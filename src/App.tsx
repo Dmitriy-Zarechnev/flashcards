@@ -4,7 +4,9 @@ export function App() {
   return (
     <div>
       Hello
-      <Button as={'a'}>Button</Button>
+      <Button as={'a'} img>
+        Button
+      </Button>
     </div>
   )
 }

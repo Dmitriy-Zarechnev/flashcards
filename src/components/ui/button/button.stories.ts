@@ -42,6 +42,34 @@ export const FullWidth: Story = {
   },
 }
 
+export const PrimaryWithImg: Story = {
+  args: {
+    children: 'Primary Button',
+    disabled: false,
+    img: true,
+    variant: 'primary',
+  },
+}
+
+export const PrimaryDisabledWithImg: Story = {
+  args: {
+    children: 'Primary Disabled Button',
+    disabled: true,
+    img: true,
+    variant: 'primary',
+  },
+}
+
+export const FullWidthPrimaryWithImg: Story = {
+  args: {
+    children: 'Full Width Primary Button',
+    disabled: false,
+    fullWidth: true,
+    img: true,
+    variant: 'primary',
+  },
+}
+
 export const Secondary: Story = {
   args: {
     children: 'Secondary Button',
