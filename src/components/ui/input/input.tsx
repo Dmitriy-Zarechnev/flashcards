@@ -1,25 +1,61 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { Icon } from '@/components/ui/icon/icon'
+
 import s from './input.module.scss'
 
 type InputProps = {
   className?: string
   error?: string
-  labelTitle: string
+  eyeImg?: boolean
+  labelTitle?: string
+  searchImg?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
-export const Input = ({ className, error, labelTitle, ...rest }: InputProps) => {
+export const Input = ({
+  className,
+  disabled,
+  error,
+  eyeImg,
+  labelTitle,
+  placeholder,
+  searchImg,
+  ...rest
+}: InputProps) => {
   return (
     <div className={s.box}>
-      <label className={`${s.label}`} htmlFor={'inputId'}>
-        {labelTitle}
-      </label>
-      <input
-        className={`${s.input} ${error && s.error} ${className}`}
-        id={'inputId'}
-        {...rest}
-        placeholder={labelTitle}
-      />
+      {labelTitle && (
+        <label className={`${s.label}`} htmlFor={'inputId'}>
+          {labelTitle}
+        </label>
+      )}
+      <div className={s.inputWrapper}>
+        {searchImg && (
+          <Icon
+            className={`${s.searchIcon} ${disabled && s.searchIconDisabled}`}
+            height={'20px'}
+            iconId={'searchOutline'}
+            width={'20px'}
+          />
+        )}
+        <input
+          className={`${s.input} ${eyeImg && s.eyePadding} ${searchImg && s.searchPadding} ${
+            error && s.error
+          } ${className}`}
+          disabled={disabled}
+          id={'inputId'}
+          {...rest}
+          placeholder={placeholder || labelTitle}
+        />
+        {eyeImg && (
+          <Icon
+            className={`${s.eyeIcon} ${disabled && s.eyeIconDisabled}`}
+            height={'20px'}
+            iconId={'eyeOutline'}
+            width={'20px'}
+          />
+        )}
+      </div>
       <span className={`${s.errorText}`}>{error}</span>
     </div>
   )

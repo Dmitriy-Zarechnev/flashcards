@@ -18,13 +18,30 @@
   }
 }
 
+.inputWrapper {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 20%;
+  left: 12px;
+  color: var(--color-dark-100);
+}
+
+.searchIconDisabled {
+  color: var(--color-dark-300);
+}
+
 .input {
+  width: 100%;
   padding: 6px 12px;
 
   font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   line-height: inherit;
+  vertical-align: middle;
 
   background-color: var(--color-dark-900);
   border: 1px solid var(--color-dark-300);
@@ -52,6 +69,25 @@
   &:disabled {
     color: var(--color-dark-300);
   }
+}
+
+.eyePadding {
+  padding: 6px 34px 6px 12px;
+}
+
+.searchPadding {
+  padding: 6px 12px 6px 40px;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 25%;
+  right: 12px;
+  color: var(--color-light-100);
+}
+
+.eyeIconDisabled {
+  color: var(--color-dark-300);
 }
 
 .error {

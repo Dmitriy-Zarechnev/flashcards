@@ -17,17 +17,59 @@ export const DefaultInput: Story = {
     labelTitle: 'Input',
   },
 }
-
 export const DisabledInput: Story = {
   args: {
     disabled: true,
     labelTitle: 'Input',
   },
 }
-
 export const ErrorInput: Story = {
   args: {
     error: 'error',
     labelTitle: 'Input',
+  },
+}
+
+export const DefaultInputWithEye: Story = {
+  args: {
+    eyeImg: true,
+    labelTitle: 'Input',
+  },
+}
+export const DisabledInputWithEye: Story = {
+  args: {
+    disabled: true,
+    eyeImg: true,
+    labelTitle: 'Input',
+  },
+}
+export const ErrorInputWithEye: Story = {
+  args: {
+    error: 'error',
+    eyeImg: true,
+    labelTitle: 'Input',
+  },
+}
+
+export const DefaultInputWithSearch: Story = {
+  args: {
+    placeholder: 'Default Input With Search',
+    searchImg: true,
+  },
+}
+
+export const DisabledInputWithSearch: Story = {
+  args: {
+    disabled: true,
+    placeholder: 'Disabled Input With Search',
+    searchImg: true,
+  },
+}
+
+export const ErrorInputWithSearch: Story = {
+  args: {
+    error: 'error',
+    placeholder: 'Error Input With Search',
+    searchImg: true,
   },
 }
