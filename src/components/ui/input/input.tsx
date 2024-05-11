@@ -5,6 +5,7 @@ import { Icon } from '@/components/ui/icon/icon'
 import s from './input.module.scss'
 
 type InputProps = {
+  closeImg?: boolean
   error?: string
   eyeImg?: boolean
   labelTitle?: string
@@ -13,6 +14,7 @@ type InputProps = {
 
 export const Input = ({
   className,
+  closeImg,
   disabled,
   error,
   eyeImg,
@@ -52,6 +54,9 @@ export const Input = ({
             iconId={'eyeOutline'}
             width={'20px'}
           />
+        )}
+        {closeImg && (
+          <Icon className={`${s.eyeIcon}`} height={'16px'} iconId={'closeOutline'} width={'16px'} />
         )}
       </div>
       <span className={`${s.errorText}`}>{error}</span>

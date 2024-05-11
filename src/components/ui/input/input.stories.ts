@@ -71,3 +71,11 @@ export const ErrorInputWithSearch: Story = {
     searchImg: true,
   },
 }
+
+export const DefaultInputWithSearchActive: Story = {
+  args: {
+    closeImg: true,
+    placeholder: 'Active Default Input With Search',
+    searchImg: true,
+  },
+}
