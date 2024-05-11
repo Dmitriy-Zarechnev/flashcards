@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
-import s from './button.module.scss'
+import { Icon } from '@/components/ui/icon/icon'
 
-import logOut from '../../../assets/icons/svg/log-out.svg'
+import s from './button.module.scss'
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
@@ -29,7 +29,7 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonProps<T>) 
       className={` ${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
       {...rest}
     >
-      {img && <img alt={'log-out picture'} className={s.img} src={logOut} />}
+      {img && <Icon class={s.img} iconId={'logOut'} />}
       {children}
     </Component>
   )

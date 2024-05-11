@@ -3,19 +3,27 @@
 
   cursor: pointer;
 
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
   box-sizing: border-box;
+  width: auto;
+  max-width: 100%;
   padding: 6px 28px;
 
   font-family: inherit;
-  font-size: 14px;
-  line-height: 24px;
   color: inherit;
-  text-align: center;
 
   border-radius: 4px;
 
   &:focus-visible {
     outline: 2px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    color: var(--color-light-900);
   }
 }
 
@@ -37,6 +45,18 @@
 
 .secondary {
   background-color: var(--color-dark-300);
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+
+  &:disabled {
+    background-color: var(--color-dark-300);
+  }
+
+  &:active {
+    background-color: var(--color-dark-500);
+  }
 }
 
 .fullWidth {
@@ -46,6 +66,4 @@
 .img {
   width: 16px;
   height: 16px;
-  margin-right: 10px;
-  vertical-align: middle;
 }
