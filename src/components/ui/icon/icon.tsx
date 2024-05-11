@@ -1,7 +1,7 @@
 import iconsSprite from '../../../assets/icons/sprite_svg.svg'
 
 type IconProps = {
-  class?: string
+  className?: string
   fill?: string
   height?: string
   iconId: string
@@ -12,7 +12,7 @@ type IconProps = {
 export const Icon = (props: IconProps) => {
   return (
     <svg
-      className={props.class}
+      className={props.className}
       fill={props.fill || 'white'}
       height={props.height || '16'}
       viewBox={props.viewBox || '0 0 24 24'}

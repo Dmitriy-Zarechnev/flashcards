@@ -29,7 +29,7 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonProps<T>) 
       className={` ${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
       {...rest}
     >
-      {img && <Icon class={s.img} iconId={'logOut'} />}
+      {img && <Icon className={s.img} iconId={'logOut'} />}
       {children}
     </Component>
   )
