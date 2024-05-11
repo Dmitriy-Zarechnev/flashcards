@@ -57,7 +57,6 @@ export const DefaultInputWithSearch: Story = {
     searchImg: true,
   },
 }
-
 export const DisabledInputWithSearch: Story = {
   args: {
     disabled: true,
@@ -65,7 +64,6 @@ export const DisabledInputWithSearch: Story = {
     searchImg: true,
   },
 }
-
 export const ErrorInputWithSearch: Story = {
   args: {
     error: 'error',

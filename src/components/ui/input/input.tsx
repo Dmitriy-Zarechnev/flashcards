@@ -5,7 +5,6 @@ import { Icon } from '@/components/ui/icon/icon'
 import s from './input.module.scss'
 
 type InputProps = {
-  className?: string
   error?: string
   eyeImg?: boolean
   labelTitle?: string
@@ -32,16 +31,15 @@ export const Input = ({
       <div className={s.inputWrapper}>
         {searchImg && (
           <Icon
-            className={`${s.searchIcon} ${disabled && s.searchIconDisabled}`}
+            className={`${s.searchIcon} ${disabled && s.disabled}`}
             height={'20px'}
             iconId={'searchOutline'}
             width={'20px'}
           />
         )}
         <input
-          className={`${s.input} ${eyeImg && s.eyePadding} ${searchImg && s.searchPadding} ${
-            error && s.error
-          } ${className}`}
+          className={`${s.input} ${eyeImg && s.eyePadding} ${searchImg && s.searchPadding} 
+          ${error && s.error} ${disabled && s.disabled} ${className}`}
           disabled={disabled}
           id={'inputId'}
           {...rest}
@@ -49,7 +47,7 @@ export const Input = ({
         />
         {eyeImg && (
           <Icon
-            className={`${s.eyeIcon} ${disabled && s.eyeIconDisabled}`}
+            className={`${s.eyeIcon} ${disabled && s.disabled}`}
             height={'20px'}
             iconId={'eyeOutline'}
             width={'20px'}
