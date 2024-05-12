@@ -8,8 +8,8 @@
   cursor: pointer;
 
   font-family: inherit;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
   line-height: inherit;
   color: var(--color-dark-100);
 
@@ -34,8 +34,8 @@
   padding: 6px 12px;
 
   font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-regular);
   line-height: inherit;
 
   background-color: var(--color-dark-900);
@@ -93,8 +93,8 @@
 }
 
 .errorText {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
   line-height: inherit;
   color: var(--color-danger-300);
 }
