@@ -38,8 +38,10 @@
     background-color: var(--color-accent-900);
   }
 
-  &:active {
-    background-color: var(--color-accent-700);
+  &:not(:disabled) {
+    &:active {
+      background-color: var(--color-accent-700);
+    }
   }
 }
 
@@ -54,8 +56,10 @@
     background-color: var(--color-dark-300);
   }
 
-  &:active {
-    background-color: var(--color-dark-500);
+  &:not(:disabled) {
+    &:active {
+      background-color: var(--color-dark-500);
+    }
   }
 }
 
