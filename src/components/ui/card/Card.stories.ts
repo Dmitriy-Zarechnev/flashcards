@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Card } from '@/components/ui/card/card'
+import { Card } from './'
 
 const meta = {
   argTypes: {},

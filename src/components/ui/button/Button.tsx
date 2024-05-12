@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 
-import { Icon } from '@/components/ui/icon/icon'
+import { Icon } from '@/components/ui/icon'
 
-import s from './button.module.scss'
+import s from './Button.module.scss'
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T

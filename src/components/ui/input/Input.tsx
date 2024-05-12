@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Icon } from '@/components/ui/icon/icon'
+import { Icon } from '@/components/ui/icon'
 
-import s from './input.module.scss'
+import s from './Input.module.scss'
 
 type InputProps = {
   closeImg?: boolean

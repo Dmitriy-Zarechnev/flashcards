@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 
-import s from '@/components/ui/card/card.module.scss'
+import s from '@/components/ui/card/Card.module.scss'
 
 type CardProps<T extends ElementType = 'div'> = {
   as?: T
