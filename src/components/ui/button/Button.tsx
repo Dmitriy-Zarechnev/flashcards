@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 
 import { Icon } from '@/components/ui/icon'
+import { clsx } from 'clsx'
 
 import s from './Button.module.scss'
 
@@ -24,7 +25,7 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonProps<T>) 
 
   return (
     <Component
-      className={`${s.button} ${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
+      className={clsx(s.button, s[variant], fullWidth && s.fullWidth, className)}
       {...rest}
     >
       {img && <Icon className={s.img} iconId={'logOut'} />}
