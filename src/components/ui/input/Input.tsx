@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Icon } from '@/components/ui/icon'
+import { clsx } from 'clsx'
 
 import s from './Input.module.scss'
 
@@ -26,22 +27,28 @@ export const Input = ({
   return (
     <div className={s.box}>
       {labelTitle && (
-        <label className={`${s.label}`} htmlFor={'inputId'}>
+        <label className={clsx(s.label)} htmlFor={'inputId'}>
           {labelTitle}
         </label>
       )}
       <div className={s.inputWrapper}>
         {searchImg && (
           <Icon
-            className={`${s.searchIcon} ${disabled && s.disabled}`}
+            className={clsx(s.searchIcon, disabled && s.disabled)}
             height={'20px'}
             iconId={'searchOutline'}
             width={'20px'}
           />
         )}
         <input
-          className={`${s.input} ${eyeImg && s.eyePadding} ${searchImg && s.searchPadding} 
-          ${error && s.error} ${disabled && s.disabled} ${className}`}
+          className={clsx(
+            s.input,
+            eyeImg && s.eyePadding,
+            searchImg && s.searchPadding,
+            error && s.error,
+            disabled && s.disabled,
+            className
+          )}
           disabled={disabled}
           id={'inputId'}
           {...rest}
@@ -49,17 +56,17 @@ export const Input = ({
         />
         {eyeImg && (
           <Icon
-            className={`${s.eyeIcon} ${disabled && s.disabled}`}
+            className={clsx(s.eyeIcon, disabled && s.disabled)}
             height={'20px'}
             iconId={'eyeOutline'}
             width={'20px'}
           />
         )}
         {closeImg && (
-          <Icon className={`${s.eyeIcon}`} height={'16px'} iconId={'closeOutline'} width={'16px'} />
+          <Icon className={s.eyeIcon} height={'16px'} iconId={'closeOutline'} width={'16px'} />
         )}
       </div>
-      <span className={`${s.errorText}`}>{error}</span>
+      <span className={s.errorText}>{error}</span>
     </div>
   )
 }
