@@ -10,9 +10,6 @@ const meta = {
     },
   },
   component: Button,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   title: 'Components/Button',
 } satisfies Meta<typeof Button>
