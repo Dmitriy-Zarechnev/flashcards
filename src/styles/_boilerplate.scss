@@ -24,9 +24,11 @@ option {
   color: inherit;
 }
 
+/*
 a:visited {
   color: inherit;
 }
+ */
 
 body {
   margin: 0;
@@ -37,6 +39,7 @@ body {
   color: var(--color-light-100);
 
   background-color: var(--color-dark-900);
+  border: 0;
 }
 
 // Стили для автокомплита
@@ -47,4 +50,40 @@ input:-webkit-autofill:active {
   box-shadow: 0 0 0 30px var(--color-dark-900) inset !important;
 
   -webkit-text-fill-color: var(--color-light-100) !important;
+}
+
+// от светы
+img {
+  vertical-align: top;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a,
+a:hover,
+a:active {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+button {
+  cursor: pointer;
+  background-color: unset;
+  border: none;
 }
