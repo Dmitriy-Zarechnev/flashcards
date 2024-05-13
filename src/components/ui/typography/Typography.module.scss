@@ -22,38 +22,38 @@
 
   &H1 {
     font-size: var(--font-size-xxl);
-    line-height: 1.38;
+    line-height: var(--line-height-l); // 36px/26px = 1.38
   }
 
   &H2 {
     font-size: var(--font-size-xl);
-    line-height: 1.8;
+    line-height: var(--line-height-l); // 36px/20px = 1.8
   }
 
   &H3 {
     font-size: var(--font-size-l);
-    line-height: 1.33;
+    line-height: var(--line-height-m); // 24px/18px = 1.33
   }
 
   &H4,
   &Body1,
   &Subtitle1 {
     font-size: var(--font-size-m);
-    line-height: 1.5;
+    line-height: var(--line-height-m); // 24px/16px = 1.5
   }
 
   &Body2,
   &Subtitle2,
   &Link1 {
     font-size: var(--font-size-s);
-    line-height: 1.71;
+    line-height: var(--line-height-m); // 24px/14px = 1.71
   }
 
   &Caption,
   &Overline,
   &Link2 {
     font-size: var(--font-size-xs);
-    line-height: 1.33;
+    line-height: var(--line-height-s); // 16px/12px = 13.33
   }
 
   &Link1,

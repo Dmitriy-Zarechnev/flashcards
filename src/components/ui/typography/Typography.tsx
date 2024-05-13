@@ -1,4 +1,4 @@
-import { ElementType, HTMLAttributes, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -37,16 +37,16 @@ export const TAGS: Record<TagsOptions, ElementType> = {
 
 //========================================================================================
 
-type TypographyProps = {
-  as?: ElementType
+type TypographyProps<T extends ElementType> = {
+  as?: T
   children: ReactNode
   className?: string
-} & HTMLAttributes<HTMLElement>
+} & ComponentPropsWithoutRef<T>
 
 //========================================================================================
 
 const TypographyFrame = (defaultTag: ElementType, style: string) => {
-  return (props: TypographyProps) => {
+  return <T extends ElementType = typeof defaultTag>(props: TypographyProps<T>) => {
     const { as, className, ...rest } = props
     const Tag = as || defaultTag
 

@@ -1,3 +1,7 @@
 export function App() {
-  return <div>Typography</div>
+  return (
+    <>
+      <div>Typography</div>
+    </>
+  )
 }
