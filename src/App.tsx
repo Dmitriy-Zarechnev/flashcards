@@ -1,8 +1,9 @@
+import { SelectComp } from '@/components/ui/select'
+
 export function App() {
   return (
     <div>
-      <p>Welcome</p>
-      Welcome
+      <SelectComp />
     </div>
   )
 }
