@@ -1,6 +1,6 @@
 import iconsSprite from '../../../assets/icons/sprite_svg.svg'
 
-type IconProps = {
+export type IconProps = {
   className?: string
   height?: string
   iconId: string
