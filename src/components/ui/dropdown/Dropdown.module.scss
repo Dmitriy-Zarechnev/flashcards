@@ -1,5 +1,18 @@
-.triggerBtn {
-  color: red;
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+
+  background-color: #2f68cc;
+  border-radius: 100%;
+
+  & * {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .content {
@@ -18,6 +31,11 @@
   &[data-side='bottom'] {
     animation-name: slide-down;
   }
+}
+
+.arrow {
+  //filter: drop-shadow(0 0 1px orange);
+  fill: white;
 }
 
 @keyframes slide-up {
