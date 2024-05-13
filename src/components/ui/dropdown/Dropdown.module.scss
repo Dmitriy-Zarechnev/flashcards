@@ -1,0 +1,45 @@
+.triggerBtn {
+  color: red;
+}
+
+.content {
+  width: 400px;
+  height: 400px;
+
+  background-color: #b45050;
+
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+
+  &[data-side='top'] {
+    animation-name: slide-up;
+  }
+
+  &[data-side='bottom'] {
+    animation-name: slide-down;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
