@@ -23,9 +23,7 @@ export const SelectComp = ({ disabled = false, ...rest }: SelectCompProps) => {
 
   return (
     <>
-      <Typography.Body2>
-        <span className={s.SelectLabel}>Select Label</span>
-      </Typography.Body2>
+      <Typography.Body2 className={s.SelectLabel}>Select Label</Typography.Body2>
       <Select.Root disabled={disabled} {...rest}>
         <Select.Trigger className={s.SelectTrigger}>
           <Select.Value placeholder={'default text'} />
