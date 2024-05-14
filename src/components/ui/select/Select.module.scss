@@ -1,16 +1,4 @@
 .SelectTrigger {
-  color: black;
-}
-
-//.SelectViewport {
-//  position: relative;
-//}
-//
-//.SelectGroup {
-//  position: absolute;
-//}
-// SelectComp.module.scss
-.SelectTrigger {
   cursor: pointer;
 
   display: flex;
@@ -19,25 +7,21 @@
 
   padding: 8px;
 
-  background-color: #fff;
+  color: var(--color-light-100);
+
+  background-color: var(--color-dark-900);
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.SelectIcon {
-  // Style your ChevronDownIcon here
-}
-
 .SelectContent {
   position: absolute;
-  z-index: 1000; // Ensure dropdown is above other content
-  top: 10px;
-  left: 0;
+  z-index: 1000;
 
   overflow: hidden;
 
   width: 100%;
-  margin-top: 4px; // Space between trigger and dropdown
+  margin-top: 4px;
 
   background-color: #fff;
   border-radius: 4px;
@@ -46,32 +30,17 @@
 
 .SelectViewport {
   overflow-y: auto;
-
-  //max-height: 200px; // Adjust based on your needs
-}
-
-.SelectGroup {
-  // Additional styles for the group if needed
 }
 
 .SelectItem {
   padding: 8px;
-  color: red;
-  border-bottom: 1px solid #eee; // Optional divider between items
+  color: var(--color-light-100);
+  background-color: var(--color-dark-900);
+  border-bottom: 1px solid #eee;
+
   &:hover {
-    background-color: #f7f7f7;
+    cursor: pointer;
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
   }
-}
-
-.SelectItemText {
-  // Any specific styles for the text inside items
-}
-
-.SelectScrollUpButton,
-.SelectScrollDownButton {
-  // Styles for scroll buttons if they are used
-}
-
-.SelectArrow {
-  // Style the dropdown arrow here
 }
