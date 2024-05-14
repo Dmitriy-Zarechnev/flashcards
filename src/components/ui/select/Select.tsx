@@ -1,3 +1,4 @@
+import { Typography } from '@/components/ui/typography'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as Select from '@radix-ui/react-select'
 
@@ -22,7 +23,9 @@ export const SelectComp = ({ disabled = false, ...rest }: SelectCompProps) => {
 
   return (
     <>
-      <div>Select-box</div>
+      <Typography.Body2>
+        <span className={s.SelectLabel}>Select Label</span>
+      </Typography.Body2>
       <Select.Root disabled={disabled} {...rest}>
         <Select.Trigger className={s.SelectTrigger}>
           <Select.Value placeholder={'default text'} />
@@ -32,13 +35,15 @@ export const SelectComp = ({ disabled = false, ...rest }: SelectCompProps) => {
         </Select.Trigger>
 
         <Select.Portal>
-          <Select.Content className={s.SelectContent}>
-            <Select.Viewport className={s.SelectViewport}>
+          <Select.Content>
+            <Select.Viewport>
               <Select.Group className={s.SelectGroup}>
                 {optionItems.map(el => {
                   return (
                     <Select.Item className={s.SelectItem} key={el.id} value={el.value}>
-                      <Select.ItemText className={s.SelectItemText}>{el.text}</Select.ItemText>
+                      <Select.ItemText>
+                        <Typography.Body1>{el.text}</Typography.Body1>
+                      </Select.ItemText>
                     </Select.Item>
                   )
                 })}

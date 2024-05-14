@@ -12,11 +12,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const DefaultSelect: Story = {
-  args: {
-    disabled: false,
-  },
-}
+export const DefaultSelect: Story = {}
 
 export const DisabledSelect: Story = {
   args: {
