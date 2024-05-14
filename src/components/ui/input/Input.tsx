@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Icon } from '@/components/ui/icon'
+import { Typography } from '@/components/ui/typography'
 import { clsx } from 'clsx'
 
 import s from './Input.module.scss'
@@ -27,8 +28,8 @@ export const Input = ({
   return (
     <div className={s.box}>
       {labelTitle && (
-        <label className={clsx(s.label)} htmlFor={'inputId'}>
-          {labelTitle}
+        <label className={s.label} htmlFor={'inputId'}>
+          <Typography.Body2>{labelTitle}</Typography.Body2>
         </label>
       )}
       <div className={s.inputWrapper}>
@@ -66,7 +67,7 @@ export const Input = ({
           <Icon className={s.eyeIcon} height={'16px'} iconId={'closeOutline'} width={'16px'} />
         )}
       </div>
-      <span className={s.errorText}>{error}</span>
+      <Typography.Caption className={s.errorText}>{error}</Typography.Caption>
     </div>
   )
 }

@@ -7,11 +7,9 @@
 .label {
   cursor: pointer;
 
-  font-family: inherit;
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-regular);
-  line-height: inherit;
-  color: var(--color-dark-100);
+  & p {
+    color: var(--color-dark-100);
+  }
 
   &:disabled {
     color: var(--color-dark-300);
@@ -93,9 +91,6 @@
 }
 
 .errorText {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-regular);
-  line-height: inherit;
   color: var(--color-danger-300);
 }
 
