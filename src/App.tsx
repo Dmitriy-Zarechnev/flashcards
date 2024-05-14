@@ -1,7 +1,17 @@
 export function App() {
   return (
-    <>
-      <div>Check</div>
-    </>
+    <div
+      style={{
+        alignItems: 'center',
+        columnGap: '500px',
+        display: 'flex',
+        flexDirection: 'row',
+        height: '100vh',
+        justifyContent: 'center',
+        width: '100vw',
+      }}
+    >
+      123
+    </div>
   )
 }
