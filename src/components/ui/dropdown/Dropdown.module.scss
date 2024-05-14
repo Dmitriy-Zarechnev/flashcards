@@ -79,12 +79,12 @@
 
   outline: none;
 
-  &[data-highlighted] {
+  &[data-highlighted] * {
     color: var(--color-accent-500);
+  }
 
-    .itemTitle {
-      color: var(--color-accent-500);
-    }
+  &:hover {
+    color: var(--color-accent-500);
   }
 }
 

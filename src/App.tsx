@@ -1,4 +1,6 @@
-import { Tabswitcher } from '@/components/ui/tabswitcher'
+import { Dropdown } from '@/components/ui/dropdown'
+import { Icon } from '@/components/ui/icon'
+import { Typography } from '@/components/ui/typography'
 
 export function App() {
   return (
@@ -13,7 +15,22 @@ export function App() {
         width: '100vw',
       }}
     >
-      <Tabswitcher />
+      <Dropdown.Root trigger={<Icon iconId={'eyeOutline'} />}>
+        <Dropdown.Item>
+          <Icon iconId={'eyeOutline'} />
+          <Typography.Caption>123</Typography.Caption>
+        </Dropdown.Item>
+        <Dropdown.Separator />
+        <Dropdown.Item>
+          <Icon iconId={'eyeOutline'} />
+          <Typography.Caption>123</Typography.Caption>
+        </Dropdown.Item>
+        <Dropdown.Separator />
+        <Dropdown.Item>
+          <Icon iconId={'eyeOutline'} />
+          <Typography.Caption>123</Typography.Caption>
+        </Dropdown.Item>
+      </Dropdown.Root>
     </div>
   )
 }
