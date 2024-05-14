@@ -6,12 +6,7 @@
   width: 24px;
   height: 24px;
 
-  border-radius: 100%;
-
-  &Profile {
-    width: 36px;
-    height: 36px;
-  }
+  border-radius: 50%;
 
   & * {
     width: 100%;
@@ -40,21 +35,6 @@
   }
 }
 
-.profile {
-  display: flex;
-  flex-flow: row nowrap;
-  column-gap: 8px;
-  align-items: center;
-
-  & > div:nth-child(2) {
-    padding-right: 20px;
-  }
-
-  & > div:nth-child(2) :nth-child(2) {
-    color: var(--color-dark-100);
-  }
-}
-
 .arrow {
   position: absolute;
   transform-origin: 20% 10%;
@@ -80,10 +60,6 @@
   outline: none;
 
   &[data-highlighted] * {
-    color: var(--color-accent-500);
-  }
-
-  &:hover {
     color: var(--color-accent-500);
   }
 }
