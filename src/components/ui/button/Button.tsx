@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 
 import { Icon } from '@/components/ui/icon'
+import { Typography } from '@/components/ui/typography'
 import { clsx } from 'clsx'
 
 import s from './Button.module.scss'
@@ -29,7 +30,7 @@ export const Button = <T extends ElementType = 'button'>(props: ButtonProps<T>) 
       {...rest}
     >
       {img && <Icon height={'16px'} iconId={'logOut'} width={'16px'} />}
-      {children}
+      <Typography.Subtitle2>{children}</Typography.Subtitle2>
     </Component>
   )
 }

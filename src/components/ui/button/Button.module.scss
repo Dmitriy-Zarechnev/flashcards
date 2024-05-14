@@ -13,9 +13,6 @@
   max-width: 100%;
   padding: 6px 28px;
 
-  font-family: inherit;
-  color: inherit;
-
   border-radius: 4px;
 
   &:focus-visible {
@@ -24,6 +21,10 @@
 
   &:disabled {
     color: var(--color-light-900);
+
+    & p {
+      color: var(--color-light-900);
+    }
   }
 }
 
