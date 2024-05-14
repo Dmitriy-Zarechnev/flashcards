@@ -1,20 +1,10 @@
 import { ReactNode } from 'react'
 
-import { Icon, IconProps } from '@/components/ui/icon'
-import { Typography } from '@/components/ui/typography'
+import { IconProps } from '@/components/ui/icon'
 import * as D from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
 
 import s from './Dropdown.module.scss'
-
-//========================================================================================
-/*
-      asChild - для стандартных элементов Radix - не будет обертки, а будет отрисовываться только
-                дочерний элемент
-   sideOffset - расстояние между кнопкой и меню ( м/у trigger и content )
-        align - с какой стороны от кнопки будет появляться меню
-*/
-//========================================================================================
 
 export type ItemType = {
   id: string
@@ -27,12 +17,6 @@ export type DropdownProfile = {
   person: string
 }
 
-/*
-         - dropdownProfile - объект для отображения в профиля пользователя
-                   - Items - массив элементов для отображения в меню
-        - triggerClassName - className для кнопки открытия меню
-                 - trigger - компонент для отображения кнопки открытия меню
-*/
 type DropdownProps = {
   children?: ReactNode
   dropdownProfile?: DropdownProfile
@@ -40,7 +24,6 @@ type DropdownProps = {
   trigger: ReactNode
   triggerClassName?: string
 }
-//========================================================================================
 
 const Root = ({ children, dropdownProfile, trigger, triggerClassName }: DropdownProps) => {
   return (
@@ -65,17 +48,9 @@ const Root = ({ children, dropdownProfile, trigger, triggerClassName }: Dropdown
 
 type ItemProps = {
   children: ReactNode
-  title: string
 }
 
-const Item = ({ children, title }: ItemProps) => {
-  return (
-    <D.Item className={s.item}>
-      {children}
-      <Typography.Caption className={s.itemTitle}>{title}</Typography.Caption>
-    </D.Item>
-  )
-}
+const Item = ({ children }: ItemProps) => <D.Item className={s.item}>{children}</D.Item>
 
 const Separator = () => <D.Separator className={s.separator} />
 
