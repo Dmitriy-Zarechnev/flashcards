@@ -1,3 +1,5 @@
+import { Tabswitcher } from '@/components/ui/tabswitcher'
+
 export function App() {
   return (
     <div
@@ -11,7 +13,7 @@ export function App() {
         width: '100vw',
       }}
     >
-      123
+      <Tabswitcher />
     </div>
   )
 }

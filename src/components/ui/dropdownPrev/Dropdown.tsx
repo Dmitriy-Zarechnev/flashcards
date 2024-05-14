@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { Fragment, ReactNode } from 'react'
 
 import { Icon, IconProps } from '@/components/ui/icon'
 import { Typography } from '@/components/ui/typography'
@@ -16,7 +16,7 @@ import s from './Dropdown.module.scss'
 */
 //========================================================================================
 
-export type ItemType = {
+export type Item = {
   id: string
   svgCfg: IconProps
   title: string
@@ -36,13 +36,13 @@ export type DropdownProfile = {
 type DropdownProps = {
   children?: ReactNode
   dropdownProfile?: DropdownProfile
-  items: ItemType[]
+  items: Item[]
   trigger: ReactNode
   triggerClassName?: string
 }
 //========================================================================================
 
-const Root = ({ children, dropdownProfile, trigger, triggerClassName }: DropdownProps) => {
+export const Dropdown = ({ dropdownProfile, items, trigger, triggerClassName }: DropdownProps) => {
   return (
     <D.Root>
       <D.Trigger asChild>
@@ -53,7 +53,33 @@ const Root = ({ children, dropdownProfile, trigger, triggerClassName }: Dropdown
 
       <D.Portal>
         <D.Content align={'end'} className={s.content} sideOffset={5}>
-          {children}
+          {dropdownProfile && (
+            <>
+              <div className={s.profile}>
+                <div
+                  className={clsx(s.trigger, triggerClassName, dropdownProfile && s.triggerProfile)}
+                >
+                  {trigger}
+                </div>
+                <div>
+                  <Typography.Subtitle2>{dropdownProfile.person}</Typography.Subtitle2>
+                  <Typography.Caption>{dropdownProfile.email}</Typography.Caption>
+                </div>
+              </div>
+              <D.Separator className={s.separator} />
+            </>
+          )}
+
+          {items.map((item, index) => (
+            <Fragment key={item.id}>
+              <D.Item className={s.item}>
+                <Icon iconId={item.svgCfg.iconId} />
+                <Typography.Caption className={s.itemTitle}>{item.title}</Typography.Caption>
+              </D.Item>
+              {index !== items.length - 1 && <D.Separator className={s.separator} />}
+            </Fragment>
+          ))}
+
           <D.Arrow asChild className={s.arrowBox}>
             <div className={s.arrow} />
           </D.Arrow>
@@ -61,26 +87,4 @@ const Root = ({ children, dropdownProfile, trigger, triggerClassName }: Dropdown
       </D.Portal>
     </D.Root>
   )
-}
-
-type ItemProps = {
-  children: ReactNode
-  title: string
-}
-
-const Item = ({ children, title }: ItemProps) => {
-  return (
-    <D.Item className={s.item}>
-      {children}
-      <Typography.Caption className={s.itemTitle}>{title}</Typography.Caption>
-    </D.Item>
-  )
-}
-
-const Separator = () => <D.Separator className={s.separator} />
-
-export const Dropdown = {
-  Item,
-  Root,
-  Separator,
 }
