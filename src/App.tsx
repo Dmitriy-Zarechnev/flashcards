@@ -1,25 +1,30 @@
-import { Tabs } from '@/components/ui/tabs'
+import { useState } from 'react'
 
-const tabsData = [
-  { title: 'Switcher', value: 'tab1' },
-  { title: 'Tab 2', value: 'tab2' },
-  { disabled: true, title: 'Tab 3', value: 'tab3' },
-]
+import { Checkbox } from '@/components/ui/checkbox'
+import { Typography } from '@/components/ui/typography'
 
 export function App() {
+  const [value, setValue] = useState(false)
+
+  function foo() {
+    setValue(!value)
+  }
+
   return (
     <div
-    // style={{
-    //   alignItems: 'center',
-    //   columnGap: '500px',
-    //   display: 'flex',
-    //   flexDirection: 'row',
-    //   height: '100vh',
-    //   justifyContent: 'center',
-    //   width: '100vw',
-    // }}
+      style={{
+        alignItems: 'center',
+        columnGap: '500px',
+        display: 'flex',
+        flexDirection: 'row',
+        height: '100vh',
+        justifyContent: 'center',
+        width: '100vw',
+      }}
     >
-      <Tabs.Root notFullWidth tabs={tabsData} />
+      <Checkbox checked={value} id={'checkbox'} onChange={foo}>
+        <Typography.Body2>Some label</Typography.Body2>
+      </Checkbox>
     </div>
   )
 }
