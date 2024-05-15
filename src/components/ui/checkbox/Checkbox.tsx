@@ -37,7 +37,7 @@ export const Checkbox = ({
       >
         <C.Indicator className={s.indicator}>✔︎</C.Indicator>
       </C.Root>
-      <label className={s.label} htmlFor={id}>
+      <label className={clsx(s.label, disabled && s.labelDisabled)} htmlFor={id}>
         {children}
       </label>
     </div>

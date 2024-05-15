@@ -22,8 +22,8 @@ export function App() {
         width: '100vw',
       }}
     >
-      <Checkbox checked={value} id={'checkbox'} onChange={foo}>
-        <Typography.Body2>Some label</Typography.Body2>
+      <Checkbox checked disabled id={'checkbox'} onChange={foo}>
+        <Typography.Body2>Check-box</Typography.Body2>
       </Checkbox>
     </div>
   )
