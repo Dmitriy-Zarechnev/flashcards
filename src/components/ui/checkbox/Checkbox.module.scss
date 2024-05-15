@@ -15,11 +15,9 @@
   width: 18px;
   height: 18px;
 
-  background-color: var(--color-dark-900);
+  background-color: inherit;
   border: 2px solid var(--color-light-900);
   border-radius: 2px;
-
-  transition: background-color 0.3s ease-in-out;
 
   &:not(:disabled)[data-state='checked'] {
     background-color: var(--color-light-100);
