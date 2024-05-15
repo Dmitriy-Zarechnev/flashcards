@@ -23,7 +23,7 @@ const CheckboxWrapper = () => {
   }
 
   return (
-    <Checkbox checked={checked} onChange={foo}>
+    <Checkbox checked={checked} id={'checkbox'} onChange={foo}>
       <Typography.Body2>Checkbox-label</Typography.Body2>
     </Checkbox>
   )
@@ -45,6 +45,7 @@ export const DisabledChecked: Story = {
     checked: true,
     children: <Typography.Body2>Checkbox-label</Typography.Body2>,
     disabled: true,
+    id: 'checkbox',
     onChange: () => {},
   },
 }
@@ -54,6 +55,7 @@ export const DisabledUnchecked: Story = {
     checked: false,
     children: <Typography.Body2>Checkbox-label</Typography.Body2>,
     disabled: true,
+    id: 'checkbox',
     onChange: () => {},
   },
 }

@@ -43,11 +43,7 @@ const Root = ({
       <T.List aria-label={'brief description'} className={s.list}>
         {tabs.map(tab => (
           <T.Trigger
-            className={clsx(
-              s.trigger,
-              tab.disabled && s.triggerDisabled,
-              notFullWidth && s.triggerNotFullWidth
-            )}
+            className={clsx(s.trigger, notFullWidth && s.triggerNotFullWidth)}
             disabled={tab.disabled}
             key={tab.value}
             value={tab.value}
