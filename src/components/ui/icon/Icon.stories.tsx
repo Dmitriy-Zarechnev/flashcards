@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Icon } from '@/components/ui/icon/Icon'
 import { ids } from '@/components/ui/icon/svgIdGetter'
+
+import { Icon } from './'
 
 //========================================================================================
 

@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { ReactNode } from 'react'
 
-import { Typography } from './Typography'
+import { Typography } from './'
 
 /*
-# так как компонента отрисовыывается через cb-function, для отрисовки в storybook используется
+# так как компонента отрисовывается через cb-function, для отрисовки в storybook используется
  WrapperComponent - пустая компонента для отрисовки разных вариантов компоненты Typography
 */
 function WrapperComponent({ children }: { children: ReactNode }) {
