@@ -1,9 +1,17 @@
-import { SelectComp } from '@/components/ui/select'
-
 export function App() {
   return (
-    <div>
-      <SelectComp />
+    <div
+      style={{
+        alignItems: 'center',
+        columnGap: '500px',
+        display: 'flex',
+        flexDirection: 'row',
+        height: '100vh',
+        justifyContent: 'center',
+        width: '100vw',
+      }}
+    >
+      💩💩💩
     </div>
   )
 }
