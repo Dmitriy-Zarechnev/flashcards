@@ -23,7 +23,7 @@
 
   flex-grow: 1;
 
-  height: 3px;
+  height: 5px;
 
   background-color: var(--color-accent-700);
   border-radius: 5px;
@@ -41,11 +41,28 @@
 
   display: block;
 
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 
   background-color: var(--color-accent-500);
   border-radius: 50%;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: block;
+
+    width: 8px;
+    height: 8px;
+
+    background-color: var(--color-light-100);
+    border-radius: 50%;
+  }
 
   &:hover {
     background-color: var(--color-accent-300);
