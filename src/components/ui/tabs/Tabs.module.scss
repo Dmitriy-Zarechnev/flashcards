@@ -1,0 +1,124 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-dark-900);
+}
+
+.list {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.trigger {
+  user-select: none;
+
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 24px;
+
+  border: 1px solid var(--color-dark-300);
+
+  &Disabled {
+    cursor: default;
+    background-color: var(--color-dark-700);
+
+    & * {
+      color: var(--color-dark-300);
+    }
+  }
+
+  &NotFullWidth {
+    display: inline-flex;
+    flex: none;
+  }
+}
+
+.trigger:not([data-state='active'], :disabled):hover {
+  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+
+  & * {
+    color: var(--color-light-900);
+  }
+}
+
+.trigger[data-state='active'] {
+  color: var(--color-light-100);
+  background-color: var(--color-accent-500);
+  border: 1px solid var(--color-accent-500);
+}
+
+.content {
+  padding: 20px;
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-300);
+  outline: none;
+}
+
+//
+//.root {
+//  display: flex;
+//  flex-direction: column;
+//  background-color: var(--color-dark-900);
+//}
+//
+//.list {
+//  display: flex;
+//  flex-shrink: 0;
+//}
+//
+//.trigger {
+//  user-select: none;
+//
+//  overflow: hidden; /* Hide overflow */
+//  display: flex;
+//  flex: 1;
+//  align-items: center;
+//  justify-content: center;
+//
+//  padding: 6px 24px;
+//
+//  text-overflow: ellipsis; /* Use ellipsis for overflow text */
+//  white-space: nowrap; /* Prevent text from wrapping */
+//
+//  border: 1px solid var(--color-dark-300);
+//
+//  &Disabled {
+//    cursor: default;
+//    background-color: var(--color-dark-700);
+//
+//    & * {
+//      color: var(--color-dark-300);
+//    }
+//  }
+//
+//  &NotFullWidth {
+//    display: inline-flex;
+//    flex: 0;
+//  }
+//}
+//
+//.trigger:not([data-state='active'], :disabled):hover {
+//  background-color: var(--color-dark-300);
+//  border: 1px solid var(--color-dark-100);
+//
+//  & * {
+//    color: var(--color-light-900);
+//  }
+//}
+//
+//.trigger[data-state='active'] {
+//  color: var(--color-light-100);
+//  background-color: var(--color-accent-500);
+//  border: 1px solid var(--color-accent-500);
+//}
+//
+//.content {
+//  padding: 20px;
+//  background-color: var(--color-dark-900);
+//  border: 1px solid var(--color-dark-300);
+//  outline: none;
+//}
