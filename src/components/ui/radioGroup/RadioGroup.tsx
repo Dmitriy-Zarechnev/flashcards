@@ -28,7 +28,9 @@ export const RadioGroup = ({ disabled = false }: RadioGroupProps) => {
             <Radio.Item className={s.RadioItem} disabled={disabled} id={el.id} value={el.value}>
               <Radio.Indicator className={s.RadioIndicator} />
             </Radio.Item>
-            <Typography.Body2 htmlFor={'el.id'}>{el.label}</Typography.Body2>
+            <Typography.Body2 as={'label'} className={s.RadioLabel} htmlFor={el.id}>
+              {el.label}
+            </Typography.Body2>
           </div>
         )
       })}
