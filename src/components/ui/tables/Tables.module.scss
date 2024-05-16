@@ -1,23 +1,21 @@
 .table {
-  background-color: red;
+  border-collapse: collapse;
 }
 
 .thead {
-  background-color: green;
-}
-
-.tbody {
-  background-color: antiquewhite;
+  background-color: var(--color-dark-500);
 }
 
 .tr {
-  background-color: brown;
+  border-bottom: 1px solid var(--color-dark-500);
 }
 
 .th {
-  background-color: palevioletred;
+  padding: 12px 25px;
+  text-align: start;
 }
 
 .td {
-  background-color: gold;
+  padding: 12px 25px;
+  text-align: start;
 }

@@ -1,0 +1,12 @@
+.IconButtonsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  align-items: center;
+}
+
+.IconButton {
+  &:hover {
+    color: var(--color-accent-500);
+  }
+}
