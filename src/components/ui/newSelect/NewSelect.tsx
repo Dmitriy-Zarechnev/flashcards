@@ -1,44 +1,10 @@
-// import { Typography } from '@/components/ui/typography'
-// import { Select } from '@headlessui/react'
-//
-import s from '@/components/ui/select/Select.module.scss'
-// type OptionItems = {
-//   id: number
-//   text: string
-//   value: string
-// }
-//
-// export const NewSelect = () => {
-//   const optionItems: OptionItems[] = [
-//     { id: 1, text: 'Orange', value: 'orange' },
-//     { id: 2, text: 'Apple', value: 'apple' },
-//     { id: 3, text: 'Banana', value: 'banana' },
-//   ]
-//
-//   return (
-//     <div>
-//       <Typography.Body2 className={s.SelectLabel}>Select Label</Typography.Body2>
-//       <Select className={s.SelectTrigger} data-focus data-hover>
-//         <option className={s.SelectItem} data-hover={'active'} value={'active'}>
-//           Active
-//         </option>
-//         <option className={s.SelectItem} value={'paused'}>
-//           Paused
-//         </option>
-//         <option className={s.SelectItem} value={'delayed'}>
-//           Delayed
-//         </option>
-//         <option className={s.SelectItem} value={'canceled'}>
-//           Canceled
-//         </option>
-//       </Select>
-//     </div>
-//   )
-// }
+import { useState } from 'react'
 
-import { Fragment, useState } from 'react'
+import { Icon } from '@/components/ui/icon'
+import { Typography } from '@/components/ui/typography'
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 
-import { Listbox, Transition } from '@headlessui/react'
+import s from './NewSelect.module.scss'
 
 const people = [
   { id: 1, name: 'Active' },
@@ -51,15 +17,25 @@ export const NewSelect = () => {
   const [selectedPerson, setSelectedPerson] = useState(people[0])
 
   return (
-    <Listbox onChange={setSelectedPerson} value={selectedPerson}>
-      <ListboxButton>{selectedPerson.name}</ListboxButton>
-      <ListboxOptions anchor={'bottom'}>
-        {people.map(person => (
-          <ListboxOption className={'data-[focus]:bg-blue-100'} key={person.id} value={person}>
-            {person.name}
-          </ListboxOption>
-        ))}
-      </ListboxOptions>
-    </Listbox>
+    <>
+      <Typography.Body2 className={s.SelectLabel}>Select Label</Typography.Body2>
+      <Listbox onChange={setSelectedPerson} value={selectedPerson}>
+        {({ open }) => (
+          <>
+            <ListboxButton className={s.SelectTrigger}>
+              {selectedPerson.name}
+              <Icon height={'16px'} iconId={open ? 'eyeOutline' : 'searchOutline'} width={'16px'} />
+            </ListboxButton>
+            <ListboxOptions anchor={'bottom'} className={s.SelectGroup}>
+              {people.map(person => (
+                <ListboxOption className={s.SelectItem} key={person.id} value={person}>
+                  {person.name}
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
+          </>
+        )}
+      </Listbox>
+    </>
   )
 }
