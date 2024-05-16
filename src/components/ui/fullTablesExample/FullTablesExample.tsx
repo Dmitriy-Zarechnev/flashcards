@@ -1,12 +1,9 @@
-import { Icon } from '@/components/ui/icon'
+import { HeadCellWithArrow } from '@/components/ui/headCellWithArrow'
 import { IconButtons } from '@/components/ui/iconButtons'
 import { ImgBlock } from '@/components/ui/imgBlock'
-import { Rating } from '@/components/ui/rating'
-import { RatingValueType } from '@/components/ui/rating/Rating'
+import { Rating, RatingValueType } from '@/components/ui/rating'
 import { Tables } from '@/components/ui/tables'
 import { Typography } from '@/components/ui/typography'
-
-import s from './FullTablesExample.module.scss'
 
 import defImg from '../../../assets/defaultPicture.jpg'
 
@@ -52,9 +49,8 @@ export const FullTablesExample = () => {
           <Tables.TableHeadCell>
             <Typography.Subtitle2>Name 1</Typography.Subtitle2>
           </Tables.TableHeadCell>
-          <Tables.TableHeadCell className={s.TableHeadCell}>
-            <Typography.Subtitle2>Name 1</Typography.Subtitle2>
-            <Icon height={'12px'} iconId={'arrowUp'} width={'12px'} />
+          <Tables.TableHeadCell>
+            <HeadCellWithArrow title={'Name 1'} />
           </Tables.TableHeadCell>
           <Tables.TableHeadCell>
             <Typography.Subtitle2>Name 1</Typography.Subtitle2>

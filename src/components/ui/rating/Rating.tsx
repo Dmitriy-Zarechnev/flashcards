@@ -1,4 +1,7 @@
+import { ComponentPropsWithoutRef } from 'react'
+
 import { Icon } from '@/components/ui/icon'
+import { clsx } from 'clsx'
 
 import s from './Rating.module.scss'
 
@@ -6,15 +9,15 @@ export type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5
 
 type RatingProps = {
   rating?: RatingValueType
-}
+} & ComponentPropsWithoutRef<'div'>
 
 type StarProps = {
   selected: boolean
 }
 
-export const Rating = ({ rating = 0 }: RatingProps) => {
+export const Rating = ({ className, rating = 0, ...rest }: RatingProps) => {
   return (
-    <div className={s.RatingWrapper}>
+    <div className={clsx(s.RatingWrapper, className)} {...rest}>
       {[1, 2, 3, 4, 5].map((el, i) => {
         return <Star key={el} selected={rating > i} />
       })}
