@@ -6,9 +6,14 @@ type IconButtonProps = {
   iconId: string
   onClick: () => void
 }
+type IconButtonsProps = {
+  id: string
+}
 
-export const IconButtons = () => {
-  const buttonClickHandler = () => {}
+export const IconButtons = ({ id }: IconButtonsProps) => {
+  const buttonClickHandler = () => {
+    console.log(id)
+  }
 
   return (
     <div className={s.IconButtonsWrapper}>

@@ -1,17 +1,19 @@
 import { Icon } from '@/components/ui/icon'
 import { IconButtons } from '@/components/ui/iconButtons'
 import { Rating } from '@/components/ui/rating'
+import { RatingValueType } from '@/components/ui/rating/Rating'
 import { Tables } from '@/components/ui/tables'
+import { Typography } from '@/components/ui/typography'
 
 import s from './FullTablesExample.module.scss'
 
 import defImg from '../../../assets/defaultPicture.jpg'
 
 type TableData = {
-  fifthCell: number
   firstCell: FirstCell
   forthCell: string
   id: string
+  rating: RatingValueType
   secondCell: string
   thirdCell: string
 }
@@ -24,19 +26,19 @@ type FirstCell = {
 export const FullTablesExample = () => {
   const tableData: TableData[] = [
     {
-      fifthCell: 2,
       firstCell: { imgUrl: defImg, text: 'Cell 1' },
       forthCell: 'Cell 4',
-      id: '1',
+      id: 'uniq1',
+      rating: 2,
       secondCell: 'Cell 2',
       thirdCell: 'Cell 1',
     },
 
     {
-      fifthCell: 4,
       firstCell: { imgUrl: defImg, text: 'Cell 1' },
       forthCell: 'Cell 4',
-      id: '1',
+      id: 'uniq2',
+      rating: 4,
       secondCell: 'Cell 2',
       thirdCell: 'Cell 1',
     },
@@ -46,60 +48,61 @@ export const FullTablesExample = () => {
     <Tables.Table>
       <Tables.TableHead>
         <Tables.TableRow>
-          <Tables.TableHeadCell>Name 1</Tables.TableHeadCell>
           <Tables.TableHeadCell>
-            Name
-            <Icon className={s.ArrowIcon} height={'12px'} iconId={'arrowUp'} width={'12px'} />
+            <Typography.Subtitle2>Name 1</Typography.Subtitle2>
           </Tables.TableHeadCell>
-          <Tables.TableHeadCell>Name 1</Tables.TableHeadCell>
-          <Tables.TableHeadCell>Name 1</Tables.TableHeadCell>
-          <Tables.TableHeadCell>Name 1</Tables.TableHeadCell>
-          <Tables.TableHeadCell>Name 1</Tables.TableHeadCell>
+          <Tables.TableHeadCell className={s.TableHeadCell}>
+            <Typography.Subtitle2>Name 1</Typography.Subtitle2>
+            <Icon height={'12px'} iconId={'arrowUp'} width={'12px'} />
+          </Tables.TableHeadCell>
+          <Tables.TableHeadCell>
+            <Typography.Subtitle2>Name 1</Typography.Subtitle2>
+          </Tables.TableHeadCell>
+          <Tables.TableHeadCell>
+            <Typography.Subtitle2>Name 1</Typography.Subtitle2>
+          </Tables.TableHeadCell>
+          <Tables.TableHeadCell>
+            <Typography.Subtitle2>Name 1</Typography.Subtitle2>
+          </Tables.TableHeadCell>
+          <Tables.TableHeadCell>
+            <Typography.Subtitle2>Name 1</Typography.Subtitle2>
+          </Tables.TableHeadCell>
         </Tables.TableRow>
       </Tables.TableHead>
 
       <Tables.TableBody>
-        {/*{tableData.map(el)=>{*/}
-        {/*  return{}*/}
-        {/*}}*/}
+        {tableData.map(el => {
+          return (
+            <Tables.TableRow key={el.id}>
+              <Tables.TableBodyCell className={s.tdFlex}>
+                <img
+                  alt={`${el.firstCell.text} picture`}
+                  className={s.cardsImg}
+                  src={el.firstCell.imgUrl}
+                />
+                <Typography.Body2>{el.firstCell.text}</Typography.Body2>
+              </Tables.TableBodyCell>
 
-        <Tables.TableRow>
-          <Tables.TableBodyCell className={s.tdFlex}>
-            <img alt={'picture'} src={defImg} />
-            Name 2
-          </Tables.TableBodyCell>
+              <Tables.TableBodyCell>
+                <Typography.Body2>{el.secondCell}</Typography.Body2>
+              </Tables.TableBodyCell>
+              <Tables.TableBodyCell>
+                <Typography.Body2>{el.thirdCell}</Typography.Body2>
+              </Tables.TableBodyCell>
+              <Tables.TableBodyCell>
+                <Typography.Body2>{el.forthCell}</Typography.Body2>
+              </Tables.TableBodyCell>
 
-          <Tables.TableBodyCell>Name 2</Tables.TableBodyCell>
-          <Tables.TableBodyCell>Name 2</Tables.TableBodyCell>
-          <Tables.TableBodyCell>Name 2</Tables.TableBodyCell>
+              <Tables.TableBodyCell>
+                <Rating rating={el.rating} />
+              </Tables.TableBodyCell>
 
-          <Tables.TableBodyCell>
-            <Rating rating={4} />
-          </Tables.TableBodyCell>
-
-          <Tables.TableBodyCell>
-            <IconButtons />
-          </Tables.TableBodyCell>
-        </Tables.TableRow>
-
-        <Tables.TableRow>
-          <Tables.TableBodyCell className={s.tdFlex}>
-            <img alt={'picture'} src={defImg} />
-            Name 3
-          </Tables.TableBodyCell>
-
-          <Tables.TableBodyCell>Name 3</Tables.TableBodyCell>
-          <Tables.TableBodyCell>Name 3</Tables.TableBodyCell>
-          <Tables.TableBodyCell>Name 3</Tables.TableBodyCell>
-
-          <Tables.TableBodyCell>
-            <Rating rating={3} />
-          </Tables.TableBodyCell>
-
-          <Tables.TableBodyCell>
-            <IconButtons />
-          </Tables.TableBodyCell>
-        </Tables.TableRow>
+              <Tables.TableBodyCell>
+                <IconButtons id={el.id} />
+              </Tables.TableBodyCell>
+            </Tables.TableRow>
+          )
+        })}
       </Tables.TableBody>
     </Tables.Table>
   )

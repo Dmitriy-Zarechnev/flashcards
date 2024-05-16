@@ -1,31 +1,15 @@
-.table {
-  border-collapse: collapse;
+.cardsImg {
+  width: 120px;
+  height: 50px;
+  object-fit: cover;
 }
 
-.thead {
-  background-color: var(--color-dark-500);
-}
-
-.tbody {
-}
-
-.tr {
-  //vertical-align: middle;
-  border-bottom: 1px solid var(--color-dark-500);
-}
-
-.th {
-  padding: 12px 25px;
-  text-align: start;
-}
-
-.td {
-  padding: 12px 25px;
-  text-align: start;
-}
-
-.ArrowIcon {
-  margin-left: 5px;
+.TableHeadCell {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: start;
 }
 
 .tdFlex {
@@ -34,6 +18,4 @@
   gap: 5px;
   align-items: center;
   justify-content: start;
-
-  padding: 12px 25px;
 }

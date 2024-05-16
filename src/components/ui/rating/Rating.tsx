@@ -2,7 +2,7 @@ import { Icon } from '@/components/ui/icon'
 
 import s from './Rating.module.scss'
 
-type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5
+export type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5
 
 type RatingProps = {
   rating?: RatingValueType
