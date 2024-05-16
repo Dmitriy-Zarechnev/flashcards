@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Icon } from '@/components/ui/icon'
 import { Typography } from '@/components/ui/typography'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
+import { clsx } from 'clsx'
 
 import s from './NewSelect.module.scss'
 
@@ -13,13 +14,19 @@ const people = [
   { id: 4, name: 'Canceled' },
 ]
 
-export const NewSelect = () => {
+type NewSelectProps = {
+  disabled?: boolean
+}
+
+export const NewSelect = ({ disabled = false }: NewSelectProps) => {
   const [selectedPerson, setSelectedPerson] = useState(people[0])
 
   return (
     <>
-      <Typography.Body2 className={s.SelectLabel}>Select Label</Typography.Body2>
-      <Listbox onChange={setSelectedPerson} value={selectedPerson}>
+      <Typography.Body2 className={clsx(s.SelectLabel, { [s.disabled]: disabled })}>
+        Select Label
+      </Typography.Body2>
+      <Listbox disabled={disabled} onChange={setSelectedPerson} value={selectedPerson}>
         {({ open }) => (
           <>
             <ListboxButton className={s.SelectTrigger}>
@@ -28,7 +35,16 @@ export const NewSelect = () => {
             </ListboxButton>
             <ListboxOptions anchor={'bottom'} className={s.SelectGroup}>
               {people.map(person => (
-                <ListboxOption className={s.SelectItem} key={person.id} value={person}>
+                <ListboxOption
+                  className={({ active, selected }) =>
+                    clsx(s.SelectItem, {
+                      [s.focus]: active,
+                      [s.selected]: selected,
+                    })
+                  }
+                  key={person.id}
+                  value={person}
+                >
                   {person.name}
                 </ListboxOption>
               ))}

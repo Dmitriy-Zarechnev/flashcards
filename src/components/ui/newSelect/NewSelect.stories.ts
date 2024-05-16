@@ -15,3 +15,9 @@ type Story = StoryObj<typeof meta>
 export const NewSelectDefault: Story = {
   args: {},
 }
+
+export const NewSelectDisabled: Story = {
+  args: {
+    disabled: true,
+  },
+}

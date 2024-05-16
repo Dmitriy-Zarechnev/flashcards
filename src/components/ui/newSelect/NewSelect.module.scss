@@ -25,6 +25,7 @@
   }
 
   &:disabled {
+    cursor: default;
     color: var(--color-dark-300);
   }
 }
@@ -40,15 +41,16 @@
   color: var(--color-light-100);
   background-color: var(--color-dark-900);
 
-  //&[data-focus] {
-  //  background-color: #e2e8f0;
-  //  outline: none;
-  //}
+  &.selected {
+    font-weight: bold;
+    background-color: var(--color-accent-300);
+  }
 
-  //&[data-selected] {
-  //  font-weight: bold;
-  //  background-color: #cbd5e0;
-  //}
+  &.focus {
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
+    outline: none;
+  }
 
   &:hover {
     cursor: pointer;
@@ -60,4 +62,8 @@
 
 .SelectLabel {
   color: var(--color-dark-100);
+
+  &.disabled {
+    color: var(--color-dark-300);
+  }
 }
