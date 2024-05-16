@@ -4,19 +4,30 @@ import s from './Rating.module.scss'
 
 type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5
 
-export const Rating = ({ rating = 0 }: { rating?: RatingValueType }) => {
+type RatingProps = {
+  rating?: RatingValueType
+}
+
+type StarProps = {
+  selected: boolean
+}
+
+export const Rating = ({ rating = 0 }: RatingProps) => {
   return (
     <div className={s.RatingWrapper}>
-      <Star selected={rating > 0} />
-      <Star selected={rating > 1} />
-      <Star selected={rating > 2} />
-      <Star selected={rating > 3} />
-      <Star selected={rating > 4} />
+      {[1, 2, 3, 4, 5].map((el, i) => {
+        return <Star key={el} selected={rating > i} />
+      })}
+      {/*<Star selected={rating > 0} />*/}
+      {/*<Star selected={rating > 1} />*/}
+      {/*<Star selected={rating > 2} />*/}
+      {/*<Star selected={rating > 3} />*/}
+      {/*<Star selected={rating > 4} />*/}
     </div>
   )
 }
 
-const Star = ({ selected }: { selected: boolean }) => {
+const Star = ({ selected }: StarProps) => {
   return (
     <Icon
       height={'14px'}
