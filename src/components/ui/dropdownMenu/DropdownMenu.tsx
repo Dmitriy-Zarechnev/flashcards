@@ -1,6 +1,6 @@
-import { Dropdown } from '@/components/ui/dropdown'
-import { Icon } from '@/components/ui/icon'
-import { Typography } from '@/components/ui/typography'
+import { Dropdown } from './../dropdown'
+import { Icon } from './../icon'
+import { Typography } from './../typography'
 
 export const DropdownMenu = () => {
   return (

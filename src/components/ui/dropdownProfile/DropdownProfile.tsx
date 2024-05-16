@@ -1,8 +1,8 @@
-import { Dropdown } from '@/components/ui/dropdown'
-import { Icon } from '@/components/ui/icon'
-import { Typography } from '@/components/ui/typography'
-
 import s from './DropdownProfile.module.scss'
+
+import { Dropdown } from './../dropdown'
+import { Icon } from './../icon'
+import { Typography } from './../typography'
 
 type DropdownProfileProps = {
   email: string
