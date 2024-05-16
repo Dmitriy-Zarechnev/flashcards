@@ -1,7 +1,8 @@
-import { TabType, Tabs } from '@/components/ui/tabs'
-import { TabsProps } from '@/components/ui/tabs/Tabs'
 import { Meta, StoryFn } from '@storybook/react'
 import { fn } from '@storybook/test'
+
+import { TabType, Tabs } from './'
+import { TabsProps } from './Tabs'
 
 // Define tabs data
 const tabsData: TabType[] = [

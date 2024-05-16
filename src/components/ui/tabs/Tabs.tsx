@@ -1,10 +1,11 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Typography } from '@/components/ui/typography'
 import * as T from '@radix-ui/react-tabs'
 import { clsx } from 'clsx'
 
 import s from './Tabs.module.scss'
+
+import { Typography } from './../typography'
 
 export type TabType = {
   disabled?: boolean
@@ -62,7 +63,7 @@ type ContentProps = {
   value: string
 } & ComponentPropsWithoutRef<typeof T.Content>
 
-export const Content = ({ children, value, ...rest }: ContentProps) => {
+const Content = ({ children, value, ...rest }: ContentProps) => {
   return (
     <T.Content className={s.content} value={value} {...rest}>
       {children}

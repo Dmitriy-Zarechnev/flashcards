@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -39,8 +39,6 @@ export const TAGS: Record<TagsOptions, ElementType> = {
 
 type TypographyProps<T extends ElementType> = {
   as?: T
-  children: ReactNode
-  className?: string
 } & ComponentPropsWithoutRef<T>
 
 //========================================================================================
