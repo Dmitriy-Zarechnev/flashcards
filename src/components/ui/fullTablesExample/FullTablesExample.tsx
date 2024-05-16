@@ -1,5 +1,6 @@
 import { Icon } from '@/components/ui/icon'
 import { IconButtons } from '@/components/ui/iconButtons'
+import { ImgBlock } from '@/components/ui/imgBlock'
 import { Rating } from '@/components/ui/rating'
 import { RatingValueType } from '@/components/ui/rating/Rating'
 import { Tables } from '@/components/ui/tables'
@@ -74,13 +75,8 @@ export const FullTablesExample = () => {
         {tableData.map(el => {
           return (
             <Tables.TableRow key={el.id}>
-              <Tables.TableBodyCell className={s.tdFlex}>
-                <img
-                  alt={`${el.firstCell.text} picture`}
-                  className={s.cardsImg}
-                  src={el.firstCell.imgUrl}
-                />
-                <Typography.Body2>{el.firstCell.text}</Typography.Body2>
+              <Tables.TableBodyCell>
+                <ImgBlock title={el.firstCell.text} url={el.firstCell.imgUrl} />
               </Tables.TableBodyCell>
 
               <Tables.TableBodyCell>

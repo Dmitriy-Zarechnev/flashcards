@@ -1,7 +1,13 @@
-.TableHeadCell {
+.wrapper {
   display: flex;
   flex-direction: row;
   gap: 5px;
   align-items: center;
   justify-content: start;
+}
+
+.cardsImg {
+  width: 120px;
+  height: 50px;
+  object-fit: cover;
 }
