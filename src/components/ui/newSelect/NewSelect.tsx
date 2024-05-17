@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { Icon } from '@/components/ui/icon'
 import { Typography } from '@/components/ui/typography'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
@@ -7,38 +5,43 @@ import { clsx } from 'clsx'
 
 import s from './NewSelect.module.scss'
 
-type OptionsType = {
-  id: number
-  value: string
-}
+type OptionsType =
+  | { label: number; value: number }
+  | { label: number; value: string }
+  | { label: string; value: number }
+  | { label: string; value: string }
 
 type NewSelectProps = {
   className?: string
+  currentValue: number | string
   disabled?: boolean
   fullWidth?: boolean
+  onChange: (id: number | string) => void
   options: OptionsType[]
   selectTitle?: string
 }
 
 export const NewSelect = ({
   className,
+  currentValue,
   disabled = false,
-  fullWidth,
+  fullWidth = true,
+  onChange,
   options,
   selectTitle,
 }: NewSelectProps) => {
-  const [selectedPerson, setSelectedPerson] = useState(options[0].value)
+  const currentLabel = options.filter(el => el.value === currentValue)[0].label
 
   return (
     <>
       <Typography.Body2 className={clsx(s.SelectLabel, { [s.disabled]: disabled })}>
         {selectTitle}
       </Typography.Body2>
-      <Listbox disabled={disabled} onChange={setSelectedPerson} value={selectedPerson}>
+      <Listbox disabled={disabled} onChange={onChange} value={currentValue}>
         {({ open }) => (
           <div className={clsx(fullWidth && s.fullWidth, className)}>
             <ListboxButton className={clsx(s.SelectTrigger, fullWidth && s.fullWidth)}>
-              {selectedPerson}
+              {currentLabel}
               <Icon
                 height={'16px'}
                 iconId={open ? 'arrowUpOutline' : 'arrowDownOutline'}
@@ -57,10 +60,10 @@ export const NewSelect = ({
                       [s.selected]: selected,
                     })
                   }
-                  key={el.id}
+                  key={el.value}
                   value={el.value}
                 >
-                  {el.value}
+                  {el.label}
                 </ListboxOption>
               ))}
             </ListboxOptions>
