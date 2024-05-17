@@ -7,45 +7,58 @@ import { clsx } from 'clsx'
 
 import s from './NewSelect.module.scss'
 
-const people = [
-  { id: 1, name: 'Active' },
-  { id: 2, name: 'Paused' },
-  { id: 3, name: 'Delayed' },
-  { id: 4, name: 'Canceled' },
-]
+type OptionsType = {
+  id: number
+  value: string
+}
 
 type NewSelectProps = {
   disabled?: boolean
+  fullWidth?: boolean
+  options: OptionsType[]
+  selectTitle?: string
 }
 
-export const NewSelect = ({ disabled = false }: NewSelectProps) => {
-  const [selectedPerson, setSelectedPerson] = useState(people[0])
+export const NewSelect = ({
+  disabled = false,
+  fullWidth,
+  options,
+  selectTitle,
+}: NewSelectProps) => {
+  const [selectedPerson, setSelectedPerson] = useState(options[0].value)
 
   return (
     <>
       <Typography.Body2 className={clsx(s.SelectLabel, { [s.disabled]: disabled })}>
-        Select Label
+        {selectTitle}
       </Typography.Body2>
       <Listbox disabled={disabled} onChange={setSelectedPerson} value={selectedPerson}>
         {({ open }) => (
           <>
-            <ListboxButton className={s.SelectTrigger}>
-              {selectedPerson.name}
-              <Icon height={'16px'} iconId={open ? 'eyeOutline' : 'searchOutline'} width={'16px'} />
+            <ListboxButton className={clsx(s.SelectTrigger, fullWidth && s.fullWidth)}>
+              {selectedPerson}
+              <Icon
+                height={'16px'}
+                iconId={open ? 'arrowUpOutline' : 'arrowDownOutline'}
+                width={'16px'}
+              />
             </ListboxButton>
-            <ListboxOptions anchor={'bottom'} className={s.SelectGroup}>
-              {people.map(person => (
+            <ListboxOptions
+              anchor={'bottom'}
+              className={clsx(s.SelectGroup, fullWidth && s.fullWidth)}
+            >
+              {options.map(el => (
                 <ListboxOption
-                  className={({ active, selected }) =>
+                  className={({ focus, selected }) =>
                     clsx(s.SelectItem, {
-                      [s.focus]: active,
+                      [s.focus]: focus,
                       [s.selected]: selected,
                     })
                   }
-                  key={person.id}
-                  value={person}
+                  key={el.id}
+                  value={el.value}
                 >
-                  {person.name}
+                  {el.value}
                 </ListboxOption>
               ))}
             </ListboxOptions>
