@@ -5,9 +5,7 @@ import { Rating, RatingValueType } from '@/components/ui/rating'
 import { Tables } from '@/components/ui/tables'
 import { Typography } from '@/components/ui/typography'
 
-import defImg from '../../../assets/defaultPicture.jpg'
-
-type TableData = {
+export type TableData = {
   firstCell: FirstCell
   forthCell: string
   id: string
@@ -21,27 +19,11 @@ type FirstCell = {
   text: string
 }
 
-export const FullTablesExample = () => {
-  const tableData: TableData[] = [
-    {
-      firstCell: { imgUrl: defImg, text: 'Cell 1' },
-      forthCell: 'Cell 4',
-      id: 'uniq1',
-      rating: 2,
-      secondCell: 'Cell 2',
-      thirdCell: 'Cell 1',
-    },
+type FullTablesExampleProps = {
+  tableData: TableData[]
+}
 
-    {
-      firstCell: { imgUrl: defImg, text: 'Cell 1' },
-      forthCell: 'Cell 4',
-      id: 'uniq2',
-      rating: 4,
-      secondCell: 'Cell 2',
-      thirdCell: 'Cell 1',
-    },
-  ]
-
+export const FullTablesExample = ({ tableData }: FullTablesExampleProps) => {
   return (
     <Tables.Table>
       <Tables.TableHead>
