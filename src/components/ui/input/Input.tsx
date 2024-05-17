@@ -26,7 +26,7 @@ export const Input = ({
   ...rest
 }: InputProps) => {
   return (
-    <div className={s.box}>
+    <div className={clsx(s.box, className)}>
       {labelTitle && (
         <label className={s.label} htmlFor={'inputId'}>
           <Typography.Body2>{labelTitle}</Typography.Body2>
@@ -47,8 +47,7 @@ export const Input = ({
             eyeImg && s.eyePadding,
             searchImg && s.searchPadding,
             error && s.error,
-            disabled && s.disabled,
-            className
+            disabled && s.disabled
           )}
           disabled={disabled}
           id={'inputId'}

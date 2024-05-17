@@ -1,0 +1,11 @@
+.Wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+}
+
+.Img {
+  height: 230px;
+  object-fit: cover;
+}
