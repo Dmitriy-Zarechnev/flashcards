@@ -1,0 +1,1 @@
+export { FullTablesExample } from './FullTablesExample'
