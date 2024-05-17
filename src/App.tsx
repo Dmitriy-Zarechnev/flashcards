@@ -7,5 +7,5 @@ export function App() {
     width: '100vw',
   }
 
-  return <div style={centerStyles}>💩💩💩</div>
+  return <div style={centerStyles}>💩💩💩🥁</div>
 }
