@@ -14,7 +14,7 @@ export const HeadCellWithArrow = ({ className, title, ...rest }: HeadCellWithArr
   return (
     <div className={clsx(s.TableHeadCell, className)} {...rest}>
       <Typography.Subtitle2>{title}</Typography.Subtitle2>
-      <Icon height={'12px'} iconId={'arrowUp'} width={'12px'} />
+      <Icon height={'12px'} iconId={'arrowUpOutline'} width={'12px'} />
     </div>
   )
 }
