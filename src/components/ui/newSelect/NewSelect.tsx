@@ -13,6 +13,7 @@ type OptionsType = {
 }
 
 type NewSelectProps = {
+  className?: string
   disabled?: boolean
   fullWidth?: boolean
   options: OptionsType[]
@@ -20,6 +21,7 @@ type NewSelectProps = {
 }
 
 export const NewSelect = ({
+  className,
   disabled = false,
   fullWidth,
   options,
@@ -34,7 +36,7 @@ export const NewSelect = ({
       </Typography.Body2>
       <Listbox disabled={disabled} onChange={setSelectedPerson} value={selectedPerson}>
         {({ open }) => (
-          <>
+          <div className={clsx(fullWidth && s.fullWidth, className)}>
             <ListboxButton className={clsx(s.SelectTrigger, fullWidth && s.fullWidth)}>
               {selectedPerson}
               <Icon
@@ -44,7 +46,7 @@ export const NewSelect = ({
               />
             </ListboxButton>
             <ListboxOptions
-              anchor={'bottom'}
+              {...(!fullWidth && { anchor: 'bottom' })}
               className={clsx(s.SelectGroup, fullWidth && s.fullWidth)}
             >
               {options.map(el => (
@@ -62,7 +64,7 @@ export const NewSelect = ({
                 </ListboxOption>
               ))}
             </ListboxOptions>
-          </>
+          </div>
         )}
       </Listbox>
     </>
