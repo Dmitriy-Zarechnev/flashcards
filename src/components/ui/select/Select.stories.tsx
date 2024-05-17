@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { FC, useState } from 'react'
 
-import { NewSelect } from '@/components/ui/newSelect/NewSelect'
+import { Select } from './'
 
 const options = [
   { label: 'one', value: 1 },
@@ -12,15 +12,15 @@ const options = [
   { label: 'five', value: 5 },
 ]
 
-const meta: Meta<typeof NewSelect> = {
-  component: NewSelect,
+const meta: Meta<typeof Select> = {
+  component: Select,
   tags: ['autodocs'],
-  title: 'Components/NewSelect',
+  title: 'Components/Select',
 }
 
 export default meta
 
-type Story = StoryObj<typeof NewSelect>
+type Story = StoryObj<typeof Select>
 
 const Wrapper: FC<{ isDisabled: boolean }> = ({ isDisabled }) => {
   const [currentValue, setCurrentValue] = useState<number | string>(1)
@@ -30,7 +30,7 @@ const Wrapper: FC<{ isDisabled: boolean }> = ({ isDisabled }) => {
   }
 
   return (
-    <NewSelect
+    <Select
       currentValue={currentValue}
       disabled={isDisabled}
       onChange={foo}

@@ -1,55 +1,75 @@
+import { Icon } from '@/components/ui/icon'
 import { Typography } from '@/components/ui/typography'
-import { ChevronDownIcon } from '@radix-ui/react-icons'
-import * as Select from '@radix-ui/react-select'
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
+import { clsx } from 'clsx'
 
 import s from './Select.module.scss'
 
-type OptionItems = {
-  id: number
-  text: string
-  value: string
-}
+type OptionsType =
+  | { label: number; value: number }
+  | { label: number; value: string }
+  | { label: string; value: number }
+  | { label: string; value: string }
 
-type SelectCompProps = {
+type SelectProps = {
+  className?: string
+  currentValue: number | string
   disabled?: boolean
+  fullWidth?: boolean
+  onChange: (id: number | string) => void
+  options: OptionsType[]
+  selectTitle?: string
 }
 
-export const SelectComp = ({ disabled = false, ...rest }: SelectCompProps) => {
-  const optionItems: OptionItems[] = [
-    { id: 1, text: 'Orange', value: 'orange' },
-    { id: 2, text: 'Apple', value: 'apple' },
-    { id: 3, text: 'Banana', value: 'banana' },
-  ]
+export const Select = ({
+  className,
+  currentValue,
+  disabled = false,
+  fullWidth = true,
+  onChange,
+  options,
+  selectTitle,
+}: SelectProps) => {
+  const currentLabel = options.filter(el => el.value === currentValue)[0].label
 
   return (
     <>
-      <Typography.Body2 className={s.SelectLabel}>Select Label</Typography.Body2>
-      <Select.Root disabled={disabled} {...rest}>
-        <Select.Trigger className={s.SelectTrigger}>
-          <Select.Value placeholder={'default text'} />
-          <Select.Icon>
-            <ChevronDownIcon />
-          </Select.Icon>
-        </Select.Trigger>
-
-        <Select.Portal>
-          <Select.Content>
-            <Select.Viewport>
-              <Select.Group className={s.SelectGroup}>
-                {optionItems.map(el => {
-                  return (
-                    <Select.Item className={s.SelectItem} key={el.id} value={el.value}>
-                      <Select.ItemText>
-                        <Typography.Body1>{el.text}</Typography.Body1>
-                      </Select.ItemText>
-                    </Select.Item>
-                  )
-                })}
-              </Select.Group>
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Portal>
-      </Select.Root>
+      <Typography.Body2 className={clsx(s.SelectLabel, { [s.disabled]: disabled })}>
+        {selectTitle}
+      </Typography.Body2>
+      <Listbox disabled={disabled} onChange={onChange} value={currentValue}>
+        {({ open }) => (
+          <div className={clsx(fullWidth && s.fullWidth, className)}>
+            <ListboxButton className={clsx(s.SelectTrigger, fullWidth && s.fullWidth)}>
+              {currentLabel}
+              <Icon
+                height={'16px'}
+                iconId={open ? 'arrowUpOutline' : 'arrowDownOutline'}
+                width={'16px'}
+              />
+            </ListboxButton>
+            <ListboxOptions
+              {...(!fullWidth && { anchor: 'bottom' })}
+              className={clsx(s.SelectGroup, fullWidth && s.fullWidth)}
+            >
+              {options.map(el => (
+                <ListboxOption
+                  className={({ focus, selected }) =>
+                    clsx(s.SelectItem, {
+                      [s.focus]: focus,
+                      [s.selected]: selected,
+                    })
+                  }
+                  key={el.value}
+                  value={el.value}
+                >
+                  {el.label}
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
+          </div>
+        )}
+      </Listbox>
     </>
   )
 }

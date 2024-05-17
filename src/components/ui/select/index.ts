@@ -1,1 +1,1 @@
-export { SelectComp } from './Select'
+export { Select } from './Select'
