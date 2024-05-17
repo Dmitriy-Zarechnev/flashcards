@@ -6,8 +6,10 @@ import { clsx } from 'clsx'
 import s from './IconButtons.module.scss'
 
 type IconButtonProps = {
+  height?: string
   iconId: string
   onClick: () => void
+  width?: string
 }
 
 type IconButtonsProps = {
@@ -28,10 +30,15 @@ export const IconButtons = ({ className, id, ...rest }: IconButtonsProps) => {
   )
 }
 
-const IconButton = ({ iconId, onClick }: IconButtonProps) => {
+export const IconButton = ({
+  height = '16px',
+  iconId,
+  onClick,
+  width = '16px',
+}: IconButtonProps) => {
   return (
     <button className={s.IconButton} onClick={onClick}>
-      <Icon height={'16px'} iconId={iconId} width={'16px'} />
+      <Icon height={height} iconId={iconId} width={width} />
     </button>
   )
 }

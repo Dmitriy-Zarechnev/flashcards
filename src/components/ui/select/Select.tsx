@@ -33,13 +33,13 @@ export const Select = ({
   const currentLabel = options.filter(el => el.value === currentValue)[0].label
 
   return (
-    <>
+    <div>
       <Typography.Body2 className={clsx(s.SelectLabel, { [s.disabled]: disabled })}>
         {selectTitle}
       </Typography.Body2>
       <Listbox disabled={disabled} onChange={onChange} value={currentValue}>
         {({ open }) => (
-          <div className={clsx(fullWidth && s.fullWidth, className)}>
+          <div className={clsx(s.FatherRelative, fullWidth && s.fullWidth, className)}>
             <ListboxButton className={clsx(s.SelectTrigger, fullWidth && s.fullWidth)}>
               {currentLabel}
               <Icon
@@ -70,6 +70,6 @@ export const Select = ({
           </div>
         )}
       </Listbox>
-    </>
+    </div>
   )
 }

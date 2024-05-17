@@ -1,0 +1,38 @@
+.FormWrapper {
+  width: 540px;
+}
+
+.FormHeader,
+.FormMiddle,
+.FormFooter {
+  display: flex;
+  flex-direction: row;
+}
+
+.FormHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+}
+
+.FormMiddle {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+
+  margin-bottom: 24px;
+}
+
+.FormFooter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
