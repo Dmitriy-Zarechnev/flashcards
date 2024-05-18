@@ -6,19 +6,25 @@ import { clsx } from 'clsx'
 import s from './ThreeIconButtons.module.scss'
 
 type IconButtonsProps = {
+  editFunction: () => void
   id: string
+  playFunction: () => void
+  trashFunction: () => void
 } & ComponentPropsWithoutRef<'div'>
 
-export const ThreeIconButtons = ({ className, id, ...rest }: IconButtonsProps) => {
-  const playButtonClickHandler = () => {}
-  const editButtonClickHandler = () => {}
-  const trashButtonClickHandler = () => {}
-
+export const ThreeIconButtons = ({
+  className,
+  editFunction,
+  id,
+  playFunction,
+  trashFunction,
+  ...rest
+}: IconButtonsProps) => {
   return (
     <div className={clsx(s.IconButtonsWrapper, className)} {...rest}>
-      <IconButton iconId={'playCircleOutline'} onClick={playButtonClickHandler} />
-      <IconButton iconId={'editOutline'} onClick={editButtonClickHandler} />
-      <IconButton iconId={'trashOutline'} onClick={trashButtonClickHandler} />
+      <IconButton iconId={'playCircleOutline'} onClick={playFunction} />
+      <IconButton iconId={'editOutline'} onClick={editFunction} />
+      <IconButton iconId={'trashOutline'} onClick={trashFunction} />
     </div>
   )
 }

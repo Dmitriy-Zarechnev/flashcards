@@ -14,6 +14,8 @@ type Story = StoryObj<typeof meta>
 
 export const TwoIconButtonsStory: Story = {
   args: {
+    editFunction: () => {},
     id: '456',
+    trashFunction: () => {},
   },
 }

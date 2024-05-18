@@ -14,6 +14,9 @@ type Story = StoryObj<typeof meta>
 
 export const ThreeIconButtonsStory: Story = {
   args: {
+    editFunction: () => {},
     id: '123',
+    playFunction: () => {},
+    trashFunction: () => {},
   },
 }
