@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { fn } from '@storybook/test'
+
 import { TwoIconButtons } from './'
 
 const meta = {
@@ -14,8 +16,8 @@ type Story = StoryObj<typeof meta>
 
 export const TwoIconButtonsStory: Story = {
   args: {
-    editFunction: () => {},
+    editFunction: fn(),
     id: '456',
-    trashFunction: () => {},
+    trashFunction: fn(),
   },
 }
