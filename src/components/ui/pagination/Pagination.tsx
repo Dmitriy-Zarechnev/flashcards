@@ -1,13 +1,12 @@
 import { FC } from 'react'
 
 import { Icon } from '@/components/ui/icon'
-import { PaginationSelect } from '@/components/ui/pagination/paginationSelect'
+import { Select } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
 import { clsx } from 'clsx'
 
 import s from './Pagination.module.scss'
 
-// import { KeyboardArrowLeft, KeyboardArrowRight } from '../../'
 import { usePagination } from './usePagination'
 
 type PaginationConditionals =
@@ -183,9 +182,10 @@ const PerPageSelect: FC<PerPageSelectProps> = ({ onPerPageChange, perPage, perPa
   return (
     <div className={classNames.selectBox}>
       <Typography.Body2>Показать</Typography.Body2>
-      <PaginationSelect
+      <Select
         className={classNames.select}
         currentValue={perPage}
+        isActiveBackgroundBlocked
         onChange={onPerPageChangeForType}
         options={selectOptions}
       />

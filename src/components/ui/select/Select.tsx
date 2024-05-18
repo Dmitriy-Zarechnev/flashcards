@@ -16,6 +16,7 @@ type SelectProps = {
   currentValue: number | string
   disabled?: boolean
   fullWidth?: boolean
+  isActiveBackgroundBlocked?: boolean
   onChange: (id: number | string) => void
   options: OptionsType[]
   selectTitle?: string
@@ -26,6 +27,7 @@ export const Select = ({
   currentValue,
   disabled = false,
   fullWidth = true,
+  isActiveBackgroundBlocked = false,
   onChange,
   options,
   selectTitle,
@@ -57,7 +59,7 @@ export const Select = ({
                   className={({ focus, selected }) =>
                     clsx(s.SelectItem, {
                       [s.focus]: focus,
-                      [s.selected]: selected,
+                      [s.selected]: selected && !isActiveBackgroundBlocked,
                     })
                   }
                   key={el.value}

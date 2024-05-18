@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { FC, useState } from 'react'
 
+import { fn } from '@storybook/test'
+
 import { Select } from './'
 
 const options = [
@@ -46,4 +48,14 @@ export const Default: Story = {
 
 export const Disabled: Story = {
   render: () => <Wrapper isDisabled />,
+}
+
+export const WithoutActiveBackground: Story = {
+  args: {
+    currentValue: 2,
+    isActiveBackgroundBlocked: true,
+    onChange: fn,
+    options,
+    selectTitle: 'SelectTitle',
+  },
 }
