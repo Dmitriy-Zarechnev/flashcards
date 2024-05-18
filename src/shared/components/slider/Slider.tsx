@@ -1,19 +1,19 @@
-import { useState } from 'react'
-
 import { Typography } from '@/shared/components/typography'
 import * as Slider from '@radix-ui/react-slider'
 
 import s from './Slider.module.scss'
 
-export const SliderComponent = () => {
-  const [valueLeft, setValueLeft] = useState(25)
-  const [valueRight, setValueRight] = useState(75)
+type SliderComponentProps = {
+  valueChangeHandler: (value: number[]) => void
+  valueLeft: number
+  valueRight: number
+}
 
-  const valueChangeHandler = (value: number[]) => {
-    setValueLeft(value[0])
-    setValueRight(value[1])
-  }
-
+export const SliderComponent = ({
+  valueChangeHandler,
+  valueLeft,
+  valueRight,
+}: SliderComponentProps) => {
   return (
     <div className={s.SliderWrapper}>
       <Typography.Body1 className={s.SliderText}>{valueLeft}</Typography.Body1>

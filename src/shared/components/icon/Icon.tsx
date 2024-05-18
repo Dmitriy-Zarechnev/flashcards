@@ -8,15 +8,15 @@ type IconProps = {
   width?: string
 }
 
-export const Icon = (props: IconProps) => {
+export const Icon = ({ className, height, iconId, viewBox, width }: IconProps) => {
   return (
     <svg
-      className={props.className}
-      height={props.height || '16'}
-      viewBox={props.viewBox || '0 0 24 24'}
-      width={props.width || '16'}
+      className={className}
+      height={height || '16'}
+      viewBox={viewBox || '0 0 24 24'}
+      width={width || '16'}
     >
-      <use xlinkHref={`${iconsSprite}#${props.iconId}`} />
+      <use xlinkHref={`${iconsSprite}#${iconId}`} />
     </svg>
   )
 }

@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { IconButtons } from './'
+import { IconButton } from './'
 
 const meta = {
   argTypes: {},
-  component: IconButtons,
+  component: IconButton,
   tags: ['autodocs'],
-  title: 'Entities/Tables/IconButtons',
-} satisfies Meta<typeof IconButtons>
+  title: 'Components/IconButton',
+} satisfies Meta<typeof IconButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const IconButtonsStory: Story = {
   args: {
-    id: '123',
+    iconId: 'eyeOutline',
   },
 }
