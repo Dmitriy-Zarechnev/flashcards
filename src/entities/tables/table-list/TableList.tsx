@@ -2,7 +2,7 @@ import { HeadCellWithArrow } from '@/entities/tables/head-cell-with-arrow'
 import { ImgBlock } from '@/entities/tables/image-block'
 import { Rating, RatingValueType, Tables, Typography } from '@/shared'
 
-import { ThreeIconButtons } from '../three-icon-buttons'
+import { IconButtons } from '../icon-buttons'
 
 export type TableData = {
   firstCell: FirstCell
@@ -71,7 +71,12 @@ export const TableList = ({ tableData }: TableListProps) => {
               </Tables.TableBodyCell>
 
               <Tables.TableBodyCell>
-                <ThreeIconButtons id={el.id} />
+                <IconButtons
+                  editFunction={() => {}}
+                  id={el.id}
+                  showPlayButton
+                  trashFunction={() => {}}
+                />
               </Tables.TableBodyCell>
             </Tables.TableRow>
           )
