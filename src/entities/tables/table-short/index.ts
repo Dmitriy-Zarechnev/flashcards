@@ -1,0 +1,1 @@
+export { TableShort } from './TableShort'
