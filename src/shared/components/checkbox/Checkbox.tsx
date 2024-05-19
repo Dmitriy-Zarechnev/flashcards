@@ -8,9 +8,9 @@ import s from './Checkbox.module.scss'
 //========================================================================================
 
 type CheckboxProps = {
-  checked: boolean
+  checked?: boolean
   id?: string
-  onChange: (checked: boolean) => void
+  onChange?: (checked: boolean) => void
   /** When true, indicates that the user must check the checkbox
    * before the owning form can be submitted. */
   required?: boolean

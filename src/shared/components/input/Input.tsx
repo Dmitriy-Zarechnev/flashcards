@@ -10,7 +10,7 @@ type InputProps = {
   closeImg?: boolean
   error?: string
   eyeImg?: boolean
-  labelTitle?: string
+  label?: string
   searchImg?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
@@ -20,16 +20,16 @@ export const Input = ({
   disabled,
   error,
   eyeImg,
-  labelTitle,
+  label,
   placeholder,
   searchImg,
   ...rest
 }: InputProps) => {
   return (
     <div className={clsx(s.box, className)}>
-      {labelTitle && (
+      {label && (
         <label className={s.label} htmlFor={'inputId'}>
-          <Typography.Body2>{labelTitle}</Typography.Body2>
+          <Typography.Body2>{label}</Typography.Body2>
         </label>
       )}
       <div className={s.inputWrapper}>
@@ -52,7 +52,7 @@ export const Input = ({
           disabled={disabled}
           id={'inputId'}
           {...rest}
-          placeholder={placeholder || labelTitle}
+          placeholder={placeholder || label}
         />
         {eyeImg && (
           <Icon

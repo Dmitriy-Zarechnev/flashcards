@@ -16,7 +16,7 @@ export const ModalList = () => {
     <Card as={'form'}>
       <Modal buttonTitle={'buttonTitle'} title={'Question'} />
       <Modal buttonTitle={'buttonTitle'} title={'Answer'} />
-      <Input className={s.Input} labelTitle={'Input'} placeholder={'Test'} />
+      <Input className={s.Input} label={'Input'} placeholder={'Test'} />
       <Checkbox checked={checked} id={'checkbox'} onChange={fooCheck}>
         <Typography.Body2>Checkbox-label</Typography.Body2>
       </Checkbox>

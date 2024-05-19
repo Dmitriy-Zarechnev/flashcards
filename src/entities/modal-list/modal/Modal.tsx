@@ -17,7 +17,7 @@ export const Modal = ({ buttonTitle, className, imgUrl = reactImg, title }: Moda
   return (
     <div className={clsx(s.Wrapper, className)}>
       <Typography.Subtitle2>{title}:</Typography.Subtitle2>
-      <Input labelTitle={`${title}`} placeholder={`Write ${title}`} />
+      <Input label={`${title}`} placeholder={`Write ${title}`} />
       <img alt={`${title} picture`} className={s.Img} src={imgUrl} />
       <Button img imgId={'imgOutline'} variant={'secondary'}>
         {buttonTitle}

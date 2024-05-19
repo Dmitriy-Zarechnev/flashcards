@@ -14,40 +14,40 @@ type Story = StoryObj<typeof meta>
 
 export const DefaultInput: Story = {
   args: {
-    labelTitle: 'Input',
+    label: 'Input',
   },
 }
 export const DisabledInput: Story = {
   args: {
     disabled: true,
-    labelTitle: 'Input',
+    label: 'Input',
   },
 }
 export const ErrorInput: Story = {
   args: {
     error: 'error',
-    labelTitle: 'Input',
+    label: 'Input',
   },
 }
 
 export const DefaultInputWithEye: Story = {
   args: {
     eyeImg: true,
-    labelTitle: 'Input',
+    label: 'Input',
   },
 }
 export const DisabledInputWithEye: Story = {
   args: {
     disabled: true,
     eyeImg: true,
-    labelTitle: 'Input',
+    label: 'Input',
   },
 }
 export const ErrorInputWithEye: Story = {
   args: {
     error: 'error',
     eyeImg: true,
-    labelTitle: 'Input',
+    label: 'Input',
   },
 }
 

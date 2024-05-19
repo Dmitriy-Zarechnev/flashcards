@@ -53,8 +53,8 @@ export const FormModal = ({
             options={selectOptions}
             selectTitle={`${selectTitle}`}
           />
-          <Input labelTitle={`${firstInputTitle}`} placeholder={`Write ${firstInputTitle}`} />
-          <Input labelTitle={`${secondInputTitle}`} placeholder={`Write ${secondInputTitle}`} />
+          <Input label={`${firstInputTitle}`} placeholder={`Write ${firstInputTitle}`} />
+          <Input label={`${secondInputTitle}`} placeholder={`Write ${secondInputTitle}`} />
           <Checkbox checked={checkboxValue} id={'checkbox'} onChange={checkBoxChangeFunction}>
             <Typography.Body2>{checkboxLabel}</Typography.Body2>
           </Checkbox>
