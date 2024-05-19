@@ -8,7 +8,7 @@ import { z } from 'zod'
 
 export const LoginForm = () => {
   const loginSchema = z.object({
-    email: z.string().email(),
+    email: z.string().trim().email(),
     password: z.string().min(3, { message: 'Password should be 3 or more characters long' }),
     rememberMe: z.boolean().default(false),
   })

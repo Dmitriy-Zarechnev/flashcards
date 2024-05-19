@@ -2,20 +2,20 @@ import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
 import { Checkbox, CheckboxProps } from '@/shared'
 
-export type ControlledCheckboxProps<TFieldValues extends FieldValues> = Omit<
+export type ControlledCheckboxProps<T extends FieldValues> = Omit<
   CheckboxProps,
   'id' | 'onChange' | 'value'
 > &
-  UseControllerProps<TFieldValues>
+  UseControllerProps<T>
 
-export const ControlledCheckbox = <TFieldValues extends FieldValues>({
+export const ControlledCheckbox = <T extends FieldValues>({
   control,
   defaultValue,
   name,
   rules,
   shouldUnregister,
   ...checkboxProps
-}: ControlledCheckboxProps<TFieldValues>) => {
+}: ControlledCheckboxProps<T>) => {
   const {
     field: { onChange, value },
   } = useController({
