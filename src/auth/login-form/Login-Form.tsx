@@ -1,27 +1,26 @@
-import { useController, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
-import { Button, Checkbox, Input } from '@/shared'
-
-type FormValues = {
-  email: string
-  password: string
-  rememberMe: boolean
-}
+import { ControlledCheckbox } from '@/auth/controlled/controlled-checkbox/Controlled-Checkbox'
+import { Button, Input } from '@/shared'
+import { DevTool } from '@hookform/devtools'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 export const LoginForm = () => {
+  const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(3, { message: 'Password should be 3 or more characters long' }),
+    rememberMe: z.boolean().default(false),
+  })
+
+  type FormValues = z.infer<typeof loginSchema>
   const {
     control,
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm<FormValues>()
-
-  const {
-    field: { onChange, value },
-  } = useController({
-    control,
-    defaultValue: false,
-    name: 'rememberMe',
+  } = useForm<FormValues>({
+    resolver: zodResolver(loginSchema),
   })
 
   const onSubmit = (data: FormValues) => {
@@ -30,32 +29,19 @@ export const LoginForm = () => {
 
   console.log('errors: ', errors)
 
-  const emailRegex =
-    /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <DevTool control={control} />
+      <Input {...register('email')} error={errors.email?.message} label={'email'} type={'email'} />
       <Input
-        {...register('email', {
-          pattern: { message: 'Invalid email', value: emailRegex },
-          required: 'Email is required',
-        })}
-        error={errors.email?.message}
-        label={'email'}
-        type={'email'}
-      />
-      <Input
-        {...register('password', {
-          minLength: { message: 'Password has to be at least 3 characters long', value: 3 },
-          required: 'Password is required',
-        })}
+        {...register('password')}
         error={errors.password?.message}
         label={'password'}
         type={'password'}
       />
-      <Checkbox checked={value} onChange={onChange}>
+      <ControlledCheckbox control={control} name={'rememberMe'}>
         rememberMe
-      </Checkbox>
+      </ControlledCheckbox>
       <Button type={'submit'} variant={'primary'}>
         Submit
       </Button>

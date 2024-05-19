@@ -1,6 +1,7 @@
 export { Button } from './button'
 export { Card } from './card'
 export { Checkbox } from './checkbox'
+export type { CheckboxProps } from './checkbox'
 export { Dropdown } from './dropdown'
 export { Icon } from './icon'
 export { IconButton } from './iconButton'

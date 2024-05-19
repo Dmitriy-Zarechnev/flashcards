@@ -7,7 +7,7 @@ import s from './Checkbox.module.scss'
 
 //========================================================================================
 
-type CheckboxProps = {
+export type CheckboxProps = {
   checked?: boolean
   id?: string
   onChange?: (checked: boolean) => void
