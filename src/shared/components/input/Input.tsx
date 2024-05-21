@@ -11,7 +11,7 @@ type InputProps = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, disabled, error, id, label, placeholder, ...rest }, ref) => {
+  ({ className, disabled, error, id, label, onChange, placeholder, value, ...rest }, ref) => {
     const inputId = useId()
     const finalId = id || inputId
 
@@ -27,8 +27,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           disabled={disabled}
           id={finalId}
           {...rest}
+          onChange={onChange}
           placeholder={placeholder || label}
           ref={ref}
+          value={value}
         />
         <Typography.Caption className={s.errorText}>{error}</Typography.Caption>
       </div>

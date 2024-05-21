@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, useId } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useId, useState } from 'react'
 
 import { IconButton, Input } from '@/shared'
 import { Icon } from '@/shared/components/icon'
@@ -13,6 +13,15 @@ type SearchInputProps = {
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ className, disabled = false, error, ...rest }, ref) => {
     const inputId = useId()
+    const [searchText, setSearchText] = useState('')
+
+    const inputValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      setSearchText(e.currentTarget.value)
+    }
+
+    const searchTextResetHandler = () => {
+      setSearchText('')
+    }
 
     return (
       <div className={clsx(s.searchInputWrapper, className)} {...rest} ref={ref}>
@@ -28,13 +37,18 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
           error={error}
           id={inputId}
           label={'Search Input'}
+          onChange={inputValueChangeHandler}
+          value={searchText}
         />
-        <IconButton
-          className={clsx(s.closeIcon)}
-          height={'20px'}
-          iconId={'closeOutline'}
-          width={'20px'}
-        />
+        {searchText && (
+          <IconButton
+            className={clsx(s.closeIcon)}
+            height={'20px'}
+            iconId={'closeOutline'}
+            onClick={searchTextResetHandler}
+            width={'20px'}
+          />
+        )}
       </div>
     )
   }
