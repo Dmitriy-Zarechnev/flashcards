@@ -1,66 +1,35 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useId } from 'react'
 
-import { Icon } from '@/shared/components/icon'
 import { Typography } from '@/shared/components/typography'
 import { clsx } from 'clsx'
 
 import s from './Input.module.scss'
 
 type InputProps = {
-  closeImg?: boolean
   error?: string
-  eyeImg?: boolean
   label?: string
-  searchImg?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    { className, closeImg, disabled, error, eyeImg, label, placeholder, searchImg, ...rest },
-    ref
-  ) => {
+  ({ className, disabled, error, id, label, placeholder, ...rest }, ref) => {
+    const inputId = useId()
+    const finalId = id || inputId
+
     return (
-      <div className={clsx(s.box, className)}>
+      <div className={clsx(s.inputWrapper)}>
         {label && (
-          <label className={s.label} htmlFor={'inputId'}>
-            <Typography.Body2>{label}</Typography.Body2>
-          </label>
+          <Typography.Body2 as={'label'} className={s.label} htmlFor={finalId}>
+            {label}
+          </Typography.Body2>
         )}
-        <div className={s.inputWrapper}>
-          {searchImg && (
-            <Icon
-              className={clsx(s.searchIcon, disabled && s.disabled)}
-              height={'20px'}
-              iconId={'searchOutline'}
-              width={'20px'}
-            />
-          )}
-          <input
-            className={clsx(
-              s.input,
-              eyeImg && s.eyePadding,
-              searchImg && s.searchPadding,
-              error && s.error,
-              disabled && s.disabled
-            )}
-            disabled={disabled}
-            id={'inputId'}
-            {...rest}
-            placeholder={placeholder || label}
-            ref={ref}
-          />
-          {eyeImg && (
-            <Icon
-              className={clsx(s.eyeIcon, disabled && s.disabled)}
-              height={'20px'}
-              iconId={'eyeOutline'}
-              width={'20px'}
-            />
-          )}
-          {closeImg && (
-            <Icon className={s.eyeIcon} height={'16px'} iconId={'closeOutline'} width={'16px'} />
-          )}
-        </div>
+        <input
+          className={clsx(s.input, error && s.error, className)}
+          disabled={disabled}
+          id={finalId}
+          {...rest}
+          placeholder={placeholder || label}
+          ref={ref}
+        />
         <Typography.Caption className={s.errorText}>{error}</Typography.Caption>
       </div>
     )

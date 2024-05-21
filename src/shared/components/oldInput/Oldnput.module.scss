@@ -1,4 +1,4 @@
-.inputWrapper {
+.box {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -6,7 +6,24 @@
 
 .label {
   cursor: pointer;
-  color: var(--color-dark-100);
+
+  & p {
+    color: var(--color-dark-100);
+  }
+
+  &:disabled {
+    color: var(--color-dark-300);
+  }
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 20%;
+  left: 12px;
 }
 
 .input {
@@ -40,31 +57,42 @@
   }
 
   &:not(:disabled) {
-    &:focus {
-      color: var(--color-light-100);
-      border: 1px solid var(--color-light-100);
-      outline: none;
-    }
-  }
-
-  &:not(:disabled) {
     &:active {
       color: var(--color-light-100);
       border: 1px solid var(--color-light-100);
       outline: none;
     }
   }
+}
 
-  &.error,
-  &.error:hover {
-    border: 1px solid var(--color-danger-300);
+.eyePadding {
+  padding: 6px 34px 6px 12px;
+}
 
-    &::placeholder {
-      color: var(--color-danger-300);
-    }
+.searchPadding {
+  padding: 6px 12px 6px 40px;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 25%;
+  right: 12px;
+  color: var(--color-light-100);
+}
+
+.error {
+  color: var(--color-danger-300);
+  border: 1px solid var(--color-danger-300);
+
+  &::placeholder {
+    color: var(--color-danger-300);
   }
 }
 
 .errorText {
   color: var(--color-danger-300);
+}
+
+.disabled {
+  color: var(--color-dark-300);
 }

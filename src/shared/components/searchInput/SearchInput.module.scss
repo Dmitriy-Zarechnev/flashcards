@@ -1,0 +1,25 @@
+.searchInputWrapper {
+  position: relative;
+  color: var(--color-dark-300);
+}
+
+.searchIcon {
+  position: absolute;
+  top: 32px;
+  left: 12px;
+}
+
+.searchPadding {
+  padding: 6px 12px 6px 40px;
+}
+
+.disabled {
+  color: var(--color-dark-300);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 33px;
+  right: 12px;
+  color: var(--color-light-100);
+}
