@@ -38,6 +38,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
           id={inputId}
           label={'Search Input'}
           onChange={inputValueChangeHandler}
+          type={'text'}
           value={searchText}
         />
         {searchText && (
