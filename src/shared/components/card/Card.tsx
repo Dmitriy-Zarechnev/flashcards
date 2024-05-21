@@ -6,13 +6,14 @@ import s from '@/shared/components/card/Card.module.scss'
 
 type CardProps<T extends ElementType = 'div'> = {
   as?: T
+  fullWidth?: boolean
 } & ComponentPropsWithoutRef<T>
 
 export const Card = <T extends ElementType = 'div'>(props: CardProps<T>) => {
-  const { as: Component = 'div', children, className, ...rest } = props
+  const { as: Component = 'div', children, className, fullWidth, ...rest } = props
 
   return (
-    <Component className={clsx(s.card, className)} {...rest}>
+    <Component className={clsx(s.card, fullWidth && s.fullWidth, className)} {...rest}>
       {children}
     </Component>
   )
