@@ -24,7 +24,7 @@ const CheckboxWrapper = () => {
   }
 
   return (
-    <Checkbox checked={checked} id={'checkbox'} onChange={foo}>
+    <Checkbox checked={checked} id={'checkbox'} onCheckedChange={foo}>
       <Typography.Body2>Checkbox-label</Typography.Body2>
     </Checkbox>
   )

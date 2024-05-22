@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export const LoginForm = () => {
   const loginSchema = z.object({
-    email: z.string().trim().email(),
+    email: z.string().trim().email('Email is required'),
     password: z.string().min(3, { message: 'Password should be 3 or more characters long' }),
     rememberMe: z.boolean().default(false),
   })
@@ -26,11 +26,9 @@ export const LoginForm = () => {
     console.log(data)
   }
 
-  console.log('errors: ', errors)
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <DevTool control={control} />
+      {import.meta.env.DEV && <DevTool control={control} />}
       <Input {...register('email')} error={errors.email?.message} label={'email'} type={'email'} />
       <Input
         {...register('password')}
@@ -39,7 +37,7 @@ export const LoginForm = () => {
         type={'password'}
       />
       <ControlledCheckbox control={control} name={'rememberMe'}>
-        rememberMe
+        remember me
       </ControlledCheckbox>
       <Button type={'submit'} variant={'primary'}>
         Submit
