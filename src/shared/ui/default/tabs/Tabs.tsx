@@ -32,18 +32,25 @@ const Root = ({
   value,
   ...rest
 }: TabsProps) => {
+  /** to apply styles to tabs borders */
+
   return (
     <T.Root
+      {...rest}
       className={s.root}
       defaultValue={defaultValue}
       onValueChange={onValueChange}
       value={value}
-      {...rest}
     >
       <T.List aria-label={'brief description'} className={s.list}>
-        {tabs.map(tab => (
+        {tabs.map((tab, i) => (
           <T.Trigger
-            className={clsx(s.trigger, notFullWidth && s.triggerNotFullWidth)}
+            className={clsx(
+              s.trigger,
+              notFullWidth && s.triggerNotFullWidth,
+              i === 0 && s.triggerBorderFirst,
+              i === tabs.length - 1 && s.triggerBorderLast
+            )}
             disabled={tab.disabled}
             key={tab.value}
             value={tab.value}

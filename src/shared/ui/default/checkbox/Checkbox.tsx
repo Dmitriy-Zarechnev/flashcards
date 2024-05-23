@@ -13,8 +13,15 @@ export type CheckboxProps = {
 export const Checkbox = forwardRef<ElementRef<typeof C.Root>, CheckboxProps>(
   ({ children, className, disabled, id, required, ...rest }, ref) => {
     return (
-      <div className={clsx(s.checkbox, className)}>
-        <C.Root {...rest} className={s.root} id={id} ref={ref} required={required}>
+      <div className={clsx(s.checkbox, disabled && s.checkboxDisabled, className)}>
+        <C.Root
+          {...rest}
+          className={s.root}
+          disabled={disabled}
+          id={id}
+          ref={ref}
+          required={required}
+        >
           <C.Indicator className={s.indicator}>✔︎</C.Indicator>
         </C.Root>
         <label className={clsx(s.label, disabled && s.labelDisabled)} htmlFor={id}>

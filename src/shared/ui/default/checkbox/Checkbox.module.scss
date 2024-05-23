@@ -3,6 +3,14 @@
   flex-flow: row nowrap;
   column-gap: 12px;
   align-items: center;
+
+  button {
+    cursor: pointer;
+  }
+
+  &Disabled button {
+    cursor: inherit;
+  }
 }
 
 .root {
@@ -19,17 +27,17 @@
   border: 2px solid var(--color-light-900);
   border-radius: 2px;
 
-  &:not(:disabled)[data-state='checked'] {
+  &[data-state='checked'] {
     background-color: var(--color-light-100);
     border-color: var(--color-light-100);
   }
 
-  &:not(:disabled):hover::before,
-  &:not(:disabled):focus::before {
+  &:hover::before,
+  &:focus::before {
     content: '';
 
     position: absolute;
-    z-index: 1;
+    z-index: -1;
     transform: scale(1);
 
     width: 36px;
@@ -45,16 +53,11 @@
       background-color 0.3s ease-in-out;
   }
 
-  &:not(:disabled)[data-state='checked']:hover::before,
-  &:not(:disabled)[data-state='checked']:focus::before {
-    z-index: -1;
-  }
-
-  &:not(:disabled):hover::before {
+  &:hover::before {
     background-color: var(--color-dark-500);
   }
 
-  &:not(:disabled):focus::before {
+  &:focus::before {
     background-color: var(--color-dark-100);
   }
 
@@ -63,9 +66,12 @@
   }
 
   &:disabled {
-    cursor: inherit;
     background-color: var(--color-dark-100);
     border-color: var(--color-dark-100);
+
+    &::before {
+      content: none;
+    }
   }
 
   &[data-state='unchecked']:disabled {
