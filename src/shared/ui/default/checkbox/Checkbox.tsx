@@ -6,7 +6,6 @@ import { clsx } from 'clsx'
 import s from './Checkbox.module.scss'
 
 export type CheckboxProps = {
-  id?: string
   required?: boolean
 } & ComponentPropsWithoutRef<typeof C.Root>
 
