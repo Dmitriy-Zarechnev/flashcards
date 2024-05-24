@@ -35,7 +35,7 @@ const Wrapper: FC<{ isDisabled: boolean }> = ({ isDisabled }) => {
     <Select
       currentValue={currentValue}
       disabled={isDisabled}
-      onChange={foo}
+      onValueChange={foo}
       options={options}
       selectTitle={'SelectTitle'}
     />

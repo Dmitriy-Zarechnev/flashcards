@@ -13,7 +13,7 @@ type OptionsType =
   | { label: string; value: string }
 
 export type SelectProps = {
-  currentValue: number | string
+  currentValue?: number | string
   fullWidth?: boolean
   isActiveBackgroundBlocked?: boolean
   onValueChange: (id: number | string) => void
@@ -35,7 +35,7 @@ export const Select = forwardRef<ElementRef<'select'>, SelectProps>(
     },
     ref
   ) => {
-    const currentLabel = options.filter(el => el.value === currentValue)[0].label
+    const currentLabel = options.filter(el => el.value === currentValue)[0]?.label
 
     return (
       <div>
@@ -46,7 +46,7 @@ export const Select = forwardRef<ElementRef<'select'>, SelectProps>(
           {({ open }) => (
             <div className={clsx(s.FatherRelative, fullWidth && s.fullWidth, className)}>
               <ListboxButton className={clsx(s.SelectTrigger, fullWidth && s.fullWidth)}>
-                {currentLabel}
+                {currentLabel || options[0].label}
                 <Icon
                   height={'16px'}
                   iconId={open ? 'arrowUpOutline' : 'arrowDownOutline'}
