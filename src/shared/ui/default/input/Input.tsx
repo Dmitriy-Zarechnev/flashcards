@@ -16,14 +16,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const finalId = id || inputId
 
     return (
-      <div className={clsx(s.inputWrapper)}>
+      <div className={clsx(s.inputWrapper, className)}>
         {label && (
           <Typography.Body2 as={'label'} className={s.label} htmlFor={finalId}>
             {label}
           </Typography.Body2>
         )}
         <input
-          className={clsx(s.input, error && s.error, className)}
+          className={clsx(s.input, error && s.error)}
           disabled={disabled}
           id={finalId}
           {...rest}

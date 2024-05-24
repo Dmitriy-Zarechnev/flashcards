@@ -19,9 +19,9 @@ export type SelectProps = {
   onValueChange: (id: number | string) => void
   options: OptionsType[]
   selectTitle?: string
-} & ComponentPropsWithoutRef<'select'>
+} & ComponentPropsWithoutRef<typeof Listbox>
 
-export const Select = forwardRef<ElementRef<'select'>, SelectProps>(
+export const Select = forwardRef<ElementRef<typeof Listbox>, SelectProps>(
   (
     {
       className,
