@@ -1,4 +1,4 @@
-import { Button, Card, Input, Typography } from '@/shared'
+import { Button, Card, Input, ModalFooter, Typography } from '@/shared'
 import { PasswordInput } from '@/shared/ui/default/password-Input'
 
 import s from './SingUp.module.scss'
@@ -17,12 +17,7 @@ export const SingUp = () => {
           Sing Up
         </Button>
       </form>
-      <div className={s.footerWrapper}>
-        <Typography.Subtitle2>Already have an account?</Typography.Subtitle2>
-        <Button className={s.linkButton} variant={'secondary'}>
-          Sing In
-        </Button>
-      </div>
+      <ModalFooter buttonChildren={'Sing In'} footerText={'Already have an account?'} />
     </Card>
   )
 }

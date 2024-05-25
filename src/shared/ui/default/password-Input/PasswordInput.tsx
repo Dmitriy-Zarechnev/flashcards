@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
-import { IconButton, Input } from '@/shared'
-import { InputProps } from '@/shared/ui/default/input'
 import { clsx } from 'clsx'
 
 import s from './PasswordInput.module.scss'
+
+import { IconButton } from '../icon-button'
+import { Input, InputProps } from '../input'
 
 type PasswordInputProps = {
   className?: string
