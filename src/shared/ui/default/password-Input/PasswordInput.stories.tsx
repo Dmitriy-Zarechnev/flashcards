@@ -13,5 +13,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const DefaultPasswordInput: Story = {
-  args: {},
+  args: {
+    label: 'Password Input',
+  },
 }

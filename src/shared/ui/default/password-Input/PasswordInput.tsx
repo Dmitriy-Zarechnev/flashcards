@@ -1,10 +1,16 @@
 import { useState } from 'react'
 
 import { IconButton, Input } from '@/shared'
+import { InputProps } from '@/shared/ui/default/input'
+import { clsx } from 'clsx'
 
 import s from './PasswordInput.module.scss'
 
-export const PasswordInput = () => {
+type PasswordInputProps = {
+  className?: string
+} & InputProps
+
+export const PasswordInput = ({ className, ...inputProps }: PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const showPasswordClickHandler = () => {
@@ -14,8 +20,8 @@ export const PasswordInput = () => {
   const showPasswordCondition = showPassword ? { type: 'text' } : { type: 'password' }
 
   return (
-    <div className={s.passwordInputWrapper}>
-      <Input className={s.eyePadding} {...showPasswordCondition} label={'Password'} />
+    <div className={clsx(s.passwordInputWrapper, className)}>
+      <Input inputClassName={s.eyePadding} {...showPasswordCondition} {...inputProps} />
       <IconButton
         className={s.eyeIcon}
         height={'20px'}

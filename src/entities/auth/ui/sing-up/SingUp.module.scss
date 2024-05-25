@@ -1,0 +1,42 @@
+.singUpWrapper {
+  width: 420px;
+  padding: 33px 36px;
+}
+
+.form {
+  margin-bottom: 20px;
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: center;
+
+  margin-bottom: 60px;
+}
+
+.singUpHeader {
+  align-self: center;
+}
+
+.linkButton {
+  background-color: transparent;
+
+  & p {
+    color: var(--color-accent-500);
+    text-decoration: underline;
+  }
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.footerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
