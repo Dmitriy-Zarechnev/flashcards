@@ -28,7 +28,7 @@ type FormValues = z.infer<typeof loginSchema>
 export const SingUp = ({ onSubmit }: SingUpProps) => {
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     register,
   } = useForm<FormValues>({
@@ -43,22 +43,25 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
           <Typography.H1 className={s.singUpHeader}>Sing Up</Typography.H1>
           <Input
             {...register('email')}
+            autoComplete={'email'}
             error={errors.email?.message}
             label={'email'}
             type={'email'}
           />
           <PasswordInput
             {...register('password')}
+            autoComplete={'new-password'}
             error={errors.password?.message}
             label={'password'}
           />
           <PasswordInput
             {...register('confirmPassword')}
+            autoComplete={'new-password'}
             error={errors.confirmPassword?.message}
             label={'confirmPassword'}
           />
         </div>
-        <Button fullWidth type={'submit'} variant={'primary'}>
+        <Button disabled={isSubmitting} fullWidth type={'submit'} variant={'primary'}>
           Sing Up
         </Button>
       </form>

@@ -20,7 +20,7 @@ type FormValues = z.infer<typeof loginSchema>
 export const CreateNewPassword = ({ onSubmit }: CreateNewPasswordProps) => {
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     register,
   } = useForm<FormValues>({
@@ -35,6 +35,7 @@ export const CreateNewPassword = ({ onSubmit }: CreateNewPasswordProps) => {
           <Typography.H1 className={s.createNewPasswordHeader}>Create new password</Typography.H1>
           <PasswordInput
             {...register('password')}
+            autoComplete={'new-password'}
             error={errors.password?.message}
             label={'password'}
           />
@@ -42,7 +43,7 @@ export const CreateNewPassword = ({ onSubmit }: CreateNewPasswordProps) => {
             Create new password and we will send you further instructions to email
           </Typography.Body2>
         </div>
-        <Button fullWidth type={'submit'} variant={'primary'}>
+        <Button disabled={isSubmitting} fullWidth type={'submit'} variant={'primary'}>
           Create New Password
         </Button>
       </form>

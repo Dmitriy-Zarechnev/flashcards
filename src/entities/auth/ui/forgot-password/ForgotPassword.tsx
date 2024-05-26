@@ -20,7 +20,7 @@ type FormValues = z.infer<typeof loginSchema>
 export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     register,
   } = useForm<FormValues>({
@@ -35,6 +35,7 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
           <Typography.H1 className={s.forgotPasswordHeader}>Forgot your password?</Typography.H1>
           <Input
             {...register('email')}
+            autoComplete={'email'}
             error={errors.email?.message}
             label={'email'}
             type={'email'}
@@ -43,7 +44,7 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
             Enter your email address and we will send you further instructions
           </Typography.Body2>
         </div>
-        <Button fullWidth type={'submit'} variant={'primary'}>
+        <Button disabled={isSubmitting} fullWidth type={'submit'} variant={'primary'}>
           Send Instructions
         </Button>
       </form>
