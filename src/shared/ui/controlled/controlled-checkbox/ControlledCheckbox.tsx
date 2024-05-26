@@ -2,7 +2,7 @@ import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
 import { Checkbox, CheckboxProps } from '@/shared'
 
-export type ControlledCheckboxProps<T extends FieldValues> = Omit<
+type ControlledCheckboxProps<T extends FieldValues> = Omit<
   CheckboxProps,
   'id' | 'onChange' | 'value'
 > &

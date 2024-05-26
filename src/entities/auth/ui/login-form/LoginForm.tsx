@@ -1,6 +1,13 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, ControlledCheckbox, ControlledSelect, Input } from '@/shared'
+import {
+  Button,
+  ControlledCheckbox,
+  ControlledRadioGroup,
+  ControlledSelect,
+  PasswordField,
+  TextField,
+} from '@/shared'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -19,21 +26,30 @@ const options: OptionsType[] = [
   { label: 'five', value: 5 },
 ]
 
+const radioOptions = [
+  { id: '1', label: 'RadioGroup 1', value: 'item 1' },
+  { id: '2', label: 'RadioGroup 2', value: 'item 2' },
+  { id: '3', label: 'RadioGroup 3', value: 'item 3' },
+]
+
 export const LoginForm = () => {
   const loginSchema = z.object({
-    email: z.string().trim().email('Email is required'),
+    email: z.string().trim().email('Invalid email address'),
     password: z.string().min(3, { message: 'Password should be 3 or more characters long' }),
+    radioValue: z.any(),
     rememberMe: z.boolean().default(false),
     select: z.any(),
   })
 
   type FormValues = z.infer<typeof loginSchema>
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormValues>({
+    defaultValues: {
+      email: '',
+      password: '',
+      radioValue: '',
+      rememberMe: false,
+      select: 1,
+    },
     resolver: zodResolver(loginSchema),
   })
 
@@ -42,19 +58,19 @@ export const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       {import.meta.env.DEV && <DevTool control={control} />}
-      <Input {...register('email')} error={errors.email?.message} label={'email'} type={'email'} />
-      <Input
-        {...register('password')}
-        error={errors.password?.message}
-        label={'password'}
-        type={'password'}
-      />
+      <TextField control={control} label={'Email'} name={'email'} type={'email'} />
+      <PasswordField control={control} label={'Password'} name={'password'} />
+
       <ControlledCheckbox control={control} name={'rememberMe'}>
         remember me
       </ControlledCheckbox>
+
       <ControlledSelect control={control} name={'select'} options={options} />
+
+      <ControlledRadioGroup control={control} name={'radioValue'} options={radioOptions} />
+
       <Button type={'submit'} variant={'primary'}>
         Submit
       </Button>

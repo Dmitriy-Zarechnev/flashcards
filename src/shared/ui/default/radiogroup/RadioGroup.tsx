@@ -1,3 +1,5 @@
+import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
+
 import { Typography } from '@/shared'
 import * as Radio from '@radix-ui/react-radio-group'
 
@@ -9,31 +11,35 @@ type Options = {
   value: string
 }
 
-type RadioGroupProps = {
+export type RadioGroupProps = {
   disabled?: boolean
-}
+  onChange: (value: string) => void
+  options: Options[]
+} & ComponentPropsWithRef<typeof Radio.Root>
 
-export const RadioGroup = ({ disabled = false }: RadioGroupProps) => {
-  const options: Options[] = [
-    { id: '1', label: 'RadioGroup 1', value: 'item 1' },
-    { id: '2', label: 'RadioGroup 2', value: 'item 2' },
-    { id: '3', label: 'RadioGroup 3', value: 'item 3' },
-  ]
-
-  return (
-    <Radio.Root className={s.RadioRoot}>
-      {options.map(el => {
-        return (
-          <div className={s.RadioItemWrapper} key={el.id}>
-            <Radio.Item className={s.RadioItem} disabled={disabled} id={el.id} value={el.value}>
-              <Radio.Indicator className={s.RadioIndicator} />
-            </Radio.Item>
-            <Typography.Body2 as={'label'} className={s.RadioLabel} htmlFor={el.id}>
-              {el.label}
-            </Typography.Body2>
-          </div>
-        )
-      })}
-    </Radio.Root>
-  )
-}
+export const RadioGroup = forwardRef<ElementRef<typeof Radio.Root>, RadioGroupProps>(
+  ({ disabled = false, onChange, options, value, ...rest }, ref) => {
+    return (
+      <Radio.Root
+        className={s.RadioRoot}
+        {...rest}
+        onValueChange={onChange}
+        ref={ref}
+        value={value}
+      >
+        {options.map(el => {
+          return (
+            <div className={s.RadioItemWrapper} key={el.id}>
+              <Radio.Item className={s.RadioItem} disabled={disabled} id={el.id} value={el.value}>
+                <Radio.Indicator className={s.RadioIndicator} />
+              </Radio.Item>
+              <Typography.Body2 as={'label'} className={s.RadioLabel} htmlFor={el.id}>
+                {el.label}
+              </Typography.Body2>
+            </div>
+          )
+        })}
+      </Radio.Root>
+    )
+  }
+)
