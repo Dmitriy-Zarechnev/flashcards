@@ -1,9 +1,7 @@
+import { Button, Typography } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './ModalFooter.module.scss'
-
-import { Button } from '../button'
-import { Typography } from '../typography'
 
 type ModalFooterProps = {
   buttonChildren: string
