@@ -37,7 +37,7 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
 
   return (
     <Card className={s.singUpWrapper}>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} noValidate onSubmit={handleSubmit(onSubmit)}>
         {import.meta.env.DEV && <DevTool control={control} />}
         <div className={s.inputsWrapper}>
           <Typography.H1 className={s.singUpHeader}>Sing Up</Typography.H1>
