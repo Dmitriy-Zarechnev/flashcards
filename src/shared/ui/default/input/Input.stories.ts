@@ -6,7 +6,7 @@ const meta = {
   argTypes: {},
   component: Input,
   tags: ['autodocs'],
-  title: 'Input',
+  title: '🟢UI/Default/Input',
 } satisfies Meta<typeof Input>
 
 export default meta

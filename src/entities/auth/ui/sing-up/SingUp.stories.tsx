@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { FieldValues } from 'react-hook-form'
+
 import { SingUp } from './SingUp'
 
 const meta = {
@@ -13,8 +15,16 @@ const meta = {
 } satisfies Meta<typeof SingUp>
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof SingUp>
+
+const Wrapper = () => {
+  const onSubmit = (data: FieldValues) => {
+    console.log(data)
+  }
+
+  return <SingUp onSubmit={onSubmit} />
+}
 
 export const SingUpStory: Story = {
-  args: {},
+  render: () => <Wrapper />,
 }

@@ -47,7 +47,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           value={value}
         />
-        <Typography.Caption className={s.errorText}>{error}</Typography.Caption>
+        <Typography.Caption>{error}</Typography.Caption>
       </div>
     )
   }

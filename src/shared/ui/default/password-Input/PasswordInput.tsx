@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -11,25 +11,27 @@ type PasswordInputProps = {
   className?: string
 } & InputProps
 
-export const PasswordInput = ({ className, ...inputProps }: PasswordInputProps) => {
-  const [showPassword, setShowPassword] = useState(false)
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
+  ({ className, ...inputProps }, ref) => {
+    const [showPassword, setShowPassword] = useState(false)
 
-  const showPasswordClickHandler = () => {
-    setShowPassword(!showPassword)
+    const showPasswordClickHandler = () => {
+      setShowPassword(!showPassword)
+    }
+
+    const showPasswordCondition = showPassword ? { type: 'text' } : { type: 'password' }
+
+    return (
+      <div className={clsx(s.passwordInputWrapper, className)}>
+        <Input inputClassName={s.eyePadding} {...showPasswordCondition} {...inputProps} ref={ref} />
+        <IconButton
+          className={s.eyeIcon}
+          height={'20px'}
+          iconId={showPassword ? 'eyeOffOutline' : 'eyeOutline'}
+          onClick={showPasswordClickHandler}
+          width={'20px'}
+        />
+      </div>
+    )
   }
-
-  const showPasswordCondition = showPassword ? { type: 'text' } : { type: 'password' }
-
-  return (
-    <div className={clsx(s.passwordInputWrapper, className)}>
-      <Input inputClassName={s.eyePadding} {...showPasswordCondition} {...inputProps} />
-      <IconButton
-        className={s.eyeIcon}
-        height={'20px'}
-        iconId={showPassword ? 'eyeOffOutline' : 'eyeOutline'}
-        onClick={showPasswordClickHandler}
-        width={'20px'}
-      />
-    </div>
-  )
-}
+)
