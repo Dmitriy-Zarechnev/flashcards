@@ -49,7 +49,7 @@ export const FormModal = ({
         <div className={s.FormMiddle}>
           <Select
             currentValue={selectCurrentValue}
-            onChange={selectChangeFunction}
+            onValueChange={selectChangeFunction}
             options={selectOptions}
             selectTitle={`${selectTitle}`}
           />
