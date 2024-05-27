@@ -11,6 +11,8 @@ const meta: Meta<typeof Icon> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+console.log(ids)
+
 export const AllSvgIcons: StoryObj<typeof meta> = {
   render: () => (
     <ul style={{ display: 'flex', flexDirection: 'column', rowGap: '30px' }}>

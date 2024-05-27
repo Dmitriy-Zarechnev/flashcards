@@ -1,0 +1,23 @@
+.infoPanel {
+  position: relative;
+
+  display: flex;
+  flex-flow: nowrap column;
+  align-items: center;
+
+  margin-top: 12px;
+
+  button {
+    margin-top: 13px;
+  }
+}
+
+.editBtn {
+  position: absolute;
+  top: -1%;
+  left: 70%;
+}
+
+.email {
+  color: var(--color-dark-100);
+}

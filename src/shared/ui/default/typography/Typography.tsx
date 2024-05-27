@@ -37,6 +37,7 @@ const TAGS: Record<TagsOptions, ElementType> = {
 
 type TypographyProps<T extends ElementType> = {
   as?: T
+  className?: string
 } & ComponentPropsWithoutRef<T>
 
 //========================================================================================
@@ -46,7 +47,8 @@ const TypographyFrame = (defaultTag: ElementType, style: string) => {
     const { as, className, ...rest } = props
     const Tag = as || defaultTag
 
-    return <Tag className={clsx(className, s.typography, style)} {...rest} />
+    // return <Tag className={clsx(className, s.typography, style)} {...rest} />
+    return <Tag className={clsx(s.typography, style, className)} {...rest} />
   }
 }
 

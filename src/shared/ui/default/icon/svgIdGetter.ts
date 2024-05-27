@@ -1,4 +1,5 @@
-import svgFile from '../../../assets/sprite.svg'
+/** import has to end with .svg?raw => to put directly content of file in function below */
+import svgFile from '../../../assets/sprite.svg?raw'
 
 const svgContent: string = svgFile
 
