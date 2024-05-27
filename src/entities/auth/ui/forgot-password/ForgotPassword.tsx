@@ -7,15 +7,15 @@ import { z } from 'zod'
 
 import s from './ForgotPassword.module.scss'
 
+import { schema } from './../validationSchemas'
+
 type ForgotPasswordProps = {
   onSubmit: (data: FieldValues) => void
 }
 
-const loginSchema = z.object({
-  email: z.string().trim().email({ message: 'Email is required' }),
-})
+const validationSchema = schema.forgotPassword
 
-type FormValues = z.infer<typeof loginSchema>
+type FormValues = z.infer<typeof validationSchema>
 
 export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
   const {
@@ -24,12 +24,12 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
     handleSubmit,
     register,
   } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(validationSchema),
   })
 
   return (
     <Card className={s.forgotPasswordWrapper}>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} noValidate onSubmit={handleSubmit(onSubmit)}>
         {import.meta.env.DEV && <DevTool control={control} />}
         <div className={s.inputWrapper}>
           <Typography.H1 className={s.forgotPasswordHeader}>Forgot your password?</Typography.H1>

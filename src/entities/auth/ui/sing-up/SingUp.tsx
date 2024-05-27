@@ -8,22 +8,15 @@ import { z } from 'zod'
 
 import s from './SingUp.module.scss'
 
+import { schema } from './../validationSchemas'
+
 type SingUpProps = {
   onSubmit: (data: FieldValues) => void
 }
 
-const loginSchema = z
-  .object({
-    confirmPassword: z.string().trim(),
-    email: z.string().trim().email({ message: 'Email is required' }),
-    password: z.string().min(3, { message: 'Password should be 3 or more characters long' }),
-  })
-  .refine(data => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-  })
+const validationSchema = schema.signUp
 
-type FormValues = z.infer<typeof loginSchema>
+type FormValues = z.infer<typeof validationSchema>
 
 export const SingUp = ({ onSubmit }: SingUpProps) => {
   const {
@@ -32,7 +25,7 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
     handleSubmit,
     register,
   } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(validationSchema),
   })
 
   return (

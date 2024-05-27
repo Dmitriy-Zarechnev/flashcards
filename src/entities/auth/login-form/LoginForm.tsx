@@ -37,7 +37,7 @@ export const LoginForm = () => {
     email: z.string().trim().email('Invalid email address'),
     password: z.string().min(3, { message: 'Password should be 3 or more characters long' }),
     radioValue: z.any(),
-    rememberMe: z.boolean().default(false),
+    rememberMe: z.boolean(),
     select: z.any(),
   })
 
