@@ -1,0 +1,34 @@
+.signIn {
+  display: flex;
+  flex-flow: nowrap column;
+  width: 420px;
+  padding: 33px 36px 25px;
+
+  h1 {
+    margin-bottom: 27px;
+    text-align: center;
+  }
+
+  input[type='email'] {
+    margin-bottom: 24px;
+  }
+
+  input[type='password'] {
+    margin-bottom: 19px;
+  }
+
+  button[type='submit'] {
+    margin-bottom: 20px;
+  }
+}
+
+.forgotPasswordBox {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 66px;
+  padding-right: 13px;
+
+  a {
+    align-self: flex-end;
+  }
+}

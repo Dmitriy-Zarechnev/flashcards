@@ -7,6 +7,10 @@ const password = z.string().min(3, 'Password must be at least 3 characters long'
 
 //========================================================================================
 
+const createNewPassword = z.object({ password })
+const forgotPassword = z.object({ email })
+const signIn = z.object({ email, password, rememberMe: z.boolean() })
+
 const signUp = z
   .object({
     confirmPassword: z.string().trim(),
@@ -18,23 +22,11 @@ const signUp = z
     path: ['confirmPassword'],
   })
 
-const forgotPassword = z.object({ email })
-
-const createNewPassword = z.object({ password })
-
-const logIn = z.object({
-  email,
-  password,
-  radioValue: z.any(),
-  rememberMe: z.boolean().default(false),
-  select: z.any(),
-})
-
 //========================================================================================
 
 export const schema = {
   createNewPassword,
   forgotPassword,
-  logIn,
+  signIn,
   signUp,
 }
