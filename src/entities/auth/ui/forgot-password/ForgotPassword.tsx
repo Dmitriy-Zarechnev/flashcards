@@ -23,6 +23,9 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
     formState: { isSubmitting },
     handleSubmit,
   } = useForm<FormValues>({
+    defaultValues: {
+      email: '',
+    },
     resolver: zodResolver(validationSchema),
   })
 
@@ -30,9 +33,9 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
     <Card className={s.forgotPasswordWrapper}>
       <form className={s.form} noValidate onSubmit={handleSubmit(onSubmit)}>
         {import.meta.env.DEV && <DevTool control={control} />}
+
         <div className={s.inputWrapper}>
           <Typography.H1 className={s.forgotPasswordHeader}>Forgot your password?</Typography.H1>
-
           <TextField
             autoComplete={'email'}
             control={control}
@@ -40,14 +43,6 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
             name={'email'}
             type={'email'}
           />
-
-          {/*<Input*/}
-          {/*  {...register('email')}*/}
-          {/*  autoComplete={'email'}*/}
-          {/*  error={errors.email?.message}*/}
-          {/*  label={'Email'}*/}
-          {/*  type={'email'}*/}
-          {/*/>*/}
           <Typography.Body2 className={s.forgotPasswordText}>
             Enter your email address and we will send you further instructions
           </Typography.Body2>

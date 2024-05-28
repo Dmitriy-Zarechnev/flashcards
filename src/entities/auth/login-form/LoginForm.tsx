@@ -5,7 +5,7 @@ import {
   ControlledCheckbox,
   ControlledRadioGroup,
   ControlledSelect,
-  PasswordField,
+  PasswordInput,
   TextField,
 } from '@/shared'
 import { DevTool } from '@hookform/devtools'
@@ -61,7 +61,7 @@ export const LoginForm = () => {
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       {import.meta.env.DEV && <DevTool control={control} />}
       <TextField control={control} label={'Email'} name={'email'} type={'email'} />
-      <PasswordField control={control} label={'Password'} name={'password'} />
+      <PasswordInput control={control} label={'Password'} name={'password'} />
 
       <ControlledCheckbox control={control} name={'rememberMe'}>
         remember me

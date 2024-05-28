@@ -1,5 +1,5 @@
 export * from './controlled-checkbox'
 export * from './controlled-radiogroup'
 export * from './controlled-select'
-export * from './password-field'
+export * from './password-input'
 export * from './text-field'

@@ -6,7 +6,7 @@ import {
   Card,
   ControlledCheckbox,
   ModalFooter,
-  PasswordField,
+  PasswordInput,
   TextField,
   Typography,
 } from '@/shared'
@@ -48,7 +48,7 @@ export const SignIn = ({ onSubmit }: SingInProps) => {
           name={'email'}
           type={'email'}
         />
-        <PasswordField
+        <PasswordInput
           autoComplete={'password'}
           control={control}
           label={'Password'}

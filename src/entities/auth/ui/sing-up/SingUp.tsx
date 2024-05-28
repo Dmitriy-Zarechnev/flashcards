@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, Card, ModalFooter, PasswordField, TextField, Typography } from '@/shared'
+import { Button, Card, ModalFooter, PasswordInput, TextField, Typography } from '@/shared'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -37,7 +37,6 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
         {import.meta.env.DEV && <DevTool control={control} />}
         <div className={s.inputsWrapper}>
           <Typography.H1 className={s.singUpHeader}>Sing Up</Typography.H1>
-
           <TextField
             autoComplete={'email'}
             control={control}
@@ -45,41 +44,19 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
             name={'email'}
             type={'email'}
           />
-
-          {/*<Input*/}
-          {/*  {...register('email')}*/}
-          {/*  autoComplete={'email'}*/}
-          {/*  error={errors.email?.message}*/}
-          {/*  label={'Email'}*/}
-          {/*  type={'email'}*/}
-          {/*/>*/}
-          <PasswordField
+          <PasswordInput
             autoComplete={'new-password'}
             control={control}
             label={'Password'}
             name={'password'}
           />
-          {/*<PasswordInput*/}
-          {/*  {...register('password')}*/}
-          {/*  autoComplete={'new-password'}*/}
-          {/*  error={errors.password?.message}*/}
-          {/*  label={'Password'}*/}
-          {/*/>*/}
-
-          <PasswordField
+          <PasswordInput
             autoComplete={'new-password'}
             control={control}
             label={'confirmPassword'}
             name={'confirmPassword'}
             placeholder={'Confirm Password'}
           />
-          {/*<PasswordInput*/}
-          {/*  {...register('confirmPassword')}*/}
-          {/*  autoComplete={'new-password'}*/}
-          {/*  error={errors.confirmPassword?.message}*/}
-          {/*  label={'confirmPassword'}*/}
-          {/*  placeholder={'Confirm Password'}*/}
-          {/*/>*/}
         </div>
         <Button disabled={isSubmitting} fullWidth type={'submit'} variant={'primary'}>
           Sing Up
