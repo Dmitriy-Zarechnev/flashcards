@@ -37,7 +37,7 @@ export const CreateNewPassword = ({ onSubmit }: CreateNewPasswordProps) => {
             {...register('password')}
             autoComplete={'new-password'}
             error={errors.password?.message}
-            label={'password'}
+            label={'Password'}
           />
           <Typography.Body2 className={s.createNewPasswordText}>
             Create new password and we will send you further instructions to email

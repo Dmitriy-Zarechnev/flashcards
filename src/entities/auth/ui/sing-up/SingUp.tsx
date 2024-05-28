@@ -1,6 +1,6 @@
 import { FieldValues, useForm } from 'react-hook-form'
 
-import { Button, Card, Input, ModalFooter, Typography } from '@/shared'
+import { Button, Card, ModalFooter, TextField, Typography } from '@/shared'
 import { PasswordInput } from '@/shared/ui/default/password-Input'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -34,24 +34,34 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
         {import.meta.env.DEV && <DevTool control={control} />}
         <div className={s.inputsWrapper}>
           <Typography.H1 className={s.singUpHeader}>Sing Up</Typography.H1>
-          <Input
-            {...register('email')}
+
+          <TextField
             autoComplete={'email'}
-            error={errors.email?.message}
-            label={'email'}
+            control={control}
+            label={'Email'}
+            name={'email'}
             type={'email'}
           />
+
+          {/*<Input*/}
+          {/*  {...register('email')}*/}
+          {/*  autoComplete={'email'}*/}
+          {/*  error={errors.email?.message}*/}
+          {/*  label={'Email'}*/}
+          {/*  type={'email'}*/}
+          {/*/>*/}
           <PasswordInput
             {...register('password')}
             autoComplete={'new-password'}
             error={errors.password?.message}
-            label={'password'}
+            label={'Password'}
           />
           <PasswordInput
             {...register('confirmPassword')}
             autoComplete={'new-password'}
             error={errors.confirmPassword?.message}
             label={'confirmPassword'}
+            placeholder={'Confirm Password'}
           />
         </div>
         <Button disabled={isSubmitting} fullWidth type={'submit'} variant={'primary'}>

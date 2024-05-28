@@ -33,11 +33,12 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
         {import.meta.env.DEV && <DevTool control={control} />}
         <div className={s.inputWrapper}>
           <Typography.H1 className={s.forgotPasswordHeader}>Forgot your password?</Typography.H1>
+
           <Input
             {...register('email')}
             autoComplete={'email'}
             error={errors.email?.message}
-            label={'email'}
+            label={'Email'}
             type={'email'}
           />
           <Typography.Body2 className={s.forgotPasswordText}>
