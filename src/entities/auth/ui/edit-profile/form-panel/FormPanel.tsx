@@ -1,4 +1,4 @@
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { schema } from '@/entities/auth/ui/validationSchemas'
 import { Button, TextField } from '@/shared'
@@ -9,7 +9,7 @@ import s from './FormPanel.module.scss'
 
 type FormPanelProps = {
   name: string
-  onSubmit: (data: FieldValues) => void
+  onSubmit: (data: FormValues) => void
 }
 
 const validationSchema = schema.editProfileFormPanel

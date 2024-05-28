@@ -31,7 +31,7 @@ export const EditProfile = () => {
     setIsEditName(!isEditName)
   }
 
-  //**  костыль, чтобы кнопка внутри label аботала */
+  //** костыль, чтобы кнопка внутри label аботала */
   const onClickHandler: MouseEventHandler<HTMLLabelElement> = e => {
     if (e.target !== e.currentTarget) {
       e.currentTarget.click()
