@@ -1,17 +1,16 @@
-import { useState } from 'react'
+import { ChangeEvent, MouseEventHandler, useState } from 'react'
 import { FieldValues } from 'react-hook-form'
 
-import { InfoPanel } from '@/entities/auth/ui/edit-profile/Info-panel/InfoPannel'
-import { FormPanel } from '@/entities/auth/ui/edit-profile/form-panel/FormPanel'
 import { Card, IconButton, Typography } from '@/shared'
 
 import s from './EditProfile.module.scss'
 
+import { InfoPanel } from './Info-panel/InfoPannel'
 import image from './catAvatar.webp'
+import { FormPanel } from './form-panel/FormPanel'
 
 export const EditProfile = () => {
   const [isEditName, setIsEditName] = useState(false)
-  const [isEditPhoto, setIsEditPhoto] = useState(false)
 
   const name = 'Ivan'
 
@@ -19,9 +18,24 @@ export const EditProfile = () => {
     console.log('logout')
   }
 
-  function submitHandler(data: FieldValues) {
+  function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0]
+
+      console.log('Sending to server', file)
+    }
+  }
+
+  function changeNameHandler(data: FieldValues) {
     console.log(data)
     setIsEditName(!isEditName)
+  }
+
+  //**  костыль, чтобы кнопка внутри label аботала */
+  const onClickHandler: MouseEventHandler<HTMLLabelElement> = e => {
+    if (e.target !== e.currentTarget) {
+      e.currentTarget.click()
+    }
   }
 
   return (
@@ -29,7 +43,16 @@ export const EditProfile = () => {
       <Typography.H1>Personal Information</Typography.H1>
       <div className={s.imageContainer}>
         <img alt={'#'} src={image} />
-        {!isEditName && <IconButton iconId={'editOutline'} onClick={() => {}} />}
+        <label htmlFor={'imageChange'} onClick={onClickHandler}>
+          {!isEditName && <IconButton iconId={'editOutline'} type={'submit'} />}
+        </label>
+        <input
+          accept={'image/*'}
+          id={'imageChange'}
+          onChange={imageChangeHandler}
+          style={{ display: 'none' }}
+          type={'file'}
+        />
       </div>
       {!isEditName ? (
         <InfoPanel
@@ -39,7 +62,7 @@ export const EditProfile = () => {
           name={name}
         />
       ) : (
-        <FormPanel name={name} onSubmit={submitHandler} />
+        <FormPanel name={name} onSubmit={changeNameHandler} />
       )}
     </Card>
   )
