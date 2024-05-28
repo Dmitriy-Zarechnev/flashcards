@@ -9,26 +9,48 @@
     text-align: center;
   }
 
-  input[type='email'] {
-    margin-bottom: 24px;
-  }
-
-  input[type='password'] {
-    margin-bottom: 19px;
-  }
-
-  button[type='submit'] {
-    margin-bottom: 20px;
-  }
+  //input[type='email'] {
+  //  margin-bottom: 24px;
+  //}
+  //
+  //input[type='password'] {
+  //  margin-bottom: 19px;
+  //}
+  //
+  //button[type='submit'] {
+  //  margin-bottom: 20px;
+  //}
 }
 
-.forgotPasswordBox {
+.form {
+  margin-bottom: 20px;
+}
+
+.inputsWrapper {
   display: flex;
   flex-direction: column;
-  margin-bottom: 66px;
-  padding-right: 13px;
+  gap: 25px;
+  justify-content: center;
 
-  a {
+  margin-bottom: 66px;
+
+  & a {
     align-self: flex-end;
   }
 }
+
+//.forgotPasswordBox {
+//align-self: flex-end;
+
+//justify-items: flex-end;
+
+//display: flex;
+//flex-direction: column;
+//margin-bottom: 66px;
+//padding-right: 13px;
+//text-align: end;
+
+//a {
+//  align-self: flex-end;
+//}
+//}

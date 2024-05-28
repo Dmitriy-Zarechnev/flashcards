@@ -39,26 +39,27 @@ export const SignIn = ({ onSubmit }: SingInProps) => {
 
   return (
     <Card className={s.signIn}>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <Typography.H1>Sing In</Typography.H1>
-        <TextField
-          autoComplete={'email'}
-          control={control}
-          label={'Email'}
-          name={'email'}
-          type={'email'}
-        />
-        <PasswordInput
-          autoComplete={'password'}
-          control={control}
-          label={'Password'}
-          name={'password'}
-        />
-        <ControlledCheckbox control={control} name={'rememberMe'}>
-          Remember me
-        </ControlledCheckbox>
-        <div className={s.forgotPasswordBox}>
-          <Typography.Body2 as={'a'} href={'#'}>
+      <form className={s.form} noValidate onSubmit={handleSubmit(onSubmit)}>
+        <div className={s.inputsWrapper}>
+          <Typography.H1>Sing In</Typography.H1>
+          <TextField
+            autoComplete={'email'}
+            control={control}
+            label={'Email'}
+            name={'email'}
+            type={'email'}
+          />
+          <PasswordInput
+            autoComplete={'password'}
+            control={control}
+            label={'Password'}
+            name={'password'}
+          />
+          <ControlledCheckbox control={control} name={'rememberMe'}>
+            Remember me
+          </ControlledCheckbox>
+
+          <Typography.Body2 as={'a'} className={s.forgotPasswordBox} href={'#'}>
             Forgot Password?
           </Typography.Body2>
         </div>
