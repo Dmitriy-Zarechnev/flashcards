@@ -22,10 +22,15 @@ const signUp = z
     path: ['confirmPassword'],
   })
 
+const editProfileFormPanel = z.object({
+  name: z.string().trim(),
+})
+
 //========================================================================================
 
 export const schema = {
   createNewPassword,
+  editProfileFormPanel,
   forgotPassword,
   signIn,
   signUp,
