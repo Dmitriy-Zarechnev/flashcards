@@ -63,7 +63,7 @@ export const SignIn = ({ onSubmit }: SingInProps) => {
           </Typography.Body2>
         </div>
         <Button disabled={isSubmitting} fullWidth type={'submit'} variant={'primary'}>
-          Sing Up
+          Sing In
         </Button>
       </form>
       <ModalFooter buttonChildren={'Sing Up'} footerText={"Don't have an account?"} />

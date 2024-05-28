@@ -17,7 +17,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof SignIn>
 
-export const SingUpStory: Story = {
+export const SingInStory: Story = {
   args: {
     onSubmit: (data: FieldValues) => console.log(data),
   },

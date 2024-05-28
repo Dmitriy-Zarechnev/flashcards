@@ -17,14 +17,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof SingUp>
 
-const Wrapper = () => {
-  const onSubmit = (data: FieldValues) => {
-    console.log(data)
-  }
-
-  return <SingUp onSubmit={onSubmit} />
-}
-
 export const SingUpStory: Story = {
-  render: () => <Wrapper />,
+  args: {
+    onSubmit: (data: FieldValues) => console.log(data),
+  },
 }

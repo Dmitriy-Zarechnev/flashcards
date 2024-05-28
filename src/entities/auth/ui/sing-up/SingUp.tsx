@@ -1,4 +1,4 @@
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { Button, Card, ModalFooter, PasswordField, TextField, Typography } from '@/shared'
 import { DevTool } from '@hookform/devtools'
@@ -10,7 +10,7 @@ import s from './SingUp.module.scss'
 import { schema } from './../validationSchemas'
 
 type SingUpProps = {
-  onSubmit: (data: FieldValues) => void
+  onSubmit: (data: FormValues) => void
 }
 
 const validationSchema = schema.signUp
@@ -23,6 +23,11 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
     formState: { isSubmitting },
     handleSubmit,
   } = useForm<FormValues>({
+    defaultValues: {
+      confirmPassword: '',
+      email: '',
+      password: '',
+    },
     resolver: zodResolver(validationSchema),
   })
 
