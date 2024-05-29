@@ -1,3 +1,9 @@
+import { Provider } from 'react-redux'
+
+import { store } from '@/services/store'
+
+import { Router } from './router'
+
 export function App() {
   const centerStyles = {
     alignItems: 'center',
@@ -7,5 +13,11 @@ export function App() {
     width: '100vw',
   }
 
-  return <div style={centerStyles}>💩💩💩🥁</div>
+  return (
+    <div style={centerStyles}>
+      <Provider store={store}>
+        <Router />
+      </Provider>
+    </div>
+  )
 }
