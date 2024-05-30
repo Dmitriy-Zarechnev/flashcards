@@ -1,11 +1,9 @@
-export function App() {
-  const centerStyles = {
-    alignItems: 'center',
-    display: 'flex',
-    height: '100vh',
-    justifyContent: 'center',
-    width: '100vw',
-  }
+import { Layout } from '@/shared'
 
-  return <div style={centerStyles}>💩💩💩🥁</div>
+export function App() {
+  return (
+    <Layout>
+      <div>💩💩💩🥁</div>
+    </Layout>
+  )
 }
