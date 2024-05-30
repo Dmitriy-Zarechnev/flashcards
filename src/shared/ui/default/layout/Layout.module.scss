@@ -2,6 +2,11 @@
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   padding-top: var(--header-height);
   padding-inline: var(--header-inline-padding);
 }
