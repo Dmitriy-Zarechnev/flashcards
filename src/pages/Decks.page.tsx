@@ -1,16 +1,52 @@
-import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { useGetDecksQuery } from '@/services/flashcards-api'
-import { Input } from '@/shared'
+import { Input, Pagination } from '@/shared'
+
+//========================================================================================
+
+//========================================================================================
 
 export const DecksPage = () => {
-  const [search, setSearch] = useState('')
-
   const [searchParams, setSearchParams] = useSearchParams()
-  const search = searchParams.get('search')
+  const search = searchParams.get('search') ?? ''
+  const currentPage = searchParams.get('currentPage') ?? '1'
+  const optionsItemsPerPage = [10, 20, 30]
+  const itemsPerPage = searchParams.get('itemsPerPage') ?? `${optionsItemsPerPage[0]}`
 
-  const { data, error, isLoading } = useGetDecksQuery({ name: search })
+  function handleSearch(value: string) {
+    if (value.length) {
+      searchParams.set('search', value)
+    } else {
+      searchParams.delete('search')
+    }
+    setSearchParams(searchParams)
+  }
+
+  function handleCurrentPage(value: number) {
+    if (value) {
+      searchParams.set('currentPage', value.toString())
+    } else {
+      searchParams.delete('currentPage')
+    }
+    setSearchParams(searchParams)
+  }
+
+  function handlePerPage(value: number) {
+    if (value) {
+      searchParams.set('itemsPerPage', value.toString())
+    } else {
+      searchParams.delete('itemsPerPage')
+    }
+    setSearchParams(searchParams)
+  }
+
+  const { data, error, isLoading } = useGetDecksQuery({
+    currentPage: +currentPage,
+    itemsPerPage: +itemsPerPage,
+    name: search,
+  })
+
   if (isLoading) {
     return <h1>Loading...</h1>
   }
@@ -21,7 +57,15 @@ export const DecksPage = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
-      <Input onChange={e => setSearch(e.target.value)} value={search} />
+      <Input onChange={e => handleSearch(e.target.value)} value={search} />
+      <Pagination
+        count={data?.pagination.totalPages || 0}
+        onChange={handleCurrentPage}
+        onPerPageChange={handlePerPage}
+        page={+currentPage}
+        perPage={+itemsPerPage}
+        perPageOptions={optionsItemsPerPage}
+      />
       <table>
         <thead>
           <tr>

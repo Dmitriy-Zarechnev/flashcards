@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { DecksPage } from '@/pages'
+import { CreateDeckPage } from '@/pages/CreateDeck.page'
 
 //========================================================================================
 
@@ -19,7 +20,20 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <DecksPage />,
+    element: (
+      <div
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          rowGap: '50px',
+        }}
+      >
+        <DecksPage />
+        <CreateDeckPage />
+      </div>
+    ),
     path: '/',
   },
 ]

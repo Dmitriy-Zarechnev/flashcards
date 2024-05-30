@@ -184,7 +184,7 @@ const PerPageSelect: FC<PerPageSelectProps> = ({ onPerPageChange, perPage, perPa
         className={classNames.select}
         currentValue={perPage}
         isActiveBackgroundBlocked
-        onChange={onPerPageChangeForType}
+        onValueChange={onPerPageChangeForType}
         options={selectOptions}
       />
       <Typography.Body2>на странице</Typography.Body2>

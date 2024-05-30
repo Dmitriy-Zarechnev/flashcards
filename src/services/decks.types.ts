@@ -36,3 +36,24 @@ export type GetDecksArgs = {
   name?: string
   orderBy?: string
 }
+
+//========================================================================================
+
+export type CreateDeckResponse = {
+  cardsCount: number
+  cover: string
+  created: string
+  id: string
+  isPrivate: boolean
+  name: string
+  updated: string
+  userId: string
+}
+
+export type CreateDeckArgs = {
+  cover?: string
+  isPrivate: boolean // по дефолту поставить false
+  name: string // валидация описана в апишке
+}
+
+//========================================================================================
