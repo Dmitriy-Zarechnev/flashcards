@@ -1,9 +1,11 @@
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+
 import { Button, DropdownProfile, Typography } from '@/shared'
 
 import s from './PageHeader.module.scss'
 
 import profileImage from '../dropdown-profile/stories/Dropdown.webp'
-import logo from './logo_2.png'
+import logo from './Logo.png'
 
 const profile = {
   email: 'SuperIvan@gmail.com',
@@ -14,11 +16,11 @@ const profile = {
 
 type PageHeaderProps = {
   isSingUp: boolean
-}
+} & ComponentPropsWithoutRef<'header'>
 
-export const PageHeader = ({ isSingUp }: PageHeaderProps) => {
+export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ isSingUp }, ref) => {
   return (
-    <div className={s.headerWrapper}>
+    <header className={s.headerWrapper} ref={ref}>
       <img alt={'Project Picture'} className={s.img} src={logo} />
       {isSingUp ? (
         <div className={s.profileInfo}>
@@ -33,6 +35,6 @@ export const PageHeader = ({ isSingUp }: PageHeaderProps) => {
       ) : (
         <Button variant={'secondary'}>Sing In</Button>
       )}
-    </div>
+    </header>
   )
-}
+})

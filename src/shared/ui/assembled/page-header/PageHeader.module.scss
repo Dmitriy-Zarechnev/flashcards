@@ -1,17 +1,22 @@
 .headerWrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-  height: 60px;
-  padding: 12px 136px;
+  height: var(--header-height);
+  padding: 12px var(--header-inline-padding);
 
   background-color: var(--color-dark-700);
 }
 
 .img {
-  height: 50px;
+  height: calc(var(--header-height) - 10px);
   object-fit: cover;
 }
 
