@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, ReactNode } from 'react'
+import { CSSProperties, ComponentPropsWithRef, ReactNode } from 'react'
 
 import * as D from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
@@ -6,15 +6,18 @@ import { clsx } from 'clsx'
 import s from './Dropdown.module.scss'
 
 type DropdownProps = {
+  style?: CSSProperties
   trigger: ReactNode
   triggerClassName?: string
 } & ComponentPropsWithRef<typeof D.Root>
 
-const Root = ({ children, trigger, triggerClassName, ...rest }: DropdownProps) => {
+const Root = ({ children, style, trigger, triggerClassName, ...rest }: DropdownProps) => {
   return (
     <D.Root {...rest}>
       <D.Trigger asChild>
-        <button className={clsx(triggerClassName, s.trigger)}>{trigger}</button>
+        <button className={clsx(triggerClassName, s.trigger)} style={style}>
+          {trigger}
+        </button>
       </D.Trigger>
 
       <D.Portal>

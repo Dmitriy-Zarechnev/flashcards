@@ -12,8 +12,8 @@ type DropdownProfileProps = {
 export const DropdownProfile = ({ email, name, photo, photoDescription }: DropdownProfileProps) => {
   return (
     <Dropdown.Root
+      style={{ height: '36px', width: '36px' }}
       trigger={<img alt={photoDescription} src={photo} />}
-      triggerClassName={s.trigger}
     >
       <div className={s.profileItem}>
         <img alt={photoDescription} src={photo} />

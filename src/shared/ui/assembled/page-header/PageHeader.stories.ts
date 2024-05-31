@@ -6,7 +6,7 @@ const meta = {
   argTypes: {},
   component: PageHeader,
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/page-header/PageHeader',
+  title: '🟢UI/Assembled/Page-header/PageHeader',
 } satisfies Meta<typeof PageHeader>
 
 export default meta
