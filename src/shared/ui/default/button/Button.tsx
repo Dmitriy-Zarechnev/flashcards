@@ -1,6 +1,5 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 
-// import { Icon } from '@/shared/components/icon'
 import { Typography } from '@/shared'
 import { clsx } from 'clsx'
 
