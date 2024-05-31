@@ -4,6 +4,7 @@ import { PageHeader } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './Layout.module.scss'
+
 type LayoutProps = {} & ComponentPropsWithoutRef<'div'>
 
 export const Layout = forwardRef<ElementRef<'div'>, LayoutProps>(
