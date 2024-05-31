@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { useCreateDeckMutation } from '@/services/flashcards-api'
+import { useCreateDeckMutation } from '@/services/flashcards.api'
 import { Button, ControlledCheckbox, TextField } from '@/shared'
 
 type FormValues = {
@@ -20,6 +20,8 @@ export const CreateDeckPage = () => {
     },
   })
 
+  // хук представляет заранее готовый массив данных - кортеж
+  // 1. createDeck - сам запрос
   const [createDeck] = useCreateDeckMutation()
 
   function onSubmit(data: FormValues) {

@@ -1,11 +1,16 @@
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 
-import { useGetDecksQuery } from '@/services/flashcards-api'
-import { Input, Pagination } from '@/shared'
+import { useGetDecksQuery, useUpdateDeckMutation } from '@/services/flashcards.api'
+import { Button, ControlledCheckbox, IconButton, Input, Pagination, TextField } from '@/shared'
 
 //========================================================================================
 
-//========================================================================================
+type FormValues = {
+  isPrivate: boolean
+  name: string
+}
 
 export const DecksPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -46,6 +51,27 @@ export const DecksPage = () => {
     itemsPerPage: +itemsPerPage,
     name: search,
   })
+  const [updateDeck] = useUpdateDeckMutation()
+
+  const { control, handleSubmit } = useForm<FormValues>({
+    defaultValues: {
+      isPrivate: false,
+      name: '',
+    },
+  })
+
+  const [showEdit, setShowEdit] = useState(false)
+  const [editDeckId, setEditDeckId] = useState('')
+
+  function handleUpdateDeck(id: string) {
+    setShowEdit(true)
+    setEditDeckId(id)
+  }
+
+  function onSubmit(data: FormValues) {
+    updateDeck({ id: editDeckId, isPrivate: data.isPrivate, name: data.name })
+    setShowEdit(false)
+  }
 
   if (isLoading) {
     return <h1>Loading...</h1>
@@ -85,11 +111,26 @@ export const DecksPage = () => {
                 <td>{deck.cardsCount}</td>
                 <td>{updatedAt}</td>
                 <td>{deck.author.name}</td>
+                <td>
+                  <IconButton iconId={'editOutline'} onClick={() => handleUpdateDeck(deck.id)} />
+                </td>
               </tr>
             )
           })}
         </tbody>
       </table>
+
+      {showEdit && (
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          <TextField control={control} label={'Name'} name={'name'} />
+          <ControlledCheckbox control={control} name={'isPrivate'}>
+            isPrivate?
+          </ControlledCheckbox>
+          <Button fullWidth={false} type={'submit'} variant={'primary'}>
+            Sing In
+          </Button>
+        </form>
+      )}
     </div>
   )
 }
