@@ -2,11 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import {
   CreateDeckArgs,
-  CreateDeckResponse,
-  DecksListResponse,
+  DefaultDeckResponse,
   GetDecksArgs,
+  GetDecksResponse,
   UpdateDeckArgs,
-  UpdateDeckResponse,
 } from './decks.types'
 
 export const flashcardsApi = createApi({
@@ -19,7 +18,7 @@ export const flashcardsApi = createApi({
   }),
   endpoints: builder => {
     return {
-      createDeck: builder.mutation<CreateDeckResponse, CreateDeckArgs>({
+      createDeck: builder.mutation<DefaultDeckResponse, CreateDeckArgs>({
         invalidatesTags: ['Decks'],
         query: args => ({
           body: args,
@@ -27,7 +26,14 @@ export const flashcardsApi = createApi({
           url: `v1/decks`,
         }),
       }),
-      getDecks: builder.query<DecksListResponse, GetDecksArgs | void>({
+      deleteDeck: builder.mutation<DefaultDeckResponse, string>({
+        invalidatesTags: ['Decks'],
+        query: id => ({
+          method: 'DELETE',
+          url: `/v1/decks/${id}`,
+        }),
+      }),
+      getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
         providesTags: ['Decks'],
         query: args => ({
           method: 'GET',
@@ -35,7 +41,7 @@ export const flashcardsApi = createApi({
           url: `v2/decks`,
         }),
       }),
-      updateDeck: builder.mutation<UpdateDeckResponse, UpdateDeckArgs>({
+      updateDeck: builder.mutation<DefaultDeckResponse, UpdateDeckArgs>({
         invalidatesTags: ['Decks'],
         query: ({ id, ...args }) => ({
           body: args,
@@ -49,4 +55,9 @@ export const flashcardsApi = createApi({
   tagTypes: ['Decks'],
 })
 
-export const { useCreateDeckMutation, useGetDecksQuery, useUpdateDeckMutation } = flashcardsApi
+export const {
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+  useUpdateDeckMutation,
+} = flashcardsApi

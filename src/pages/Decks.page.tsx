@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 
-import { useGetDecksQuery, useUpdateDeckMutation } from '@/services/flashcards.api'
+import {
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+  useUpdateDeckMutation,
+} from '@/services/flashcards.api'
 import { Button, ControlledCheckbox, IconButton, Input, Pagination, TextField } from '@/shared'
 
 //========================================================================================
@@ -73,6 +77,8 @@ export const DecksPage = () => {
     setShowEdit(false)
   }
 
+  const [deleteDeck] = useDeleteDeckMutation()
+
   if (isLoading) {
     return <h1>Loading...</h1>
   }
@@ -113,6 +119,7 @@ export const DecksPage = () => {
                 <td>{deck.author.name}</td>
                 <td>
                   <IconButton iconId={'editOutline'} onClick={() => handleUpdateDeck(deck.id)} />
+                  <IconButton iconId={'closeOutline'} onClick={() => deleteDeck(deck.id)} />
                 </td>
               </tr>
             )

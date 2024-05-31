@@ -1,10 +1,4 @@
-type Author = {
-  id: string
-  name: string
-}
-
-type Deck = {
-  author: Author
+export type DefaultDeckResponse = {
   cardsCount: number
   cover?: string
   created: string
@@ -15,6 +9,17 @@ type Deck = {
   userId: string
 }
 
+//========================================================================================
+
+type Author = {
+  id: string
+  name: string
+}
+
+type Deck = {
+  author: Author
+} & DefaultDeckResponse
+
 type Pagination = {
   currentPage: number
   itemsPerPage: number
@@ -22,7 +27,7 @@ type Pagination = {
   totalPages: number
 }
 
-export type DecksListResponse = {
+export type GetDecksResponse = {
   items: Deck[]
   pagination: Pagination
 }
@@ -39,17 +44,6 @@ export type GetDecksArgs = {
 
 //========================================================================================
 
-export type CreateDeckResponse = {
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-
 export type CreateDeckArgs = {
   cover?: string
   isPrivate: boolean // по дефолту поставить false
@@ -57,17 +51,6 @@ export type CreateDeckArgs = {
 }
 
 //========================================================================================
-
-export type UpdateDeckResponse = {
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
 
 export type UpdateDeckArgs = { id: string } & Partial<CreateDeckArgs>
 
