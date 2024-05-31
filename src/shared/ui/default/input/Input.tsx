@@ -9,6 +9,7 @@ export type InputProps = {
   error?: string
   inputClassName?: string
   label?: string
+  onValueChange?: (value: string) => void
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
