@@ -14,7 +14,7 @@ const Root = ({ children, trigger, triggerClassName, ...rest }: DropdownProps) =
   return (
     <D.Root {...rest}>
       <D.Trigger asChild>
-        <button className={clsx(s.trigger, triggerClassName)}>{trigger}</button>
+        <button className={clsx(triggerClassName, s.trigger)}>{trigger}</button>
       </D.Trigger>
 
       <D.Portal>

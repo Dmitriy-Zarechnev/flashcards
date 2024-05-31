@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux'
 
 import { store } from '@/services/store'
+import { Layout } from '@/shared'
 
 import { Router } from './router'
 
@@ -16,7 +17,9 @@ export function App() {
   return (
     <div style={centerStyles}>
       <Provider store={store}>
-        <Router />
+        <Layout>
+          <Router />
+        </Layout>
       </Provider>
     </div>
   )
