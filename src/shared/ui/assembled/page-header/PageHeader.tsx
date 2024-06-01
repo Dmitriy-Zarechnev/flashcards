@@ -20,21 +20,23 @@ type PageHeaderProps = {
 
 export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ isSingUp }, ref) => {
   return (
-    <header className={s.headerWrapper} ref={ref}>
-      <img alt={'Project Picture'} className={s.img} src={logo} />
-      {isSingUp ? (
-        <div className={s.profileInfo}>
-          <Typography.Subtitle1>{profile.name}</Typography.Subtitle1>
-          <DropdownProfile
-            email={profile.email}
-            name={profile.name}
-            photo={profile.photo}
-            photoDescription={profile.photoDescription}
-          />
-        </div>
-      ) : (
-        <Button variant={'secondary'}>Sing In</Button>
-      )}
+    <header className={s.header} ref={ref}>
+      <div className={s.container}>
+        <img alt={'Project Picture'} className={s.img} src={logo} />
+        {isSingUp ? (
+          <div className={s.profileInfo}>
+            <Typography.Subtitle1>{profile.name}</Typography.Subtitle1>
+            <DropdownProfile
+              email={profile.email}
+              name={profile.name}
+              photo={profile.photo}
+              photoDescription={profile.photoDescription}
+            />
+          </div>
+        ) : (
+          <Button variant={'secondary'}>Sing In</Button>
+        )}
+      </div>
     </header>
   )
 })

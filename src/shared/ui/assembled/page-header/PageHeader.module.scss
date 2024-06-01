@@ -1,18 +1,28 @@
-.headerWrapper {
-  position: fixed;
+.header {
+  //position: fixed;
+  position: sticky;
   top: 0;
   right: 0;
   left: 0;
 
+  height: var(--header-height);
+
+  //padding: 12px var(--header-inline-padding);
+
+  background-color: var(--color-dark-700);
+}
+
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-  height: var(--header-height);
-  padding: 12px var(--header-inline-padding);
-
-  background-color: var(--color-dark-700);
+  width: 100%;
+  max-width: 1010px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 0 12px;
 }
 
 .img {
