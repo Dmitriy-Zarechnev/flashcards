@@ -6,7 +6,7 @@ import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
-} from '@/services/flashcards.api'
+} from '@/services/decks/decks.service'
 import { Button, ControlledCheckbox, IconButton, Input, Pagination, TextField } from '@/shared'
 
 //========================================================================================
@@ -119,7 +119,7 @@ export const DecksPage = () => {
                 <td>{deck.author.name}</td>
                 <td>
                   <IconButton iconId={'editOutline'} onClick={() => handleUpdateDeck(deck.id)} />
-                  <IconButton iconId={'closeOutline'} onClick={() => deleteDeck(deck.id)} />
+                  <IconButton iconId={'closeOutline'} onClick={() => deleteDeck({ id: deck.id })} />
                 </td>
               </tr>
             )

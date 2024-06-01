@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { useCreateDeckMutation } from '@/services/flashcards.api'
+import { useCreateDeckMutation } from '@/services/decks/decks.service'
 import { Button, ControlledCheckbox, TextField } from '@/shared'
 
 type FormValues = {

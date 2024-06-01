@@ -55,3 +55,7 @@ export type CreateDeckArgs = {
 export type UpdateDeckArgs = { id: string } & Partial<CreateDeckArgs>
 
 //========================================================================================
+
+export type DeleteDecksArgs = { id: string }
+
+//========================================================================================
