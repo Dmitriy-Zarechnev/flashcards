@@ -1,15 +1,22 @@
-import { ComponentPropsWithRef, MouseEvent, ReactNode, useState } from 'react'
+import {
+  ComponentPropsWithRef,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+  cloneElement,
+  useState,
+} from 'react'
 
-import { Card, Typography } from '@/shared'
+import { Card, IconButton, Typography } from '@/shared'
 
 import s from './Dialog.module.scss'
 
 type DialogProps = {
-  isSubmitting: boolean
+  title: string
   trigger: ReactNode
 } & ComponentPropsWithRef<'div'>
 
-export const Dialog = ({ children, trigger, ...rest }: DialogProps) => {
+export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
   const [isShown, setShown] = useState(true)
 
   function show() {
@@ -21,6 +28,10 @@ export const Dialog = ({ children, trigger, ...rest }: DialogProps) => {
     setShown(false)
   }
 
+  /**  для отправки cb-fnc закрытия окна в форму, которая сюда придет как children
+       !!! children только как один тег !!! */
+  const enhancedChildren = cloneElement(children as ReactElement, { setShown })
+
   return (
     <div onClick={show} {...rest}>
       {trigger}
@@ -28,9 +39,16 @@ export const Dialog = ({ children, trigger, ...rest }: DialogProps) => {
         <div className={s.overlay} onClick={close}>
           <Card className={s.card} fullWidth={false} onClick={e => e.stopPropagation()}>
             <div className={s.header}>
-              <Typography.H3>123</Typography.H3>
+              <Typography.H3>{title}</Typography.H3>
+              <IconButton
+                height={'14px'}
+                iconId={'dialogClose'}
+                onClick={close}
+                viewBox={'0 0 14 14'}
+                width={'14px'}
+              />
             </div>
-            {children}
+            {enhancedChildren}
           </Card>
         </div>
       )}

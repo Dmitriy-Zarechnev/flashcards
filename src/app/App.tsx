@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux'
 
+import { Demo } from '@/app/demo'
 import { store } from '@/services/store'
 import { Dialog, Layout } from '@/shared'
 
@@ -11,7 +12,9 @@ export function App() {
       {/*<Layout>*/}
       {/*  <Router />*/}
       {/*</Layout>*/}
-      <Dialog isSubmitting trigger={<button>CLICK</button>} />
+      <Dialog title={'Add New Deck'} trigger={<button>CLICK</button>}>
+        <Demo />
+      </Dialog>
     </Provider>
   )
 }
