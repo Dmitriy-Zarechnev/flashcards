@@ -11,6 +11,7 @@ export function App() {
       {/*<Layout>*/}
       {/*  <Router />*/}
       {/*</Layout>*/}
+      <Dialog isSubmitting trigger={<button>CLICK</button>} />
     </Provider>
   )
 }
