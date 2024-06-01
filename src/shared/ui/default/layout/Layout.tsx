@@ -12,7 +12,7 @@ export const Layout = forwardRef<ElementRef<'div'>, LayoutProps>(
     return (
       <div ref={ref} {...rest} className={clsx(s.layout, className)}>
         <PageHeader isSingUp />
-        <main className={s.main}>{children}</main>
+        <main>{children}</main>
       </div>
     )
   }

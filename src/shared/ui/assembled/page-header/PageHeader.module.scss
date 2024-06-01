@@ -1,21 +1,28 @@
-.headerWrapper {
+header {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
 
+  height: var(--header-height);
+
+  background-color: var(--color-dark-700);
+}
+
+.wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-  height: var(--header-height);
+  width: 100%;
+  max-width: 1010px;
+  height: 100%;
+  margin: 0 auto;
   padding: 12px var(--header-inline-padding);
-
-  background-color: var(--color-dark-700);
 }
 
-.img {
+.projectPicture {
   height: calc(var(--header-height) - 10px);
   object-fit: cover;
 }
