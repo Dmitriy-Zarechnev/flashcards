@@ -7,13 +7,13 @@ import { z } from 'zod'
 
 import s from './CreateNewPassword.module.scss'
 
-import { schema } from './../validationSchemas'
+import { authSchemes } from '../../../validationSchemes'
 
 type CreateNewPasswordProps = {
   onSubmit: (data: FormValues) => void
 }
 
-const validationSchema = schema.createNewPassword
+const validationSchema = authSchemes.createNewPassword
 
 type FormValues = z.infer<typeof validationSchema>
 

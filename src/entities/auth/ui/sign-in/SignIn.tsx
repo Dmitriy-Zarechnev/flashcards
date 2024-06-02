@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { schema } from '@/entities/auth/ui/validationSchemas'
+import { authSchemes } from '@/entities/validationSchemes'
 import {
   Button,
   Card,
@@ -19,7 +19,7 @@ type SingInProps = {
   onSubmit: (data: FormValues) => void
 }
 
-const validationSchema = schema.signIn
+const validationSchema = authSchemes.signIn
 
 type FormValues = z.infer<typeof validationSchema>
 

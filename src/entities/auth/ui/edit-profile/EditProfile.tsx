@@ -20,9 +20,12 @@ export const EditProfile = () => {
 
   function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0]
+      const formData = new FormData()
 
-      console.log('Sending to server', file)
+      formData.append('image', event.target.files[0])
+
+      console.log('Sending to server', formData.get('image'))
+      console.log('Sending to server', formData)
     }
   }
 

@@ -17,7 +17,7 @@ type DialogProps = {
 } & ComponentPropsWithRef<'div'>
 
 export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
-  const [isShown, setShown] = useState(true)
+  const [isShown, setShown] = useState(false)
 
   function show() {
     setShown(true)
@@ -30,7 +30,11 @@ export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
 
   /**  для отправки cb-fnc закрытия окна в форму, которая сюда придет как children
        !!! children только как один тег !!! */
-  const enhancedChildren = cloneElement(children as ReactElement, { setShown })
+  const enhancedChildren = cloneElement(children as ReactElement, {
+    closeModal: () => {
+      setShown(false)
+    },
+  })
 
   return (
     <div onClick={show} {...rest}>
