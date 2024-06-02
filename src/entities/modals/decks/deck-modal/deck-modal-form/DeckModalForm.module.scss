@@ -1,6 +1,11 @@
 .form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
   padding: 24px 24px 36px;
+}
 
+.imgWrapper {
   img {
     aspect-ratio: 3;
     width: 100%;

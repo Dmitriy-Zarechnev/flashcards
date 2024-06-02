@@ -1,10 +1,11 @@
 import { Provider } from 'react-redux'
 
+import { DeckFormValues } from '@/entities'
 import { DeckModal } from '@/entities/modals/decks/deck-modal/DeckModal'
 import { store } from '@/services/store'
 import { Dialog, Layout } from '@/shared'
 
-import { Router } from './router'
+import img from './../shared/ui/assembled/dropdown-profile/stories/Dropdown.webp'
 
 export function App() {
   const handler = (data: any) => {

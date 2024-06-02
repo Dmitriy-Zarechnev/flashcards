@@ -1,8 +1,8 @@
-import { MouseEventHandler, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { DeckFormValues, modalSchemes } from '@/entities/validationSchemes'
-import { Button, ControlledCheckbox, IconButton, TextField } from '@/shared'
+import { Button, ControlledCheckbox, Icon, TextField } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './DeckModalForm.module.scss'
@@ -11,18 +11,19 @@ import defaultImage from './card-image-default.webp'
 
 type DeckModalFormProps = {
   btnTitle: string
+  cardData?: DeckFormValues
   closeModal?: () => void
   onSubmit: (data: DeckFormValues) => Promise<any>
 }
 
-export const DeckModalForm = ({ btnTitle, closeModal, onSubmit }: DeckModalFormProps) => {
+export const DeckModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: DeckModalFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { control, handleSubmit } = useForm<DeckFormValues>({
     defaultValues: {
-      name: '',
-      picture: '',
-      private: false,
+      name: cardData?.name || '',
+      picture: cardData?.picture || defaultImage,
+      private: cardData?.private || false,
     },
     resolver: zodResolver(modalSchemes.deck),
   })
@@ -39,20 +40,21 @@ export const DeckModalForm = ({ btnTitle, closeModal, onSubmit }: DeckModalFormP
     }
   }
 
-  //** костыль, чтобы кнопка внутри label аботала */
-  const onClickHandler: MouseEventHandler<HTMLLabelElement> = e => {
-    if (e.target !== e.currentTarget) {
-      e.currentTarget.click()
-    }
-  }
-
   return (
     <form className={s.form} noValidate onSubmit={handleSubmit(submitHandler)}>
-      <img alt={'no photo'} src={defaultImage} />
+      <div className={s.imgWrapper}>
+        <img alt={'no photo'} src={cardData?.picture || defaultImage} />
 
-      {/* here btn, with this button load new img and show it in img tag above */}
+        {/* here btn, with this button load new img and show it in img tag above */}
+
+        <Button disabled={isSubmitting} fullWidth type={'button'} variant={'secondary'}>
+          <Icon iconId={'imgOutline'} />
+          Change Image
+        </Button>
+      </div>
 
       <TextField control={control} label={'Name Pack'} name={'name'} type={'text'} />
+
       <ControlledCheckbox control={control} name={'private'}>
         Private Deck
       </ControlledCheckbox>
