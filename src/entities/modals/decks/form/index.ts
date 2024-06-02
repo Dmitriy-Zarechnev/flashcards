@@ -1,1 +1,0 @@
-export { DecksModalForm } from './DecksModalForm'

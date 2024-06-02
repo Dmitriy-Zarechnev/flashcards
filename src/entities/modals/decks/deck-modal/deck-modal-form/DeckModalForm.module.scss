@@ -1,0 +1,15 @@
+.form {
+  padding: 24px 24px 36px;
+
+  img {
+    aspect-ratio: 3;
+    width: 100%;
+    margin-bottom: 24px;
+    object-fit: cover;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: space-between;
+}

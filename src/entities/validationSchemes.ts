@@ -58,3 +58,14 @@ export const modalSchemes = {
   card,
   deck,
 }
+
+//========================================================================================
+
+export type CreateNewPasswordFormValues = z.infer<typeof authSchemes.createNewPassword>
+export type EditProfileFormPanelFormValues = z.infer<typeof authSchemes.editProfileFormPanel>
+export type ForgotPasswordFormValues = z.infer<typeof authSchemes.forgotPassword>
+export type SignInFormValues = z.infer<typeof authSchemes.signIn>
+export type SignUpFormValues = z.infer<typeof authSchemes.signUp>
+
+export type CardFormValues = z.infer<typeof modalSchemes.card>
+export type DeckFormValues = z.infer<typeof modalSchemes.deck>

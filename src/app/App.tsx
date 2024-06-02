@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 
-import { AddDeckModal } from '@/entities/modals/decks/add-deck-modal/AddDeckModal'
+import { DeckModal } from '@/entities/modals/decks/deck-modal/DeckModal'
 import { store } from '@/services/store'
 import { Dialog, Layout } from '@/shared'
 
@@ -22,7 +22,7 @@ export function App() {
       {/*<Layout>*/}
       {/*  <Router />*/}
       {/*</Layout>*/}
-      <AddDeckModal onSubmit={handler} />
+      <DeckModal onSubmit={handler} variant={'edit'} />
     </Provider>
   )
 }
