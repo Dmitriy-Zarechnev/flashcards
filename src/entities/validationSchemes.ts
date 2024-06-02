@@ -32,8 +32,8 @@ const editProfileFormPanel = z.object({
 // [ MODALS ]
 
 const deck = z.object({
+  cover: z.any(),
   name,
-  picture: z.any(),
   private: z.boolean(),
 })
 

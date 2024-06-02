@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, MouseEventHandler, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { DeckFormValues, modalSchemes } from '@/entities/validationSchemes'
@@ -17,18 +17,44 @@ type DeckModalFormProps = {
 }
 
 export const DeckModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: DeckModalFormProps) => {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const pictureDefault = cardData?.cover || defaultImage
 
-  const { control, handleSubmit } = useForm<DeckFormValues>({
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [selectedImage, setSelectedImage] = useState(pictureDefault)
+
+  const { control, handleSubmit, setValue } = useForm<DeckFormValues>({
     defaultValues: {
+      cover: pictureDefault,
       name: cardData?.name || '',
-      picture: cardData?.picture || defaultImage,
       private: cardData?.private || false,
     },
     resolver: zodResolver(modalSchemes.deck),
   })
 
+  //** костыль, чтобы кнопка внутри label аботала */
+  const onClickHandler: MouseEventHandler<HTMLLabelElement> = e => {
+    if (e.target !== e.currentTarget) {
+      e.currentTarget.click()
+    }
+  }
+
+  function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.files && event.target.files[0]) {
+      const newImageUI = URL.createObjectURL(event.target.files[0])
+
+      setSelectedImage(newImageUI)
+
+      const newImageServer = new FormData()
+
+      newImageServer.append('cover', event.target.files[0])
+
+      /** метод RHF засетать изображение при его загрузке */
+      setValue('cover', newImageServer.get('cover'))
+    }
+  }
+
   async function submitHandler(data: DeckFormValues) {
+    console.log(data)
     setIsSubmitting(true)
     try {
       const res = await onSubmit(data)
@@ -43,14 +69,21 @@ export const DeckModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Deck
   return (
     <form className={s.form} noValidate onSubmit={handleSubmit(submitHandler)}>
       <div className={s.imgWrapper}>
-        <img alt={'no photo'} src={cardData?.picture || defaultImage} />
+        <img alt={'no photo'} src={selectedImage} />
 
-        {/* here btn, with this button load new img and show it in img tag above */}
-
-        <Button disabled={isSubmitting} fullWidth type={'button'} variant={'secondary'}>
-          <Icon iconId={'imgOutline'} />
-          Change Image
-        </Button>
+        <label className={s.imageUploadLabel} htmlFor={'image-upload'} onClick={onClickHandler}>
+          <Button disabled={isSubmitting} fullWidth type={'button'} variant={'secondary'}>
+            <Icon iconId={'imgOutline'} />
+            Change Image
+          </Button>
+        </label>
+        <input
+          accept={'image/*'}
+          id={'image-upload'}
+          onChange={handleImageChange}
+          style={{ display: 'none' }}
+          type={'file'}
+        />
       </div>
 
       <TextField control={control} label={'Name Pack'} name={'name'} type={'text'} />
