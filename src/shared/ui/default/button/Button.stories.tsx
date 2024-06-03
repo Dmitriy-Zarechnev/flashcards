@@ -70,7 +70,6 @@ export const PrimaryDisabledWithImg: Story = {
       </>
     ),
     disabled: true,
-    img: true,
     variant: 'primary',
   },
 }
@@ -84,7 +83,6 @@ export const PrimaryFullWidthWithImg: Story = {
     ),
     disabled: false,
     fullWidth: true,
-    img: true,
     variant: 'primary',
   },
   parameters: {
@@ -140,7 +138,6 @@ export const SecondaryDisabledWithImg: Story = {
       </>
     ),
     disabled: true,
-    img: true,
     variant: 'secondary',
   },
 }
@@ -154,7 +151,6 @@ export const SecondaryFullWidthWithImg: Story = {
     ),
     disabled: false,
     fullWidth: true,
-    img: true,
     variant: 'secondary',
   },
   parameters: {

@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
 
 import { Icon, Typography } from '@/shared'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
@@ -17,6 +17,7 @@ export type SelectProps = {
   fullWidth?: boolean
   isActiveBackgroundBlocked?: boolean
   onValueChange: (id: number | string) => void
+  openToUp?: boolean
   options: OptionsType[]
   selectTitle?: string
 } & ComponentPropsWithoutRef<typeof Listbox>
@@ -30,12 +31,15 @@ export const Select = forwardRef<ElementRef<typeof Listbox>, SelectProps>(
       fullWidth = true,
       isActiveBackgroundBlocked = false,
       onValueChange,
+      openToUp = false,
       options,
       selectTitle,
     },
     ref
   ) => {
     const currentLabel = options.filter(el => el.value === currentValue)[0]?.label
+
+    const generatedId = useId()
 
     return (
       <div>
@@ -55,7 +59,7 @@ export const Select = forwardRef<ElementRef<typeof Listbox>, SelectProps>(
               </ListboxButton>
               <ListboxOptions
                 {...(!fullWidth && { anchor: 'bottom' })}
-                className={clsx(s.SelectGroup, fullWidth && s.fullWidth)}
+                className={clsx(s.SelectGroup, fullWidth && s.fullWidth, openToUp && s.openToUp)}
               >
                 {options.map(el => (
                   <ListboxOption
@@ -65,7 +69,7 @@ export const Select = forwardRef<ElementRef<typeof Listbox>, SelectProps>(
                         [s.selected]: selected && !isActiveBackgroundBlocked,
                       })
                     }
-                    key={el.value}
+                    key={generatedId}
                     value={el.value}
                   >
                     {el.label}

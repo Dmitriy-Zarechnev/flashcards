@@ -1,6 +1,7 @@
-.IconButtonsWrapper {
+.cellWrapper {
   display: flex;
   flex-direction: row;
-  gap: 14px;
+  gap: 5px;
   align-items: center;
+  justify-content: start;
 }

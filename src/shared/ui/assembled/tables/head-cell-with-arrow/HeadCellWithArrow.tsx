@@ -1,19 +1,27 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Icon, Typography } from '@/shared'
+import { IconButton, Typography } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './HeadCellWithArrow.module.scss'
 
 type HeadCellWithArrowProps = {
+  arrowDirection?: boolean
   title: string
 } & ComponentPropsWithoutRef<'div'>
 
-export const HeadCellWithArrow = ({ className, title, ...rest }: HeadCellWithArrowProps) => {
+export const HeadCellWithArrow = ({
+  arrowDirection = false,
+  className,
+  title,
+  ...rest
+}: HeadCellWithArrowProps) => {
+  const arrow = arrowDirection ? 'arrowDownOutline' : 'arrowUpOutline'
+
   return (
-    <div className={clsx(s.TableHeadCell, className)} {...rest}>
-      <Typography.Subtitle2>{title}</Typography.Subtitle2>
-      <Icon height={'12px'} iconId={'arrowUpOutline'} width={'12px'} />
+    <div className={clsx(s.tableHeadCell, className)} {...rest}>
+      <Typography.Subtitle2 className={s.typography}>{title}</Typography.Subtitle2>
+      <IconButton height={'20px'} iconId={`${arrow}`} width={'20px'} />
     </div>
   )
 }

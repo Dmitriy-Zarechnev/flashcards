@@ -14,7 +14,7 @@ const tabsData = [
 ]
 
 // Template for stories
-/** isWithContent пропс только для истории, чтобы отключить контент, при исользованнии компоненты, просто
+/** isWithContent пропс только для истории, чтобы отключить контент, при использованнии компоненты, просто
  * не нужно добавлять children */
 const Template: StoryFn<{ isWithContent: boolean } & TabsProps> = args => (
   <Tabs.Root {...args}>

@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useId, useState } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import { Icon, IconButton, Input } from '@/shared'
 import { clsx } from 'clsx'
@@ -7,21 +7,23 @@ import s from './SearchInput.module.scss'
 
 type SearchInputProps = {
   error?: string
+  searchTextResetHandler?: () => void
 } & ComponentPropsWithoutRef<'input'>
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ className, disabled = false, error, ...rest }, ref) => {
-    const inputId = useId()
-    const [searchText, setSearchText] = useState('')
-
-    const inputValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      setSearchText(e.currentTarget.value)
-    }
-
-    const searchTextResetHandler = () => {
-      setSearchText('')
-    }
-
+  (
+    {
+      className,
+      disabled = false,
+      error,
+      onChange,
+      placeholder,
+      searchTextResetHandler,
+      value,
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <div className={clsx(s.searchInputWrapper, className)} {...rest} ref={ref}>
         <Icon
@@ -34,13 +36,12 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
           className={s.searchPadding}
           disabled={disabled}
           error={error}
-          id={inputId}
-          label={'Search Input'}
-          onChange={inputValueChangeHandler}
+          onChange={onChange}
+          placeholder={placeholder}
           type={'text'}
-          value={searchText}
+          value={value}
         />
-        {searchText && (
+        {value && (
           <IconButton
             className={clsx(s.closeIcon)}
             height={'20px'}

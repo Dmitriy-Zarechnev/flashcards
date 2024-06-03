@@ -1,5 +1,7 @@
 .table {
   border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 50px;
 }
 
 .thead {
@@ -10,16 +12,20 @@
   border-right: 1px solid var(--color-dark-500);
   border-bottom: 1px solid var(--color-dark-500);
   border-left: 1px solid var(--color-dark-500);
+
+  &:hover {
+    background-color: var(--color-dark-700);
+  }
+}
+
+.th,
+.td {
+  min-width: 100px;
+  padding: 12px 20px;
 }
 
 .th {
-  padding: 12px 25px;
-  text-align: start;
-}
-
-.td {
-  width: 100%;
-  max-width: 400px;
-  padding: 12px 25px;
-  text-align: start;
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
 }

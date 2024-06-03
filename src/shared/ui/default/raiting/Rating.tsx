@@ -5,10 +5,10 @@ import { clsx } from 'clsx'
 
 import s from './Rating.module.scss'
 
-export type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5
+//export type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5
 
 type RatingProps = {
-  rating?: RatingValueType
+  rating?: number
 } & ComponentPropsWithoutRef<'div'>
 
 type StarProps = {

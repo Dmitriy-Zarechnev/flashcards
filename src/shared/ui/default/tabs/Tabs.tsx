@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useId } from 'react'
 
 import { Typography } from '@/shared'
 import * as T from '@radix-ui/react-tabs'
@@ -17,6 +17,7 @@ export type TabsProps = {
   /** The value of the tab that should be active when initially rendered. Use when you do not need to control the state of the tabs. */
   defaultValue?: string
   notFullWidth?: boolean
+  onClick?: () => void
   /** An array of objects with the value and title of the tab. {value: string, title: string} */
   tabs: TabType[]
   /** The controlled value of the tab to activate. Should be used in conjunction with onValueChange */
@@ -27,12 +28,14 @@ const Root = ({
   children,
   defaultValue,
   notFullWidth,
+  onClick,
   onValueChange,
   tabs,
   value,
   ...rest
 }: TabsProps) => {
   /** to apply styles to tabs borders */
+  const tabId = useId()
 
   return (
     <T.Root
@@ -52,7 +55,8 @@ const Root = ({
               i === tabs.length - 1 && s.triggerBorderLast
             )}
             disabled={tab.disabled}
-            key={tab.value}
+            key={`${tabId} ${tab.value}`}
+            onClick={onClick}
             value={tab.value}
           >
             <Typography.Body1>{tab.title}</Typography.Body1>

@@ -22,7 +22,7 @@ export const IconButton = ({
   ...rest
 }: IconButtonProps) => {
   return (
-    <button className={clsx(s.IconButton, className)} onClick={onClick} type={'button'} {...rest}>
+    <button className={clsx(s.iconButton, className)} onClick={onClick} type={'button'} {...rest}>
       <Icon height={height} iconId={iconId} viewBox={viewBox} width={width} />
     </button>
   )

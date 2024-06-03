@@ -57,6 +57,7 @@ export const DecksPage = () => {
   })
   const [updateDeck] = useUpdateDeckMutation()
 
+  console.log(data)
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       isPrivate: false,

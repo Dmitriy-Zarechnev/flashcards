@@ -16,7 +16,7 @@ type Author = {
   name: string
 }
 
-type Deck = {
+export type Deck = {
   author: Author
 } & DefaultDeckResponse
 

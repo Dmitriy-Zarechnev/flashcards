@@ -65,7 +65,9 @@
   }
 
   &:hover {
+    cursor: pointer;
     background-color: var(--color-accent-300);
+    box-shadow: 0 0 10px var(--color-light-100);
   }
 
   &:focus {

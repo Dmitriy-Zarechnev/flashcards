@@ -1,8 +1,8 @@
 import { Rating, RatingValueType, Tables, Typography } from '@/shared'
 
-import { IconButtons } from '../icon-buttons'
+import { IconButtons } from '../../../../../features/cards-list/cards-table/icon-buttons'
+import { ImgBlock } from '../../../../../features/cards-list/cards-table/image-block'
 import { HeadCellWithArrow } from './../head-cell-with-arrow'
-import { ImgBlock } from './../image-block'
 
 export type TableData = {
   firstCell: FirstCell

@@ -16,10 +16,9 @@ header {
   justify-content: space-between;
 
   width: 100%;
-  max-width: 1010px;
+  max-width: var(--screen-max-width);
   height: 100%;
   margin: 0 auto;
-  padding: 12px var(--header-inline-padding);
 }
 
 .projectPicture {

@@ -1,0 +1,23 @@
+.blockWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 36px;
+}
+
+.searchInput {
+  flex: 0 0 300px;
+  align-self: end;
+  margin-bottom: 4px;
+}
+
+.tabsBox {
+  flex: 0 0 230px;
+}
+
+.sliderBox {
+  flex: 0 0 250px;
+}

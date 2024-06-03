@@ -46,6 +46,7 @@
 
 .FatherRelative {
   position: relative;
+  min-width: 60px;
 }
 
 .SelectItem {
@@ -82,4 +83,9 @@
 
 .fullWidth {
   width: 100%;
+}
+
+.openToUp {
+  bottom: 100%;
+  left: 0;
 }

@@ -10,7 +10,7 @@ type PageProps = {
 
 export const Page = forwardRef<ElementRef<'div'>, PageProps>(
   ({ className, mt = '33px', style, ...rest }, ref) => {
-    const classes = clsx(className, s.container)
+    const classes = clsx(s.container, className)
     const styles: CSSProperties = { marginTop: mt, ...style }
 
     return <div className={classes} ref={ref} style={styles} {...rest} />

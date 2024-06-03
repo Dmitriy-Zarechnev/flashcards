@@ -1,82 +1,62 @@
+import { updatedDate } from '@/features/cards-list/utils/updateDate'
+import { GetCardsResponse } from '@/services/cards/cards.types'
 import { Rating, Tables, Typography } from '@/shared'
-import defImg from '@/shared/ui/assembled/tables/assets/defaultPicture.jpg'
-import { HeadCellWithArrow } from '@/shared/ui/assembled/tables/head-cell-with-arrow'
-import { IconButtons } from '@/shared/ui/assembled/tables/icon-buttons'
-import { ImgBlock } from '@/shared/ui/assembled/tables/image-block'
 
-export const CardsTable = () => {
-  const tableData = [
-    {
-      firstCell: {
-        imgUrl: defImg,
-        text: 'Cell 1ed/ui/assembled/tables/image-block ed/ui/assembled/tables/image-blocked/ui/assembled/tables/image-block ',
-      },
-      forthCell: 'Cell 4',
-      id: 'uniq1',
-      rating: 2,
-      secondCell: 'Cell 2',
-      thirdCell: 'Cell 1',
-    },
+import s from '@/features/cards-list/decks-table/DecksTable.module.scss'
 
-    {
-      firstCell: { imgUrl: defImg, text: 'Cell 1' },
-      forthCell: 'Cell 4',
-      id: 'uniq2',
-      rating: 4,
-      secondCell: 'Cell 2',
-      thirdCell: 'Cell 1',
-    },
-  ]
+import defImg from './defaultCardImg.jpg'
+import { HeadCellWithArrow } from './head-cell-with-arrow'
+import { IconButtons } from './icon-buttons'
+import { ImgBlock } from './image-block'
 
+type CardsTableProps = {
+  cards: GetCardsResponse[]
+  editFunction: (id: string) => void
+  trashFunction: (id: string) => void
+  userId: boolean
+}
+
+export const CardsTable = ({ cards, editFunction, trashFunction, userId }: CardsTableProps) => {
   return (
     <Tables.Table>
       <Tables.TableHead>
         <Tables.TableRow>
-          <Tables.TableHeadCell>
-            <Typography.Subtitle2>Question</Typography.Subtitle2>
-          </Tables.TableHeadCell>
-          <Tables.TableHeadCell>
-            <Typography.Subtitle2>Answer</Typography.Subtitle2>
-          </Tables.TableHeadCell>
-          <Tables.TableHeadCell>
-            <HeadCellWithArrow title={'Last Updated'} />
-          </Tables.TableHeadCell>
-          <Tables.TableHeadCell>
-            <Typography.Subtitle2>Grade</Typography.Subtitle2>
-          </Tables.TableHeadCell>
-          <Tables.TableHeadCell>
-            <Typography.Subtitle2></Typography.Subtitle2>
-          </Tables.TableHeadCell>
+          <HeadCellWithArrow arrowDirection={false} title={'Question'} />
+          <HeadCellWithArrow arrowDirection={false} title={'Answer'} />
+          <HeadCellWithArrow arrowDirection={false} title={'Last Updated'} />
+          <HeadCellWithArrow arrowDirection={false} title={'Grade'} />
+          {userId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
         </Tables.TableRow>
       </Tables.TableHead>
 
       <Tables.TableBody>
-        {tableData.map(el => {
+        {cards.map(card => {
           return (
-            <Tables.TableRow key={el.id}>
+            <Tables.TableRow key={card.id}>
               <Tables.TableBodyCell>
-                <ImgBlock title={el.firstCell.text} url={el.firstCell.imgUrl} />
+                <ImgBlock title={card.question} url={card.questionImg || defImg} />
               </Tables.TableBodyCell>
 
               <Tables.TableBodyCell>
-                <Typography.Body2>{el.secondCell}</Typography.Body2>
-              </Tables.TableBodyCell>
-              <Tables.TableBodyCell>
-                <Typography.Body2>{el.thirdCell}</Typography.Body2>
+                <ImgBlock title={card.answer} url={card.answerImg || defImg} />
               </Tables.TableBodyCell>
 
               <Tables.TableBodyCell>
-                <Rating rating={el.rating} />
+                <Typography.Body2>{updatedDate(card.updated)}</Typography.Body2>
               </Tables.TableBodyCell>
 
               <Tables.TableBodyCell>
-                <IconButtons
-                  editFunction={() => {}}
-                  id={el.id}
-                  showPlayButton
-                  trashFunction={() => {}}
-                />
+                <Rating rating={card.grade} />
               </Tables.TableBodyCell>
+
+              {userId && (
+                <Tables.TableBodyCell>
+                  <IconButtons
+                    editFunction={() => editFunction(card.id)}
+                    trashFunction={() => trashFunction(card.id)}
+                  />
+                </Tables.TableBodyCell>
+              )}
             </Tables.TableRow>
           )
         })}

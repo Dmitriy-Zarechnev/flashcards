@@ -1,16 +1,20 @@
 .searchInputWrapper {
   position: relative;
+  margin-bottom: 24px;
   color: var(--color-dark-300);
 }
 
 .searchIcon {
   position: absolute;
-  top: 32px;
+  z-index: 5;
+  top: 8px;
   left: 12px;
 }
 
 .searchPadding {
-  padding: 6px 12px 6px 40px;
+  & input {
+    padding: 6px 12px 6px 40px;
+  }
 }
 
 .disabled {
@@ -19,7 +23,9 @@
 
 .closeIcon {
   position: absolute;
-  top: 33px;
+  z-index: 5;
+  top: 10px;
   right: 12px;
+
   color: var(--color-light-100);
 }

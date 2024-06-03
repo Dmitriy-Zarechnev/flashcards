@@ -1,2 +1,5 @@
 .container {
+  width: 100%;
+  max-width: var(--screen-max-width);
+  margin-bottom: 30px;
 }

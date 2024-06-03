@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: start;
+}
+
+.cardsImg {
+  aspect-ratio: 2;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.typography {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

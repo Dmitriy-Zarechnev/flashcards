@@ -1,11 +1,12 @@
+import { flashcardsApi } from '@/services/flashcards.api'
+
 import {
   DefaultDeckResponse,
   DeleteDecksArgs,
   GetDecksArgs,
   GetDecksResponse,
   UpdateDeckArgs,
-} from '@/services/decks/decks.types'
-import { flashcardsApi } from '@/services/flashcards.api'
+} from './decks.types'
 
 const decksService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -23,7 +24,7 @@ const decksService = flashcardsApi.injectEndpoints({
         invalidatesTags: ['Decks'],
         query: ({ id }) => ({
           method: 'DELETE',
-          url: `/v1/decks/${id}`,
+          url: `v1/decks/${id}`,
         }),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
@@ -39,7 +40,7 @@ const decksService = flashcardsApi.injectEndpoints({
         query: ({ id, ...args }) => ({
           body: args,
           method: 'PATCH',
-          url: `/v1/decks/${id}`,
+          url: `v1/decks/${id}`,
         }),
       }),
     }

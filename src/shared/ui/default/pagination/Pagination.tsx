@@ -177,6 +177,8 @@ const PerPageSelect: FC<PerPageSelectProps> = ({ onPerPageChange, perPage, perPa
     onPerPageChange(value as number)
   }
 
+  const selectOpen = perPage > 5
+
   return (
     <div className={classNames.selectBox}>
       <Typography.Body2>Показать</Typography.Body2>
@@ -185,6 +187,7 @@ const PerPageSelect: FC<PerPageSelectProps> = ({ onPerPageChange, perPage, perPa
         currentValue={perPage}
         isActiveBackgroundBlocked
         onValueChange={onPerPageChangeForType}
+        openToUp={selectOpen}
         options={selectOptions}
       />
       <Typography.Body2>на странице</Typography.Body2>

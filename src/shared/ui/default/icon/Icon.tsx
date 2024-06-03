@@ -1,4 +1,4 @@
-import iconsSprite from './../../../assets/sprite.svg'
+import iconsSprite from '@/shared/assets/sprite.svg'
 
 type IconProps = {
   className?: string

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ImgBlock } from './'
-import defImg from './../assets/defaultPicture.jpg'
+import defImg from '../../../../shared/ui/assembled/tables/assets/defaultPicture.jpg'
+import { ImgBlock } from './index'
 
 const meta = {
   argTypes: {},
