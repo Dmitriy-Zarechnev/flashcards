@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useForm } from 'react-hook-form'
 
-import { schema } from '@/entities/auth/ui/validationSchemas'
+import { authSchemes } from '@/entities/validationSchemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -18,7 +18,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof PasswordInput>
 
-const validationSchema = schema.createNewPassword
+const validationSchema = authSchemes.createNewPassword
 
 type FormValues = z.infer<typeof validationSchema>
 

@@ -7,13 +7,13 @@ import { z } from 'zod'
 
 import s from './ForgotPassword.module.scss'
 
-import { schema } from './../validationSchemas'
+import { authSchemes } from '../../../validationSchemes'
 
 type ForgotPasswordProps = {
   onSubmit: (data: FormValues) => void
 }
 
-const validationSchema = schema.forgotPassword
+const validationSchema = authSchemes.forgotPassword
 
 type FormValues = z.infer<typeof validationSchema>
 

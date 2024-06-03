@@ -7,13 +7,13 @@ import { z } from 'zod'
 
 import s from './SingUp.module.scss'
 
-import { schema } from './../validationSchemas'
+import { authSchemes } from '../../../validationSchemes'
 
 type SingUpProps = {
   onSubmit: (data: FormValues) => void
 }
 
-const validationSchema = schema.signUp
+const validationSchema = authSchemes.signUp
 
 type FormValues = z.infer<typeof validationSchema>
 

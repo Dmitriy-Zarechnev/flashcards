@@ -1,9 +1,8 @@
 import { Provider } from 'react-redux'
 
+import { Router } from '@/app/router'
 import { store } from '@/services/store'
 import { Layout } from '@/shared'
-
-import { Router } from './router'
 
 export function App() {
   return (

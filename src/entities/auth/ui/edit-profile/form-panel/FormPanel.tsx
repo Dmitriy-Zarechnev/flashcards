@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { schema } from '@/entities/auth/ui/validationSchemas'
+import { authSchemes } from '@/entities/validationSchemes'
 import { Button, TextField } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -12,7 +12,7 @@ type FormPanelProps = {
   onSubmit: (data: FormValues) => void
 }
 
-const validationSchema = schema.editProfileFormPanel
+const validationSchema = authSchemes.editProfileFormPanel
 
 type FormValues = z.infer<typeof validationSchema>
 

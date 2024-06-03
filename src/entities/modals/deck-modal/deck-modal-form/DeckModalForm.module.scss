@@ -1,0 +1,25 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  padding: 24px 24px 36px;
+}
+
+.imgWrapper {
+  img {
+    aspect-ratio: 3;
+    width: 100%;
+    margin-bottom: 24px;
+    object-fit: cover;
+  }
+}
+
+.imageBtnWrapper {
+  display: flex;
+  column-gap: 24px;
+}
+
+.footerBtnWrapper {
+  display: flex;
+  justify-content: space-between;
+}

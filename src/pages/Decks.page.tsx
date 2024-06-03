@@ -113,7 +113,10 @@ export const DecksPage = () => {
 
             return (
               <tr key={deck.id}>
-                <td>{deck.name}</td>
+                <td>
+                  {deck.name}
+                  <img alt={'sry'} src={deck?.cover} style={{ height: '100px', width: '200px' }} />
+                </td>
                 <td>{deck.cardsCount}</td>
                 <td>{updatedAt}</td>
                 <td>{deck.author.name}</td>

@@ -1,5 +1,4 @@
 import {
-  CreateDeckArgs,
   DefaultDeckResponse,
   DeleteDecksArgs,
   GetDecksArgs,
@@ -11,10 +10,11 @@ import { flashcardsApi } from '@/services/flashcards.api'
 const decksService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
-      createDeck: builder.mutation<DefaultDeckResponse, CreateDeckArgs>({
+      // createDeck: builder.mutation<DefaultDeckResponse, CreateDeckArgs>({
+      createDeck: builder.mutation<DefaultDeckResponse, FormData>({
         invalidatesTags: ['Decks'],
-        query: args => ({
-          body: args,
+        query: formData => ({
+          body: formData,
           method: 'POST',
           url: `v1/decks`,
         }),
