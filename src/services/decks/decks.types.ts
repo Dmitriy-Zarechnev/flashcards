@@ -44,15 +44,12 @@ export type GetDecksArgs = {
 
 //========================================================================================
 
-export type CreateDeckArgs = {
+export type UpdateDeckArgs = {
   cover?: string
+  id: string
   isPrivate: boolean // по дефолту поставить false
   name: string // валидация описана в апишке
 }
-
-//========================================================================================
-
-export type UpdateDeckArgs = { id: string } & Partial<CreateDeckArgs>
 
 //========================================================================================
 

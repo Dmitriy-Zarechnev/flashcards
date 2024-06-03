@@ -14,7 +14,12 @@
   }
 }
 
-.btnWrapper {
+.imageBtnWrapper {
+  display: flex;
+  column-gap: 24px;
+}
+
+.footerBtnWrapper {
   display: flex;
   justify-content: space-between;
 }

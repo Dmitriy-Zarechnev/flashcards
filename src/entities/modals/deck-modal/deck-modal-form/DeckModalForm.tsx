@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEventHandler, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { DeckFormValues, modalSchemes } from '@/entities/validationSchemes'
@@ -7,36 +7,27 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './DeckModalForm.module.scss'
 
-import defaultImage from './card-image-default.webp'
+import cardDefaultCover from '../../../../shared/assets/card-default-cover.webp'
 
 type DeckModalFormProps = {
   btnTitle: string
-  cardData?: DeckFormValues
   closeModal?: () => void
+  deckData?: DeckFormValues
   onSubmit: (data: DeckFormValues) => Promise<any>
 }
 
-export const DeckModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: DeckModalFormProps) => {
-  const pictureDefault = cardData?.cover || defaultImage
-
+export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: DeckModalFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [selectedImage, setSelectedImage] = useState(pictureDefault)
+  const [selectedImage, setSelectedImage] = useState(deckData?.cover)
 
   const { control, handleSubmit, setValue } = useForm<DeckFormValues>({
     defaultValues: {
-      cover: pictureDefault,
-      name: cardData?.name || '',
-      private: cardData?.private || false,
+      cover: '',
+      name: deckData?.name || '',
+      private: deckData?.private || false,
     },
     resolver: zodResolver(modalSchemes.deck),
   })
-
-  //** костыль, чтобы кнопка внутри label аботала */
-  const onClickHandler: MouseEventHandler<HTMLLabelElement> = e => {
-    if (e.target !== e.currentTarget) {
-      e.currentTarget.click()
-    }
-  }
 
   function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
@@ -49,13 +40,23 @@ export const DeckModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Deck
     }
   }
 
+  /** bound image-input to button */
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  function handleButtonClick() {
+    if (fileInputRef.current !== null) {
+      fileInputRef.current.click()
+    }
+  }
+
+  function deleteImageHandler() {
+    setSelectedImage(undefined)
+  }
+
   async function submitHandler(data: DeckFormValues) {
-    console.log(data)
     setIsSubmitting(true)
     try {
-      const res = await onSubmit(data)
-
-      console.log(res)
+      await onSubmit(data)
       closeModal?.()
     } catch (error) {
       setIsSubmitting(false)
@@ -65,21 +66,41 @@ export const DeckModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Deck
   return (
     <form className={s.form} noValidate onSubmit={handleSubmit(submitHandler)}>
       <div className={s.imgWrapper}>
-        <img alt={'no photo'} src={selectedImage} />
+        <img alt={'no photo'} src={selectedImage || cardDefaultCover} />
 
-        <label className={s.imageUploadLabel} htmlFor={'image-upload'} onClick={onClickHandler}>
-          <Button disabled={isSubmitting} fullWidth type={'button'} variant={'secondary'}>
+        <div className={s.imageBtnWrapper}>
+          {selectedImage && (
+            <Button
+              disabled={isSubmitting}
+              fullWidth
+              onClick={deleteImageHandler}
+              type={'button'}
+              variant={'secondary'}
+            >
+              <Icon iconId={'trashOutline'} />
+              Delete Image
+            </Button>
+          )}
+
+          <Button
+            disabled={isSubmitting}
+            fullWidth
+            onClick={handleButtonClick}
+            type={'button'}
+            variant={'secondary'}
+          >
             <Icon iconId={'imgOutline'} />
             Change Image
           </Button>
-        </label>
-        <input
-          accept={'image/*'}
-          id={'image-upload'}
-          onChange={handleImageChange}
-          style={{ display: 'none' }}
-          type={'file'}
-        />
+          <input
+            accept={'image/*'}
+            id={'image-upload'}
+            onChange={handleImageChange}
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            type={'file'}
+          />
+        </div>
       </div>
 
       <TextField control={control} label={'Name Pack'} name={'name'} type={'text'} />
@@ -88,7 +109,7 @@ export const DeckModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Deck
         Private Deck
       </ControlledCheckbox>
 
-      <div className={s.btnWrapper}>
+      <div className={s.footerBtnWrapper}>
         <Button onClick={closeModal} type={'button'} variant={'secondary'}>
           Cancel
         </Button>

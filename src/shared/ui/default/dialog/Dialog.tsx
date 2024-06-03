@@ -48,7 +48,7 @@ export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
                 height={'14px'}
                 iconId={'dialogClose'}
                 onClick={close}
-                viewBox={'0 0 14 14'}
+                viewBox={'0 0 12 12'}
                 width={'14px'}
               />
             </div>

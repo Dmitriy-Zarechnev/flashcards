@@ -13,13 +13,7 @@ export const CreateDeckPage = () => {
     formData.append('name', data.name)
     formData.append('isPrivate', data.private.toString())
 
-    // createDeck({
-    //   cover: data.cover,
-    //   isPrivate: data.private,
-    //   name: data.name,
-    // })
-
-    createDeck(formData)
+    await createDeck(formData)
   }
 
   return <DeckModal onSubmit={onSubmit} variant={'add'} />

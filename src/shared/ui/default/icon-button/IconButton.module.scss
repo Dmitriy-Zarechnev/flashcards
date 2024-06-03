@@ -1,4 +1,8 @@
 .IconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
     color: var(--color-accent-500);
   }
