@@ -7,11 +7,19 @@ export const CreateDeckPage = () => {
   const [createDeck] = useCreateDeckMutation()
 
   async function onSubmit(data: DeckFormValues) {
-    createDeck({
-      cover: data.cover,
-      isPrivate: data.private,
-      name: data.name,
-    })
+    const formData = new FormData()
+
+    formData.append('cover', data.cover)
+    formData.append('name', data.name)
+    formData.append('isPrivate', data.private.toString())
+
+    // createDeck({
+    //   cover: data.cover,
+    //   isPrivate: data.private,
+    //   name: data.name,
+    // })
+
+    createDeck(formData)
   }
 
   return <DeckModal onSubmit={onSubmit} variant={'add'} />

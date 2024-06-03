@@ -44,12 +44,8 @@ export const DeckModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Deck
 
       setSelectedImage(newImageUI)
 
-      const newImageServer = new FormData()
-
-      newImageServer.append('cover', event.target.files[0])
-
       /** метод RHF засетать изображение при его загрузке */
-      setValue('cover', newImageServer.get('cover'))
+      setValue('cover', event.target.files[0])
     }
   }
 
