@@ -51,6 +51,12 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
 
   function deleteImageHandler() {
     setSelectedImage(undefined)
+    setValue('cover', '')
+
+    //** to make able  */
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
   }
 
   async function submitHandler(data: DeckFormValues) {
