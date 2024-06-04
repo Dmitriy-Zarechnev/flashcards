@@ -9,7 +9,7 @@ const perPageOptions = [5, 10, 250]
 const meta: Meta<typeof Pagination> = {
   component: Pagination,
   tags: ['autodocs'],
-  title: '🟢UI/Default/Pagination',
+  title: '🟢UI/Assembled/Pagination',
 }
 
 export default meta
