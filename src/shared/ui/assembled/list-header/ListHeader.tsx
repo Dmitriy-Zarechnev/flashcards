@@ -7,6 +7,7 @@ import s from './ListHeader.module.scss'
 
 type ListHeaderProps = {
   buttonTitle: string
+  onButtonClick?: () => void
   title: string
   userId?: boolean
 } & ComponentPropsWithoutRef<'div'>
@@ -14,6 +15,7 @@ type ListHeaderProps = {
 export const ListHeader = ({
   buttonTitle,
   className,
+  onButtonClick,
   title,
   userId = false,
   ...rest
@@ -24,7 +26,7 @@ export const ListHeader = ({
         <Typography.H1>{title}</Typography.H1>
         {userId && <DropdownMenu />}
       </div>
-      <Button className={s.button} variant={'primary'}>
+      <Button className={s.button} onClick={onButtonClick} variant={'primary'}>
         {buttonTitle}
       </Button>
     </div>
