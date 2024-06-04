@@ -1,12 +1,12 @@
-import { HeadCellWithArrow } from '@/features/cards-list/cards-table/head-cell-with-arrow'
-import { IconButtons } from '@/features/cards-list/cards-table/icon-buttons'
-import { ImgBlock } from '@/features/cards-list/cards-table/image-block'
-import { updatedDate } from '@/features/cards-list/utils/updateDate'
 import { Deck } from '@/services/decks/decks.types'
 import { Tables, Typography } from '@/shared'
+import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './DecksTable.module.scss'
 
+import { HeadCellWithArrow } from '../head-cell-with-arrow'
+import { IconButtons } from '../icon-buttons'
+import { ImgBlock } from '../image-block'
 import defImg from './defaultDeckImg.jpg'
 
 type DecksTableProps = {

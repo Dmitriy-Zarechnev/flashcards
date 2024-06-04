@@ -1,15 +1,14 @@
 import { useState } from 'react'
 
-import { CardsTable } from '@/features/cards-list/cards-table'
-import { useSuperPagination } from '@/features/cards-list/utils/useSuperPagination'
 import { useDeleteCardMutation, useUpdateCardMutation } from '@/services/cards/cards.service'
 import { GetCardsResponse } from '@/services/cards/cards.types'
 import { Button, Icon, Page, SearchInput } from '@/shared'
-import { ListHeader } from '@/shared/ui/default/list-header'
+import { CardsTable } from '@/shared/ui/assembled/cards-table'
+import defDeckImg from '@/shared/ui/assembled/decks-table/defaultDeckImg.jpg'
+import { ListHeader } from '@/shared/ui/assembled/list-header'
+import { useSuperPagination } from '@/shared/utils/useSuperPagination'
 
-import s from './CardsPage.module.scss'
-
-import defDeckImg from '../decks-table/defaultDeckImg.jpg'
+import s from './Cards.page.module.scss'
 
 const mockCardsData: GetCardsResponse[] = [
   {

@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { DecksPage } from '@/features/cards-list/decks-page/DecksPage'
+import { DecksPage } from '@/features/decks-page/Decks.page'
 
 //========================================================================================
 

@@ -1,14 +1,13 @@
-import { DeckControlBlock } from '@/features/cards-list/decks-page/deck-control-block'
-import { DecksTable } from '@/features/cards-list/decks-table/DecksTable'
-import { useSuperPagination } from '@/features/cards-list/utils/useSuperPagination'
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
 } from '@/services/decks/decks.service'
 import { Page, Pagination } from '@/shared'
-
-import { ListHeader } from '../../../shared/ui/default/list-header'
+import { DeckControlBlock } from '@/shared/ui/assembled/deck-control-block'
+import { DecksTable } from '@/shared/ui/assembled/decks-table/DecksTable'
+import { ListHeader } from '@/shared/ui/assembled/list-header'
+import { useSuperPagination } from '@/shared/utils/useSuperPagination'
 
 export const DecksPage = () => {
   // ----- Хук который необходим для работы пагинации и с url-ом -----
@@ -24,7 +23,7 @@ export const DecksPage = () => {
   const [updateDeck] = useUpdateDeckMutation()
 
   const updateDeckHandler = (id: string) => {
-    updateDeck({ id })
+    updateDeck({ id, isPrivate: false, name: 'hello' })
   }
   const deleteDeckHandler = (id: string) => {
     deleteDeck({ id })

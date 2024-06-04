@@ -1,13 +1,13 @@
-import { updatedDate } from '@/features/cards-list/utils/updateDate'
 import { GetCardsResponse } from '@/services/cards/cards.types'
 import { Rating, Tables, Typography } from '@/shared'
+import { updatedDate } from '@/shared/utils/updateDate'
 
-import s from '@/features/cards-list/decks-table/DecksTable.module.scss'
+import s from '@/shared/ui/assembled/decks-table/DecksTable.module.scss'
 
+import { HeadCellWithArrow } from '../head-cell-with-arrow'
+import { IconButtons } from '../icon-buttons'
+import { ImgBlock } from '../image-block'
 import defImg from './defaultCardImg.jpg'
-import { HeadCellWithArrow } from './head-cell-with-arrow'
-import { IconButtons } from './icon-buttons'
-import { ImgBlock } from './image-block'
 
 type CardsTableProps = {
   cards: GetCardsResponse[]

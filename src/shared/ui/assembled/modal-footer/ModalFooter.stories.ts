@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ModalFooter } from './'
+import { ModalFooter } from './index'
 
 const meta = {
   argTypes: {},

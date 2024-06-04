@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SearchInput } from './'
+import { SearchInput } from './index'
 
 const meta = {
   argTypes: {},

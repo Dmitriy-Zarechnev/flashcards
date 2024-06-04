@@ -16,7 +16,7 @@ type FormValues = {
   name: string
 }
 
-export const DecksPage = () => {
+export const DecksLessonPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const search = searchParams.get('search') ?? ''
   const currentPage = searchParams.get('currentPage') ?? '1'

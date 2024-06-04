@@ -1,1 +1,1 @@
-export { DecksPage } from './Decks.page'
+export { DecksLessonPage } from './DecksLesson.page'
