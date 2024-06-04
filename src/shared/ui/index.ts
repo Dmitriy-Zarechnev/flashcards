@@ -2,7 +2,6 @@
 export { BackToDecks } from './assembled/back-to-decks'
 export { CardsTable } from './assembled/cards-table'
 export { DeckControlBlock } from './assembled/deck-control-block'
-export type { TabsData } from './assembled/deck-control-block'
 export { DecksTable } from './assembled/decks-table'
 export { Dialog } from './assembled/dialog'
 export { DropdownMenu } from './assembled/dropdown-menu'

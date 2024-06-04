@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
@@ -12,8 +10,11 @@ import {
   ListHeader,
   Page,
   Pagination,
-  TabsData,
   useSuperPagination,
+  useSuperSearch,
+  useSuperSlider,
+  useSuperSort,
+  useSuperTabs,
 } from '@/shared'
 
 export const DecksPage = () => {
@@ -28,53 +29,21 @@ export const DecksPage = () => {
     setSearchParams,
   } = useSuperPagination([5, 10, 15, 20])
 
-  // ----- Блок работы с поиском по названию deck -----
-  const search = searchParams.get('search') ?? ''
+  // ----- Хук который необходим для работы с поиском по названию -----
+  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperSearch(
+    searchParams,
+    setSearchParams
+  )
 
-  function searchInputOnChangeHandler(value: string) {
-    if (value.length) {
-      searchParams.set('search', value)
-    } else {
-      searchParams.delete('search')
-    }
-    setSearchParams(searchParams)
-  }
+  // ----- Хук который необходим для работы со слайдером -----
+  const { setSliderValues, sliderMaxCardsCount, sliderMinCardsCount, sliderValueChangeHandler } =
+    useSuperSlider()
 
-  const searchInputResetHandler = () => {
-    searchParams.delete('search')
-    setSearchParams(searchParams)
-  }
+  // ----- Хук который необходим для работы с tabs -----
+  const { setTabValue, tabValue, tabValueChangeHandler, tabsData } = useSuperTabs()
 
-  // ----- Блок работы со слайдером -----
-  const [sliderValues, setSliderValues] = useState([0, 25])
-
-  const [sliderMinCardsCount, sliderMaxCardsCount] = sliderValues
-
-  const sliderValueChangeHandler = (value: number[]) => {
-    setSliderValues(value)
-  }
-
-  // ----- Блок работы с tabs -----
-  const tabsData: TabsData[] = [
-    { title: 'My Cards', value: 'My Cards' },
-    { title: 'All Cards', value: 'All Cards' },
-  ]
-
-  const [tabValue, setTabValue] = useState(tabsData[1].value)
-  const tabValueChangeHandler = (value: string) => {
-    setTabValue(value)
-  }
-
-  // ----- Блок работы с сортировкой -----
-  const [tableSort, setTableSort] = useState('updated-desc')
-
-  const sortTableOnClickHandler = (title: string) => {
-    if (`${title}-asc` !== tableSort) {
-      setTableSort(`${title}-asc`)
-    } else {
-      setTableSort(`${title}-desc`)
-    }
-  }
+  // ----- Хук который необходим для работы с сортировкой -----
+  const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperSort()
 
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({

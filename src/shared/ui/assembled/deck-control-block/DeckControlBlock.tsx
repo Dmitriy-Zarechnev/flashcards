@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 
-import { Button, Icon, SearchInput, SliderComponent, Tabs, Typography } from '@/shared'
+import { Button, Icon, SearchInput, SliderComponent, Tabs, TabsData, Typography } from '@/shared'
 
 import s from './DeckControlBlock.module.scss'
 
@@ -14,11 +14,6 @@ type DeckControlBlockProps = {
   tabValue: string
   tabValueChange: (value: string) => void
   tabsData: TabsData[]
-}
-
-export type TabsData = {
-  title: string
-  value: string
 }
 
 export const DeckControlBlock = ({

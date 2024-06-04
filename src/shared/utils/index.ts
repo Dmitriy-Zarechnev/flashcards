@@ -1,2 +1,7 @@
 export { updatedDate } from './updateDate'
 export { useSuperPagination } from './useSuperPagination'
+export { useSuperSearch } from './useSuperSearch'
+export { useSuperSlider } from './useSuperSlider'
+export { useSuperSort } from './useSuperSort'
+export { useSuperTabs } from './useSuperTabs'
+export type { TabsData } from './useSuperTabs'
