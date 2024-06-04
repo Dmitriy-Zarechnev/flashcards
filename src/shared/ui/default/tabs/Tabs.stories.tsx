@@ -1,8 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react'
 import { fn } from '@storybook/test'
 
+import { Tabs } from './'
 import { TabsProps } from './Tabs'
-import { Tabs } from './index'
 
 //========================================================================================
 

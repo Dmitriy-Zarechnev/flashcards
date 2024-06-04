@@ -1,4 +1,4 @@
-// ======================= Assembled =============================
+// ============================== [ Assembled ] ===========================================
 export { CardsTable } from './assembled/cards-table'
 export { DeckControlBlock } from './assembled/deck-control-block'
 export { DecksTable } from './assembled/decks-table'
@@ -17,7 +17,7 @@ export { PageHeader } from './assembled/page-header'
 export { Pagination } from './assembled/pagination'
 export { SearchInput } from './assembled/search-input'
 
-// ======================= Controlled =============================
+// ============================== [ Controlled ] ===========================================
 export { ControlledCheckbox } from './controlled/controlled-checkbox'
 export { ControlledRadioGroup } from './controlled/controlled-radiogroup'
 export { ControlledSelect } from './controlled/controlled-select'
@@ -25,7 +25,7 @@ export { PasswordInput } from './controlled/password-input'
 export type { PasswordInputProps } from './controlled/password-input'
 export { TextField } from './controlled/text-field'
 
-// ======================= Default =============================
+// ============================== [ Default ] ===========================================
 export { Button } from './default/button'
 export { Card } from './default/card'
 export { Checkbox } from './default/checkbox'

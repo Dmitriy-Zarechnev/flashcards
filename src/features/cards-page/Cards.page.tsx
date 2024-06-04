@@ -2,11 +2,16 @@ import { useState } from 'react'
 
 import { useDeleteCardMutation, useUpdateCardMutation } from '@/services/cards/cards.service'
 import { GetCardsResponse } from '@/services/cards/cards.types'
-import { Button, Icon, Page, SearchInput } from '@/shared'
-import { CardsTable } from '@/shared/ui/assembled/cards-table'
-import defDeckImg from '@/shared/ui/assembled/decks-table/defaultDeckImg.jpg'
-import { ListHeader } from '@/shared/ui/assembled/list-header'
-import { useSuperPagination } from '@/shared/utils/useSuperPagination'
+import {
+  Button,
+  CardsTable,
+  Icon,
+  ListHeader,
+  Page,
+  SearchInput,
+  useSuperPagination,
+} from '@/shared'
+import defDeckImg from '@/shared/assets/card-default-cover.webp'
 
 import s from './Cards.page.module.scss'
 

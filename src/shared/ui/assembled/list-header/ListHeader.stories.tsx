@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ListHeader } from './index'
+import { ListHeader } from './'
 
 const meta = {
   argTypes: {},

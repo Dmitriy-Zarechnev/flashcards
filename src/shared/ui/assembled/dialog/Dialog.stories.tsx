@@ -5,7 +5,7 @@ import { Dialog } from './index'
 const meta = {
   component: Dialog,
   tags: ['autodocs'],
-  title: '🟢UI/Default/Dialog',
+  title: '🟢UI/Assembled/Dialog',
 } satisfies Meta<typeof Dialog>
 
 export default meta

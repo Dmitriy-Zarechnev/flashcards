@@ -1,12 +1,9 @@
 import { GetCardsResponse } from '@/services/cards/cards.types'
-import { Rating, Tables, Typography } from '@/shared'
+import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from '@/shared/ui/assembled/decks-table/DecksTable.module.scss'
 
-import { HeadCellWithArrow } from '../head-cell-with-arrow'
-import { IconButtons } from '../icon-buttons'
-import { ImgBlock } from '../image-block'
 import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {

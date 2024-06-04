@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { ImgBlock } from './'
 import defImg from './../../../assets/deck-default-cover.webp'
-import { ImgBlock } from './index'
 
 const meta = {
   argTypes: {},

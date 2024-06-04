@@ -21,4 +21,10 @@
   &:hover {
     background-color: transparent;
   }
+
+  &:not(:disabled) {
+    &:active {
+      background-color: transparent;
+    }
+  }
 }

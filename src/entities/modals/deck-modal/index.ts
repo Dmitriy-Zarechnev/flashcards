@@ -1,0 +1,1 @@
+export { DeckModal } from './DeckModal'

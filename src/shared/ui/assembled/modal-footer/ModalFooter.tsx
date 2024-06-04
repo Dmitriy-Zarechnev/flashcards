@@ -18,7 +18,7 @@ export const ModalFooter = ({
   return (
     <div className={clsx(s.footerWrapper, className)} {...rest}>
       <Typography.Subtitle2>{footerText}</Typography.Subtitle2>
-      <Button as={'a'} className={s.linkButton} variant={'secondary'}>
+      <Button as={'a'} className={s.linkButton}>
         {buttonChildren}
       </Button>
     </div>

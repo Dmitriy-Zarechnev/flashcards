@@ -12,7 +12,7 @@ const meta = {
   argTypes: {},
   component: PasswordInput,
   tags: ['autodocs'],
-  title: '🟢UI/Default/PasswordInput',
+  title: '🟢UI/Controlled/PasswordInput',
 } satisfies Meta<typeof PasswordInput>
 
 export default meta

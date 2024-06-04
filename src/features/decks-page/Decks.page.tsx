@@ -3,11 +3,14 @@ import {
   useGetDecksQuery,
   useUpdateDeckMutation,
 } from '@/services/decks/decks.service'
-import { Page, Pagination } from '@/shared'
-import { DeckControlBlock } from '@/shared/ui/assembled/deck-control-block'
-import { DecksTable } from '@/shared/ui/assembled/decks-table/DecksTable'
-import { ListHeader } from '@/shared/ui/assembled/list-header'
-import { useSuperPagination } from '@/shared/utils/useSuperPagination'
+import {
+  DeckControlBlock,
+  DecksTable,
+  ListHeader,
+  Page,
+  Pagination,
+  useSuperPagination,
+} from '@/shared'
 
 export const DecksPage = () => {
   // ----- Хук который необходим для работы пагинации и с url-ом -----

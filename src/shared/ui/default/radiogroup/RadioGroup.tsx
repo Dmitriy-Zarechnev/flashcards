@@ -13,7 +13,7 @@ type Options = {
 
 export type RadioGroupProps = {
   disabled?: boolean
-  onChange: (value: string) => void
+  onChange?: (value: string) => void
   options: Options[]
 } & ComponentPropsWithRef<typeof Radio.Root>
 
