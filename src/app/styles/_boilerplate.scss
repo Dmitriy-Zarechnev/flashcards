@@ -59,7 +59,7 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: var(--color-light-100) !important;
 }
 
-// от светы
+// от Cветы
 img {
   vertical-align: top;
 }
@@ -93,4 +93,39 @@ button {
   cursor: pointer;
   background-color: unset;
   border: none;
+}
+
+// Стили при выделении
+*::selection {
+  color: var(--color-light-300);
+  background-color: var(--color-accent-500);
+}
+
+//// Стили для скролла FireFox
+// {
+//  scrollbar-color: var(--color-accent-100) var(--color-dark-900);
+//  scrollbar-width: thin;
+// }
+
+// Стили для скролла Chrome
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track:horizontal {
+  background-color: var(--color-dark-900);
+}
+
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb:horizontal {
+  background-color: var(--color-accent-700);
+  border: 3px solid var(--color-accent-700);
+  border-radius: 5px;
+
+  &:hover {
+    background-color: var(--color-light-300);
+    border: 3px solid var(--color-light-300);
+  }
 }
