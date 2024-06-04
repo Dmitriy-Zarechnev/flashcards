@@ -12,6 +12,7 @@ import {
   ListHeader,
   Page,
   Pagination,
+  TabsData,
   useSuperPagination,
 } from '@/shared'
 
@@ -54,13 +55,20 @@ export const DecksPage = () => {
   }
 
   // ----- Блок работы с tabs -----
-  const [tabValue, setTabValue] = useState(' ')
+
+  const tabsData: TabsData[] = [
+    { title: 'My Cards', value: 'My Cards' },
+    { title: 'All Cards', value: 'All Cards' },
+  ]
+
+  const [tabValue, setTabValue] = useState(tabsData[1].value)
   const tabValueChangeHandler = (value: string) => {
-    console.log('value', value)
+    setTabValue(value)
   }
+
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({
-    authorId: '13128e19-d4b4-4ad1-b554-3804313b6dbb',
+    authorId: tabValue === tabsData[1].value ? undefined : '12321435',
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
     maxCardsCount: sliderMaxCardsCount,
@@ -86,6 +94,7 @@ export const DecksPage = () => {
   const clearFilterOnClickHandler = () => {
     setSliderValues([0, 25])
     searchInputResetHandler()
+    setTabValue(tabsData[1].value)
   }
 
   // ----- Показывать Loader -----
@@ -98,7 +107,7 @@ export const DecksPage = () => {
     return (
       <>
         <h1>Empty😣</h1>
-        <Button onClick={searchInputResetHandler}>Reload</Button>
+        <Button onClick={clearFilterOnClickHandler}>Reload</Button>
       </>
     )
   }
@@ -120,6 +129,7 @@ export const DecksPage = () => {
         sliderValueChange={sliderValueChangeHandler}
         tabValue={tabValue}
         tabValueChange={tabValueChangeHandler}
+        tabsData={tabsData}
       />
       <DecksTable
         clickDeleteDeck={deleteDeckHandler}

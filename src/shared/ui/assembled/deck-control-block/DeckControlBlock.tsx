@@ -4,11 +4,6 @@ import { Button, Icon, SearchInput, SliderComponent, Tabs, Typography } from '@/
 
 import s from './DeckControlBlock.module.scss'
 
-const tabsData = [
-  { title: 'My Cards', value: 'My Cards' },
-  { title: 'All Cards', value: 'All Cards' },
-]
-
 type DeckControlBlockProps = {
   clearFilterOnClick: () => void
   searchInputOnChange: (value: string) => void
@@ -18,6 +13,12 @@ type DeckControlBlockProps = {
   sliderValueChange: (value: number[]) => void
   tabValue: string
   tabValueChange: (value: string) => void
+  tabsData: TabsData[]
+}
+
+export type TabsData = {
+  title: string
+  value: string
 }
 
 export const DeckControlBlock = ({
@@ -29,11 +30,8 @@ export const DeckControlBlock = ({
   sliderValueChange,
   tabValue,
   tabValueChange,
+  tabsData,
 }: DeckControlBlockProps) => {
-  const tabClickHandler = () => {
-    console.log('click')
-  }
-
   // ----- Функция работы с поиском по названию deck -----
   const searchInputOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     searchInputOnChange(e.currentTarget.value)
@@ -51,8 +49,7 @@ export const DeckControlBlock = ({
       <div className={s.tabsBox}>
         <Typography.Body2>Show decks cards</Typography.Body2>
         <Tabs.Root
-          defaultValue={tabsData[1].value}
-          onClick={tabClickHandler}
+          defaultValue={tabValue}
           onValueChange={tabValueChange}
           tabs={tabsData}
           value={tabValue}
