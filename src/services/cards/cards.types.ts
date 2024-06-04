@@ -19,7 +19,9 @@ export type GetCardsResponse = {
 export type CardIdArgs = { id: string }
 
 //========================================================================================
+
 export type UpdateCardArgs = CardIdArgs & Partial<CreateCardArgs>
+
 //========================================================================================
 
 export type CreateCardArgs = {
