@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { Button, Icon, SearchInput, SliderComponent, Tabs, Typography } from '@/shared'
 
@@ -9,7 +9,17 @@ const tabsData = [
   { title: 'All Cards', value: 'All Cards' },
 ]
 
-export const DeckControlBlock = () => {
+type DeckControlBlockProps = {
+  searchInputOnChange: (value: string) => void
+  searchInputReset: () => void
+  searchInputValue: string
+}
+
+export const DeckControlBlock = ({
+  searchInputOnChange,
+  searchInputReset,
+  searchInputValue,
+}: DeckControlBlockProps) => {
   const [valueLeft, setValueLeft] = useState(25)
   const [valueRight, setValueRight] = useState(75)
 
@@ -22,9 +32,20 @@ export const DeckControlBlock = () => {
     console.log('click')
   }
 
+  // ----- Функция работы с поиском по названию deck -----
+  const searchInputOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    searchInputOnChange(e.currentTarget.value)
+  }
+
   return (
     <div className={s.blockWrapper}>
-      <SearchInput className={s.searchInput} placeholder={'Find your fate'} />
+      <SearchInput
+        className={s.searchInput}
+        onChange={searchInputOnChangeHandler}
+        placeholder={'Find your fate'}
+        searchTextResetHandler={searchInputReset}
+        value={searchInputValue}
+      />
       <div className={s.tabsBox}>
         <Typography.Body2>Show decks cards</Typography.Body2>
         <Tabs.Root defaultValue={tabsData[1].value} onClick={tabClickHandler} tabs={tabsData} />

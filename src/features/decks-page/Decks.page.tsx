@@ -4,6 +4,7 @@ import {
   useUpdateDeckMutation,
 } from '@/services/decks/decks.service'
 import {
+  Button,
   DeckControlBlock,
   DecksTable,
   ListHeader,
@@ -14,13 +15,38 @@ import {
 
 export const DecksPage = () => {
   // ----- Хук который необходим для работы пагинации и с url-ом -----
-  const { currentPage, handleCurrentPage, handlePerPage, itemsPerPage, optionsItemsPerPage } =
-    useSuperPagination([5, 10, 15, 20])
+  const {
+    currentPage,
+    handleCurrentPage,
+    handlePerPage,
+    itemsPerPage,
+    optionsItemsPerPage,
+    searchParams,
+    setSearchParams,
+  } = useSuperPagination([5, 10, 15, 20])
+
+  // ----- Блок работы с поиском по названию deck -----
+  const search = searchParams.get('search') ?? ''
+
+  function searchInputOnChangeHandler(value: string) {
+    if (value.length) {
+      searchParams.set('search', value)
+    } else {
+      searchParams.delete('search')
+    }
+    setSearchParams(searchParams)
+  }
+
+  const searchInputResetHandler = () => {
+    searchParams.delete('search')
+    setSearchParams(searchParams)
+  }
 
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
+    name: search,
   })
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
@@ -44,7 +70,12 @@ export const DecksPage = () => {
 
   // ----- Показывать страницу при пустых данных -----
   if (data?.items.length === 0) {
-    return <h1>Empty😣</h1>
+    return (
+      <>
+        <h1>Empty😣</h1>
+        <Button onClick={searchInputResetHandler}>Reload</Button>
+      </>
+    )
   }
 
   // ----- Показывать страницу с ошибкой -----
@@ -55,7 +86,11 @@ export const DecksPage = () => {
   return (
     <Page>
       <ListHeader buttonTitle={'Add new deck'} title={'Decks List'} />
-      <DeckControlBlock />
+      <DeckControlBlock
+        searchInputOnChange={searchInputOnChangeHandler}
+        searchInputReset={searchInputResetHandler}
+        searchInputValue={search}
+      />
       <DecksTable
         clickDeleteDeck={deleteDeckHandler}
         clickUpdateDeck={updateDeckHandler}
