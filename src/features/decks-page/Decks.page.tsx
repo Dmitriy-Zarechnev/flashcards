@@ -54,7 +54,10 @@ export const DecksPage = () => {
   }
 
   // ----- Блок работы с tabs -----
-
+  const [tabValue, setTabValue] = useState(' ')
+  const tabValueChangeHandler = (value: string) => {
+    console.log('value', value)
+  }
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({
     authorId: '13128e19-d4b4-4ad1-b554-3804313b6dbb',
@@ -115,6 +118,8 @@ export const DecksPage = () => {
         searchInputValue={search}
         sliderValue={[sliderMinCardsCount, sliderMaxCardsCount]}
         sliderValueChange={sliderValueChangeHandler}
+        tabValue={tabValue}
+        tabValueChange={tabValueChangeHandler}
       />
       <DecksTable
         clickDeleteDeck={deleteDeckHandler}

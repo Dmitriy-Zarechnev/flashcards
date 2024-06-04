@@ -16,6 +16,8 @@ type DeckControlBlockProps = {
   searchInputValue: string
   sliderValue: number[]
   sliderValueChange: (value: number[]) => void
+  tabValue: string
+  tabValueChange: (value: string) => void
 }
 
 export const DeckControlBlock = ({
@@ -25,6 +27,8 @@ export const DeckControlBlock = ({
   searchInputValue,
   sliderValue,
   sliderValueChange,
+  tabValue,
+  tabValueChange,
 }: DeckControlBlockProps) => {
   const tabClickHandler = () => {
     console.log('click')
@@ -46,7 +50,13 @@ export const DeckControlBlock = ({
       />
       <div className={s.tabsBox}>
         <Typography.Body2>Show decks cards</Typography.Body2>
-        <Tabs.Root defaultValue={tabsData[1].value} onClick={tabClickHandler} tabs={tabsData} />
+        <Tabs.Root
+          defaultValue={tabsData[1].value}
+          onClick={tabClickHandler}
+          onValueChange={tabValueChange}
+          tabs={tabsData}
+          value={tabValue}
+        />
       </div>
       <div className={s.sliderBox}>
         <Typography.Body2>Number of cards</Typography.Body2>
