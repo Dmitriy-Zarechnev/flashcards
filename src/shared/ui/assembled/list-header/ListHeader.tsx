@@ -20,8 +20,10 @@ export const ListHeader = ({
 }: ListHeaderProps) => {
   return (
     <div className={clsx(s.listHeader, className)} {...rest}>
-      <Typography.H1>{title}</Typography.H1>
-      {userId && <DropdownMenu />}
+      <div className={s.titleBox}>
+        <Typography.H1>{title}</Typography.H1>
+        {userId && <DropdownMenu />}
+      </div>
       <Button className={s.button} variant={'primary'}>
         {buttonTitle}
       </Button>

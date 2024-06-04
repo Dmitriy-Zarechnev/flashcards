@@ -135,6 +135,7 @@ export const CardsPage = () => {
       />
       <img alt={`Deck picture`} className={s.deckImg} src={defDeckImg} />
       <SearchInput
+        className={s.searchInput}
         onChange={e => handleSearch(e.currentTarget.value)}
         placeholder={'Find your question'}
         searchTextResetHandler={searchTextResetHandler}

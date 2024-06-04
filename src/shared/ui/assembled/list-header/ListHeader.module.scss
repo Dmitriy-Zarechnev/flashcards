@@ -1,12 +1,15 @@
 .listHeader {
   display: flex;
   flex-direction: row;
-  gap: 6px;
   align-items: center;
+  justify-content: space-between;
 
   margin-bottom: 15px;
 }
 
-.button {
-  margin-left: auto;
+.titleBox{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 }

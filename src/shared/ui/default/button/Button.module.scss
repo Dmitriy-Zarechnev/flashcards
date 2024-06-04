@@ -9,12 +9,13 @@
   justify-content: center;
 
   box-sizing: border-box;
-  padding: 7px 28px 5px;
+  padding: 8px 28px;
 
   border-radius: 4px;
 
   & p {
     display: flex;
+    flex-direction: row;
     gap: 10px;
     align-items: center;
     justify-content: center;
