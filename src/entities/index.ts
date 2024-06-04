@@ -5,10 +5,12 @@ export * from './auth'
 export * from './modals'
 
 // ============================== [ validation ] ===========================================
-export type { CreateNewPasswordFormValues } from './validationSchemes'
-export type { EditProfileFormPanelFormValues } from './validationSchemes'
-export type { ForgotPasswordFormValues } from './validationSchemes'
-export type { SignInFormValues } from './validationSchemes'
-export type { SignUpFormValues } from './validationSchemes'
-export type { CardFormValues } from './validationSchemes'
-export type { DeckFormValues } from './validationSchemes'
+export type {
+  CardFormValues,
+  CreateNewPasswordFormValues,
+  DeckFormValues,
+  EditProfileFormPanelFormValues,
+  ForgotPasswordFormValues,
+  SignInFormValues,
+  SignUpFormValues,
+} from './validationSchemes'

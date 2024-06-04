@@ -11,7 +11,6 @@ import {
 const decksService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
-      // createDeck: builder.mutation<DefaultDeckResponse, CreateDeckArgs>({
       createDeck: builder.mutation<DefaultDeckResponse, FormData>({
         invalidatesTags: ['Decks'],
         query: formData => ({
