@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
@@ -42,10 +44,21 @@ export const DecksPage = () => {
     setSearchParams(searchParams)
   }
 
+  // ----- Блок работы со слайдером -----
+  const [sliderValues, setSliderValues] = useState([0, 25])
+
+  const [sliderMinCardsCount, sliderMaxCardsCount] = sliderValues
+
+  const sliderValueChangeHandler = (value: number[]) => {
+    setSliderValues(value)
+  }
+
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
+    maxCardsCount: sliderMaxCardsCount,
+    minCardsCount: sliderMinCardsCount,
     name: search,
   })
   const [deleteDeck] = useDeleteDeckMutation()
@@ -90,6 +103,8 @@ export const DecksPage = () => {
         searchInputOnChange={searchInputOnChangeHandler}
         searchInputReset={searchInputResetHandler}
         searchInputValue={search}
+        sliderValue={[sliderMinCardsCount, sliderMaxCardsCount]}
+        sliderValueChange={sliderValueChangeHandler}
       />
       <DecksTable
         clickDeleteDeck={deleteDeckHandler}

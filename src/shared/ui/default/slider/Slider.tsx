@@ -4,16 +4,12 @@ import * as Slider from '@radix-ui/react-slider'
 import s from './Slider.module.scss'
 
 type SliderComponentProps = {
-  valueChangeHandler: (value: number[]) => void
+  valueChange: (value: number[]) => void
   valueLeft: number
   valueRight: number
 }
 
-export const SliderComponent = ({
-  valueChangeHandler,
-  valueLeft,
-  valueRight,
-}: SliderComponentProps) => {
+export const SliderComponent = ({ valueChange, valueLeft, valueRight }: SliderComponentProps) => {
   return (
     <div className={s.SliderWrapper}>
       <Typography.Body1 className={s.SliderText}>{valueLeft}</Typography.Body1>
@@ -21,7 +17,7 @@ export const SliderComponent = ({
         className={s.SliderRoot}
         defaultValue={[valueLeft, valueRight]}
         minStepsBetweenThumbs={1}
-        onValueChange={valueChangeHandler}
+        onValueChange={valueChange}
         value={[valueLeft, valueRight]}
       >
         <Slider.Track className={s.SliderTrack}>

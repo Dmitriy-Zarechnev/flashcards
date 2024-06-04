@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 
 import { Button, Icon, SearchInput, SliderComponent, Tabs, Typography } from '@/shared'
 
@@ -13,21 +13,17 @@ type DeckControlBlockProps = {
   searchInputOnChange: (value: string) => void
   searchInputReset: () => void
   searchInputValue: string
+  sliderValue: number[]
+  sliderValueChange: (value: number[]) => void
 }
 
 export const DeckControlBlock = ({
   searchInputOnChange,
   searchInputReset,
   searchInputValue,
+  sliderValue,
+  sliderValueChange,
 }: DeckControlBlockProps) => {
-  const [valueLeft, setValueLeft] = useState(25)
-  const [valueRight, setValueRight] = useState(75)
-
-  const valueChangeHandler = (value: number[]) => {
-    setValueLeft(value[0])
-    setValueRight(value[1])
-  }
-
   const tabClickHandler = () => {
     console.log('click')
   }
@@ -53,9 +49,9 @@ export const DeckControlBlock = ({
       <div className={s.sliderBox}>
         <Typography.Body2>Number of cards</Typography.Body2>
         <SliderComponent
-          valueChangeHandler={valueChangeHandler}
-          valueLeft={valueLeft}
-          valueRight={valueRight}
+          valueChange={sliderValueChange}
+          valueLeft={sliderValue[0]}
+          valueRight={sliderValue[1]}
         />
       </div>
       <Button variant={'secondary'}>
