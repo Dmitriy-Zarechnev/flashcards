@@ -6,7 +6,7 @@ const meta = {
   argTypes: {},
   component: ModalFooter,
   tags: ['autodocs'],
-  title: '🟢UI/Default/ModalFooter',
+  title: '🟢UI/Assembled/ModalFooter',
 } satisfies Meta<typeof ModalFooter>
 
 export default meta

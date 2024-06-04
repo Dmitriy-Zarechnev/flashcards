@@ -5,7 +5,7 @@ import { clsx } from 'clsx'
 
 import s from './Modal.module.scss'
 
-import reactImg from './defaultDeckImg.jpg'
+import reactImg from '../../../assets/deck-default-cover.webp'
 
 type ModalProps = {
   buttonTitle: string

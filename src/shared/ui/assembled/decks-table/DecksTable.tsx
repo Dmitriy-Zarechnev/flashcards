@@ -7,7 +7,7 @@ import s from './DecksTable.module.scss'
 import { HeadCellWithArrow } from '../head-cell-with-arrow'
 import { IconButtons } from '../icon-buttons'
 import { ImgBlock } from '../image-block'
-import defImg from './defaultDeckImg.jpg'
+import defImg from './../../../assets/deck-default-cover.webp'
 
 type DecksTableProps = {
   clickDeleteDeck: (id: string) => void

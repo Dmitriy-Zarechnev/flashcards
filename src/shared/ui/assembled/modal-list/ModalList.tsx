@@ -4,7 +4,7 @@ import { Card, Checkbox, Input, Typography } from '@/shared'
 
 import s from './ModalList.module.scss'
 
-import { Modal } from './modal'
+import { Modal } from '../modal'
 
 export const ModalList = () => {
   const [checked, setChecked] = useState(false)

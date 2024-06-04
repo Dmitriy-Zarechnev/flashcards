@@ -6,7 +6,7 @@ const meta = {
   argTypes: {},
   component: SearchInput,
   tags: ['autodocs'],
-  title: '🟢UI/Default/SearchInput',
+  title: '🟢UI/Assembled/SearchInput',
 } satisfies Meta<typeof SearchInput>
 
 export default meta

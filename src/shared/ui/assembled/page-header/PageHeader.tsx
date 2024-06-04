@@ -4,7 +4,7 @@ import { Button, DropdownProfile, Typography } from '@/shared'
 
 import s from './PageHeader.module.scss'
 
-import profileImage from '../dropdown-profile/stories/Dropdown.webp'
+import profileImage from '../dropdown-profile/Dropdown.webp'
 import logo from './Logo.png'
 
 const profile = {

@@ -8,7 +8,7 @@ const meta = {
   argTypes: {},
   component: IconButtons,
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/Tables/IconButtons',
+  title: '🟢UI/Assembled/IconButtons',
 } satisfies Meta<typeof IconButtons>
 
 export default meta

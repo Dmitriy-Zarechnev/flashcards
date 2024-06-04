@@ -6,7 +6,7 @@ const meta = {
   argTypes: {},
   component: ModalList,
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/Modal/ModalList',
+  title: '🟢UI/Assembled/ModalList',
 } satisfies Meta<typeof ModalList>
 
 export default meta

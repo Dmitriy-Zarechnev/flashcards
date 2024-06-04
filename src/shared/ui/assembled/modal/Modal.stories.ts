@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Modal } from './'
+import { Modal } from './index'
 
 const meta = {
   argTypes: {},
   component: Modal,
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/Modal/Modal',
+  title: '🟢UI/Assembled/Modal',
 } satisfies Meta<typeof Modal>
 
 export default meta

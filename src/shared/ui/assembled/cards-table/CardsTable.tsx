@@ -7,7 +7,7 @@ import s from '@/shared/ui/assembled/decks-table/DecksTable.module.scss'
 import { HeadCellWithArrow } from '../head-cell-with-arrow'
 import { IconButtons } from '../icon-buttons'
 import { ImgBlock } from '../image-block'
-import defImg from './defaultCardImg.jpg'
+import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {
   cards: GetCardsResponse[]

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DropdownProfile } from '../index'
 import profileImage from './Dropdown.webp'
+import { DropdownProfile } from './index'
 
 const profile = {
   email: 'SuperIvan@gmail.com',

@@ -6,7 +6,7 @@ const meta = {
   argTypes: {},
   component: ListHeader,
   tags: ['autodocs'],
-  title: '🟢UI/Default/ListHeader',
+  title: '🟢UI/Assembled/ListHeader',
 } satisfies Meta<typeof ListHeader>
 
 export default meta

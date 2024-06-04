@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import defImg from '../../../../shared/ui/assembled/tables/assets/defaultPicture.jpg'
+import defImg from './../../../assets/deck-default-cover.webp'
 import { ImgBlock } from './index'
 
 const meta = {
   argTypes: {},
   component: ImgBlock,
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/Tables/ImgBlock',
+  title: '🟢UI/Assembled/ImgBlock',
 } satisfies Meta<typeof ImgBlock>
 
 export default meta

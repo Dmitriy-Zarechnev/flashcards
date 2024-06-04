@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { Dialog } from './'
+import { Dialog } from './index'
 
 const meta = {
   component: Dialog,

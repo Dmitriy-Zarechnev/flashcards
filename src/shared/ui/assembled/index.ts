@@ -1,5 +1,0 @@
-export * from './dropdown-menu'
-export * from './dropdown-profile'
-export * from './form-modal'
-export * from './modal-list'
-export * from './page-header'

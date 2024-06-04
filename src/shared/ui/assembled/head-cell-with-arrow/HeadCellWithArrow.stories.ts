@@ -6,7 +6,7 @@ const meta = {
   argTypes: {},
   component: HeadCellWithArrow,
   tags: ['autodocs'],
-  title: 'HeadCellWithArrow',
+  title: '🟢UI/Assembled/HeadCellWithArrow',
 } satisfies Meta<typeof HeadCellWithArrow>
 
 export default meta
