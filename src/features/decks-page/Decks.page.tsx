@@ -18,7 +18,7 @@ import {
 } from '@/shared'
 
 export const DecksPage = () => {
-  // ----- Хук который необходим для работы пагинации и с url-ом -----
+  // ----- Хук для работы пагинации и с url-ом -----
   const {
     currentPage,
     handleCurrentPage,
@@ -29,20 +29,20 @@ export const DecksPage = () => {
     setSearchParams,
   } = useSuperPagination([5, 10, 15, 20])
 
-  // ----- Хук который необходим для работы с поиском по названию -----
+  // ----- Хук для работы с поиском по названию -----
   const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperSearch(
     searchParams,
     setSearchParams
   )
 
-  // ----- Хук который необходим для работы со слайдером -----
+  // ----- Хук для работы со слайдером -----
   const { setSliderValues, sliderMaxCardsCount, sliderMinCardsCount, sliderValueChangeHandler } =
     useSuperSlider()
 
-  // ----- Хук который необходим для работы с tabs -----
+  // ----- Хук для работы с tabs -----
   const { setTabValue, tabValue, tabValueChangeHandler, tabsData } = useSuperTabs()
 
-  // ----- Хук который необходим для работы с сортировкой -----
+  // ----- Хук для работы с сортировкой -----
   const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperSort()
 
   // ----- Блок работы с запросом на сервер и получения данных -----
