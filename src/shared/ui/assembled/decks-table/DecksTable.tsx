@@ -7,17 +7,21 @@ import s from './DecksTable.module.scss'
 import defImg from './../../../assets/deck-default-cover.webp'
 
 type DecksTableProps = {
+  arrowDirection: boolean
   clickDeleteDeck: (id: string) => void
   clickUpdateDeck: (id: string) => void
   decks?: Deck[]
+  iconButtonOnClick: (title: string) => void
   playFunction: () => void
   userId: boolean
 }
 
 export const DecksTable = ({
+  arrowDirection,
   clickDeleteDeck,
   clickUpdateDeck,
   decks,
+  iconButtonOnClick,
   playFunction,
   userId,
 }: DecksTableProps) => {
@@ -25,10 +29,26 @@ export const DecksTable = ({
     <Tables.Table>
       <Tables.TableHead>
         <Tables.TableRow>
-          <HeadCellWithArrow arrowDirection={false} title={'Name'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Cards'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Last Updated'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Created by'} />
+          <HeadCellWithArrow
+            arrowDirection={arrowDirection}
+            iconButtonOnClick={() => iconButtonOnClick('name')}
+            title={'Name'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={arrowDirection}
+            iconButtonOnClick={() => iconButtonOnClick('cardsCount')}
+            title={'Cards'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={arrowDirection}
+            iconButtonOnClick={() => iconButtonOnClick('updated')}
+            title={'Last Updated'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={arrowDirection}
+            iconButtonOnClick={() => iconButtonOnClick('created')}
+            title={'Created by'}
+          />
           <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>
         </Tables.TableRow>
       </Tables.TableHead>

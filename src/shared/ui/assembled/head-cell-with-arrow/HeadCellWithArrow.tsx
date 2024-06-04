@@ -7,12 +7,14 @@ import s from './HeadCellWithArrow.module.scss'
 
 type HeadCellWithArrowProps = {
   arrowDirection?: boolean
+  iconButtonOnClick: () => void
   title: string
 } & ComponentPropsWithoutRef<'div'>
 
 export const HeadCellWithArrow = ({
   arrowDirection = false,
   className,
+  iconButtonOnClick,
   title,
   ...rest
 }: HeadCellWithArrowProps) => {
@@ -20,8 +22,8 @@ export const HeadCellWithArrow = ({
 
   return (
     <Tables.TableHeadCell>
-      <div className={clsx(s.cellWrapper, className)} {...rest}>
-        <Typography.Subtitle2>{title}</Typography.Subtitle2>
+      <div className={clsx(s.cellWrapper, className)} onClick={iconButtonOnClick} {...rest}>
+        <Typography.Subtitle2 style={{ cursor: 'pointer' }}>{title}</Typography.Subtitle2>
         <IconButton height={'20px'} iconId={`${arrow}`} width={'20px'} />
       </div>
     </Tables.TableHeadCell>

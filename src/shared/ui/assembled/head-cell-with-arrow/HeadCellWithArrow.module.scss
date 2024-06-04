@@ -1,4 +1,6 @@
 .cellWrapper {
+  user-select: none;
+
   display: flex;
   flex-direction: row;
   gap: 5px;

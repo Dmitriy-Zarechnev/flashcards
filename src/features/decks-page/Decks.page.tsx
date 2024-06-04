@@ -55,7 +55,6 @@ export const DecksPage = () => {
   }
 
   // ----- Блок работы с tabs -----
-
   const tabsData: TabsData[] = [
     { title: 'My Cards', value: 'My Cards' },
     { title: 'All Cards', value: 'All Cards' },
@@ -66,6 +65,20 @@ export const DecksPage = () => {
     setTabValue(value)
   }
 
+  // ----- Блок работы с сортировкой -----
+  const [tableSort, setTableSort] = useState('updated-asc')
+  const [arrowDirection, setArrowDirection] = useState(false)
+
+  const sortTableOnClickHandler = (title: string) => {
+    if (`${title}-asc` !== tableSort) {
+      setArrowDirection(false)
+      setTableSort(`${title}-asc`)
+    } else {
+      setArrowDirection(true)
+      setTableSort(`${title}-desc`)
+    }
+  }
+
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({
     authorId: tabValue === tabsData[1].value ? undefined : '12321435',
@@ -74,6 +87,7 @@ export const DecksPage = () => {
     maxCardsCount: sliderMaxCardsCount,
     minCardsCount: sliderMinCardsCount,
     name: search,
+    orderBy: tableSort,
   })
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
@@ -132,9 +146,11 @@ export const DecksPage = () => {
         tabsData={tabsData}
       />
       <DecksTable
+        arrowDirection={arrowDirection}
         clickDeleteDeck={deleteDeckHandler}
         clickUpdateDeck={updateDeckHandler}
         decks={data?.items}
+        iconButtonOnClick={sortTableOnClickHandler}
         playFunction={playDeckHandler}
         userId={userId}
       />
