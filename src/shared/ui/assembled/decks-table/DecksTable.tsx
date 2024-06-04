@@ -7,22 +7,22 @@ import s from './DecksTable.module.scss'
 import defImg from './../../../assets/deck-default-cover.webp'
 
 type DecksTableProps = {
-  arrowDirection: boolean
   clickDeleteDeck: (id: string) => void
   clickUpdateDeck: (id: string) => void
   decks?: Deck[]
-  iconButtonOnClick: (title: string) => void
   playFunction: () => void
+  sortTableOnClick: (title: string) => void
+  tableSort: string
   userId: boolean
 }
 
 export const DecksTable = ({
-  arrowDirection,
   clickDeleteDeck,
   clickUpdateDeck,
   decks,
-  iconButtonOnClick,
   playFunction,
+  sortTableOnClick,
+  tableSort,
   userId,
 }: DecksTableProps) => {
   return (
@@ -30,23 +30,23 @@ export const DecksTable = ({
       <Tables.TableHead>
         <Tables.TableRow>
           <HeadCellWithArrow
-            arrowDirection={arrowDirection}
-            iconButtonOnClick={() => iconButtonOnClick('name')}
+            arrowDirection={tableSort !== 'name-asc'}
+            sortTableOnClick={() => sortTableOnClick('name')}
             title={'Name'}
           />
           <HeadCellWithArrow
-            arrowDirection={arrowDirection}
-            iconButtonOnClick={() => iconButtonOnClick('cardsCount')}
+            arrowDirection={tableSort !== 'cardsCount-asc'}
+            sortTableOnClick={() => sortTableOnClick('cardsCount')}
             title={'Cards'}
           />
           <HeadCellWithArrow
-            arrowDirection={arrowDirection}
-            iconButtonOnClick={() => iconButtonOnClick('updated')}
+            arrowDirection={tableSort !== 'updated-asc'}
+            sortTableOnClick={() => sortTableOnClick('updated')}
             title={'Last Updated'}
           />
           <HeadCellWithArrow
-            arrowDirection={arrowDirection}
-            iconButtonOnClick={() => iconButtonOnClick('created')}
+            arrowDirection={tableSort !== 'created-asc'}
+            sortTableOnClick={() => sortTableOnClick('created')}
             title={'Created by'}
           />
           <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>

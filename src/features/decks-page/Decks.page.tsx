@@ -66,15 +66,12 @@ export const DecksPage = () => {
   }
 
   // ----- Блок работы с сортировкой -----
-  const [tableSort, setTableSort] = useState('updated-asc')
-  const [arrowDirection, setArrowDirection] = useState(false)
+  const [tableSort, setTableSort] = useState('updated-desc')
 
   const sortTableOnClickHandler = (title: string) => {
     if (`${title}-asc` !== tableSort) {
-      setArrowDirection(false)
       setTableSort(`${title}-asc`)
     } else {
-      setArrowDirection(true)
       setTableSort(`${title}-desc`)
     }
   }
@@ -109,6 +106,7 @@ export const DecksPage = () => {
     setSliderValues([0, 25])
     searchInputResetHandler()
     setTabValue(tabsData[1].value)
+    setTableSort('updated-desc')
   }
 
   // ----- Показывать Loader -----
@@ -146,12 +144,12 @@ export const DecksPage = () => {
         tabsData={tabsData}
       />
       <DecksTable
-        arrowDirection={arrowDirection}
         clickDeleteDeck={deleteDeckHandler}
         clickUpdateDeck={updateDeckHandler}
         decks={data?.items}
-        iconButtonOnClick={sortTableOnClickHandler}
         playFunction={playDeckHandler}
+        sortTableOnClick={sortTableOnClickHandler}
+        tableSort={tableSort}
         userId={userId}
       />
       <Pagination
