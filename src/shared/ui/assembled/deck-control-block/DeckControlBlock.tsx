@@ -38,10 +38,8 @@ export const DeckControlBlock = () => {
         />
       </div>
       <Button variant={'secondary'}>
-        <>
-          <Icon iconId={'trashOutline'} />
-          Clear Filter
-        </>
+        <Icon iconId={'trashOutline'} />
+        Clear Filter
       </Button>
     </div>
   )

@@ -7,28 +7,6 @@
   border-radius: 2px;
 }
 
-.linkBackButton {
-  display: inline-block;
-  margin-bottom: 33px;
-  padding: 0;
-  background-color: transparent;
-
-  &:hover {
-    text-decoration: underline;
-    background-color: transparent;
-  }
-
-  &:disabled {
-    background-color: transparent;
-  }
-
-  &:not(:disabled) {
-    &:active {
-      background-color: transparent;
-    }
-  }
-}
-
 .searchInput {
   margin-bottom: 24px;
 }

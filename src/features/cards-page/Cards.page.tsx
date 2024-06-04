@@ -3,9 +3,8 @@ import { useState } from 'react'
 import { useDeleteCardMutation, useUpdateCardMutation } from '@/services/cards/cards.service'
 import { GetCardsResponse } from '@/services/cards/cards.types'
 import {
-  Button,
+  BackToDecks,
   CardsTable,
-  Icon,
   ListHeader,
   Page,
   SearchInput,
@@ -122,12 +121,7 @@ export const CardsPage = () => {
 
   return (
     <Page mt={'24px'}>
-      <Button as={'a'} className={s.linkBackButton}>
-        <>
-          <Icon iconId={'arrowBackOutline'} />
-          Back to Decks List
-        </>
-      </Button>
+      <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <ListHeader
         buttonTitle={userId ? 'Add new card' : 'Learn to Pack'}
         title={userId ? 'My Deck' : 'Friend’s Deck'}
