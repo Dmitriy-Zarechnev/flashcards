@@ -10,6 +10,7 @@ const tabsData = [
 ]
 
 type DeckControlBlockProps = {
+  clearFilterOnClick: () => void
   searchInputOnChange: (value: string) => void
   searchInputReset: () => void
   searchInputValue: string
@@ -18,6 +19,7 @@ type DeckControlBlockProps = {
 }
 
 export const DeckControlBlock = ({
+  clearFilterOnClick,
   searchInputOnChange,
   searchInputReset,
   searchInputValue,
@@ -54,7 +56,7 @@ export const DeckControlBlock = ({
           valueRight={sliderValue[1]}
         />
       </div>
-      <Button variant={'secondary'}>
+      <Button onClick={clearFilterOnClick} variant={'secondary'}>
         <Icon iconId={'trashOutline'} />
         Clear Filter
       </Button>

@@ -53,8 +53,11 @@ export const DecksPage = () => {
     setSliderValues(value)
   }
 
+  // ----- Блок работы с tabs -----
+
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({
+    authorId: '13128e19-d4b4-4ad1-b554-3804313b6dbb',
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
     maxCardsCount: sliderMaxCardsCount,
@@ -75,6 +78,12 @@ export const DecksPage = () => {
 
   // ----- Проверка по id и изменение отображения компоненты -----
   const userId = 6 === 6
+
+  // ----- Очистили filter при нажатии на кнопку -----
+  const clearFilterOnClickHandler = () => {
+    setSliderValues([0, 25])
+    searchInputResetHandler()
+  }
 
   // ----- Показывать Loader -----
   if (isLoading) {
@@ -100,6 +109,7 @@ export const DecksPage = () => {
     <Page>
       <ListHeader buttonTitle={'Add new deck'} title={'Decks List'} />
       <DeckControlBlock
+        clearFilterOnClick={clearFilterOnClickHandler}
         searchInputOnChange={searchInputOnChangeHandler}
         searchInputReset={searchInputResetHandler}
         searchInputValue={search}
