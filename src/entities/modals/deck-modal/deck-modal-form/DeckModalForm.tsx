@@ -1,8 +1,9 @@
-import { ChangeEvent, useRef, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { PictureInput } from '@/entities/modals/ui/PictureInput'
 import { DeckFormValues, modalSchemes } from '@/entities/validationSchemes'
-import { Button, ControlledCheckbox, Icon, TextField } from '@/shared'
+import { Button, ControlledCheckbox, TextField } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './DeckModalForm.module.scss'
@@ -18,7 +19,6 @@ type DeckModalFormProps = {
 
 export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: DeckModalFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [selectedImage, setSelectedImage] = useState(deckData?.cover)
 
   const { control, handleSubmit, setValue } = useForm<DeckFormValues>({
     defaultValues: {
@@ -29,34 +29,12 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
     resolver: zodResolver(modalSchemes.deck),
   })
 
-  function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
-    if (event.target.files && event.target.files[0]) {
-      const newImageUI = URL.createObjectURL(event.target.files[0])
-
-      setSelectedImage(newImageUI)
-
-      /** метод RHF засетать изображение при его загрузке */
-      setValue('cover', event.target.files[0])
-    }
-  }
-
-  /** bound image-input to button */
-  const fileInputRef = useRef<HTMLInputElement>(null)
-
-  function handleButtonClick() {
-    if (fileInputRef.current !== null) {
-      fileInputRef.current.click()
-    }
+  function handleImageChange(file: File) {
+    setValue('cover', file)
   }
 
   function deleteImageHandler() {
-    setSelectedImage(undefined)
     setValue('cover', '')
-
-    //** to clean ref to load img with the same name once more  */
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ''
-    }
   }
 
   async function submitHandler(data: DeckFormValues) {
@@ -71,42 +49,13 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
 
   return (
     <form className={s.form} noValidate onSubmit={handleSubmit(submitHandler)}>
-      <div className={s.imgWrapper}>
-        <img alt={'no photo'} src={selectedImage || cardDefaultCover} />
-
-        <div className={s.imageBtnWrapper}>
-          {selectedImage && (
-            <Button
-              disabled={isSubmitting}
-              fullWidth
-              onClick={deleteImageHandler}
-              type={'button'}
-              variant={'secondary'}
-            >
-              <Icon iconId={'trashOutline'} />
-              Delete Image
-            </Button>
-          )}
-
-          <Button
-            disabled={isSubmitting}
-            fullWidth
-            onClick={handleButtonClick}
-            type={'button'}
-            variant={'secondary'}
-          >
-            <Icon iconId={'imgOutline'} />
-            Change Image
-          </Button>
-          <input
-            accept={'image/*'}
-            onChange={handleImageChange}
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-            type={'file'}
-          />
-        </div>
-      </div>
+      <PictureInput
+        btnDisable={isSubmitting}
+        coverFromServer={deckData?.cover}
+        deleteImageHandlerCb={deleteImageHandler}
+        handleImageChangeCb={handleImageChange}
+        pictureDefaultCover={cardDefaultCover}
+      />
 
       <TextField control={control} label={'Name Pack'} name={'name'} type={'text'} />
 

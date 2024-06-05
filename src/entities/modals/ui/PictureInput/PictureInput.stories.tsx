@@ -33,20 +33,9 @@ export const Default: Story = {
     deleteImageHandlerCb,
     handleImageChangeCb,
     pictureDefaultCover,
-    showDeleteBtn: false,
   },
 }
 
-export const WithDeleteBtn: Story = {
-  args: {
-    btnDisable: false,
-    coverFromServer: undefined,
-    deleteImageHandlerCb,
-    handleImageChangeCb,
-    pictureDefaultCover,
-    showDeleteBtn: true,
-  },
-}
 export const ButtonsDisabled: Story = {
   args: {
     btnDisable: true,
@@ -54,6 +43,5 @@ export const ButtonsDisabled: Story = {
     deleteImageHandlerCb,
     handleImageChangeCb,
     pictureDefaultCover,
-    showDeleteBtn: true,
   },
 }

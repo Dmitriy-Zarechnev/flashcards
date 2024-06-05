@@ -1,7 +1,10 @@
 .form {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+
+  max-height: 650px;
   padding: 24px 24px 36px;
 }
 

@@ -10,7 +10,6 @@ type PictureInputProps = {
   deleteImageHandlerCb: () => void
   handleImageChangeCb: (file: File) => void
   pictureDefaultCover: string
-  showDeleteBtn: boolean
 } & ComponentPropsWithoutRef<'div'>
 
 export const PictureInput = ({
@@ -19,7 +18,6 @@ export const PictureInput = ({
   deleteImageHandlerCb,
   handleImageChangeCb,
   pictureDefaultCover,
-  showDeleteBtn,
 }: PictureInputProps) => {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(coverFromServer)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -54,7 +52,7 @@ export const PictureInput = ({
       <img alt={'no photo'} src={selectedImage || pictureDefaultCover} />
 
       <div className={s.btnWrapper}>
-        {showDeleteBtn && (
+        {selectedImage && (
           <Button
             disabled={btnDisable}
             fullWidth

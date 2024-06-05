@@ -1,25 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DeckFormValues } from '@/entities'
-
-import { DeckModal } from './DeckModal'
+import { CardFormValues, CardModal } from '@/entities'
 
 const meta = {
   argTypes: {},
-  component: DeckModal,
+  component: CardModal,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🔴Modal/DeckModal',
-} satisfies Meta<typeof DeckModal>
+  title: '🔴Modal/CardModal',
+} satisfies Meta<typeof CardModal>
 
 export default meta
-type Story = StoryObj<typeof DeckModal>
+type Story = StoryObj<typeof CardModal>
 
 //========================================================================================
 
-function onFulfilled(data: DeckFormValues) {
+function onFulfilled(data: CardFormValues) {
   return new Promise(res => {
     setTimeout(() => {
       alert('Data is submitted')
@@ -28,7 +26,7 @@ function onFulfilled(data: DeckFormValues) {
   })
 }
 
-function onRejected(data: DeckFormValues) {
+function onRejected(data: CardFormValues) {
   return new Promise((_, rej) => {
     setTimeout(() => {
       console.log(data)
@@ -38,21 +36,21 @@ function onRejected(data: DeckFormValues) {
   })
 }
 
-const DeckDataFromServer = {
-  name: 'Name from server',
-  private: true,
+const dataFromServer = {
+  answer: 'Answer',
+  question: 'Question',
 }
 
-export const AddNewDeck: Story = {
+export const AddNewCard: Story = {
   args: {
     onSubmit: onFulfilled,
     variant: 'add',
   },
 }
 
-export const EditDeck: Story = {
+export const EditCard: Story = {
   args: {
-    deckData: DeckDataFromServer,
+    cardData: dataFromServer,
     onSubmit: onFulfilled,
     variant: 'edit',
   },
