@@ -1,19 +1,19 @@
-import { useState } from 'react'
-
-import { useDeleteCardMutation, useUpdateCardMutation } from '@/services/cards/cards.service'
-import { GetCardsResponse } from '@/services/cards/cards.types'
+import { GetCardsResponse, useDeleteCardMutation, useUpdateCardMutation } from '@/services'
 import {
-  Button,
+  BackToDecks,
   CardsTable,
-  Icon,
   ListHeader,
   Page,
   SearchInput,
+  useSuperCardsSearch,
+  useSuperCardsSort,
   useSuperPagination,
 } from '@/shared'
 import defDeckImg from '@/shared/assets/card-default-cover.webp'
 
 import s from './Cards.page.module.scss'
+
+export type SortValue = 'answer' | 'default' | 'grade' | 'question' | 'updated'
 
 const mockCardsData: GetCardsResponse[] = [
   {
@@ -21,81 +21,108 @@ const mockCardsData: GetCardsResponse[] = [
     answerImg: '',
     answerVideo: 'https://example.com/answer-video.mp4',
     created: '2024-06-02T12:00:00.000Z',
-    deckId: 'deck-456',
+    deckId: 'deck-456hgf',
     grade: 5,
-    id: 'card-123',
+    id: 'card-12dsd3',
     question: 'Морская',
     questionImg: '',
     questionVideo: 'https://example.com/question-video.mp4',
     shots: 3,
     updated: '2024-06-03T15:30:00.000Z',
-    userId: 'user-789',
+    userId: 'user-789asa',
   },
   {
     answer: 'Столица Франции - Париж.',
     answerImg: '',
     answerVideo: 'https://example.com/answer-video.mp4',
     created: '2024-06-02T12:00:00.000Z',
-    deckId: 'deck-456',
+    deckId: 'deck-4dsd56',
     grade: 5,
-    id: 'card-123',
+    id: 'card-123fasww',
     question: 'Самая высокая гора в мире - Эверест.',
     questionImg: '',
     questionVideo: 'https://example.com/question-video.mp4',
     shots: 3,
     updated: '2024-06-03T15:30:00.000Z',
-    userId: 'user-789',
+    userId: 'user-789sad',
   },
   {
     answer: 'Самая высокая гора в мире - Эверест.',
     answerImg: '',
     answerVideo: '',
     created: '2024-04-15T09:20:00.000Z',
-    deckId: 'deck-789',
+    deckId: 'deck-78asd9',
     grade: 4,
-    id: 'card-456',
+    id: 'card-456dsad',
     question: 'Какая гора является самой высокой в мире?',
     questionImg: '',
     questionVideo: '',
     shots: 5,
     updated: '2024-04-18T11:35:00.000Z',
-    userId: 'user-321',
+    userId: 'user-32asd1',
+  },
+  {
+    answer: 'Столица Франции - Париж.',
+    answerImg: '',
+    answerVideo: 'https://example.com/answer-video.mp4',
+    created: '2024-06-02T12:00:00.000Z',
+    deckId: 'deck-456sad',
+    grade: 5,
+    id: 'card-123asfsa',
+    question: 'Морская',
+    questionImg: '',
+    questionVideo: 'https://example.com/question-video.mp4',
+    shots: 3,
+    updated: '2024-06-03T15:30:00.000Z',
+    userId: 'user-789sa',
+  },
+  {
+    answer: 'Столица Франции - Париж.',
+    answerImg: '',
+    answerVideo: 'https://example.com/answer-video.mp4',
+    created: '2024-06-02T12:00:00.000Z',
+    deckId: 'deck-4das56',
+    grade: 5,
+    id: 'card-123fasfasd',
+    question: 'Самая высокая гора в мире - Эверест.',
+    questionImg: '',
+    questionVideo: 'https://example.com/question-video.mp4',
+    shots: 3,
+    updated: '2024-06-03T15:30:00.000Z',
+    userId: 'user-789ddd',
+  },
+  {
+    answer: 'Самая высокая гора в мире - Эверест.',
+    answerImg: '',
+    answerVideo: '',
+    created: '2024-04-15T09:20:00.000Z',
+    deckId: 'deck-78asfd9',
+    grade: 4,
+    id: 'card-443556',
+    question: 'Какая гора является самой высокой в мире?',
+    questionImg: '',
+    questionVideo: '',
+    shots: 5,
+    updated: '2024-04-18T11:35:00.000Z',
+    userId: 'user-32ss1',
   },
 ]
 
 export const CardsPage = () => {
   // ----- Хук который необходим для работы пагинации и с url-ом -----
-  const { searchParams, setSearchParams } = useSuperPagination([5, 10, 15, 20])
+  const { searchParams, setSearchParams } = useSuperPagination([5, 10, 15])
 
-  // ----- Блок работы с поиском по названию вопроса -----
-  const [data, setData] = useState<GetCardsResponse[]>(mockCardsData)
+  // ----- Хук для работы с поиском по названию вопроса -----
+  const { cardsQuestionSearch, data, search, searchTextResetHandler, setData } =
+    useSuperCardsSearch(mockCardsData, searchParams, setSearchParams)
 
-  const search = searchParams.get('search') ?? ''
-
-  function handleSearch(value: string) {
-    if (value.length) {
-      setData(data.filter(card => card.question.toLowerCase().includes(value)))
-      searchParams.set('search', value)
-    } else {
-      setData(mockCardsData)
-      searchParams.delete('search')
-    }
-    setSearchParams(searchParams)
-  }
-
-  const searchTextResetHandler = () => {
-    setData(mockCardsData)
-    searchParams.delete('search')
-    setSearchParams(searchParams)
-  }
+  // ----- Хук для работы с сортировкой -----
+  const { cardTableSort, sortOnClickHandler } = useSuperCardsSort(mockCardsData, setData)
 
   // ----- Проверка по id и изменение отображения компоненты -----
   const userId = 6 === 6
 
   // ----- Блок работы с запросом на сервер и получения данных -----
-
-  //const cardsId = 'clww4ulv105gpmp019pyckc5f'
-
   //const [skip, setSkip] = useState(true)
 
   //const { data } = useGetCardsQuery({ id: cardsId })
@@ -122,12 +149,7 @@ export const CardsPage = () => {
 
   return (
     <Page mt={'24px'}>
-      <Button as={'a'} className={s.linkBackButton}>
-        <>
-          <Icon iconId={'arrowBackOutline'} />
-          Back to Decks List
-        </>
-      </Button>
+      <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <ListHeader
         buttonTitle={userId ? 'Add new card' : 'Learn to Pack'}
         title={userId ? 'My Deck' : 'Friend’s Deck'}
@@ -135,19 +157,22 @@ export const CardsPage = () => {
       />
       <img alt={`Deck picture`} className={s.deckImg} src={defDeckImg} />
       <SearchInput
-        onChange={e => handleSearch(e.currentTarget.value)}
+        className={s.searchInput}
+        onChange={e => cardsQuestionSearch(e.currentTarget.value)}
         placeholder={'Find your question'}
         searchTextResetHandler={searchTextResetHandler}
         value={search}
       />
       <CardsTable
+        cardTableSort={cardTableSort}
         cards={data}
         editFunction={updateCardHandler}
+        sortOnClick={sortOnClickHandler}
         trashFunction={deleteCardHandler}
         userId={userId}
       />
       {/*<Pagination*/}
-      {/*  count={data.pagination.totalPages || 0}*/}
+      {/*  count={paginationCount}*/}
       {/*  onChange={handleCurrentPage}*/}
       {/*  onPerPageChange={handlePerPage}*/}
       {/*  page={+currentPage}*/}

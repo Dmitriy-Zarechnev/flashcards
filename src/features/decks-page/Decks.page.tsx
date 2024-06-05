@@ -4,23 +4,56 @@ import {
   useUpdateDeckMutation,
 } from '@/services/decks/decks.service'
 import {
+  Button,
   DeckControlBlock,
   DecksTable,
   ListHeader,
   Page,
   Pagination,
+  useSuperDecksSearch,
+  useSuperDecksSort,
   useSuperPagination,
+  useSuperSlider,
+  useSuperTabs,
 } from '@/shared'
 
 export const DecksPage = () => {
-  // ----- Хук который необходим для работы пагинации и с url-ом -----
-  const { currentPage, handleCurrentPage, handlePerPage, itemsPerPage, optionsItemsPerPage } =
-    useSuperPagination([5, 10, 15, 20])
+  // ----- Хук для работы пагинации и с url-ом -----
+  const {
+    currentPage,
+    handleCurrentPage,
+    handlePerPage,
+    itemsPerPage,
+    optionsItemsPerPage,
+    searchParams,
+    setSearchParams,
+  } = useSuperPagination([5, 10, 15, 20])
+
+  // ----- Хук для работы с поиском по названию -----
+  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperDecksSearch(
+    searchParams,
+    setSearchParams
+  )
+
+  // ----- Хук для работы со слайдером -----
+  const { setSliderValues, sliderMaxCardsCount, sliderMinCardsCount, sliderValueChangeHandler } =
+    useSuperSlider()
+
+  // ----- Хук для работы с tabs -----
+  const { setTabValue, tabValue, tabValueChangeHandler, tabsData } = useSuperTabs()
+
+  // ----- Хук для работы с сортировкой -----
+  const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperDecksSort()
 
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({
+    authorId: tabValue === tabsData[1].value ? undefined : '12321435',
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
+    maxCardsCount: sliderMaxCardsCount,
+    minCardsCount: sliderMinCardsCount,
+    name: search,
+    orderBy: tableSort,
   })
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
@@ -37,6 +70,14 @@ export const DecksPage = () => {
   // ----- Проверка по id и изменение отображения компоненты -----
   const userId = 6 === 6
 
+  // ----- Очистили filter при нажатии на кнопку -----
+  const clearFilterOnClickHandler = () => {
+    setSliderValues([0, 25])
+    searchInputResetHandler()
+    setTabValue(tabsData[1].value)
+    setTableSort('updated-desc')
+  }
+
   // ----- Показывать Loader -----
   if (isLoading) {
     return <h1>Loading...</h1>
@@ -44,7 +85,12 @@ export const DecksPage = () => {
 
   // ----- Показывать страницу при пустых данных -----
   if (data?.items.length === 0) {
-    return <h1>Empty😣</h1>
+    return (
+      <>
+        <h1>Empty😣</h1>
+        <Button onClick={clearFilterOnClickHandler}>Reload</Button>
+      </>
+    )
   }
 
   // ----- Показывать страницу с ошибкой -----
@@ -55,12 +101,24 @@ export const DecksPage = () => {
   return (
     <Page>
       <ListHeader buttonTitle={'Add new deck'} title={'Decks List'} />
-      <DeckControlBlock />
+      <DeckControlBlock
+        clearFilterOnClick={clearFilterOnClickHandler}
+        searchInputOnChange={searchInputOnChangeHandler}
+        searchInputReset={searchInputResetHandler}
+        searchInputValue={search}
+        sliderValue={[sliderMinCardsCount, sliderMaxCardsCount]}
+        sliderValueChange={sliderValueChangeHandler}
+        tabValue={tabValue}
+        tabValueChange={tabValueChangeHandler}
+        tabsData={tabsData}
+      />
       <DecksTable
         clickDeleteDeck={deleteDeckHandler}
         clickUpdateDeck={updateDeckHandler}
         decks={data?.items}
         playFunction={playDeckHandler}
+        sortTableOnClick={sortTableOnClickHandler}
+        tableSort={tableSort}
         userId={userId}
       />
       <Pagination

@@ -1,6 +1,5 @@
-import { Deck } from '@/services/decks/decks.types'
-import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography } from '@/shared'
-import { updatedDate } from '@/shared/utils/updateDate'
+import { Deck } from '@/services'
+import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography, updatedDate } from '@/shared'
 
 import s from './DecksTable.module.scss'
 
@@ -11,6 +10,8 @@ type DecksTableProps = {
   clickUpdateDeck: (id: string) => void
   decks?: Deck[]
   playFunction: () => void
+  sortTableOnClick: (title: string) => void
+  tableSort: string
   userId: boolean
 }
 
@@ -19,17 +20,35 @@ export const DecksTable = ({
   clickUpdateDeck,
   decks,
   playFunction,
+  sortTableOnClick,
+  tableSort,
   userId,
 }: DecksTableProps) => {
   return (
     <Tables.Table>
       <Tables.TableHead>
         <Tables.TableRow>
-          <HeadCellWithArrow arrowDirection={false} title={'Name'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Cards'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Last Updated'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Created by'} />
-          <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>
+          <HeadCellWithArrow
+            arrowDirection={tableSort !== 'name-asc'}
+            sortTableOnClick={() => sortTableOnClick('name')}
+            title={'Name'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={tableSort !== 'cardsCount-asc'}
+            sortTableOnClick={() => sortTableOnClick('cardsCount')}
+            title={'Cards'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={tableSort !== 'updated-asc'}
+            sortTableOnClick={() => sortTableOnClick('updated')}
+            title={'Last Updated'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={tableSort !== 'created-asc'}
+            sortTableOnClick={() => sortTableOnClick('created')}
+            title={'Created by'}
+          />
+          <Tables.TableHeadCell className={s.noHover}> </Tables.TableHeadCell>
         </Tables.TableRow>
       </Tables.TableHead>
 

@@ -15,7 +15,7 @@ type StarProps = {
 
 export const Rating = ({ className, rating = 0, ...rest }: RatingProps) => {
   return (
-    <div className={clsx(s.RatingWrapper, className)} {...rest}>
+    <div className={clsx(s.ratingWrapper, className)} {...rest}>
       {[1, 2, 3, 4, 5].map((el, i) => {
         return <Star key={el} selected={rating > i} />
       })}

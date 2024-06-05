@@ -1,27 +1,60 @@
-import { GetCardsResponse } from '@/services/cards/cards.types'
-import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
-import { updatedDate } from '@/shared/utils/updateDate'
+import { SortValue } from '@/features'
+import { GetCardsResponse } from '@/services'
+import {
+  HeadCellWithArrow,
+  IconButtons,
+  ImgBlock,
+  Rating,
+  Tables,
+  Typography,
+  updatedDate,
+} from '@/shared'
 
-import s from '@/shared/ui/assembled/decks-table/DecksTable.module.scss'
+import s from './CardsTable.module.scss'
 
 import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {
+  cardTableSort: SortValue
   cards: GetCardsResponse[]
   editFunction: (id: string) => void
+  sortOnClick: (sortValue: SortValue) => void
   trashFunction: (id: string) => void
   userId: boolean
 }
 
-export const CardsTable = ({ cards, editFunction, trashFunction, userId }: CardsTableProps) => {
+export const CardsTable = ({
+  cardTableSort,
+  cards,
+  editFunction,
+  sortOnClick,
+  trashFunction,
+  userId,
+}: CardsTableProps) => {
   return (
     <Tables.Table>
       <Tables.TableHead>
         <Tables.TableRow>
-          <HeadCellWithArrow arrowDirection={false} title={'Question'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Answer'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Last Updated'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Grade'} />
+          <HeadCellWithArrow
+            arrowDirection={cardTableSort !== 'question'}
+            sortTableOnClick={() => sortOnClick('question')}
+            title={'Question'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={cardTableSort !== 'answer'}
+            sortTableOnClick={() => sortOnClick('answer')}
+            title={'Answer'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={cardTableSort !== 'updated'}
+            sortTableOnClick={() => sortOnClick('updated')}
+            title={'Last Updated'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={cardTableSort !== 'grade'}
+            sortTableOnClick={() => sortOnClick('grade')}
+            title={'Grade'}
+          />
           {userId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
         </Tables.TableRow>
       </Tables.TableHead>

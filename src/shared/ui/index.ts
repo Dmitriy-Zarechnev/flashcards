@@ -1,4 +1,5 @@
 // ============================== [ Assembled ] ===========================================
+export { BackToDecks } from './assembled/back-to-decks'
 export { CardsTable } from './assembled/cards-table'
 export { DeckControlBlock } from './assembled/deck-control-block'
 export { DecksTable } from './assembled/decks-table'

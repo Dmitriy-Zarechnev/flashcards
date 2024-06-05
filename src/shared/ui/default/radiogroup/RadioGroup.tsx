@@ -21,7 +21,7 @@ export const RadioGroup = forwardRef<ElementRef<typeof Radio.Root>, RadioGroupPr
   ({ disabled = false, onChange, options, value, ...rest }, ref) => {
     return (
       <Radio.Root
-        className={s.RadioRoot}
+        className={s.radioRoot}
         {...rest}
         onValueChange={onChange}
         ref={ref}
@@ -29,11 +29,11 @@ export const RadioGroup = forwardRef<ElementRef<typeof Radio.Root>, RadioGroupPr
       >
         {options.map(el => {
           return (
-            <div className={s.RadioItemWrapper} key={el.id}>
-              <Radio.Item className={s.RadioItem} disabled={disabled} id={el.id} value={el.value}>
-                <Radio.Indicator className={s.RadioIndicator} />
+            <div className={s.radioItemWrapper} key={el.id}>
+              <Radio.Item className={s.radioItem} disabled={disabled} id={el.id} value={el.value}>
+                <Radio.Indicator className={s.radioIndicator} />
               </Radio.Item>
-              <Typography.Body2 as={'label'} className={s.RadioLabel} htmlFor={el.id}>
+              <Typography.Body2 as={'label'} className={s.radioLabel} htmlFor={el.id}>
                 {el.label}
               </Typography.Body2>
             </div>

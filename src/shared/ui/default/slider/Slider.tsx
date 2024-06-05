@@ -4,34 +4,30 @@ import * as Slider from '@radix-ui/react-slider'
 import s from './Slider.module.scss'
 
 type SliderComponentProps = {
-  valueChangeHandler: (value: number[]) => void
+  valueChange: (value: number[]) => void
   valueLeft: number
   valueRight: number
 }
 
-export const SliderComponent = ({
-  valueChangeHandler,
-  valueLeft,
-  valueRight,
-}: SliderComponentProps) => {
+export const SliderComponent = ({ valueChange, valueLeft, valueRight }: SliderComponentProps) => {
   return (
-    <div className={s.SliderWrapper}>
-      <Typography.Body1 className={s.SliderText}>{valueLeft}</Typography.Body1>
+    <div className={s.sliderWrapper}>
+      <Typography.Body1 className={s.sliderText}>{valueLeft}</Typography.Body1>
       <Slider.Root
-        className={s.SliderRoot}
+        className={s.sliderRoot}
         defaultValue={[valueLeft, valueRight]}
         minStepsBetweenThumbs={1}
-        onValueChange={valueChangeHandler}
+        onValueChange={valueChange}
         value={[valueLeft, valueRight]}
       >
-        <Slider.Track className={s.SliderTrack}>
-          <Slider.Range className={s.SliderRange} />
+        <Slider.Track className={s.sliderTrack}>
+          <Slider.Range className={s.sliderRange} />
         </Slider.Track>
 
-        <Slider.Thumb className={s.SliderThumb} />
-        <Slider.Thumb className={s.SliderThumb} />
+        <Slider.Thumb className={s.sliderThumb} />
+        <Slider.Thumb className={s.sliderThumb} />
       </Slider.Root>
-      <Typography.Body1 className={s.SliderText}>{valueRight}</Typography.Body1>
+      <Typography.Body1 className={s.sliderText}>{valueRight}</Typography.Body1>
     </div>
   )
 }

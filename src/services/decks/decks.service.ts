@@ -30,7 +30,10 @@ const decksService = flashcardsApi.injectEndpoints({
         providesTags: ['Decks'],
         query: args => ({
           method: 'GET',
-          params: { ...(args ?? {}), name: args?.name ?? undefined },
+          params: {
+            ...(args ?? {}),
+            name: args?.name ?? undefined,
+          },
           url: `v2/decks`,
         }),
       }),

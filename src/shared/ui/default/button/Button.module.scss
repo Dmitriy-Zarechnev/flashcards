@@ -9,12 +9,13 @@
   justify-content: center;
 
   box-sizing: border-box;
-  padding: 7px 28px 5px;
+  padding: 8px 28px;
 
   border-radius: 4px;
 
   & p {
     display: flex;
+    flex-direction: row;
     gap: 10px;
     align-items: center;
     justify-content: center;
@@ -66,6 +67,28 @@
   &:not(:disabled) {
     &:active {
       background-color: var(--color-dark-500);
+    }
+  }
+}
+
+.link {
+  display: inline-block;
+  margin-bottom: 33px;
+  padding: 0;
+  background-color: transparent;
+
+  &:hover {
+    text-decoration: underline;
+    background-color: transparent;
+  }
+
+  &:disabled {
+    background-color: transparent;
+  }
+
+  &:not(:disabled) {
+    &:active {
+      background-color: transparent;
     }
   }
 }
