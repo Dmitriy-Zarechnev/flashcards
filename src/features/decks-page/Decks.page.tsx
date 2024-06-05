@@ -10,10 +10,10 @@ import {
   ListHeader,
   Page,
   Pagination,
+  useSuperDecksSearch,
+  useSuperDecksSort,
   useSuperPagination,
-  useSuperSearch,
   useSuperSlider,
-  useSuperSort,
   useSuperTabs,
 } from '@/shared'
 
@@ -30,7 +30,7 @@ export const DecksPage = () => {
   } = useSuperPagination([5, 10, 15, 20])
 
   // ----- Хук для работы с поиском по названию -----
-  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperSearch(
+  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperDecksSearch(
     searchParams,
     setSearchParams
   )
@@ -43,7 +43,7 @@ export const DecksPage = () => {
   const { setTabValue, tabValue, tabValueChangeHandler, tabsData } = useSuperTabs()
 
   // ----- Хук для работы с сортировкой -----
-  const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperSort()
+  const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperDecksSort()
 
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({

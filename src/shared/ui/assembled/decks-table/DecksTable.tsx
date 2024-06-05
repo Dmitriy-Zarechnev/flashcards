@@ -1,4 +1,4 @@
-import { Deck } from '@/services/decks/decks.types'
+import { Deck } from '@/services'
 import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography, updatedDate } from '@/shared'
 
 import s from './DecksTable.module.scss'

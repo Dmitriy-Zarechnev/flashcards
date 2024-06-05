@@ -1,13 +1,12 @@
-import { useState } from 'react'
-
-import { useDeleteCardMutation, useUpdateCardMutation } from '@/services/cards/cards.service'
-import { GetCardsResponse } from '@/services/cards/cards.types'
+import { GetCardsResponse, useDeleteCardMutation, useUpdateCardMutation } from '@/services'
 import {
   BackToDecks,
   CardsTable,
   ListHeader,
   Page,
   SearchInput,
+  useSuperCardsSearch,
+  useSuperCardsSort,
   useSuperPagination,
 } from '@/shared'
 import defDeckImg from '@/shared/assets/card-default-cover.webp'
@@ -68,92 +67,17 @@ export const CardsPage = () => {
   // ----- Хук который необходим для работы пагинации и с url-ом -----
   const { searchParams, setSearchParams } = useSuperPagination([5, 10, 15, 20])
 
-  // ----- Блок работы с поиском по названию вопроса -----
-  const [data, setData] = useState<GetCardsResponse[]>(mockCardsData)
+  // ----- Хук для работы с поиском по названию вопроса -----
+  const { cardsQuestionSearch, data, search, searchTextResetHandler, setData } =
+    useSuperCardsSearch(mockCardsData, searchParams, setSearchParams)
 
-  const search = searchParams.get('search') ?? ''
+  // ----- Хук для работы с сортировкой -----
+  const { cardTableSort, sortOnClickHandler } = useSuperCardsSort(mockCardsData, setData)
 
-  function handleSearch(value: string) {
-    if (value.length) {
-      setData(data.filter(card => card.question.toLowerCase().includes(value)))
-      searchParams.set('search', value)
-    } else {
-      setData(mockCardsData)
-      searchParams.delete('search')
-    }
-    setSearchParams(searchParams)
-  }
-
-  const searchTextResetHandler = () => {
-    setData(mockCardsData)
-    searchParams.delete('search')
-    setSearchParams(searchParams)
-  }
-
-  // ----- Блок работы с сортировкой -----
-  const [cardTableSort, setCardTableSort] = useState<SortValue>('default')
-
-  const sortOnClickHandler = (sortValue: SortValue) => {
-    if (sortValue !== cardTableSort) {
-      const sortedCards = mockCardsData.slice(0).sort((a, b) => {
-        switch (sortValue) {
-          case 'grade':
-            return a[sortValue] - b[sortValue]
-          case 'updated':
-            return Date.parse(a[sortValue]) - Date.parse(b[sortValue])
-          case 'default':
-            return Date.parse(a['updated']) - Date.parse(b['updated'])
-          default:
-            return a[sortValue].localeCompare(b[sortValue])
-        }
-      })
-
-      setData(sortedCards)
-      setCardTableSort(sortValue)
-    } else {
-      setData(mockCardsData)
-      setCardTableSort('default')
-    }
-  }
-
-  // const [cardTableSort, setCardTableSort] = useState<SortValue>('updated')
-  //
-  // const sortOnClickHandler = (sortValue: SortValue) => {
-  //   if (sortValue !== cardTableSort) {
-  //     const sortedCards = data.slice(0).sort((a, b) => {
-  //       switch (sortValue) {
-  //         case 'grade':
-  //           return a[sortValue] - b[sortValue]
-  //         case 'updated':
-  //           return Date.parse(a[sortValue]) - Date.parse(b[sortValue])
-  //         default:
-  //           return a[sortValue].localeCompare(b[sortValue])
-  //       }
-  //     })
-  //
-  //     setCardTableSort(sortValue)
-  //     setData(sortedCards)
-  //   } else {
-  //     const sortedCards = data.slice(0).sort((a, b) => {
-  //       switch (sortValue) {
-  //         case 'grade':
-  //           return b[sortValue] - a[sortValue]
-  //         case 'updated':
-  //           return Date.parse(b[sortValue]) - Date.parse(a[sortValue])
-  //         default:
-  //           return b[sortValue].localeCompare(a[sortValue])
-  //       }
-  //     })
-  //
-  //     setData(sortedCards)
-  //   }
-  // }
   // ----- Проверка по id и изменение отображения компоненты -----
-  const userId = 6 === 6
+  const userId = 6 === 5
 
   // ----- Блок работы с запросом на сервер и получения данных -----
-
-  //const cardsId = 'clww4ulv105gpmp019pyckc5f'
 
   //const [skip, setSkip] = useState(true)
 
@@ -190,12 +114,13 @@ export const CardsPage = () => {
       <img alt={`Deck picture`} className={s.deckImg} src={defDeckImg} />
       <SearchInput
         className={s.searchInput}
-        onChange={e => handleSearch(e.currentTarget.value)}
+        onChange={e => cardsQuestionSearch(e.currentTarget.value)}
         placeholder={'Find your question'}
         searchTextResetHandler={searchTextResetHandler}
         value={search}
       />
       <CardsTable
+        cardTableSort={cardTableSort}
         cards={data}
         editFunction={updateCardHandler}
         sortOnClick={sortOnClickHandler}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const useSuperSort = () => {
+export const useSuperDecksSort = () => {
   const [tableSort, setTableSort] = useState('updated-desc')
 
   const sortTableOnClickHandler = (title: string) => {

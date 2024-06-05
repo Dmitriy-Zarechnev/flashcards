@@ -15,6 +15,7 @@ import s from './CardsTable.module.scss'
 import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {
+  cardTableSort: SortValue
   cards: GetCardsResponse[]
   editFunction: (id: string) => void
   sortOnClick: (sortValue: SortValue) => void
@@ -23,6 +24,7 @@ type CardsTableProps = {
 }
 
 export const CardsTable = ({
+  cardTableSort,
   cards,
   editFunction,
   sortOnClick,
@@ -34,22 +36,22 @@ export const CardsTable = ({
       <Tables.TableHead>
         <Tables.TableRow>
           <HeadCellWithArrow
-            arrowDirection={false}
+            arrowDirection={cardTableSort !== 'question'}
             sortTableOnClick={() => sortOnClick('question')}
             title={'Question'}
           />
           <HeadCellWithArrow
-            arrowDirection={false}
+            arrowDirection={cardTableSort !== 'answer'}
             sortTableOnClick={() => sortOnClick('answer')}
             title={'Answer'}
           />
           <HeadCellWithArrow
-            arrowDirection={false}
+            arrowDirection={cardTableSort !== 'updated'}
             sortTableOnClick={() => sortOnClick('updated')}
             title={'Last Updated'}
           />
           <HeadCellWithArrow
-            arrowDirection={false}
+            arrowDirection={cardTableSort !== 'grade'}
             sortTableOnClick={() => sortOnClick('grade')}
             title={'Grade'}
           />

@@ -1,4 +1,4 @@
-export const useSuperSearch = (
+export const useSuperDecksSearch = (
   searchParams: URLSearchParams,
   setSearchParams: (newSearchParams: URLSearchParams) => void
 ) => {
