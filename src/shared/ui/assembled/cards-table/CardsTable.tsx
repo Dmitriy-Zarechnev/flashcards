@@ -2,7 +2,7 @@ import { GetCardsResponse } from '@/services/cards/cards.types'
 import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
-import s from '@/shared/ui/assembled/decks-table/DecksTable.module.scss'
+import s from './CardsTable.module.scss'
 
 import defImg from './../../../assets/card-default-cover.webp'
 
@@ -18,10 +18,18 @@ export const CardsTable = ({ cards, editFunction, trashFunction, userId }: Cards
     <Tables.Table>
       <Tables.TableHead>
         <Tables.TableRow>
-          <HeadCellWithArrow arrowDirection={false} title={'Question'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Answer'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Last Updated'} />
-          <HeadCellWithArrow arrowDirection={false} title={'Grade'} />
+          <HeadCellWithArrow
+            arrowDirection={false}
+            sortTableOnClick={() => {}}
+            title={'Question'}
+          />
+          <HeadCellWithArrow arrowDirection={false} sortTableOnClick={() => {}} title={'Answer'} />
+          <HeadCellWithArrow
+            arrowDirection={false}
+            sortTableOnClick={() => {}}
+            title={'Last Updated'}
+          />
+          <HeadCellWithArrow arrowDirection={false} sortTableOnClick={() => {}} title={'Grade'} />
           {userId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
         </Tables.TableRow>
       </Tables.TableHead>

@@ -30,7 +30,7 @@ const cardsService = flashcardsApi.injectEndpoints({
         }),
       }),
       updateCard: builder.mutation<GetCardsResponse, UpdateCardArgs>({
-        invalidatesTags: ['Decks'],
+        invalidatesTags: ['Cards'],
         query: ({ id, ...args }) => ({
           body: args,
           method: 'PATCH',

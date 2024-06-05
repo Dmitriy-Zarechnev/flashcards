@@ -1,4 +1,4 @@
-.SelectTrigger {
+.selectTrigger {
   cursor: pointer;
 
   display: flex;
@@ -30,7 +30,7 @@
   }
 }
 
-.SelectGroup {
+.selectGroup {
   position: absolute;
   z-index: 100;
 
@@ -44,12 +44,12 @@
   }
 }
 
-.FatherRelative {
+.fatherRelative {
   position: relative;
   min-width: 60px;
 }
 
-.SelectItem {
+.selectItem {
   padding: 5px 8px;
   color: var(--color-light-100);
   background-color: var(--color-dark-900);
@@ -73,7 +73,7 @@
   }
 }
 
-.SelectLabel {
+.selectLabel {
   color: var(--color-dark-100);
 
   &.disabled {

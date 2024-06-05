@@ -1,6 +1,5 @@
 import { Deck } from '@/services/decks/decks.types'
-import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography } from '@/shared'
-import { updatedDate } from '@/shared/utils/updateDate'
+import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography, updatedDate } from '@/shared'
 
 import s from './DecksTable.module.scss'
 
@@ -49,7 +48,7 @@ export const DecksTable = ({
             sortTableOnClick={() => sortTableOnClick('created')}
             title={'Created by'}
           />
-          <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>
+          <Tables.TableHeadCell className={s.noHover}> </Tables.TableHeadCell>
         </Tables.TableRow>
       </Tables.TableHead>
 

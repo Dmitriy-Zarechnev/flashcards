@@ -1,11 +1,11 @@
-.SliderWrapper {
+.sliderWrapper {
   display: flex;
   flex-direction: row;
   gap: 10px;
   align-items: center;
 }
 
-.SliderRoot {
+.sliderRoot {
   touch-action: none;
   user-select: none;
 
@@ -18,7 +18,7 @@
   height: 20px;
 }
 
-.SliderTrack {
+.sliderTrack {
   position: relative;
 
   flex-grow: 1;
@@ -29,14 +29,14 @@
   border-radius: 5px;
 }
 
-.SliderRange {
+.sliderRange {
   position: absolute;
   height: 100%;
   background-color: var(--color-accent-300);
   border-radius: 5px;
 }
 
-.SliderThumb {
+.sliderThumb {
   position: relative;
 
   display: block;
@@ -75,7 +75,7 @@
   }
 }
 
-.SliderText {
+.sliderText {
   width: 40px;
   padding: 5px;
 

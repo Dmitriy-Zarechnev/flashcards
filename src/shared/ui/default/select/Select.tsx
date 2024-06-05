@@ -43,13 +43,13 @@ export const Select = forwardRef<ElementRef<typeof Listbox>, SelectProps>(
 
     return (
       <div>
-        <Typography.Body2 className={clsx(s.SelectLabel, { [s.disabled]: disabled })}>
+        <Typography.Body2 className={clsx(s.selectLabel, { [s.disabled]: disabled })}>
           {selectTitle}
         </Typography.Body2>
         <Listbox disabled={disabled} onChange={onValueChange} ref={ref} value={currentValue}>
           {({ open }) => (
-            <div className={clsx(s.FatherRelative, fullWidth && s.fullWidth, className)}>
-              <ListboxButton className={clsx(s.SelectTrigger, fullWidth && s.fullWidth)}>
+            <div className={clsx(s.fatherRelative, fullWidth && s.fullWidth, className)}>
+              <ListboxButton className={clsx(s.selectTrigger, fullWidth && s.fullWidth)}>
                 {currentLabel || options[0].label}
                 <Icon
                   height={'16px'}
@@ -59,12 +59,12 @@ export const Select = forwardRef<ElementRef<typeof Listbox>, SelectProps>(
               </ListboxButton>
               <ListboxOptions
                 {...(!fullWidth && { anchor: 'bottom' })}
-                className={clsx(s.SelectGroup, fullWidth && s.fullWidth, openToUp && s.openToUp)}
+                className={clsx(s.selectGroup, fullWidth && s.fullWidth, openToUp && s.openToUp)}
               >
                 {options.map(el => (
                   <ListboxOption
                     className={({ focus, selected }) =>
-                      clsx(s.SelectItem, {
+                      clsx(s.selectItem, {
                         [s.focus]: focus,
                         [s.selected]: selected && !isActiveBackgroundBlocked,
                       })
