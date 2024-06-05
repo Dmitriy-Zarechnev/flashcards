@@ -38,10 +38,10 @@ const deck = z.object({
 })
 
 const card = z.object({
-  answer: name,
-  answerPicture: z.any(),
-  question: name,
-  questionPicture: z.any(),
+  answer: z.string().trim().min(3, 'Answer must be at least 3 characters long'),
+  answerImg: z.any(),
+  question: z.string().trim().min(3, 'Question must be at least 3 characters long'),
+  questionImg: z.any(),
 })
 
 //========================================================================================

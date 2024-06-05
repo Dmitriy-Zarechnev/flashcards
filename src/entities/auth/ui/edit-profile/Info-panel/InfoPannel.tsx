@@ -12,13 +12,15 @@ type InfoPanelProps = {
 export const InfoPanel = ({ editName, email, logout, name }: InfoPanelProps) => {
   return (
     <div className={s.infoPanel}>
-      <Typography.H2>{name}</Typography.H2>
+      <div className={s.nameWrapper}>
+        <Typography.H2>{name}</Typography.H2>
+        <IconButton className={s.editBtn} iconId={'editOutline'} onClick={editName} />
+      </div>
       <Typography.Body2 className={s.email}>{email}</Typography.Body2>
       <Button onClick={logout} variant={'secondary'}>
         <Icon iconId={'logOut'} />
         Logout
       </Button>
-      <IconButton className={s.editBtn} iconId={'editOutline'} onClick={editName} />
     </div>
   )
 }

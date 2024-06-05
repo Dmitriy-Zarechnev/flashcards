@@ -1,1 +1,6 @@
-export { useLoginMutation, useMeQuery, useUpdateUserDataMutation } from './auth.service'
+export {
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useUpdateUserDataMutation,
+} from './auth.service'

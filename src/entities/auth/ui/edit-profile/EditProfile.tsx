@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEventHandler, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { FieldValues } from 'react-hook-form'
 
 import { Card, IconButton, Typography } from '@/shared'
@@ -9,23 +9,32 @@ import { InfoPanel } from './Info-panel/InfoPannel'
 import image from './catAvatar.webp'
 import { FormPanel } from './form-panel/FormPanel'
 
-export const EditProfile = () => {
+type EditProfileProps = {
+  changeProfileImg: (file: File) => void
+  email: string
+  logout: () => void
+  name: string
+}
+
+export const EditProfile = ({ changeProfileImg, email, logout, name }: EditProfileProps) => {
   const [isEditName, setIsEditName] = useState(false)
 
-  const name = 'Ivan'
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  function logoutHandler() {
-    console.log('logout')
+  function handleButtonClick() {
+    if (fileInputRef.current !== null) {
+      fileInputRef.current.click()
+    }
   }
 
   function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
-      const formData = new FormData()
+      changeProfileImg(event.target.files[0])
 
-      formData.append('image', event.target.files[0])
-
-      console.log('Sending to server', formData.get('image'))
-      console.log('Sending to server', formData)
+      //** to clean ref to load img with the same name once more  */
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''
+      }
     }
   }
 
@@ -34,25 +43,20 @@ export const EditProfile = () => {
     setIsEditName(!isEditName)
   }
 
-  //** костыль, чтобы кнопка внутри label аботала */
-  const onClickHandler: MouseEventHandler<HTMLLabelElement> = e => {
-    if (e.target !== e.currentTarget) {
-      e.currentTarget.click()
-    }
-  }
-
   return (
     <Card className={s.editProfile}>
       <Typography.H1>Personal Information</Typography.H1>
       <div className={s.imageContainer}>
         <img alt={'#'} src={image} />
-        <label htmlFor={'imageChange'} onClick={onClickHandler}>
-          {!isEditName && <IconButton iconId={'editOutline'} type={'submit'} />}
-        </label>
+
+        {!isEditName && (
+          <IconButton iconId={'editOutline'} onClick={handleButtonClick} type={'submit'} />
+        )}
+
         <input
           accept={'image/*'}
-          id={'imageChange'}
           onChange={imageChangeHandler}
+          ref={fileInputRef}
           style={{ display: 'none' }}
           type={'file'}
         />
@@ -60,8 +64,8 @@ export const EditProfile = () => {
       {!isEditName ? (
         <InfoPanel
           editName={() => setIsEditName(!isEditName)}
-          email={'j&johnson@gmail.com'}
-          logout={logoutHandler}
+          email={email}
+          logout={logout}
           name={name}
         />
       ) : (

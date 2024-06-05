@@ -13,6 +13,12 @@ const authService = flashcardsApi.injectEndpoints({
           url: '/v1/auth/login',
         }),
       }),
+      logout: builder.mutation<void, void>({
+        query: () => ({
+          method: 'POST',
+          url: `/v2/auth/logout`,
+        }),
+      }),
       me: builder.query<AuthResponse, void>({
         providesTags: ['Auth'],
         query: () => ({
@@ -32,4 +38,5 @@ const authService = flashcardsApi.injectEndpoints({
   },
 })
 
-export const { useLoginMutation, useMeQuery, useUpdateUserDataMutation } = authService
+export const { useLoginMutation, useLogoutMutation, useMeQuery, useUpdateUserDataMutation } =
+  authService

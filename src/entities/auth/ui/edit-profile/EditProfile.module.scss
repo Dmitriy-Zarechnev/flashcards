@@ -32,5 +32,9 @@
 
     background-color: var(--color-dark-300);
     border-radius: 4px;
+
+    &:hover {
+      color: var(--color-accent-500);
+    }
   }
 }

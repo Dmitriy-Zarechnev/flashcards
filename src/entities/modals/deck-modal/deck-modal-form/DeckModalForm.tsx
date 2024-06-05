@@ -53,7 +53,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
     setSelectedImage(undefined)
     setValue('cover', '')
 
-    //** to make able  */
+    //** to clean ref to load img with the same name once more  */
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -100,7 +100,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
           </Button>
           <input
             accept={'image/*'}
-            id={'image-upload'}
+            // id={'image-upload'}
             onChange={handleImageChange}
             ref={fileInputRef}
             style={{ display: 'none' }}

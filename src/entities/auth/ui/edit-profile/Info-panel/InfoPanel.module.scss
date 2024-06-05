@@ -1,21 +1,27 @@
 .infoPanel {
-  position: relative;
-
   display: flex;
   flex-flow: nowrap column;
   align-items: center;
-
   margin-top: 12px;
 
   button {
-    margin-top: 13px;
+    margin-top: 12px;
   }
+}
+
+.nameWrapper {
+  position: relative;
+  padding: 0 20px;
 }
 
 .editBtn {
   position: absolute;
-  top: -1%;
-  left: 70%;
+  top: -5%;
+  right: 0;
+
+  &:hover {
+    color: var(--color-accent-500);
+  }
 }
 
 .email {
