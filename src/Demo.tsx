@@ -5,16 +5,18 @@ export const Demo = () => {
   const { data } = useMeQuery()
 
   async function submit(data: CardFormValues) {
-    return new Promise(resolve => {
+    console.log(data)
+
+    return new Promise((res, rej) => {
       setTimeout(() => {
-        resolve(data)
-      }, 1000)
+        rej(data)
+      }, 3000)
     })
   }
 
   return (
     <div>
-      <CardModal onSubmit={submit} />
+      <CardModal onSubmit={submit} variant={'add'} />
     </div>
   )
 }

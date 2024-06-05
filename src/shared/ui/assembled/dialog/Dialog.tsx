@@ -41,7 +41,12 @@ export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
       {trigger}
       {isShown && (
         <div className={s.overlay} onClick={close}>
-          <Card className={s.card} fullWidth={false} onClick={e => e.stopPropagation()}>
+          <Card
+            className={s.card}
+            fullWidth={false}
+            onClick={e => e.stopPropagation()}
+            style={{ padding: '0' }}
+          >
             <div className={s.header}>
               <Typography.H3>{title}</Typography.H3>
               <IconButton

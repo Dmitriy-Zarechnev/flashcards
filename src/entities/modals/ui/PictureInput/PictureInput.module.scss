@@ -1,0 +1,13 @@
+.pictureInput {
+  img {
+    aspect-ratio: 3;
+    width: 100%;
+    margin-bottom: 24px;
+    object-fit: cover;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  column-gap: 24px;
+}

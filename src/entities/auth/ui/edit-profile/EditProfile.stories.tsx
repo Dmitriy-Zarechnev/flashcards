@@ -15,6 +15,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof EditProfile>
 
+const dataFromServer = {
+  email: 'Dmitry.Super@proger.io',
+  name: 'Dmitry🐱‍💻',
+}
+
 export const SingUpStory: Story = {
-  args: {},
+  args: {
+    changeProfileImg: (file: any) => console.log('data is submitted', file),
+    email: dataFromServer.email,
+    logout: () => console.log('logout'),
+    name: dataFromServer.name,
+  },
 }

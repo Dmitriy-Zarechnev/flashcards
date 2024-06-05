@@ -100,7 +100,6 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
           </Button>
           <input
             accept={'image/*'}
-            // id={'image-upload'}
             onChange={handleImageChange}
             ref={fileInputRef}
             style={{ display: 'none' }}

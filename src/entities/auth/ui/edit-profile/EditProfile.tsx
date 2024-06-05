@@ -49,9 +49,7 @@ export const EditProfile = ({ changeProfileImg, email, logout, name }: EditProfi
       <div className={s.imageContainer}>
         <img alt={'#'} src={image} />
 
-        {!isEditName && (
-          <IconButton iconId={'editOutline'} onClick={handleButtonClick} type={'submit'} />
-        )}
+        {!isEditName && <IconButton iconId={'editOutline'} onClick={handleButtonClick} />}
 
         <input
           accept={'image/*'}
