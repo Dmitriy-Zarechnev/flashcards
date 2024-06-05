@@ -1,6 +1,14 @@
-import { GetCardsResponse } from '@/services/cards/cards.types'
-import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
-import { updatedDate } from '@/shared/utils/updateDate'
+import { SortValue } from '@/features'
+import { GetCardsResponse } from '@/services'
+import {
+  HeadCellWithArrow,
+  IconButtons,
+  ImgBlock,
+  Rating,
+  Tables,
+  Typography,
+  updatedDate,
+} from '@/shared'
 
 import s from './CardsTable.module.scss'
 
@@ -9,27 +17,42 @@ import defImg from './../../../assets/card-default-cover.webp'
 type CardsTableProps = {
   cards: GetCardsResponse[]
   editFunction: (id: string) => void
+  sortOnClick: (sortValue: SortValue) => void
   trashFunction: (id: string) => void
   userId: boolean
 }
 
-export const CardsTable = ({ cards, editFunction, trashFunction, userId }: CardsTableProps) => {
+export const CardsTable = ({
+  cards,
+  editFunction,
+  sortOnClick,
+  trashFunction,
+  userId,
+}: CardsTableProps) => {
   return (
     <Tables.Table>
       <Tables.TableHead>
         <Tables.TableRow>
           <HeadCellWithArrow
             arrowDirection={false}
-            sortTableOnClick={() => {}}
+            sortTableOnClick={() => sortOnClick('question')}
             title={'Question'}
           />
-          <HeadCellWithArrow arrowDirection={false} sortTableOnClick={() => {}} title={'Answer'} />
           <HeadCellWithArrow
             arrowDirection={false}
-            sortTableOnClick={() => {}}
+            sortTableOnClick={() => sortOnClick('answer')}
+            title={'Answer'}
+          />
+          <HeadCellWithArrow
+            arrowDirection={false}
+            sortTableOnClick={() => sortOnClick('updated')}
             title={'Last Updated'}
           />
-          <HeadCellWithArrow arrowDirection={false} sortTableOnClick={() => {}} title={'Grade'} />
+          <HeadCellWithArrow
+            arrowDirection={false}
+            sortTableOnClick={() => sortOnClick('grade')}
+            title={'Grade'}
+          />
           {userId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
         </Tables.TableRow>
       </Tables.TableHead>

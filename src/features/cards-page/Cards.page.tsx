@@ -14,6 +14,8 @@ import defDeckImg from '@/shared/assets/card-default-cover.webp'
 
 import s from './Cards.page.module.scss'
 
+export type SortValue = 'answer' | 'default' | 'grade' | 'question' | 'updated'
+
 const mockCardsData: GetCardsResponse[] = [
   {
     answer: 'Столица Франции - Париж.',
@@ -37,7 +39,7 @@ const mockCardsData: GetCardsResponse[] = [
     created: '2024-06-02T12:00:00.000Z',
     deckId: 'deck-456',
     grade: 5,
-    id: 'card-123',
+    id: 'card-123fas',
     question: 'Самая высокая гора в мире - Эверест.',
     questionImg: '',
     questionVideo: 'https://example.com/question-video.mp4',
@@ -88,6 +90,64 @@ export const CardsPage = () => {
     setSearchParams(searchParams)
   }
 
+  // ----- Блок работы с сортировкой -----
+  const [cardTableSort, setCardTableSort] = useState<SortValue>('default')
+
+  const sortOnClickHandler = (sortValue: SortValue) => {
+    if (sortValue !== cardTableSort) {
+      const sortedCards = mockCardsData.slice(0).sort((a, b) => {
+        switch (sortValue) {
+          case 'grade':
+            return a[sortValue] - b[sortValue]
+          case 'updated':
+            return Date.parse(a[sortValue]) - Date.parse(b[sortValue])
+          case 'default':
+            return Date.parse(a['updated']) - Date.parse(b['updated'])
+          default:
+            return a[sortValue].localeCompare(b[sortValue])
+        }
+      })
+
+      setData(sortedCards)
+      setCardTableSort(sortValue)
+    } else {
+      setData(mockCardsData)
+      setCardTableSort('default')
+    }
+  }
+
+  // const [cardTableSort, setCardTableSort] = useState<SortValue>('updated')
+  //
+  // const sortOnClickHandler = (sortValue: SortValue) => {
+  //   if (sortValue !== cardTableSort) {
+  //     const sortedCards = data.slice(0).sort((a, b) => {
+  //       switch (sortValue) {
+  //         case 'grade':
+  //           return a[sortValue] - b[sortValue]
+  //         case 'updated':
+  //           return Date.parse(a[sortValue]) - Date.parse(b[sortValue])
+  //         default:
+  //           return a[sortValue].localeCompare(b[sortValue])
+  //       }
+  //     })
+  //
+  //     setCardTableSort(sortValue)
+  //     setData(sortedCards)
+  //   } else {
+  //     const sortedCards = data.slice(0).sort((a, b) => {
+  //       switch (sortValue) {
+  //         case 'grade':
+  //           return b[sortValue] - a[sortValue]
+  //         case 'updated':
+  //           return Date.parse(b[sortValue]) - Date.parse(a[sortValue])
+  //         default:
+  //           return b[sortValue].localeCompare(a[sortValue])
+  //       }
+  //     })
+  //
+  //     setData(sortedCards)
+  //   }
+  // }
   // ----- Проверка по id и изменение отображения компоненты -----
   const userId = 6 === 6
 
@@ -138,6 +198,7 @@ export const CardsPage = () => {
       <CardsTable
         cards={data}
         editFunction={updateCardHandler}
+        sortOnClick={sortOnClickHandler}
         trashFunction={deleteCardHandler}
         userId={userId}
       />

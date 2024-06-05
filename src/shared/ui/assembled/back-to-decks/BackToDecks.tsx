@@ -1,7 +1,4 @@
 import { Button, Icon } from '@/shared'
-import { clsx } from 'clsx'
-
-import s from './BackToDecks.module.scss'
 
 type BackToDecksProps = {
   className?: string
@@ -11,7 +8,7 @@ type BackToDecksProps = {
 
 export const BackToDecks = ({ className, iconId, title }: BackToDecksProps) => {
   return (
-    <Button as={'a'} className={clsx(s.linkBackButton, className)}>
+    <Button as={'a'} className={className} variant={'link'}>
       <Icon iconId={iconId} />
       {title}
     </Button>
