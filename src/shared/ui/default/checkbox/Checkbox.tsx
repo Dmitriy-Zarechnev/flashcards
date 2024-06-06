@@ -24,7 +24,7 @@ export const Checkbox = forwardRef<ElementRef<typeof C.Root>, CheckboxProps>(
           ref={ref}
           required={required}
         >
-          <C.Indicator className={s.indicator}>✔︎</C.Indicator>
+          <C.Indicator className={s.indicator}>✔</C.Indicator>
         </C.Root>
         <label className={clsx(s.label, disabled && s.labelDisabled)} htmlFor={finalId}>
           {children}

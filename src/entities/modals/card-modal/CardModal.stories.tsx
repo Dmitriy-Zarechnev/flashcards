@@ -20,6 +20,7 @@ type Story = StoryObj<typeof CardModal>
 function onFulfilled(data: CardFormValues) {
   return new Promise(res => {
     setTimeout(() => {
+      console.log(data)
       alert('Data is submitted')
       res(data)
     }, 1500)
