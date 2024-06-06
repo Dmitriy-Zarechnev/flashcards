@@ -69,7 +69,7 @@ export const Select = forwardRef<ElementRef<typeof Listbox>, SelectProps>(
                         [s.selected]: selected && !isActiveBackgroundBlocked,
                       })
                     }
-                    key={generatedId}
+                    key={`${generatedId} ${el.value}`}
                     value={el.value}
                   >
                     {el.label}
