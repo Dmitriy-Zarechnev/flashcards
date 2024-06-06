@@ -1,22 +1,23 @@
-import { CardFormValues, CardModal } from '@/entities'
+import { CardDeleteModal } from '@/entities'
 import { useMeQuery } from '@/services'
 
 export const Demo = () => {
   const { data } = useMeQuery()
 
-  async function submit(data: CardFormValues) {
-    console.log(data)
-
+  async function deleteCardHandler() {
     return new Promise((res, rej) => {
+      // setTimeout(() => {
+      //   res('DELETED')
+      // }, 3000)
       setTimeout(() => {
-        rej(data)
+        rej('NOT DELETED')
       }, 3000)
     })
   }
 
   return (
     <div>
-      <CardModal onSubmit={submit} variant={'add'} />
+      <CardDeleteModal cardName={'CARD NAME'} deleteCb={deleteCardHandler} />
     </div>
   )
 }

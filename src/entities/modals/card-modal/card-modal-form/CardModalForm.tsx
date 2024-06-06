@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { CardFormValues } from '@/entities'
-import { PictureInput } from '@/entities/modals/ui/PictureInput'
 import { modalSchemes } from '@/entities/validationSchemes'
 import { CreateCardArgs } from '@/services'
 import { Button, Select, TextField } from '@/shared'
@@ -10,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CardModalForm.module.scss'
 
+import { PictureInput } from '../../ui/picture-input'
 import pictureDefaultCover from './../../../../shared/assets/deck-default-cover.webp'
 
 type CardModalFormProps = {

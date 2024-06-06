@@ -10,7 +10,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🔴Modal/UI/PictureInput',
+  title: '🔴Modal/UI/picture-input',
 } satisfies Meta<typeof PictureInput>
 
 export default meta

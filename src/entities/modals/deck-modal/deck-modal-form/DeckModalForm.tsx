@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { PictureInput } from '@/entities/modals/ui/PictureInput'
 import { DeckFormValues, modalSchemes } from '@/entities/validationSchemes'
 import { Button, ControlledCheckbox, TextField } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import s from './DeckModalForm.module.scss'
 
 import cardDefaultCover from '../../../../shared/assets/card-default-cover.webp'
+import { PictureInput } from '../../ui/picture-input'
 
 type DeckModalFormProps = {
   btnTitle: string
