@@ -11,7 +11,7 @@ export const Demo = () => {
       // }, 3000)
       setTimeout(() => {
         rej('NOT DELETED')
-      }, 3000)
+      }, 2000)
     })
   }
 
