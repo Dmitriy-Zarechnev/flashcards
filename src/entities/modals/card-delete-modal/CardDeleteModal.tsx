@@ -1,6 +1,6 @@
 import { Dialog, IconButton } from '@/shared'
 
-import { CardDeleteBody } from './card-delete-body'
+import { CardDeleteBody } from './card-delete-body/CardDeleteBody'
 
 type CardDeleteModalProps = {
   cardName: string
