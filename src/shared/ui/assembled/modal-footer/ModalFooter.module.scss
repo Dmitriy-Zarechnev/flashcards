@@ -11,20 +11,8 @@
 }
 
 .linkButton {
-  background-color: transparent;
-
   & p {
     color: var(--color-accent-500);
     text-decoration: underline;
-  }
-
-  &:hover {
-    background-color: transparent;
-  }
-
-  &:not(:disabled) {
-    &:active {
-      background-color: transparent;
-    }
   }
 }
