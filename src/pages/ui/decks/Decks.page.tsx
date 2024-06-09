@@ -1,21 +1,14 @@
+import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
+import { useSuperDecksSearch } from '@/pages/ui/decks/hooks/useSuperDecksSearch'
+import { useSuperDecksSort } from '@/pages/ui/decks/hooks/useSuperDecksSort'
+import { useSuperSlider } from '@/pages/ui/decks/hooks/useSuperSlider'
+import { useSuperTabs } from '@/pages/ui/decks/hooks/useSuperTabs'
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
 } from '@/services/decks/decks.service'
-import {
-  Button,
-  DeckControlBlock,
-  DecksTable,
-  ListHeader,
-  Page,
-  Pagination,
-  useSuperDecksSearch,
-  useSuperDecksSort,
-  useSuperPagination,
-  useSuperSlider,
-  useSuperTabs,
-} from '@/shared'
+import { Button, DeckControlBlock, DecksTable, ListHeader, Page, Pagination } from '@/shared'
 
 export const DecksPage = () => {
   // ----- Хук для работы пагинации и с url-ом -----

@@ -6,9 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { Demo } from '@/Demo'
-import { DecksLessonPage } from '@/pages'
-import { CreateDeckPage } from '@/pages/CreateDeck.page'
+import { CardsPage, DecksPage, Error404, LearnPage } from '@/pages'
 
 //========================================================================================
 
@@ -21,16 +19,16 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: (
-      <>
-        {/*<CardsPage />*/}
-        {/*<DecksPage />*/}
-        {/*<DecksLessonPage />*/}
-        {/*<CreateDeckPage />*/}
-        <Demo />
-      </>
-    ),
+    element: <DecksPage />,
     path: '/',
+  },
+  {
+    element: <CardsPage />,
+    path: '/decks/:deckId',
+  },
+  {
+    element: <LearnPage />,
+    path: '/decks/:deckId/learn',
   },
 ]
 
@@ -40,6 +38,7 @@ const router = createBrowserRouter([
   {
     children: privateRoutes,
     element: <PrivateRoutes />,
+    errorElement: <Error404 />,
   },
   ...publicRoutes,
 ])

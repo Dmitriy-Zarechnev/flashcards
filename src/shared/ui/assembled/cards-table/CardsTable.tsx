@@ -1,14 +1,14 @@
-import { SortValue } from '@/features'
 import { GetCardsResponse } from '@/services'
 import {
   HeadCellWithArrow,
   IconButtons,
   ImgBlock,
   Rating,
+  SortValue,
   Tables,
   Typography,
-  updatedDate,
 } from '@/shared'
+import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './CardsTable.module.scss'
 

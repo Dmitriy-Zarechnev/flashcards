@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { SortValue } from '@/features'
 import { GetCardsResponse } from '@/services'
+import { SortValue } from '@/shared'
 
 export const useSuperCardsSort = (
   mockCardsData: GetCardsResponse[],

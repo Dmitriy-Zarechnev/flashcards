@@ -1,19 +1,11 @@
+import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
+import { useSuperCardsSearch } from '@/pages/ui/cards/hooks/useSuperCardsSearch'
+import { useSuperCardsSort } from '@/pages/ui/cards/hooks/useSuperCardsSort'
 import { GetCardsResponse, useDeleteCardMutation, useUpdateCardMutation } from '@/services'
-import {
-  BackToDecks,
-  CardsTable,
-  ListHeader,
-  Page,
-  SearchInput,
-  useSuperCardsSearch,
-  useSuperCardsSort,
-  useSuperPagination,
-} from '@/shared'
+import { BackToDecks, CardsTable, ListHeader, Page, SearchInput } from '@/shared'
 import defDeckImg from '@/shared/assets/card-default-cover.webp'
 
 import s from './Cards.page.module.scss'
-
-export type SortValue = 'answer' | 'default' | 'grade' | 'question' | 'updated'
 
 const mockCardsData: GetCardsResponse[] = [
   {
