@@ -1,20 +1,18 @@
 import { useState } from 'react'
 
-export type TabsData = {
+type TabsData = {
   title: string
   value: string
 }
 
-const tabsData: TabsData[] = [
-  { title: 'My Cards', value: 'My Cards' },
-  { title: 'All Cards', value: 'All Cards' },
+const tabsList: TabsData[] = [
+  { title: 'My Cards', value: 'my' },
+  { title: 'All Cards', value: 'all' },
 ]
 
 export const useSuperTabs = () => {
-  const [tabValue, setTabValue] = useState(tabsData[1].value)
-  const tabValueChangeHandler = (value: string) => {
-    setTabValue(value)
-  }
+  const [tabValue, setTabValue] = useState(tabsList[1].value)
+  const tabValueChangeHandler = (value: string) => setTabValue(value)
 
-  return { setTabValue, tabValue, tabValueChangeHandler, tabsData }
+  return { setTabValue, tabValue, tabValueChangeHandler, tabsList }
 }

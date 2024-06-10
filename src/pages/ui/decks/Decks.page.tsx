@@ -1,14 +1,16 @@
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
-import { useSuperDecksSearch } from '@/pages/ui/decks/hooks/useSuperDecksSearch'
 import { useSuperDecksSort } from '@/pages/ui/decks/hooks/useSuperDecksSort'
 import { useSuperSlider } from '@/pages/ui/decks/hooks/useSuperSlider'
 import { useSuperTabs } from '@/pages/ui/decks/hooks/useSuperTabs'
+import { useMeQuery } from '@/services'
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
 } from '@/services/decks.service'
 import { Button, DeckControlBlock, DecksTable, ListHeader, Page, Pagination } from '@/shared'
+
+import { useSuperDecksSearch } from './hooks/useSuperDecksSearch'
 
 export const DecksPage = () => {
   // ----- Хук для работы пагинации и с url-ом -----
@@ -33,14 +35,19 @@ export const DecksPage = () => {
     useSuperSlider()
 
   // ----- Хук для работы с tabs -----
-  const { setTabValue, tabValue, tabValueChangeHandler, tabsData } = useSuperTabs()
+  const { setTabValue, tabValue, tabValueChangeHandler, tabsList } = useSuperTabs()
 
   // ----- Хук для работы с сортировкой -----
   const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperDecksSort()
 
   // ----- Блок работы с запросом на сервер и получения данных -----
+  const { data: me } = useMeQuery()
+
+  const currentUserId = me?.id
+  const authorId = tabValue === 'my' ? currentUserId : undefined
+
   const { data, error, isLoading } = useGetDecksQuery({
-    authorId: tabValue === tabsData[1].value ? undefined : '12321435',
+    authorId: tabValue === tabsList[1].value ? undefined : '12321435',
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
     maxCardsCount: sliderMaxCardsCount,
@@ -67,7 +74,7 @@ export const DecksPage = () => {
   const clearFilterOnClickHandler = () => {
     setSliderValues([0, 25])
     searchInputResetHandler()
-    setTabValue(tabsData[1].value)
+    setTabValue(tabsList[1].value)
     setTableSort('updated-desc')
   }
 
@@ -103,7 +110,7 @@ export const DecksPage = () => {
         sliderValueChange={sliderValueChangeHandler}
         tabValue={tabValue}
         tabValueChange={tabValueChangeHandler}
-        tabsData={tabsData}
+        tabsData={tabsList}
       />
       <DecksTable
         clickDeleteDeck={deleteDeckHandler}

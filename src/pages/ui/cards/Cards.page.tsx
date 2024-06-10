@@ -108,7 +108,8 @@ const mockCardsData = [
 ]
 
 export const CardsPage = () => {
-  const { deckId } = useParams()
+  const params = useParams()
+  const deckId = params.deckId ?? ''
 
   // ----- Хук который необходим для работы пагинации и с url-ом -----
   const { searchParams, setSearchParams } = useSuperPagination([5, 10, 15])
@@ -122,12 +123,11 @@ export const CardsPage = () => {
 
   // ----- Проверка по id и изменение отображения компоненты -----
   const userId = 6 === 6
-
   // ----- Блок работы с запросом на сервер и получения данных -----
   //const [skip, setSkip] = useState(true)
 
-  const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId || '' })
-  const { data: cardsData } = useGetCardsQuery({ id: deckId || '' })
+  const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId })
+  const { data: cardsData } = useGetCardsQuery({ id: deckId })
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
   // const [createCard] = useCreateCardMutation()

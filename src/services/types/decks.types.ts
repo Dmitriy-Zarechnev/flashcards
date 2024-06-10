@@ -58,6 +58,11 @@ export type GetCardsResponse = {
 
 export type GetDeckByIdResponse = { isFavorite: boolean } & DefaultDeck
 
+export type GetDeckMinMaxCardsResponse = {
+  max: number
+  min: number
+}
+
 //========================================================================================
 // [ ARGS ]
 
