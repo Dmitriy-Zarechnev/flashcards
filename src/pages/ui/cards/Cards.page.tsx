@@ -1,13 +1,20 @@
+import { useParams } from 'react-router-dom'
+
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperCardsSearch } from '@/pages/ui/cards/hooks/useSuperCardsSearch'
 import { useSuperCardsSort } from '@/pages/ui/cards/hooks/useSuperCardsSort'
-import { GetCardsResponse, useDeleteCardMutation, useUpdateCardMutation } from '@/services'
+import {
+  useDeleteCardMutation,
+  useGetCardsQuery,
+  useGetDeckByIdQuery,
+  useUpdateCardMutation,
+} from '@/services'
 import { BackToDecks, CardsTable, ListHeader, Page, SearchInput } from '@/shared'
 import defDeckImg from '@/shared/assets/card-default-cover.webp'
 
 import s from './Cards.page.module.scss'
 
-const mockCardsData: GetCardsResponse[] = [
+const mockCardsData = [
   {
     answer: 'Столица Франции - Париж.',
     answerImg: '',
@@ -101,6 +108,8 @@ const mockCardsData: GetCardsResponse[] = [
 ]
 
 export const CardsPage = () => {
+  const { deckId } = useParams()
+
   // ----- Хук который необходим для работы пагинации и с url-ом -----
   const { searchParams, setSearchParams } = useSuperPagination([5, 10, 15])
 
@@ -117,7 +126,8 @@ export const CardsPage = () => {
   // ----- Блок работы с запросом на сервер и получения данных -----
   //const [skip, setSkip] = useState(true)
 
-  //const { data } = useGetCardsQuery({ id: cardsId })
+  const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId || '' })
+  const { data: cardsData } = useGetCardsQuery({ id: deckId || '' })
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
   // const [createCard] = useCreateCardMutation()

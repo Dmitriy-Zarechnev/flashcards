@@ -1,17 +1,17 @@
 import { flashcardsApi } from '@/services/flashcards.api'
-
 import {
-  DefaultDeckResponse,
-  DeleteDecksArgs,
+  DefaultDeck,
+  DefaultIdArg,
+  GetDeckByIdResponse,
   GetDecksArgs,
   GetDecksResponse,
   UpdateDeckArgs,
-} from './decks.types'
+} from '@/services/types/decks.types'
 
 const decksService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
-      createDeck: builder.mutation<DefaultDeckResponse, FormData>({
+      createDeck: builder.mutation<DefaultDeck, FormData>({
         invalidatesTags: ['Decks'],
         query: formData => ({
           body: formData,
@@ -19,10 +19,16 @@ const decksService = flashcardsApi.injectEndpoints({
           url: `v1/decks`,
         }),
       }),
-      deleteDeck: builder.mutation<DefaultDeckResponse, DeleteDecksArgs>({
+      deleteDeck: builder.mutation<DefaultDeck, DefaultIdArg>({
         invalidatesTags: ['Decks'],
         query: ({ id }) => ({
           method: 'DELETE',
+          url: `v1/decks/${id}`,
+        }),
+      }),
+      getDeckById: builder.query<GetDeckByIdResponse, DefaultIdArg>({
+        query: ({ id }) => ({
+          method: 'GET',
           url: `v1/decks/${id}`,
         }),
       }),
@@ -37,7 +43,7 @@ const decksService = flashcardsApi.injectEndpoints({
           url: `v2/decks`,
         }),
       }),
-      updateDeck: builder.mutation<DefaultDeckResponse, UpdateDeckArgs>({
+      updateDeck: builder.mutation<DefaultDeck, UpdateDeckArgs>({
         invalidatesTags: ['Decks'],
         query: ({ id, ...args }) => ({
           body: args,
@@ -52,6 +58,7 @@ const decksService = flashcardsApi.injectEndpoints({
 export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
+  useGetDeckByIdQuery,
   useGetDecksQuery,
   useUpdateDeckMutation,
 } = decksService

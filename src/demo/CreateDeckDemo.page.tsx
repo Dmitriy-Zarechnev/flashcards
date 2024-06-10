@@ -1,5 +1,5 @@
 import { DeckFormValues, DeckModal } from '@/entities'
-import { useCreateDeckMutation } from '@/services/decks/decks.service'
+import { useCreateDeckMutation } from '@/services/decks.service'
 
 export const CreateDeckDemoPage = () => {
   // хук представляет заранее готовый массив данных - кортеж

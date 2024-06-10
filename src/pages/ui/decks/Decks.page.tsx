@@ -7,7 +7,7 @@ import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
-} from '@/services/decks/decks.service'
+} from '@/services/decks.service'
 import { Button, DeckControlBlock, DecksTable, ListHeader, Page, Pagination } from '@/shared'
 
 export const DecksPage = () => {

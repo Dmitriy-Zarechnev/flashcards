@@ -1,6 +1,6 @@
 import { flashcardsApi } from '@/services/flashcards.api'
 
-import { AuthResponse, LoginArgs, LoginResponse, UpdateUserDataArgs } from './auth.types'
+import { AuthResponse, LoginArgs, LoginResponse, UpdateUserDataArgs } from './types/auth.types'
 
 const authService = flashcardsApi.injectEndpoints({
   endpoints: builder => {

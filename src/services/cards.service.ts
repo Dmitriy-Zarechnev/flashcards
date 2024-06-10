@@ -1,6 +1,10 @@
 import { flashcardsApi } from '@/services/flashcards.api'
-
-import { CardIdArgs, CreateCardArgs, GetCardsResponse, UpdateCardArgs } from './cards.types'
+import {
+  CreateCardArgs,
+  DefaultIdArg,
+  GetCardsResponse,
+  UpdateCardArgs,
+} from '@/services/types/decks.types'
 
 const cardsService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
@@ -13,7 +17,7 @@ const cardsService = flashcardsApi.injectEndpoints({
           url: `v1/cards/${id}/cards`,
         }),
       }),
-      deleteCard: builder.mutation<any, CardIdArgs>({
+      deleteCard: builder.mutation<any, DefaultIdArg>({
         invalidatesTags: ['Cards'],
         query: id => ({
           method: 'DELETE',
@@ -21,7 +25,7 @@ const cardsService = flashcardsApi.injectEndpoints({
           url: `v1/cards/${id}`,
         }),
       }),
-      getCards: builder.query<GetCardsResponse[], CardIdArgs>({
+      getCards: builder.query<GetCardsResponse[], DefaultIdArg>({
         providesTags: ['Cards'],
         query: id => ({
           method: 'GET',
