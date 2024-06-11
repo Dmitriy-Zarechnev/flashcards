@@ -1,3 +1,6 @@
+export { ForgotPasswordPage } from './ui/ForgotPassword.page'
+export { SignInPage } from './ui/SignIn.page'
+export { SignUpPage } from './ui/SignUp.page'
 export { CardsPage } from './ui/cards/Cards.page'
 export { DecksPage } from './ui/decks/Decks.page'
 export { Error404 } from './ui/error/Error404'

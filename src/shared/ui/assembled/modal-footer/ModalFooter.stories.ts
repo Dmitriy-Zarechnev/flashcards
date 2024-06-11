@@ -16,5 +16,6 @@ export const ModalFooterStory: Story = {
   args: {
     buttonChildren: 'Sing Up',
     footerText: "Don't have an account?",
+    linkPath: '/sign-up',
   },
 }

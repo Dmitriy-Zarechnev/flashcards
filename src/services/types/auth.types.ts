@@ -16,7 +16,7 @@ export type UpdateUserDataArgs = {
 export type LoginArgs = {
   email: string
   password: string
-  rememberMe: true
+  rememberMe: boolean
 }
 
 export type LoginResponse = {

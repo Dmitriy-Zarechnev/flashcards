@@ -21,10 +21,7 @@ const authService = flashcardsApi.injectEndpoints({
       }),
       me: builder.query<AuthResponse, void>({
         providesTags: ['Auth'],
-        query: () => ({
-          method: 'GET',
-          url: '/v1/auth/me',
-        }),
+        query: () => '/v1/auth/me',
       }),
       updateUserData: builder.mutation<AuthResponse, UpdateUserDataArgs>({
         invalidatesTags: ['Auth'],

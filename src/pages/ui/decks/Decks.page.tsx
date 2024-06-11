@@ -1,16 +1,16 @@
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
+import { useSuperDecksSearch } from '@/pages/ui/decks/hooks/useSuperDecksSearch'
 import { useSuperDecksSort } from '@/pages/ui/decks/hooks/useSuperDecksSort'
 import { useSuperSlider } from '@/pages/ui/decks/hooks/useSuperSlider'
 import { useSuperTabs } from '@/pages/ui/decks/hooks/useSuperTabs'
-import { useMeQuery } from '@/services'
 import {
   useDeleteDeckMutation,
+  useGetDeckMinMaxCardsQuery,
   useGetDecksQuery,
+  useMeQuery,
   useUpdateDeckMutation,
-} from '@/services/decks.service'
+} from '@/services'
 import { Button, DeckControlBlock, DecksTable, ListHeader, Page, Pagination } from '@/shared'
-
-import { useSuperDecksSearch } from './hooks/useSuperDecksSearch'
 
 export const DecksPage = () => {
   // ----- Хук для работы пагинации и с url-ом -----
@@ -43,18 +43,26 @@ export const DecksPage = () => {
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data: me } = useMeQuery()
 
-  const currentUserId = me?.id
-  const authorId = tabValue === 'my' ? currentUserId : undefined
+  console.log('🟢', me)
+  const authorId = tabValue === tabsList[1].value ? me?.id : undefined
 
-  const { data, error, isLoading } = useGetDecksQuery({
-    authorId: tabValue === tabsList[1].value ? undefined : '12321435',
-    currentPage: +currentPage,
-    itemsPerPage: +itemsPerPage,
-    maxCardsCount: sliderMaxCardsCount,
-    minCardsCount: sliderMinCardsCount,
-    name: search,
-    orderBy: tableSort,
-  })
+  const { data: minMaxCardsData, isLoading: isDeckMinMaxCardsLoading } =
+    useGetDeckMinMaxCardsQuery()
+
+  console.log(isDeckMinMaxCardsLoading)
+
+  const { data, error, isLoading } = useGetDecksQuery(
+    {
+      authorId,
+      currentPage: +currentPage,
+      itemsPerPage: +itemsPerPage,
+      maxCardsCount: sliderMaxCardsCount,
+      minCardsCount: sliderMinCardsCount,
+      name: search,
+      orderBy: tableSort,
+    },
+    { skip: !minMaxCardsData }
+  )
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
 
@@ -71,8 +79,8 @@ export const DecksPage = () => {
   const userId = 6 === 6
 
   // ----- Очистили filter при нажатии на кнопку -----
-  const clearFilterOnClickHandler = () => {
-    setSliderValues([0, 25])
+  const clearFilterHandler = () => {
+    setSliderValues([minMaxCardsData?.min ?? 0, minMaxCardsData?.max ?? 25])
     searchInputResetHandler()
     setTabValue(tabsList[1].value)
     setTableSort('updated-desc')
@@ -88,7 +96,7 @@ export const DecksPage = () => {
     return (
       <>
         <h1>Empty😣</h1>
-        <Button onClick={clearFilterOnClickHandler}>Reload</Button>
+        <Button onClick={clearFilterHandler}>Reload</Button>
       </>
     )
   }
@@ -102,7 +110,7 @@ export const DecksPage = () => {
     <Page>
       <ListHeader buttonTitle={'Add new deck'} title={'Decks List'} />
       <DeckControlBlock
-        clearFilterOnClick={clearFilterOnClickHandler}
+        clearFilterOnClick={clearFilterHandler}
         searchInputOnChange={searchInputOnChangeHandler}
         searchInputReset={searchInputResetHandler}
         searchInputValue={search}

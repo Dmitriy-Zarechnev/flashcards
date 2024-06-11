@@ -3,30 +3,25 @@ import { useForm } from 'react-hook-form'
 import { Button, Card, ModalFooter, TextField, Typography } from '@/shared'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './ForgotPassword.module.scss'
 
-import { authSchemes } from '../../../validationSchemes'
+import { ForgotPasswordFormValues, authSchemes } from '../../../validationSchemes'
 
 type ForgotPasswordProps = {
-  onSubmit: (data: FormValues) => void
+  onSubmit: (data: ForgotPasswordFormValues) => void
 }
-
-const validationSchema = authSchemes.forgotPassword
-
-type FormValues = z.infer<typeof validationSchema>
 
 export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
   const {
     control,
     formState: { isSubmitting },
     handleSubmit,
-  } = useForm<FormValues>({
+  } = useForm<ForgotPasswordFormValues>({
     defaultValues: {
       email: '',
     },
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(authSchemes.forgotPassword),
   })
 
   return (
@@ -54,6 +49,7 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
       <ModalFooter
         buttonChildren={'Try logging in'}
         footerText={'Did you remember your password?'}
+        linkPath={'/sign-in'}
       />
     </Card>
   )

@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
-import { authSchemes } from '@/entities/validationSchemes'
+import { SignInFormValues, authSchemes } from '@/entities/validationSchemes'
 import {
   Button,
   Card,
@@ -11,30 +12,25 @@ import {
   Typography,
 } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './SignIn.module.scss'
 
 type SingInProps = {
-  onSubmit: (data: FormValues) => void
+  onSubmit: (data: SignInFormValues) => void
 }
-
-const validationSchema = authSchemes.signIn
-
-type FormValues = z.infer<typeof validationSchema>
 
 export const SignIn = ({ onSubmit }: SingInProps) => {
   const {
     control,
     formState: { isSubmitting },
     handleSubmit,
-  } = useForm<FormValues>({
+  } = useForm<SignInFormValues>({
     defaultValues: {
       email: '',
       password: '',
       rememberMe: false,
     },
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(authSchemes.signIn),
   })
 
   return (
@@ -59,7 +55,7 @@ export const SignIn = ({ onSubmit }: SingInProps) => {
             Remember me
           </ControlledCheckbox>
 
-          <Typography.Body2 as={'a'} className={s.forgotPasswordBox} href={'#'}>
+          <Typography.Body2 as={Link} className={s.forgotPasswordBox} to={'/recover-password'}>
             Forgot Password?
           </Typography.Body2>
         </div>
@@ -67,7 +63,11 @@ export const SignIn = ({ onSubmit }: SingInProps) => {
           Sing In
         </Button>
       </form>
-      <ModalFooter buttonChildren={'Sing Up'} footerText={"Don't have an account?"} />
+      <ModalFooter
+        buttonChildren={'Sing Up'}
+        footerText={"Don't have an account?"}
+        linkPath={'/sign-up'}
+      />
     </Card>
   )
 }

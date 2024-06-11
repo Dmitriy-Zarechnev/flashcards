@@ -3,32 +3,27 @@ import { useForm } from 'react-hook-form'
 import { Button, Card, ModalFooter, PasswordInput, TextField, Typography } from '@/shared'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './SingUp.module.scss'
 
-import { authSchemes } from '../../../validationSchemes'
+import { SignUpFormValues, authSchemes } from '../../../validationSchemes'
 
 type SingUpProps = {
-  onSubmit: (data: FormValues) => void
+  onSubmit: (data: SignUpFormValues) => void
 }
-
-const validationSchema = authSchemes.signUp
-
-type FormValues = z.infer<typeof validationSchema>
 
 export const SingUp = ({ onSubmit }: SingUpProps) => {
   const {
     control,
     formState: { isSubmitting },
     handleSubmit,
-  } = useForm<FormValues>({
+  } = useForm<SignUpFormValues>({
     defaultValues: {
       confirmPassword: '',
       email: '',
       password: '',
     },
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(authSchemes.signUp),
   })
 
   return (
@@ -62,7 +57,11 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
           Sing Up
         </Button>
       </form>
-      <ModalFooter buttonChildren={'Sing In'} footerText={'Already have an account?'} />
+      <ModalFooter
+        buttonChildren={'Sing In'}
+        footerText={'Already have an account?'}
+        linkPath={'/sign-in'}
+      />
     </Card>
   )
 }
