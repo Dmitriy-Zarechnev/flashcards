@@ -1,12 +1,21 @@
-import { flashcardsApi } from '@/services/flashcards.api'
+import { baseApi } from '@/services/base.api'
 
 import { AuthResponse, LoginArgs, LoginResponse, UpdateUserDataArgs } from './types/auth.types'
 
-const authService = flashcardsApi.injectEndpoints({
+const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<LoginResponse, LoginArgs>({
         invalidatesTags: ['Auth'],
+        async onQueryStarted(_, { queryFulfilled }) {
+          const response = await queryFulfilled
+
+          if (!response.data) {
+            return
+          }
+          localStorage.setItem('accessToken', response.data.accessToken)
+          localStorage.setItem('refreshToken', response.data.refreshToken)
+        },
         query: args => ({
           body: args,
           method: 'POST',

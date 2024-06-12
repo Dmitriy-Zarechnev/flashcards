@@ -1,4 +1,4 @@
-import { flashcardsApi } from '@/services/flashcards.api'
+import { baseApi } from '@/services/base.api'
 import {
   DefaultDeck,
   DefaultIdArg,
@@ -9,7 +9,7 @@ import {
   UpdateDeckArgs,
 } from '@/services/types/decks.types'
 
-const decksService = flashcardsApi.injectEndpoints({
+const decksService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       createDeck: builder.mutation<DefaultDeck, FormData>({
