@@ -13,8 +13,8 @@ const authService = baseApi.injectEndpoints({
           if (!response.data) {
             return
           }
-          localStorage.setItem('accessToken', response.data.accessToken)
-          localStorage.setItem('refreshToken', response.data.refreshToken)
+          localStorage.setItem('accessToken', response.data.accessToken.trim())
+          localStorage.setItem('refreshToken', response.data.refreshToken.trim())
         },
         query: args => ({
           body: args,
