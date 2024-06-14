@@ -6,7 +6,7 @@ import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useUpdateDeckMutation,
-} from '@/services/decks.service'
+} from '@/services/flow/decks.service'
 import { Button, ControlledCheckbox, IconButton, Input, Pagination, TextField } from '@/shared'
 
 //========================================================================================

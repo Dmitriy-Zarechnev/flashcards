@@ -1,4 +1,4 @@
-import { baseApi } from '@/services/base.api'
+import { flashcardsApi } from '@/services/api/flashcards.api'
 import {
   CreateCardArgs,
   DefaultIdArg,
@@ -6,7 +6,7 @@ import {
   UpdateCardArgs,
 } from '@/services/types/decks.types'
 
-const cardsService = baseApi.injectEndpoints({
+const cardsService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       createCard: builder.mutation<GetCardsResponse, CreateCardArgs>({

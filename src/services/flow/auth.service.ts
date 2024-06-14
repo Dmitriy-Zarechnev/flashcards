@@ -1,8 +1,8 @@
-import { baseApi } from '@/services/base.api'
+import { flashcardsApi } from '@/services/api/flashcards.api'
 
-import { AuthResponse, LoginArgs, LoginResponse, UpdateUserDataArgs } from './types/auth.types'
+import { AuthResponse, LoginArgs, LoginResponse, UpdateUserDataArgs } from '../types/auth.types'
 
-const authService = baseApi.injectEndpoints({
+const authService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<LoginResponse, LoginArgs>({

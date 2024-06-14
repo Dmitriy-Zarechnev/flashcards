@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const baseApi = createApi({
+export const flashcardsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.flashcards.andrii.es',
 
@@ -18,7 +18,7 @@ export const baseApi = createApi({
     },
   }),
   endpoints: () => ({}),
-  reducerPath: 'baseApi',
+  reducerPath: 'flashcardsApi',
   tagTypes: ['Decks', 'Cards', 'Auth'],
 })
 

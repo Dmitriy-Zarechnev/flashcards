@@ -1,10 +1,10 @@
-import { baseApi } from '@/services/base.api'
+import { flashcardsApi } from '@/services/api/flashcards.api'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(flashcardsApi.middleware),
   reducer: {
-    [baseApi.reducerPath]: baseApi.reducer,
+    [flashcardsApi.reducerPath]: flashcardsApi.reducer,
   },
 })
 
