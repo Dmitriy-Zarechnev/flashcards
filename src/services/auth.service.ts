@@ -6,7 +6,7 @@ const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<LoginResponse, LoginArgs>({
-        invalidatesTags: ['Auth'],
+        // invalidatesTags: ['Auth'],
         async onQueryStarted(_, { queryFulfilled }) {
           const response = await queryFulfilled
 
@@ -29,11 +29,11 @@ const authService = baseApi.injectEndpoints({
         }),
       }),
       me: builder.query<AuthResponse, void>({
-        providesTags: ['Auth'],
+        // providesTags: ['Auth'],
         query: () => '/v1/auth/me',
       }),
       updateUserData: builder.mutation<AuthResponse, UpdateUserDataArgs>({
-        invalidatesTags: ['Auth'],
+        // invalidatesTags: ['Auth'],
         query: args => ({
           body: args,
           method: 'PATCH',
