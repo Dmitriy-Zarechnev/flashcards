@@ -8,13 +8,13 @@ const authService = baseApi.injectEndpoints({
       login: builder.mutation<LoginResponse, LoginArgs>({
         // invalidatesTags: ['Auth'],
         async onQueryStarted(_, { queryFulfilled }) {
-          const response = await queryFulfilled
+          const { data } = await queryFulfilled
 
-          if (!response.data) {
+          if (!data) {
             return
           }
-          localStorage.setItem('accessToken', response.data.accessToken.trim())
-          localStorage.setItem('refreshToken', response.data.refreshToken.trim())
+          localStorage.setItem('accessToken', data.accessToken.trim())
+          localStorage.setItem('refreshToken', data.refreshToken.trim())
         },
         query: args => ({
           body: args,
@@ -30,7 +30,7 @@ const authService = baseApi.injectEndpoints({
       }),
       me: builder.query<AuthResponse, void>({
         // providesTags: ['Auth'],
-        query: () => '/v1/auth/me',
+        query: () => `/v1/auth/me`,
       }),
       updateUserData: builder.mutation<AuthResponse, UpdateUserDataArgs>({
         // invalidatesTags: ['Auth'],

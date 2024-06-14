@@ -43,7 +43,6 @@ export const DecksPage = () => {
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data: me } = useMeQuery()
 
-  console.log('🟢', me)
   const authorId = tabValue === tabsList[1].value ? me?.id : undefined
 
   const { data: minMaxCardsData, isLoading: isDeckMinMaxCardsLoading } =

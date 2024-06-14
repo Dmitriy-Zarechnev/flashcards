@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { Demo } from '@/demo/Demo'
 import {
   CardsPage,
   DecksPage,
@@ -34,6 +35,10 @@ const publicRoutes: RouteObject[] = [
 ]
 
 const privateRoutes: RouteObject[] = [
+  {
+    element: <Demo />,
+    path: '/demo',
+  },
   {
     element: <DecksPage />,
     path: '/decks',

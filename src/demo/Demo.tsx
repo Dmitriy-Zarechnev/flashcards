@@ -2,7 +2,7 @@ import { CardDeleteModal } from '@/entities'
 import { useMeQuery } from '@/services'
 
 export const Demo = () => {
-  const { data } = useMeQuery()
+  const { data: me } = useMeQuery()
 
   async function deleteCardHandler() {
     return new Promise((res, rej) => {
