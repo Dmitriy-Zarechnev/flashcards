@@ -13,6 +13,7 @@ const authService = baseApi.injectEndpoints({
           if (!data) {
             return
           }
+
           localStorage.setItem('accessToken', data.accessToken.trim())
           localStorage.setItem('refreshToken', data.refreshToken.trim())
         },
@@ -29,7 +30,7 @@ const authService = baseApi.injectEndpoints({
         }),
       }),
       me: builder.query<AuthResponse, void>({
-        // providesTags: ['Auth'],
+        providesTags: ['Auth'],
         query: () => `/v1/auth/me`,
       }),
       updateUserData: builder.mutation<AuthResponse, UpdateUserDataArgs>({
