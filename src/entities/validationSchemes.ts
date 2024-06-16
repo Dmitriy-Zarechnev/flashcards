@@ -33,8 +33,8 @@ const editProfileFormPanel = z.object({
 
 const deck = z.object({
   cover: z.any(),
+  isPrivate: z.boolean(),
   name,
-  private: z.boolean(),
 })
 
 const card = z.object({

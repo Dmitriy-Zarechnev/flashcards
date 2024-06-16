@@ -78,12 +78,13 @@ export type GetDecksArgs = {
   orderBy?: string
 }
 
-export type UpdateDeckArgs = {
-  cover?: string
-  id: string
-  isPrivate: boolean // по дефолту поставить false
-  name: string // валидация описана в апишке
+export type CreateDeckArgs = {
+  cover?: File | null
+  isPrivate: boolean
+  name: string
 }
+
+export type UpdateDeckArgs = CreateDeckArgs & DefaultIdArg
 
 export type CreateCardArgs = {
   answer: string

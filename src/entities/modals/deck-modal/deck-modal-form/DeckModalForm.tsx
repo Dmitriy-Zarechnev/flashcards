@@ -23,8 +23,8 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
   const { control, handleSubmit, setValue } = useForm<DeckFormValues>({
     defaultValues: {
       cover: '',
+      isPrivate: deckData?.isPrivate || false,
       name: deckData?.name || '',
-      private: deckData?.private || false,
     },
     resolver: zodResolver(modalSchemes.deck),
   })
@@ -34,13 +34,29 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
   }
 
   function deleteImageHandler() {
-    setValue('cover', '')
+    // setValue('cover', '')
+    // если отправим на бек null, значит хотим именно удалить существующую каритнку
+    setValue('cover', null)
   }
 
-  async function submitHandler(data: DeckFormValues) {
+  async function submitHandler({ cover, isPrivate, name }: DeckFormValues) {
     setIsSubmitting(true)
     try {
-      await onSubmit(data)
+      // сравним то что пришло с сервера, и что заполнил пользователь
+      // если пользователь не поменял свойство, то не будем отправлять его с запросом
+      const args = {} as DeckFormValues
+
+      if (deckData?.cover !== cover) {
+        args.cover = cover
+      }
+      if (deckData?.isPrivate !== isPrivate) {
+        args.isPrivate = isPrivate
+      }
+      if (deckData?.name !== name) {
+        args.name = name
+      }
+
+      await onSubmit(args)
       closeModal?.()
     } catch (error) {
       setIsSubmitting(false)
@@ -59,7 +75,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
 
       <TextField control={control} label={'Name Pack'} name={'name'} type={'text'} />
 
-      <ControlledCheckbox control={control} name={'private'}>
+      <ControlledCheckbox control={control} name={'isPrivate'}>
         Private Deck
       </ControlledCheckbox>
 

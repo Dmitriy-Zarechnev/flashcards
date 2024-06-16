@@ -11,7 +11,7 @@ export const CreateDeckDemoPage = () => {
 
     formData.append('cover', data.cover)
     formData.append('name', data.name)
-    formData.append('isPrivate', data.private.toString())
+    formData.append('isPrivate', data.isPrivate.toString())
 
     await createDeck(formData)
   }

@@ -1,26 +1,27 @@
-import { useLoginMutation, useMeQuery } from '@/services'
+import { DeckFormValues, DeckModal } from '@/entities'
+import { useCreateDeckMutation, useGetDeckByIdQuery, useUpdateDeckMutation } from '@/services'
 
 export const Demo = () => {
-  const [login] = useLoginMutation()
-  const { data: me, refetch: refetchMe } = useMeQuery()
+  const [createDeck] = useCreateDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
 
-  async function onSubmitHandler() {
-    await login({
-      email: 'test@test.com',
-      password: 'test',
-      rememberMe: false,
-    })
-    refetchMe()
+  const { data } = useGetDeckByIdQuery({ id: 'clxhuia0k02x3pb01h00qgotg' })
+
+  console.log(data)
+
+  async function onSubmit({ cover, isPrivate, name }: DeckFormValues) {
+    // при создании м
+    await createDeck({ cover, isPrivate, name })
+  }
+
+  async function onUpdate(data: DeckFormValues) {
+    await updateDeck({ id: 'clxhuia0k02x3pb01h00qgotg', ...data })
   }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', rowGap: '20px' }}>
-      <button onClick={onSubmitHandler} style={{ background: 'green' }}>
-        AUTH
-      </button>
-      <button onClick={() => refetchMe()} style={{ background: 'green' }}>
-        ME
-      </button>
+      <DeckModal onSubmit={onSubmit} variant={'add'} />
+      <DeckModal deckData={data} onSubmit={onUpdate} variant={'edit'} />
     </div>
   )
 }
