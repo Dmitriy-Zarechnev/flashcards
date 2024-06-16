@@ -55,7 +55,7 @@ const privateRoutes: RouteObject[] = [
 
 //========================================================================================
 
-const routes = createBrowserRouter([
+export const routes = createBrowserRouter([
   {
     children: privateRoutes,
     element: <PrivateRoutes />,

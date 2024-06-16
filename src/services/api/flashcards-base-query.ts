@@ -1,3 +1,4 @@
+import { routes } from '@/app'
 import {
   BaseQueryFn,
   FetchArgs,
@@ -16,15 +17,16 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: headers => {
     const token = localStorage.getItem('accessToken')
 
+    // для запроса refresh-token нам не нужно заменять headers
+    // если не писать это условие, то мы будем вместо refresh-token
+    // отправолять access-token
     if (headers.get('Authorization')) {
-      return headers
+      return
     }
 
     if (token) {
       headers.set('Authorization', `Bearer ${token}`)
     }
-
-    // return headers
   },
 })
 
@@ -51,32 +53,44 @@ export const baseQueryWithReauth: BaseQueryFn<
         // почему метод post? потому что мы отправляем старый токен, он банится на сервере
         // и нам приходит уже новый токен
 
-        const refreshToken = localStorage.geiItem('refreshToken')
+        const refreshToken = localStorage.getItem('refreshToken')
 
-        const argsForRefreshToken = {
-          // нужно поменять headers
-          headers: {
-            Authorization: `Bearer ${refreshToken}`,
+        // нужно поменять headers
+        // так как header ожидает refresh-token а не access-token, чтобы отправиться его на сервер
+        const refreshResult = (await baseQuery(
+          {
+            headers: {
+              Authorization: `Bearer ${refreshToken}`,
+            },
+            method: 'POST',
+            url: '/v2/auth/refresh-token',
           },
-          method: 'POST',
-          // так как header ожидает refresh-token а не access-token, чтобы отправиться его на сервер
-          url: '/v2/auth/refresh-token',
-        }
-        const refreshResult = await baseQuery(argsForRefreshToken, api, extraOptions)
+          api,
+          extraOptions
+        )) as any
 
-        if (refreshResult.data) {
-          api.dispatch(tokenReceived(refreshResult.data))
-          // retry the initial query
-          result = await baseQuery(args, api, extraOptions)
+        if (
+          refreshResult.data &&
+          typeof refreshResult.data === 'object' &&
+          'accessToken' in refreshResult.data &&
+          'refreshToken' in refreshResult.data &&
+          typeof refreshResult.data.accessToken === 'string' &&
+          typeof refreshResult.data.refreshToken === 'string'
+        ) {
+          localStorage.setItem('accessToken', refreshResult.data.accessToken.trim())
+          localStorage.setItem('refreshToken', refreshResult.data.refreshToken.trim())
+
+          // делаем повтореный запрос уже с новыми токенами
+          await baseQuery(args, api, extraOptions)
         } else {
-          api.dispatch(loggedOut())
+          // если нет рефрешь токена, то и результата не придет, значит перенаправим на логинизацию
+          await routes.navigate('/sign-in')
         }
       } finally {
-        // release must be called once the mutex should be released again.
         release()
       }
     } else {
-      // wait until the mutex is available without locking it
+      // относится к mutex => просто скипаем
       await mutex.waitForUnlock()
       result = await baseQuery(args, api, extraOptions)
     }
