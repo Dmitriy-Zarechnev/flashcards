@@ -1,20 +1,26 @@
-import { CardDeleteModal } from '@/entities'
+import { useLoginMutation, useMeQuery } from '@/services'
 
 export const Demo = () => {
-  async function deleteCardHandler() {
-    return new Promise((res, rej) => {
-      // setTimeout(() => {
-      //   res('DELETED')
-      // }, 3000)
-      setTimeout(() => {
-        rej('NOT DELETED')
-      }, 2000)
+  const [login] = useLoginMutation()
+  const { data: me, refetch: refetchMe } = useMeQuery()
+
+  async function onSubmitHandler() {
+    await login({
+      email: 'test@test.com',
+      password: 'test',
+      rememberMe: false,
     })
+    refetchMe()
   }
 
   return (
-    <div>
-      <CardDeleteModal cardName={'CARD NAME'} deleteCb={deleteCardHandler} />
+    <div style={{ display: 'flex', flexDirection: 'column', rowGap: '20px' }}>
+      <button onClick={onSubmitHandler} style={{ background: 'green' }}>
+        AUTH
+      </button>
+      <button onClick={() => refetchMe()} style={{ background: 'green' }}>
+        ME
+      </button>
     </div>
   )
 }
