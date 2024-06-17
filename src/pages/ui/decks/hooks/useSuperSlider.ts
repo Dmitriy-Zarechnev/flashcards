@@ -7,7 +7,7 @@ export const useSuperSlider = () => {
   const { data: minMaxCardsData = { max: 30, min: 0 } } = useGetDeckMinMaxCardsQuery()
 
   // Дефолтные значения
-  const defaultMax = Math.ceil((minMaxCardsData.max ?? 5) / 2)
+  const defaultMax = Math.ceil(minMaxCardsData.max / 2)
   const defaultSliderValues = [0, defaultMax]
 
   // State для вызова перерисовки при изменении slider values

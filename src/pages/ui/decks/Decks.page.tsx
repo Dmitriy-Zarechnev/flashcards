@@ -10,7 +10,9 @@ import {
   useMeQuery,
   useUpdateDeckMutation,
 } from '@/services'
-import { Button, DeckControlBlock, DecksTable, ListHeader, Page, Pagination } from '@/shared'
+import { DeckControlBlock, DecksTable, ListHeader, Page, Pagination, Typography } from '@/shared'
+
+import s from './Decks.page.module.scss'
 
 export const DecksPage = () => {
   // ----- Хук для работы пагинации и с url-ом -----
@@ -88,16 +90,6 @@ export const DecksPage = () => {
     return <h1>Loading...</h1>
   }
 
-  // ----- Показывать страницу при пустых данных -----
-  if (data?.items.length === 0) {
-    return (
-      <>
-        <h1>Empty😣</h1>
-        <Button onClick={clearFilterHandler}>Reload</Button>
-      </>
-    )
-  }
-
   // ----- Показывать страницу с ошибкой -----
   if (error) {
     return <div>Error: {JSON.stringify(error)}</div>
@@ -118,23 +110,31 @@ export const DecksPage = () => {
         tabValueChange={tabValueChangeHandler}
         tabsData={tabsList}
       />
-      <DecksTable
-        clickDeleteDeck={deleteDeckHandler}
-        clickUpdateDeck={updateDeckHandler}
-        decks={data?.items}
-        playFunction={playDeckHandler}
-        sortTableOnClick={sortTableOnClickHandler}
-        tableSort={tableSort}
-        userId={userId}
-      />
-      <Pagination
-        count={data?.pagination.totalPages || 0}
-        onChange={handleCurrentPage}
-        onPerPageChange={handlePerPage}
-        page={+currentPage}
-        perPage={+itemsPerPage}
-        perPageOptions={optionsItemsPerPage}
-      />
+      {data?.items.length !== 0 ? (
+        <>
+          <DecksTable
+            clickDeleteDeck={deleteDeckHandler}
+            clickUpdateDeck={updateDeckHandler}
+            decks={data?.items}
+            playFunction={playDeckHandler}
+            sortTableOnClick={sortTableOnClickHandler}
+            tableSort={tableSort}
+            userId={userId}
+          />
+          <Pagination
+            count={data?.pagination.totalPages || 0}
+            onChange={handleCurrentPage}
+            onPerPageChange={handlePerPage}
+            page={+currentPage}
+            perPage={+itemsPerPage}
+            perPageOptions={optionsItemsPerPage}
+          />
+        </>
+      ) : (
+        <Typography.H2 className={s.filterErrorPage}>
+          No content with these terms...🤬
+        </Typography.H2>
+      )}
     </Page>
   )
 }
