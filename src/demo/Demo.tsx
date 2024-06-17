@@ -5,7 +5,7 @@ export const Demo = () => {
   const [createDeck] = useCreateDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
 
-  const { data } = useGetDeckByIdQuery({ id: 'clxhuia0k02x3pb01h00qgotg' })
+  const { data } = useGetDeckByIdQuery({ id: 'clxivq8an03cfpb01lijvljnx' })
 
   console.log(data)
 
@@ -15,7 +15,7 @@ export const Demo = () => {
   }
 
   async function onUpdate(data: DeckFormValues) {
-    await updateDeck({ id: 'clxhuia0k02x3pb01h00qgotg', ...data })
+    await updateDeck({ id: 'clxivq8an03cfpb01lijvljnx', ...data })
   }
 
   return (

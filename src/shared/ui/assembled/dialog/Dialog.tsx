@@ -18,18 +18,47 @@ type DialogProps = {
 
 export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
   const [isShown, setShown] = useState(false)
+  // ждя избежания закрытия окна, если пользователь кликнул внутри модальки, а отжал кнопку вне модалки
+  // для реализации функции => handleMouseDown | handleMouseUp
+  const [isMouseDownInside, setMouseDownInside] = useState(false)
 
   function show() {
     setShown(true)
   }
 
-  function close(event: MouseEvent) {
+  function handleMouseDown(event: MouseEvent) {
+    // если клинкули по клику внутри модальки, т.е. у тега, которого есть `.${s.card}`
+    const card = (event.target as HTMLElement).closest(`.${s.card}`)
+
+    // если клинкули по модалке
+    if (card) {
+      setMouseDownInside(true)
+    } else {
+      setMouseDownInside(false)
+    }
+  }
+
+  function handleMouseUp(event: MouseEvent) {
+    // если клинкули по клику внутри модальки, т.е. у тега, которого есть `.${s.card}`
+    const card = (event.target as HTMLElement).closest(`.${s.card}`)
+
+    // елси данный клик не по модалке и НАЧАЛЬНОЕ НАЖАТИЕ было не внутри модалки
+    if (!card && !isMouseDownInside) {
+      // то закрываем окно
+      setShown(false)
+    }
+
+    // клик начался внутри и закончился внутри => вернуть стейт в начальное состояние
+    setMouseDownInside(false)
+  }
+
+  function closeHandler(event: MouseEvent) {
     event.stopPropagation()
     setShown(false)
   }
 
   /**  для отправки cb-fnc закрытия окна в форму, которая сюда придет как children
-       !!! children только как один тег !!! */
+   !!! children только как один тег !!! */
   const enhancedChildren = cloneElement(children as ReactElement, {
     closeModal: () => {
       setShown(false)
@@ -40,7 +69,12 @@ export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
     <div onClick={show} {...rest}>
       {trigger}
       {isShown && (
-        <div className={s.overlay} onClick={close}>
+        <div
+          className={s.overlay}
+          onClick={handleMouseUp}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
           <Card
             className={s.card}
             fullWidth={false}
@@ -52,7 +86,7 @@ export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
               <IconButton
                 height={'14px'}
                 iconId={'dialogClose'}
-                onClick={close}
+                onClick={closeHandler}
                 viewBox={'0 0 12 12'}
                 width={'14px'}
               />
