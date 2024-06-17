@@ -31,8 +31,7 @@ export const DecksPage = () => {
   )
 
   // ----- Хук для работы со слайдером -----
-  const { setSliderValues, sliderMaxCardsCount, sliderMinCardsCount, sliderValueChangeHandler } =
-    useSuperSlider()
+  const { minMaxData, setSliderValues, sliderValueChangeHandler, sliderValues } = useSuperSlider()
 
   // ----- Хук для работы с tabs -----
   const { setTabValue, tabValue, tabValueChangeHandler, tabsList } = useSuperTabs()
@@ -40,28 +39,21 @@ export const DecksPage = () => {
   // ----- Хук для работы с сортировкой -----
   const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperDecksSort()
 
+  // const { data: me } = useMeQuery()
+  //
+  // const authorId = tabValue === tabsList[1].value ? me?.id : undefined
+
   // ----- Блок работы с запросом на сервер и получения данных -----
-  const { data: me } = useMeQuery()
+  const { data, error, isLoading } = useGetDecksQuery({
+    //authorId,
+    currentPage: +currentPage,
+    itemsPerPage: +itemsPerPage,
+    maxCardsCount: sliderValues[1],
+    minCardsCount: sliderValues[0],
+    name: search,
+    orderBy: tableSort,
+  })
 
-  const authorId = tabValue === tabsList[1].value ? me?.id : undefined
-
-  const { data: minMaxCardsData, isLoading: isDeckMinMaxCardsLoading } =
-    useGetDeckMinMaxCardsQuery()
-
-  console.log(isDeckMinMaxCardsLoading)
-
-  const { data, error, isLoading } = useGetDecksQuery(
-    {
-      authorId,
-      currentPage: +currentPage,
-      itemsPerPage: +itemsPerPage,
-      maxCardsCount: sliderMaxCardsCount,
-      minCardsCount: sliderMinCardsCount,
-      name: search,
-      orderBy: tableSort,
-    },
-    { skip: !minMaxCardsData }
-  )
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
 
@@ -79,7 +71,7 @@ export const DecksPage = () => {
 
   // ----- Очистили filter при нажатии на кнопку -----
   const clearFilterHandler = () => {
-    setSliderValues([minMaxCardsData?.min ?? 0, minMaxCardsData?.max ?? 25])
+    setSliderValues([0, 25])
     searchInputResetHandler()
     setTabValue(tabsList[1].value)
     setTableSort('updated-desc')
@@ -110,11 +102,12 @@ export const DecksPage = () => {
       <ListHeader buttonTitle={'Add new deck'} title={'Decks List'} />
       <DeckControlBlock
         clearFilterOnClick={clearFilterHandler}
+        minMaxData={minMaxData}
         searchInputOnChange={searchInputOnChangeHandler}
         searchInputReset={searchInputResetHandler}
         searchInputValue={search}
-        sliderValue={[sliderMinCardsCount, sliderMaxCardsCount]}
         sliderValueChange={sliderValueChangeHandler}
+        sliderValues={sliderValues}
         tabValue={tabValue}
         tabValueChange={tabValueChangeHandler}
         tabsData={tabsList}

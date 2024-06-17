@@ -1,13 +1,20 @@
 import { useState } from 'react'
 
-export const useSuperSlider = () => {
-  const [sliderValues, setSliderValues] = useState([0, 25])
+import { useGetDeckMinMaxCardsQuery } from '@/services'
 
-  const [sliderMinCardsCount, sliderMaxCardsCount] = sliderValues
+export const useSuperSlider = () => {
+  const { data: minMaxData = { max: 30, min: 0 } } = useGetDeckMinMaxCardsQuery()
+
+  const [sliderValues, setSliderValues] = useState([0, 25])
 
   const sliderValueChangeHandler = (value: number[]) => {
     setSliderValues(value)
   }
 
-  return { setSliderValues, sliderMaxCardsCount, sliderMinCardsCount, sliderValueChangeHandler }
+  return {
+    minMaxData,
+    setSliderValues,
+    sliderValueChangeHandler,
+    sliderValues,
+  }
 }
