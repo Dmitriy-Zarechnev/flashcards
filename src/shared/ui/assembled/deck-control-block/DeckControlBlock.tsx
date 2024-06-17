@@ -8,7 +8,7 @@ import s from './DeckControlBlock.module.scss'
 
 type DeckControlBlockProps = {
   clearFilterOnClick: () => void
-  minMaxData: GetDeckMinMaxCardsResponse
+  minMaxCardsData: GetDeckMinMaxCardsResponse
   searchInputOnChange: (value: string) => void
   searchInputReset: () => void
   searchInputValue: string
@@ -21,7 +21,7 @@ type DeckControlBlockProps = {
 
 export const DeckControlBlock = ({
   clearFilterOnClick,
-  minMaxData,
+  minMaxCardsData,
   searchInputOnChange,
   searchInputReset,
   searchInputValue,
@@ -57,8 +57,8 @@ export const DeckControlBlock = ({
       <div className={s.sliderBox}>
         <Typography.Body2>Number of cards</Typography.Body2>
         <SliderComponent
-          max={minMaxData.max}
-          min={minMaxData.min}
+          max={minMaxCardsData.max}
+          min={minMaxCardsData.min}
           onValueChange={sliderValueChange}
           value={[sliderValues[0], sliderValues[1]]}
         />

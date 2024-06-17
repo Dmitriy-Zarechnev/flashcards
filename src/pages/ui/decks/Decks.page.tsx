@@ -31,7 +31,8 @@ export const DecksPage = () => {
   )
 
   // ----- Хук для работы со слайдером -----
-  const { minMaxData, setSliderValues, sliderValueChangeHandler, sliderValues } = useSuperSlider()
+  const { minMaxCardsData, setSliderValues, sliderValueChangeHandler, sliderValues } =
+    useSuperSlider()
 
   // ----- Хук для работы с tabs -----
   const { setTabValue, tabValue, tabValueChangeHandler, tabsList } = useSuperTabs()
@@ -102,7 +103,7 @@ export const DecksPage = () => {
       <ListHeader buttonTitle={'Add new deck'} title={'Decks List'} />
       <DeckControlBlock
         clearFilterOnClick={clearFilterHandler}
-        minMaxData={minMaxData}
+        minMaxCardsData={minMaxCardsData}
         searchInputOnChange={searchInputOnChangeHandler}
         searchInputReset={searchInputResetHandler}
         searchInputValue={search}
