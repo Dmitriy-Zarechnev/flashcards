@@ -88,10 +88,10 @@ export type UpdateDeckArgs = CreateDeckArgs & DefaultIdArg
 
 export type CreateCardArgs = {
   answer: string
-  answerImg?: string
+  answerImg?: File | null
   answerVideo?: string
   question: string
-  questionImg?: string
+  questionImg?: File | null
   questionVideo?: string
 } & DefaultIdArg
 

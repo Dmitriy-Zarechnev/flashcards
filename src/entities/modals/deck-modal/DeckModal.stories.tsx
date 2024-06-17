@@ -22,6 +22,7 @@ type Story = StoryObj<typeof DeckModal>
 function onFulfilled(data: DeckFormValues) {
   return new Promise(res => {
     setTimeout(() => {
+      console.log(data)
       alert('Data is submitted')
       res(data)
     }, 1500)
@@ -39,8 +40,8 @@ function onRejected(data: DeckFormValues) {
 }
 
 const DeckDataFromServer = {
+  isPrivate: true,
   name: 'Name from server',
-  private: true,
 }
 
 export const AddNewDeck: Story = {

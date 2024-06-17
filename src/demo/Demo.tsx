@@ -9,9 +9,9 @@ export const Demo = () => {
 
   console.log(data)
 
-  async function onSubmit({ cover, isPrivate, name }: DeckFormValues) {
+  async function onSubmit(data: DeckFormValues) {
     // при создании м
-    await createDeck({ cover, isPrivate, name })
+    await createDeck({ ...data })
   }
 
   async function onUpdate(data: DeckFormValues) {

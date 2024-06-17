@@ -14,7 +14,10 @@ import pictureDefaultCover from './../../../../shared/assets/deck-default-cover.
 
 type CardModalFormProps = {
   btnTitle: string
-  cardData?: Omit<CreateCardArgs, 'id'>
+  cardData?: { answerImg?: string; questionImg?: string } & Omit<
+    CreateCardArgs,
+    'answerImg' | 'id' | 'questionImg'
+  >
   closeModal?: () => void
   onSubmit: (data: CardFormValues) => Promise<any>
 }
@@ -64,10 +67,31 @@ export const CardModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Card
     setValue('answerImg', '')
   }
 
-  async function submitHandler(data: CardFormValues) {
+  async function submitHandler({ answer, answerImg, question, questionImg }: CardFormValues) {
     setIsSubmitting(true)
     try {
-      await onSubmit(data)
+      // сравним то что пришло с сервера, и что заполнил пользователь
+      // если пользователь не поменял свойство, то не будем отправлять его с запросом
+      const args = {} as CardFormValues
+
+      if (cardData?.question !== question) {
+        args.question = question
+      }
+      if (cardData?.answer !== answer) {
+        args.answer = answer
+      }
+
+      if (isPictureMode) {
+        if (cardData?.answerImg !== answerImg) {
+          args.answerImg = answerImg
+        }
+        if (cardData?.questionImg !== questionImg) {
+          args.questionImg = questionImg
+        }
+      }
+
+      await onSubmit(args)
+
       closeModal?.()
     } catch (error) {
       setIsSubmitting(false)

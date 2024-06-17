@@ -4,7 +4,10 @@ import { CreateCardArgs } from '@/services'
 import { Button, Dialog } from '@/shared'
 
 type CardModalProps = {
-  cardData?: Omit<CreateCardArgs, 'id'>
+  cardData?: { answerImg?: string; questionImg?: string } & Omit<
+    CreateCardArgs,
+    'answerImg' | 'id' | 'questionImg'
+  >
   onSubmit: (data: CardFormValues) => Promise<any>
   variant: 'add' | 'edit'
 }
