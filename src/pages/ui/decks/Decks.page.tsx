@@ -5,7 +5,6 @@ import { useSuperSlider } from '@/pages/ui/decks/hooks/useSuperSlider'
 import { useSuperTabs } from '@/pages/ui/decks/hooks/useSuperTabs'
 import {
   useDeleteDeckMutation,
-  useGetDeckMinMaxCardsQuery,
   useGetDecksQuery,
   useMeQuery,
   useUpdateDeckMutation,
@@ -47,13 +46,13 @@ export const DecksPage = () => {
   // ----- Хук для работы с сортировкой -----
   const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperDecksSort()
 
-  // const { data: me } = useMeQuery()
-  //
-  // const authorId = tabValue === tabsList[1].value ? me?.id : undefined
+  // ----- Запрос для моего id -----
+  const { data: me } = useMeQuery()
+  const authorId = tabValue === tabsList[0].value ? me?.id : undefined
 
   // ----- Блок работы с запросом на сервер и получения данных -----
   const { data, error, isLoading } = useGetDecksQuery({
-    //authorId,
+    authorId,
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
     maxCardsCount: sliderValues[1],
@@ -75,7 +74,6 @@ export const DecksPage = () => {
   const playDeckHandler = () => {}
 
   // ----- Проверка по id и изменение отображения компоненты -----
-  const userId = 6 === 6
 
   // ----- Очистили filter при нажатии на кнопку -----
   const clearFilterHandler = () => {
@@ -83,6 +81,9 @@ export const DecksPage = () => {
     searchInputResetHandler()
     setTabValue(tabsList[1].value)
     setTableSort('updated-desc')
+
+    searchParams.set('currentPage', '1')
+    setSearchParams(searchParams)
   }
 
   // ----- Показывать Loader -----
@@ -119,7 +120,7 @@ export const DecksPage = () => {
             playFunction={playDeckHandler}
             sortTableOnClick={sortTableOnClickHandler}
             tableSort={tableSort}
-            userId={userId}
+            userId={authorId}
           />
           <Pagination
             count={data?.pagination.totalPages || 0}

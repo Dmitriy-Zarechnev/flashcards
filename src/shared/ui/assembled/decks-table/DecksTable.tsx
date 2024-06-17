@@ -13,7 +13,7 @@ type DecksTableProps = {
   playFunction: () => void
   sortTableOnClick: (title: string) => void
   tableSort: string
-  userId: boolean
+  userId?: string
 }
 
 export const DecksTable = ({
@@ -83,7 +83,7 @@ export const DecksTable = ({
                 <IconButtons
                   editFunction={() => clickUpdateDeck(deck.id)}
                   playFunction={() => playFunction()}
-                  showEditButtons={userId}
+                  showEditButtons={userId === deck.author.id}
                   showPlayButton
                   trashFunction={() => clickDeleteDeck(deck.id)}
                 />
