@@ -31,8 +31,13 @@ export const DecksPage = () => {
   )
 
   // ----- Хук для работы со слайдером -----
-  const { minMaxCardsData, setSliderValues, sliderValueChangeHandler, sliderValues } =
-    useSuperSlider()
+  const {
+    defaultSliderValues,
+    minMaxCardsData,
+    setSliderValues,
+    sliderValueChangeHandler,
+    sliderValues,
+  } = useSuperSlider()
 
   // ----- Хук для работы с tabs -----
   const { setTabValue, tabValue, tabValueChangeHandler, tabsList } = useSuperTabs()
@@ -72,7 +77,7 @@ export const DecksPage = () => {
 
   // ----- Очистили filter при нажатии на кнопку -----
   const clearFilterHandler = () => {
-    setSliderValues([0, 25])
+    setSliderValues(defaultSliderValues)
     searchInputResetHandler()
     setTabValue(tabsList[1].value)
     setTableSort('updated-desc')

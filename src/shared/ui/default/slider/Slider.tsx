@@ -11,12 +11,12 @@ export const SliderComponent = ({
   max,
   min,
   onValueChange,
-  value = [0, 25],
+  value,
   ...rest
 }: SliderComponentProps) => {
   return (
     <div className={s.sliderWrapper}>
-      <Typography.Body1 className={s.sliderText}>{value[0]}</Typography.Body1>
+      <Typography.Body1 className={s.sliderText}>{value?.[0]}</Typography.Body1>
       <Slider.Root
         className={s.sliderRoot}
         defaultValue={[0, 25]}
@@ -34,7 +34,7 @@ export const SliderComponent = ({
         <Slider.Thumb className={s.sliderThumb} />
         <Slider.Thumb className={s.sliderThumb} />
       </Slider.Root>
-      <Typography.Body1 className={s.sliderText}>{value[1]}</Typography.Body1>
+      <Typography.Body1 className={s.sliderText}>{value?.[1]}</Typography.Body1>
     </div>
   )
 }
