@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom'
+
 import { Deck } from '@/services'
 import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './DecksTable.module.scss'
 
-import defImg from './../../../assets/deck-default-cover.webp'
+import defImg from './../../../assets/card-default-cover.webp'
 
 type DecksTableProps = {
   clickDeleteDeck: (id: string) => void
@@ -59,9 +61,9 @@ export const DecksTable = ({
             <Tables.TableRow key={deck.id}>
               <Tables.TableBodyCell>
                 <ImgBlock
-                  as={'a'}
-                  href={'#'}
+                  as={Link}
                   title={deck.name}
+                  to={`/decks/${deck.id}`}
                   url={deck.cover || defImg}
                   wd={'250px'}
                 />

@@ -123,11 +123,12 @@ export const CardsPage = () => {
 
   // ----- Проверка по id и изменение отображения компоненты -----
   const userId = 6 === 6
+
   // ----- Блок работы с запросом на сервер и получения данных -----
   //const [skip, setSkip] = useState(true)
 
   const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId })
-  const { data: cardsData } = useGetCardsQuery({ id: deckId })
+  const { data: cardsData, isLoading } = useGetCardsQuery({ id: deckId })
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
   // const [createCard] = useCreateCardMutation()
@@ -142,6 +143,11 @@ export const CardsPage = () => {
 
   const updateCardHandler = (id: string) => {
     updateCard({ id })
+  }
+
+  // ----- Показывать Loader -----
+  if (isLoading) {
+    return <h1>Loading...</h1>
   }
 
   // const createCardHandler = (id: string) => {

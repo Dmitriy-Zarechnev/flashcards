@@ -73,9 +73,7 @@ export const DecksPage = () => {
 
   const playDeckHandler = () => {}
 
-  // ----- Проверка по id и изменение отображения компоненты -----
-
-  // ----- Очистили filter при нажатии на кнопку -----
+  // ----- Очистили filters при нажатии на кнопку -----
   const clearFilterHandler = () => {
     setSliderValues(defaultSliderValues)
     searchInputResetHandler()
