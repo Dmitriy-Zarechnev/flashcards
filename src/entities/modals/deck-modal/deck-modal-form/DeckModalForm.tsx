@@ -19,6 +19,7 @@ type DeckModalFormProps = {
 
 export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: DeckModalFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [imageURL, setImageURL] = useState<string | undefined>(deckData?.cover) // Сохраняем URL изображения в состоянии
 
   const { control, handleSubmit, setValue } = useForm<DeckFormValues>({
     defaultValues: {
@@ -30,10 +31,18 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
   })
 
   function handleImageChange(file: File) {
+    const newImageURL = URL.createObjectURL(file)
+
+    setImageURL(newImageURL) // Обновляем URL в состоянии
     setValue('cover', file)
   }
 
   function deleteImageHandler() {
+    if (imageURL) {
+      // удаляем изображение, чтобы оно не оставлось в памяти браузера
+      URL.revokeObjectURL(imageURL)
+      setImageURL(undefined)
+    }
     // setValue('cover', '')
     // если отправим на бек null, значит хотим именно удалить существующую каритнку
     setValue('cover', null)
@@ -46,7 +55,11 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
       // если пользователь не поменял свойство, то не будем отправлять его с запросом
       const args = {} as DeckFormValues
 
-      if (deckData?.cover !== cover) {
+      // если сс ервера пришла дека без картинки, то будет undefined
+      // если картинки не было, пользователь её добавит, и удалит, то засетается null
+      // и получиться что undefined !== null и полетит запрос с cover:null
+      // т.е. картинки там и не было, а мы её еще удаляем... поэтому => deckData?.cover !== undefined
+      if (deckData?.cover !== cover && deckData?.cover !== undefined) {
         args.cover = cover
       }
       if (deckData?.isPrivate !== isPrivate) {
@@ -57,6 +70,10 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
       }
 
       await onSubmit(args)
+      if (imageURL) {
+        URL.revokeObjectURL(imageURL) // Освобождаем URL после отправки формы
+        setImageURL(undefined)
+      }
       closeModal?.()
     } catch (error) {
       setIsSubmitting(false)

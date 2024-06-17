@@ -29,6 +29,11 @@ export const PictureInput = ({
   }
 
   function deleteImageHandler() {
+    // Если уже было выбрано изображение, освобождаем его URL
+    if (selectedImage) {
+      URL.revokeObjectURL(selectedImage)
+    }
+
     setSelectedImage(undefined)
     deleteImageHandlerCb()
     if (fileInputRef.current) {
@@ -38,6 +43,11 @@ export const PictureInput = ({
 
   function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
+      // Освобождаем предыдущий URL, если он существует
+      if (selectedImage) {
+        URL.revokeObjectURL(selectedImage)
+      }
+
       const newImageUI = URL.createObjectURL(event.target.files[0])
 
       setSelectedImage(newImageUI)
