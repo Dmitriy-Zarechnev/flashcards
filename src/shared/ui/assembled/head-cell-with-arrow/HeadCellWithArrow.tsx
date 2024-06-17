@@ -7,7 +7,7 @@ import s from './HeadCellWithArrow.module.scss'
 
 type HeadCellWithArrowProps = {
   arrowDirection?: boolean
-  sortTableOnClick: () => void
+  sortTableOnClick?: () => void
   title: string
 } & ComponentPropsWithoutRef<'div'>
 

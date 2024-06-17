@@ -20,7 +20,7 @@ export type Deck = {
   author: Author
 } & DefaultDeck
 
-type Card = {
+export type Card = {
   answer: string
   answerImg: string
   answerVideo: string

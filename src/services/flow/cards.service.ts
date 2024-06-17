@@ -25,11 +25,15 @@ const cardsService = flashcardsApi.injectEndpoints({
           url: `v1/cards/${id}`,
         }),
       }),
-      getCards: builder.query<GetCardsResponse[], DefaultIdArg>({
+      getCards: builder.query<any, DefaultIdArg>({
         providesTags: ['Cards'],
-        query: id => ({
+        query: ({ id }) => ({
           method: 'GET',
-          params: id,
+
+          // params: {
+          //   ...(args ?? {}),
+          //   name: args?.name ?? undefined,
+          // },
           url: `v1/cards/${id}`,
         }),
       }),

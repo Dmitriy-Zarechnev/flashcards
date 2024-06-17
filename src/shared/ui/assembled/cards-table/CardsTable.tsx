@@ -1,4 +1,4 @@
-import { GetCardsResponse } from '@/services'
+import { Card } from '@/services/types/decks.types'
 import {
   HeadCellWithArrow,
   IconButtons,
@@ -15,10 +15,10 @@ import s from './CardsTable.module.scss'
 import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {
-  cardTableSort: SortValue
-  cards: GetCardsResponse[]
+  cardTableSort?: SortValue
+  cards?: Card[]
   editFunction: (id: string) => void
-  sortOnClick: (sortValue: SortValue) => void
+  sortOnClick?: (sortValue: SortValue) => void
   trashFunction: (id: string) => void
   userId: boolean
 }
@@ -27,7 +27,6 @@ export const CardsTable = ({
   cardTableSort,
   cards,
   editFunction,
-  sortOnClick,
   trashFunction,
   userId,
 }: CardsTableProps) => {
@@ -37,22 +36,22 @@ export const CardsTable = ({
         <Tables.TableRow>
           <HeadCellWithArrow
             arrowDirection={cardTableSort !== 'question'}
-            sortTableOnClick={() => sortOnClick('question')}
+            //sortTableOnClick={() => sortOnClick('question')}
             title={'Question'}
           />
           <HeadCellWithArrow
             arrowDirection={cardTableSort !== 'answer'}
-            sortTableOnClick={() => sortOnClick('answer')}
+            //sortTableOnClick={() => sortOnClick('answer')}
             title={'Answer'}
           />
           <HeadCellWithArrow
             arrowDirection={cardTableSort !== 'updated'}
-            sortTableOnClick={() => sortOnClick('updated')}
+            //sortTableOnClick={() => sortOnClick('updated')}
             title={'Last Updated'}
           />
           <HeadCellWithArrow
             arrowDirection={cardTableSort !== 'grade'}
-            sortTableOnClick={() => sortOnClick('grade')}
+            //sortTableOnClick={() => sortOnClick('grade')}
             title={'Grade'}
           />
           {userId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
@@ -60,7 +59,7 @@ export const CardsTable = ({
       </Tables.TableHead>
 
       <Tables.TableBody>
-        {cards.map(card => {
+        {cards?.map(card => {
           return (
             <Tables.TableRow key={card.id}>
               <Tables.TableBodyCell>
