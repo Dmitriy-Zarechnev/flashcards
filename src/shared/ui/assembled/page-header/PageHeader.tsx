@@ -20,15 +20,15 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ i
   return (
     <header ref={ref}>
       <div className={s.wrapper}>
-        <Link to={'/decks'}>
+        <a href={'/decks'}>
           <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
-        </Link>
+        </a>
 
         {isSingUp ? (
           <div className={s.profileInfo}>
-            <Link to={'/profile'}>
+            <a href={'/profile'}>
               <Typography.Subtitle1>{data?.name}</Typography.Subtitle1>
-            </Link>
+            </a>
             <DropdownProfile
               email={data?.email ?? 'user@yandex.com'}
               name={data?.name ?? 'User'}

@@ -16,7 +16,6 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
-import { Layout } from '@/shared'
 
 //========================================================================================
 
@@ -66,11 +65,7 @@ export const routes = createBrowserRouter([
 ])
 
 export function Router() {
-  return (
-    <Layout>
-      <RouterProvider router={routes} />
-    </Layout>
-  )
+  return <RouterProvider router={routes} />
 }
 
 //========================================================================================
