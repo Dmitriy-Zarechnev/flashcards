@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Button, DropdownProfile, Typography } from '@/shared'
 
@@ -22,7 +23,10 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ i
   return (
     <header ref={ref}>
       <div className={s.wrapper}>
-        <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
+        <Link to={'/decks'}>
+          <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
+        </Link>
+
         {isSingUp ? (
           <div className={s.profileInfo}>
             <Typography.Subtitle1>{profile.name}</Typography.Subtitle1>

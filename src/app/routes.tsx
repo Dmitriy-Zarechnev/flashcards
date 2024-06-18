@@ -16,6 +16,7 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
+import { Layout } from '@/shared'
 
 //========================================================================================
 
@@ -58,7 +59,11 @@ const privateRoutes: RouteObject[] = [
 export const routes = createBrowserRouter([
   {
     children: privateRoutes,
-    element: <PrivateRoutes />,
+    element: (
+      <Layout>
+        <PrivateRoutes />
+      </Layout>
+    ),
     errorElement: <Error404 />,
   },
   ...publicRoutes,
