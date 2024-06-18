@@ -59,18 +59,18 @@ const privateRoutes: RouteObject[] = [
 export const routes = createBrowserRouter([
   {
     children: privateRoutes,
-    element: (
-      <Layout>
-        <PrivateRoutes />
-      </Layout>
-    ),
+    element: <PrivateRoutes />,
     errorElement: <Error404 />,
   },
   ...publicRoutes,
 ])
 
 export function Router() {
-  return <RouterProvider router={routes} />
+  return (
+    <Layout>
+      <RouterProvider router={routes} />
+    </Layout>
+  )
 }
 
 //========================================================================================

@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { fn } from '@storybook/test'
+
 import { DecksTable } from './'
 
 const meta = {
@@ -10,7 +12,7 @@ const meta = {
 } satisfies Meta<typeof DecksTable>
 
 export default meta
-type Story = StoryObj<typeof DecksTable>
+type Story = StoryObj<typeof meta>
 
 const decks = [
   {
@@ -43,33 +45,43 @@ const decks = [
   },
 ]
 
-const MyWrapper = () => {
-  return (
-    <DecksTable
-      clickDeleteDeck={() => {}}
-      clickUpdateDeck={() => {}}
-      decks={decks}
-      playFunction={() => {}}
-      userId
-    />
-  )
-}
+// const MyWrapper = () => {
+//   return (
+//     <DecksTable
+//       clickDeleteDeck={() => {}}
+//       clickUpdateDeck={() => {}}
+//       decks={decks}
+//       playFunction={() => {}}
+//       userId
+//     />
+//   )
+// }
 
 export const DefaultMyDecksTable: Story = {
-  render: () => <MyWrapper />,
+  args: {
+    authorId: 'true',
+    cards: decks,
+    clickDeleteDeck: fn(),
+    clickUpdateDeck: fn(),
+    editFunction: fn(),
+    playFunction: fn(),
+    sortTableOnClick: fn(),
+    tableSort: '',
+    trashFunction: fn(),
+  },
 }
 
-const YourWrapper = () => {
-  return (
-    <DecksTable
-      clickDeleteDeck={() => {}}
-      clickUpdateDeck={() => {}}
-      decks={decks}
-      playFunction={() => {}}
-      userId={false}
-    />
-  )
-}
+// const YourWrapper = () => {
+//   return (
+//     <DecksTable
+//       clickDeleteDeck={() => {}}
+//       clickUpdateDeck={() => {}}
+//       decks={decks}
+//       playFunction={() => {}}
+//       userId={false}
+//     />
+//   )
+// }
 
 export const DefaultYourDecksTable: Story = {
   render: () => <YourWrapper />,

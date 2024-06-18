@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { fn } from '@storybook/test'
+
 import { CardsTable } from './'
 
 const meta = {
@@ -10,7 +12,8 @@ const meta = {
 } satisfies Meta<typeof CardsTable>
 
 export default meta
-type Story = StoryObj<typeof CardsTable>
+type Story = StoryObj<typeof meta>
+
 const mockCardsData = [
   {
     answer: 'Столица Франции - Париж.',
@@ -59,27 +62,24 @@ const mockCardsData = [
   },
 ]
 
-const MyWrapper = () => {
-  return (
-    <CardsTable cards={mockCardsData} editFunction={() => {}} trashFunction={() => {}} userId />
-  )
-}
-
 export const DefaultMyCardsTable: Story = {
-  render: () => <MyWrapper />,
-}
-
-const YourWrapper = () => {
-  return (
-    <CardsTable
-      cards={mockCardsData}
-      editFunction={() => {}}
-      trashFunction={() => {}}
-      userId={false}
-    />
-  )
+  args: {
+    authorId: true,
+    cards: mockCardsData,
+    editFunction: fn(),
+    sortTableOnClick: fn(),
+    tableSort: '',
+    trashFunction: fn(),
+  },
 }
 
 export const DefaultYourCardsTable: Story = {
-  render: () => <YourWrapper />,
+  args: {
+    authorId: false,
+    cards: mockCardsData,
+    editFunction: fn(),
+    sortTableOnClick: fn(),
+    tableSort: '',
+    trashFunction: fn(),
+  },
 }
