@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { HeaderAvatar } from './'
+import profileImage from './Dropdown.webp'
 
 const meta = {
   argTypes: {},
@@ -10,12 +11,20 @@ const meta = {
 } satisfies Meta<typeof HeaderAvatar>
 
 export default meta
-type Story = StoryObj<typeof HeaderAvatar>
-
-const MyWrapper = () => {
-  return <HeaderAvatar />
-}
+type Story = StoryObj<typeof meta>
 
 export const DefaultHeaderAvatar: Story = {
-  render: () => <MyWrapper />,
+  args: {
+    name: 'Hello',
+    photo: profileImage,
+    photoDescription: 'Phototo',
+  },
+}
+
+export const HeaderAvatarWithoutPhoto: Story = {
+  args: {
+    name: 'Hello',
+    photo: '',
+    photoDescription: 'Phototo',
+  },
 }

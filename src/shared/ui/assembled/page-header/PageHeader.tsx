@@ -6,7 +6,7 @@ import { Button, DropdownProfile, Typography } from '@/shared'
 
 import s from './PageHeader.module.scss'
 
-import profileImage from '../dropdown-profile/Dropdown.webp'
+import img from './Dropdown.webp'
 import logo from './Logo.png'
 
 type PageHeaderProps = {
@@ -32,7 +32,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ i
             <DropdownProfile
               email={data?.email ?? 'user@yandex.com'}
               name={data?.name ?? 'User'}
-              photo={data?.avatar ?? profileImage}
+              photo={data?.avatar ?? img}
               photoDescription={`${data?.name} - avatar`}
             />
           </div>
