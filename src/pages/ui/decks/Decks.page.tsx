@@ -25,7 +25,7 @@ export const DecksPage = () => {
     setSearchParams,
   } = useSuperPagination([5, 10, 15, 20])
 
-  // ----- Хук для работы с поиском по названию -----
+  // ----- Хук для работы с поиском по названию колоды -----
   const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperSearch(
     searchParams,
     setSearchParams
@@ -46,7 +46,7 @@ export const DecksPage = () => {
   // ----- Хук для работы с сортировкой -----
   const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperSort()
 
-  // ----- Запрос для моего id -----
+  // ----- Запрос для получения id пользователя -----
   const { data: me } = useMeQuery()
   const authorId = tabValue === tabsList[0].value ? me?.id : undefined
 
@@ -61,6 +61,7 @@ export const DecksPage = () => {
     orderBy: tableSort,
   })
 
+  // ----- Блок работы с удалением и редактированием колод -----
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
 
@@ -70,7 +71,6 @@ export const DecksPage = () => {
   const deleteDeckHandler = (id: string) => {
     deleteDeck({ id })
   }
-
   const playDeckHandler = () => {}
 
   // ----- Очистили filters при нажатии на кнопку -----

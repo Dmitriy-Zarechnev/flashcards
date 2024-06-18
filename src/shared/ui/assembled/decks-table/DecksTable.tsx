@@ -48,6 +48,7 @@ export const DecksTable = ({
           />
           <HeadCellWithArrow
             arrowDirection={tableSort !== 'created-asc'}
+            className={s.cellWidth}
             sortTableOnClick={() => sortTableOnClick('created')}
             title={'Created by'}
           />

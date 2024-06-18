@@ -54,13 +54,17 @@ export const CardsPage = () => {
 
   // ----- Запросили deck по id чтобы получить cover и name -----
   const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId })
-  // ----- Запрос для моего id -----
+  // ----- Запрос для получения id пользователя -----
   const { data: me } = useMeQuery()
-  // ----- Проверка по id и изменение отображения компоненты -----
-  const authorId = deckByIdData?.userId === me?.id ?? false
+  // ----- Проверка id и изменение отображения компоненты -----
+  const authorId = deckByIdData?.userId === me?.id
 
   // ----- Запросили cards используя deck.id  -----
-  const { data: cardsData, isLoading } = useGetCardsQuery({
+  const {
+    data: cardsData,
+    error,
+    isLoading,
+  } = useGetCardsQuery({
     currentPage: +currentPage,
     id: deckId,
     itemsPerPage: +itemsPerPage,
@@ -68,7 +72,7 @@ export const CardsPage = () => {
     question: search,
   })
 
-  // ----- Удаление и изменение колоды -----
+  // ----- Блок работы с удалением и редактированием карточек в колоде -----
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
   // const [createCard] = useCreateCardMutation()
@@ -76,20 +80,23 @@ export const CardsPage = () => {
   const deleteCardHandler = (id: string) => {
     deleteCard({ id })
   }
-
   const updateCardHandler = (id: string) => {
     updateCard({ id })
   }
+  // const createCardHandler = (id: string) => {
+  //   createCard({ answer: 'why&', id, question: 'because' })
+  //   console.log('createCard')
+  // }
 
   // ----- Показывать Loader -----
   if (isLoading) {
     return <h1>Loading...</h1>
   }
 
-  // const createCardHandler = (id: string) => {
-  //   createCard({ answer: 'why&', id, question: 'because' })
-  //   console.log('createCard')
-  // }
+  // ----- Показывать страницу с ошибкой -----
+  if (error) {
+    return <div>Error: {JSON.stringify(error)}</div>
+  }
 
   return (
     <Page mt={'24px'}>
