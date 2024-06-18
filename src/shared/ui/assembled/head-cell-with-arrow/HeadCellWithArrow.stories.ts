@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { HeadCellWithArrow } from './index'
+import { HeadCellWithArrow } from './'
 
 const meta = {
   argTypes: {},
