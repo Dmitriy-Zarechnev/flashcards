@@ -9,23 +9,23 @@ import s from './DecksTable.module.scss'
 import defImg from './../../../assets/card-default-cover.webp'
 
 type DecksTableProps = {
+  authorId?: string
   clickDeleteDeck: (id: string) => void
   clickUpdateDeck: (id: string) => void
   decks?: Deck[]
   playFunction: () => void
   sortTableOnClick: (title: string) => void
   tableSort: string
-  userId?: string
 }
 
 export const DecksTable = ({
+  authorId,
   clickDeleteDeck,
   clickUpdateDeck,
   decks,
   playFunction,
   sortTableOnClick,
   tableSort,
-  userId,
 }: DecksTableProps) => {
   return (
     <Tables.Table>
@@ -85,7 +85,7 @@ export const DecksTable = ({
                 <IconButtons
                   editFunction={() => clickUpdateDeck(deck.id)}
                   playFunction={() => playFunction()}
-                  showEditButtons={userId === deck.author.id}
+                  showEditButtons={authorId === deck.author.id}
                   showPlayButton
                   trashFunction={() => clickDeleteDeck(deck.id)}
                 />

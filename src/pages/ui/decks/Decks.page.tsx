@@ -112,13 +112,13 @@ export const DecksPage = () => {
       {data?.items.length !== 0 ? (
         <>
           <DecksTable
+            authorId={authorId}
             clickDeleteDeck={deleteDeckHandler}
             clickUpdateDeck={updateDeckHandler}
             decks={data?.items}
             playFunction={playDeckHandler}
             sortTableOnClick={sortTableOnClickHandler}
             tableSort={tableSort}
-            userId={authorId}
           />
           <Pagination
             count={data?.pagination.totalPages || 0}

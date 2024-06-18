@@ -7,21 +7,21 @@ import s from './CardsTable.module.scss'
 import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {
+  authorId?: boolean
   cards?: Card[]
   editFunction: (id: string) => void
   sortTableOnClick: (title: string) => void
   tableSort: string
   trashFunction: (id: string) => void
-  userId: boolean
 }
 
 export const CardsTable = ({
+  authorId,
   cards,
   editFunction,
   sortTableOnClick,
   tableSort,
   trashFunction,
-  userId,
 }: CardsTableProps) => {
   return (
     <Tables.Table>
@@ -47,7 +47,7 @@ export const CardsTable = ({
             sortTableOnClick={() => sortTableOnClick('grade')}
             title={'Grade'}
           />
-          {userId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
+          {authorId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
         </Tables.TableRow>
       </Tables.TableHead>
 
@@ -71,7 +71,7 @@ export const CardsTable = ({
                 <Rating rating={card.grade} />
               </Tables.TableBodyCell>
 
-              {userId && (
+              {authorId && (
                 <Tables.TableBodyCell>
                   <IconButtons
                     editFunction={() => editFunction(card.id)}

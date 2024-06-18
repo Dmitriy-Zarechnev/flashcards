@@ -8,6 +8,7 @@ import {
   useDeleteCardMutation,
   useGetCardsQuery,
   useGetDeckByIdQuery,
+  useMeQuery,
   useUpdateCardMutation,
 } from '@/services'
 import {
@@ -53,24 +54,19 @@ export const CardsPage = () => {
 
   // ----- Запросили deck по id чтобы получить cover и name -----
   const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId })
+  // ----- Запрос для моего id -----
+  const { data: me } = useMeQuery()
+  // ----- Проверка по id и изменение отображения компоненты -----
+  const authorId = deckByIdData?.userId === me?.id ?? false
 
   // ----- Запросили cards используя deck.id  -----
-  const { data: cardsData, isLoading } = useGetCardsQuery(
-    //{ id: deckId },
-    {
-      //authorId: 'qew',
-      currentPage: +currentPage,
-      id: deckId,
-      itemsPerPage: +itemsPerPage,
-      orderBy: tableSort,
-      question: search,
-    }
-  )
-
-  console.log(cardsData)
-
-  // ----- Проверка по id и изменение отображения компоненты -----
-  const userId = 6 === 6
+  const { data: cardsData, isLoading } = useGetCardsQuery({
+    currentPage: +currentPage,
+    id: deckId,
+    itemsPerPage: +itemsPerPage,
+    orderBy: tableSort,
+    question: search,
+  })
 
   // ----- Удаление и изменение колоды -----
   const [deleteCard] = useDeleteCardMutation()
@@ -99,9 +95,9 @@ export const CardsPage = () => {
     <Page mt={'24px'}>
       <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <ListHeader
-        buttonTitle={userId ? 'Add new card' : 'Learn to Pack'}
+        buttonTitle={authorId ? 'Add new card' : 'Learn to Pack'}
         title={deckByIdData?.name ?? 'Super Deck'}
-        userId={userId}
+        userId={authorId}
       />
       <img alt={`Deck picture`} className={s.deckImg} src={deckByIdData?.cover ?? defDeckImg} />
       <SearchInput
@@ -114,12 +110,12 @@ export const CardsPage = () => {
       {cardsData?.items.length !== 0 ? (
         <>
           <CardsTable
+            authorId={authorId}
             cards={cardsData?.items}
             editFunction={updateCardHandler}
             sortTableOnClick={sortTableOnClickHandler}
             tableSort={tableSort}
             trashFunction={deleteCardHandler}
-            userId={userId}
           />
           <Pagination
             count={cardsData?.pagination.totalPages || 0}
