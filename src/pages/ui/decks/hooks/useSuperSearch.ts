@@ -2,7 +2,7 @@ export const useSuperSearch = (
   searchParams: URLSearchParams,
   setSearchParams: (newSearchParams: URLSearchParams) => void
 ) => {
-  // Создали переменную для поиска
+  // Создали переменную поиска
   const search = searchParams.get('search') ?? ''
 
   // Реагируем на изменение value в input

@@ -1,7 +1,7 @@
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
-import { useSuperDecksSort } from '@/pages/ui/decks/hooks/useSuperDecksSort'
 import { useSuperSearch } from '@/pages/ui/decks/hooks/useSuperSearch'
 import { useSuperSlider } from '@/pages/ui/decks/hooks/useSuperSlider'
+import { useSuperSort } from '@/pages/ui/decks/hooks/useSuperSort'
 import { useSuperTabs } from '@/pages/ui/decks/hooks/useSuperTabs'
 import {
   useDeleteDeckMutation,
@@ -44,7 +44,7 @@ export const DecksPage = () => {
   const { setTabValue, tabValue, tabValueChangeHandler, tabsList } = useSuperTabs()
 
   // ----- Хук для работы с сортировкой -----
-  const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperDecksSort()
+  const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperSort()
 
   // ----- Запрос для моего id -----
   const { data: me } = useMeQuery()

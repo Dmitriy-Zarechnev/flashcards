@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/ui/decks/hooks/useSuperSearch'
+import { useSuperSort } from '@/pages/ui/decks/hooks/useSuperSort'
 import {
   useDeleteCardMutation,
   useGetCardsQuery,
@@ -47,6 +48,9 @@ export const CardsPage = () => {
     searchInputOnChangeHandler(e.currentTarget.value)
   }
 
+  // ----- Хук для работы с сортировкой -----
+  const { sortTableOnClickHandler, tableSort } = useSuperSort()
+
   // ----- Запросили deck по id чтобы получить cover и name -----
   const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId })
 
@@ -58,37 +62,20 @@ export const CardsPage = () => {
       currentPage: +currentPage,
       id: deckId,
       itemsPerPage: +itemsPerPage,
+      orderBy: tableSort,
       question: search,
-      //name: search,
-      //orderBy: tableSort,
     }
   )
 
   console.log(cardsData)
 
-  // // ----- Хук который необходим для работы пагинации и с url-ом -----
-  // const { searchParams, setSearchParams } = useSuperPagination([5, 10, 15])
-  //
-  // // ----- Хук для работы с поиском по названию вопроса -----
-  // const { cardsQuestionSearch, data, search, searchTextResetHandler, setData } =
-  //   useSuperCardsSearch(mockCardsData, searchParams, setSearchParams)
-
-  // // ----- Хук для работы с сортировкой -----
-  // const { cardTableSort, sortOnClickHandler } = useSuperCardsSort(mockCardsData, setData)
-
   // ----- Проверка по id и изменение отображения компоненты -----
   const userId = 6 === 6
 
-  // ----- Блок работы с запросом на сервер и получения данных -----
-  //const [skip, setSkip] = useState(true)
-
+  // ----- Удаление и изменение колоды -----
   const [deleteCard] = useDeleteCardMutation()
   const [updateCard] = useUpdateCardMutation()
   // const [createCard] = useCreateCardMutation()
-
-  // if (!skip) {
-  //   console.log('Cards', data)
-  // }
 
   const deleteCardHandler = (id: string) => {
     deleteCard({ id })
@@ -127,10 +114,10 @@ export const CardsPage = () => {
       {cardsData?.items.length !== 0 ? (
         <>
           <CardsTable
-            //cardTableSort={cardTableSort}
             cards={cardsData?.items}
             editFunction={updateCardHandler}
-            //sortOnClick={sortOnClickHandler}
+            sortTableOnClick={sortTableOnClickHandler}
+            tableSort={tableSort}
             trashFunction={deleteCardHandler}
             userId={userId}
           />

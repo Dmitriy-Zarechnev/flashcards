@@ -1,13 +1,5 @@
 import { Card } from '@/services/types/decks.types'
-import {
-  HeadCellWithArrow,
-  IconButtons,
-  ImgBlock,
-  Rating,
-  SortValue,
-  Tables,
-  Typography,
-} from '@/shared'
+import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './CardsTable.module.scss'
@@ -15,18 +7,19 @@ import s from './CardsTable.module.scss'
 import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {
-  cardTableSort?: SortValue
   cards?: Card[]
   editFunction: (id: string) => void
-  sortOnClick?: (sortValue: SortValue) => void
+  sortTableOnClick: (title: string) => void
+  tableSort: string
   trashFunction: (id: string) => void
   userId: boolean
 }
 
 export const CardsTable = ({
-  cardTableSort,
   cards,
   editFunction,
+  sortTableOnClick,
+  tableSort,
   trashFunction,
   userId,
 }: CardsTableProps) => {
@@ -35,23 +28,23 @@ export const CardsTable = ({
       <Tables.TableHead>
         <Tables.TableRow>
           <HeadCellWithArrow
-            arrowDirection={cardTableSort !== 'question'}
-            //sortTableOnClick={() => sortOnClick('question')}
+            arrowDirection={tableSort !== 'question-asc'}
+            sortTableOnClick={() => sortTableOnClick('question')}
             title={'Question'}
           />
           <HeadCellWithArrow
-            arrowDirection={cardTableSort !== 'answer'}
-            //sortTableOnClick={() => sortOnClick('answer')}
+            arrowDirection={tableSort !== 'answer-asc'}
+            sortTableOnClick={() => sortTableOnClick('answer')}
             title={'Answer'}
           />
           <HeadCellWithArrow
-            arrowDirection={cardTableSort !== 'updated'}
-            //sortTableOnClick={() => sortOnClick('updated')}
+            arrowDirection={tableSort !== 'updated-asc'}
+            sortTableOnClick={() => sortTableOnClick('updated')}
             title={'Last Updated'}
           />
           <HeadCellWithArrow
-            arrowDirection={cardTableSort !== 'grade'}
-            //sortTableOnClick={() => sortOnClick('grade')}
+            arrowDirection={tableSort !== 'grade-asc'}
+            sortTableOnClick={() => sortTableOnClick('grade')}
             title={'Grade'}
           />
           {userId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
