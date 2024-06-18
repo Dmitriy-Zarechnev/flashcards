@@ -2,7 +2,6 @@
 export * from './assets/card-default-cover.webp'
 
 // ============================== [ types ] ===========================================
-export type { SortValue } from './types/sortValue.types'
 
 // ============================== [ ui ] ===========================================
 export * from './ui'
