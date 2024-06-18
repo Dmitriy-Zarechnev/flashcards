@@ -1,121 +1,68 @@
+import { ChangeEvent } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
-import { useSuperCardsSearch } from '@/pages/ui/cards/hooks/useSuperCardsSearch'
-import { useSuperCardsSort } from '@/pages/ui/cards/hooks/useSuperCardsSort'
+import { useSuperSearch } from '@/pages/ui/decks/hooks/useSuperSearch'
 import {
   useDeleteCardMutation,
   useGetCardsQuery,
   useGetDeckByIdQuery,
   useUpdateCardMutation,
 } from '@/services'
-import { BackToDecks, CardsTable, ListHeader, Page, SearchInput, Typography } from '@/shared'
+import {
+  BackToDecks,
+  CardsTable,
+  ListHeader,
+  Page,
+  Pagination,
+  SearchInput,
+  Typography,
+} from '@/shared'
 import defDeckImg from '@/shared/assets/card-default-cover.webp'
 
 import s from './Cards.page.module.scss'
 
-const mockCardsData = [
-  {
-    answer: 'Столица Франции - Париж.',
-    answerImg: '',
-    answerVideo: 'https://example.com/answer-video.mp4',
-    created: '2024-06-02T12:00:00.000Z',
-    deckId: 'deck-456hgf',
-    grade: 5,
-    id: 'card-12dsd3',
-    question: 'Морская',
-    questionImg: '',
-    questionVideo: 'https://example.com/question-video.mp4',
-    shots: 3,
-    updated: '2024-06-03T15:30:00.000Z',
-    userId: 'user-789asa',
-  },
-  {
-    answer: 'Столица Франции - Париж.',
-    answerImg: '',
-    answerVideo: 'https://example.com/answer-video.mp4',
-    created: '2024-06-02T12:00:00.000Z',
-    deckId: 'deck-4dsd56',
-    grade: 5,
-    id: 'card-123fasww',
-    question: 'Самая высокая гора в мире - Эверест.',
-    questionImg: '',
-    questionVideo: 'https://example.com/question-video.mp4',
-    shots: 3,
-    updated: '2024-06-03T15:30:00.000Z',
-    userId: 'user-789sad',
-  },
-  {
-    answer: 'Самая высокая гора в мире - Эверест.',
-    answerImg: '',
-    answerVideo: '',
-    created: '2024-04-15T09:20:00.000Z',
-    deckId: 'deck-78asd9',
-    grade: 4,
-    id: 'card-456dsad',
-    question: 'Какая гора является самой высокой в мире?',
-    questionImg: '',
-    questionVideo: '',
-    shots: 5,
-    updated: '2024-04-18T11:35:00.000Z',
-    userId: 'user-32asd1',
-  },
-  {
-    answer: 'Столица Франции - Париж.',
-    answerImg: '',
-    answerVideo: 'https://example.com/answer-video.mp4',
-    created: '2024-06-02T12:00:00.000Z',
-    deckId: 'deck-456sad',
-    grade: 5,
-    id: 'card-123asfsa',
-    question: 'Морская',
-    questionImg: '',
-    questionVideo: 'https://example.com/question-video.mp4',
-    shots: 3,
-    updated: '2024-06-03T15:30:00.000Z',
-    userId: 'user-789sa',
-  },
-  {
-    answer: 'Столица Франции - Париж.',
-    answerImg: '',
-    answerVideo: 'https://example.com/answer-video.mp4',
-    created: '2024-06-02T12:00:00.000Z',
-    deckId: 'deck-4das56',
-    grade: 5,
-    id: 'card-123fasfasd',
-    question: 'Самая высокая гора в мире - Эверест.',
-    questionImg: '',
-    questionVideo: 'https://example.com/question-video.mp4',
-    shots: 3,
-    updated: '2024-06-03T15:30:00.000Z',
-    userId: 'user-789ddd',
-  },
-  {
-    answer: 'Самая высокая гора в мире - Эверест.',
-    answerImg: '',
-    answerVideo: '',
-    created: '2024-04-15T09:20:00.000Z',
-    deckId: 'deck-78asfd9',
-    grade: 4,
-    id: 'card-443556',
-    question: 'Какая гора является самой высокой в мире?',
-    questionImg: '',
-    questionVideo: '',
-    shots: 5,
-    updated: '2024-04-18T11:35:00.000Z',
-    userId: 'user-32ss1',
-  },
-]
-
 export const CardsPage = () => {
+  // ----- Достали deck id из url-а -----
   const params = useParams()
   const deckId = params.deckId ?? ''
+
+  // ----- Хук для работы пагинации и с url-ом -----
+  const {
+    currentPage,
+    handleCurrentPage,
+    handlePerPage,
+    itemsPerPage,
+    optionsItemsPerPage,
+    searchParams,
+    setSearchParams,
+  } = useSuperPagination([5, 10, 15])
+
+  // ----- Хук и функция для работы с поиском по вопросу -----
+  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperSearch(
+    searchParams,
+    setSearchParams
+  )
+  const searchQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    searchInputOnChangeHandler(e.currentTarget.value)
+  }
 
   // ----- Запросили deck по id чтобы получить cover и name -----
   const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId })
 
   // ----- Запросили cards используя deck.id  -----
-  const { data: cardsData, isLoading } = useGetCardsQuery({ id: deckId })
+  const { data: cardsData, isLoading } = useGetCardsQuery(
+    //{ id: deckId },
+    {
+      //authorId: 'qew',
+      currentPage: +currentPage,
+      id: deckId,
+      itemsPerPage: +itemsPerPage,
+      question: search,
+      //name: search,
+      //orderBy: tableSort,
+    }
+  )
 
   console.log(cardsData)
 
@@ -172,10 +119,10 @@ export const CardsPage = () => {
       <img alt={`Deck picture`} className={s.deckImg} src={deckByIdData?.cover ?? defDeckImg} />
       <SearchInput
         className={s.searchInput}
-        //onChange={e => cardsQuestionSearch(e.currentTarget.value)}
-        placeholder={'Find your question'}
-        // searchTextResetHandler={searchTextResetHandler}
-        // value={search}
+        onChange={searchQuestionHandler}
+        placeholder={'Look for the question that you need'}
+        searchTextResetHandler={searchInputResetHandler}
+        value={search}
       />
       {cardsData?.items.length !== 0 ? (
         <>
@@ -187,14 +134,14 @@ export const CardsPage = () => {
             trashFunction={deleteCardHandler}
             userId={userId}
           />
-          {/*<Pagination*/}
-          {/*  count={paginationCount}*/}
-          {/*  onChange={handleCurrentPage}*/}
-          {/*  onPerPageChange={handlePerPage}*/}
-          {/*  page={+currentPage}*/}
-          {/*  perPage={+itemsPerPage}*/}
-          {/*  perPageOptions={optionsItemsPerPage}*/}
-          {/*/>*/}
+          <Pagination
+            count={cardsData?.pagination.totalPages || 0}
+            onChange={handleCurrentPage}
+            onPerPageChange={handlePerPage}
+            page={+currentPage}
+            perPage={+itemsPerPage}
+            perPageOptions={optionsItemsPerPage}
+          />
         </>
       ) : (
         <Typography.H2 className={s.filterErrorPage}>

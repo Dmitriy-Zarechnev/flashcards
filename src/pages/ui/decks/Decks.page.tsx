@@ -1,6 +1,6 @@
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
-import { useSuperDecksSearch } from '@/pages/ui/decks/hooks/useSuperDecksSearch'
 import { useSuperDecksSort } from '@/pages/ui/decks/hooks/useSuperDecksSort'
+import { useSuperSearch } from '@/pages/ui/decks/hooks/useSuperSearch'
 import { useSuperSlider } from '@/pages/ui/decks/hooks/useSuperSlider'
 import { useSuperTabs } from '@/pages/ui/decks/hooks/useSuperTabs'
 import {
@@ -26,7 +26,7 @@ export const DecksPage = () => {
   } = useSuperPagination([5, 10, 15, 20])
 
   // ----- Хук для работы с поиском по названию -----
-  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperDecksSearch(
+  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperSearch(
     searchParams,
     setSearchParams
   )
