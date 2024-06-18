@@ -56,7 +56,8 @@ export const CardModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Card
   }
 
   function deleteQuestionImageHandler() {
-    setValue('questionImg', '')
+    // если отправим на бек null, значит хотим именно удалить существующую каритнку
+    setValue('questionImg', null)
   }
 
   function handleAnswerImageChange(file: File) {
@@ -64,7 +65,8 @@ export const CardModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Card
   }
 
   function deleteAnswerImageHandler() {
-    setValue('answerImg', '')
+    // если отправим на бек null, значит хотим именно удалить существующую каритнку
+    setValue('answerImg', null)
   }
 
   async function submitHandler({ answer, answerImg, question, questionImg }: CardFormValues) {

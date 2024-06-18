@@ -19,8 +19,13 @@ export const PictureInput = ({
   handleImageChangeCb,
   pictureDefaultCover,
 }: PictureInputProps) => {
+  /* Локальное состояние нужно для реактивного отслеживания и отображения URL изображения.
+     Ref нужен для управления поведением скрытого <input type="file"> */
+
   const [selectedImage, setSelectedImage] = useState<string | undefined>(coverFromServer)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  /* почему ref а не локлаьное состояние? при работе с input, если мы будем работать через локальное состояние
+     то при замене blob-картинки приедтся перерисовывать компоненту, использование ref помогает избежать перерисовки */
 
   function handleButtonClick() {
     if (fileInputRef.current !== null) {
@@ -28,14 +33,23 @@ export const PictureInput = ({
     }
   }
 
-  function deleteImageHandler() {
-    // Если уже было выбрано изображение, освобождаем его URL
+  function deleteBlob() {
+    // удаляем изображение из памяти по ссылке
     if (selectedImage) {
       URL.revokeObjectURL(selectedImage)
     }
+  }
 
+  function deleteImageHandler() {
+    deleteBlob()
+
+    // удаляем саму ссылку на изображение из локального стейта
     setSelectedImage(undefined)
+
+    // удалям картинку в форме
     deleteImageHandlerCb()
+
+    // удаляем предыдущее значение в input
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -43,11 +57,9 @@ export const PictureInput = ({
 
   function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
-      // Освобождаем предыдущий URL, если он существует
-      if (selectedImage) {
-        URL.revokeObjectURL(selectedImage)
-      }
+      deleteBlob()
 
+      // генерация новой blob-картинки
       const newImageUI = URL.createObjectURL(event.target.files[0])
 
       setSelectedImage(newImageUI)
