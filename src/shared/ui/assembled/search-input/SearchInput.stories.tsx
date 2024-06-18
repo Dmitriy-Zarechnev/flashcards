@@ -16,6 +16,12 @@ export const DefaultSearchInput: Story = {
   args: {},
 }
 
+export const DefaultSearchInputWithButton: Story = {
+  args: {
+    value: '12',
+  },
+}
+
 export const DisabledSearchInput: Story = {
   args: {
     disabled: true,

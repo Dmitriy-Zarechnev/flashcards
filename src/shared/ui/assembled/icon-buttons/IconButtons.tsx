@@ -6,11 +6,11 @@ import { clsx } from 'clsx'
 import s from './IconButtons.module.scss'
 
 type IconButtonsProps = {
-  editFunction: () => void
+  editFunction?: () => void
   playFunction?: () => void
   showEditButtons?: boolean
   showPlayButton?: boolean
-  trashFunction: () => void
+  trashFunction?: () => void
 } & ComponentPropsWithoutRef<'div'>
 
 export const IconButtons = ({

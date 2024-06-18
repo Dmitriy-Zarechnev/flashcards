@@ -10,28 +10,20 @@ const meta = {
 } satisfies Meta<typeof ListHeader>
 
 export default meta
-type Story = StoryObj<typeof ListHeader>
-
-const MyWrapper = () => {
-  return <ListHeader buttonTitle={'Add new card'} title={'My Deck'} userId />
-}
+type Story = StoryObj<typeof meta>
 
 export const DefaultMyListHeader: Story = {
-  render: () => <MyWrapper />,
-}
-
-const FriendWrapper = () => {
-  return <ListHeader buttonTitle={'Learn to Pack'} title={'Friend’s Deck'} userId={false} />
+  args: {
+    buttonTitle: 'Add new card',
+    title: 'My Deck',
+    userId: true,
+  },
 }
 
 export const DefaultFriendListHeader: Story = {
-  render: () => <FriendWrapper />,
-}
-
-const DeckWrapper = () => {
-  return <ListHeader buttonTitle={'Add new deck'} title={'Decks List'} />
-}
-
-export const DefaultDeckListHeader: Story = {
-  render: () => <DeckWrapper />,
+  args: {
+    buttonTitle: 'Learn to Pack',
+    title: 'Friend’s Deck',
+    userId: false,
+  },
 }

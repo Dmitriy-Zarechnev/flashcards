@@ -1,10 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { RouterDecorator } from '@/shared/utils/RouterDecorator'
+
 import { ModalFooter } from './'
 
 const meta = {
   argTypes: {},
   component: ModalFooter,
+  decorators: [RouterDecorator],
   tags: ['autodocs'],
   title: '🟢UI/Assembled/ModalFooter',
 } satisfies Meta<typeof ModalFooter>

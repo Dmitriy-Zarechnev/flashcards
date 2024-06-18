@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { RouterDecorator } from '@/shared/utils/RouterDecorator'
 import { fn } from '@storybook/test'
 
 import { DecksTable } from './'
@@ -7,6 +8,7 @@ import { DecksTable } from './'
 const meta = {
   argTypes: {},
   component: DecksTable,
+  decorators: [RouterDecorator],
   tags: ['autodocs'],
   title: '🟢UI/Assembled/DecksTable',
 } satisfies Meta<typeof DecksTable>
@@ -45,44 +47,26 @@ const decks = [
   },
 ]
 
-// const MyWrapper = () => {
-//   return (
-//     <DecksTable
-//       clickDeleteDeck={() => {}}
-//       clickUpdateDeck={() => {}}
-//       decks={decks}
-//       playFunction={() => {}}
-//       userId
-//     />
-//   )
-// }
-
 export const DefaultMyDecksTable: Story = {
   args: {
-    authorId: 'true',
-    cards: decks,
+    authorId: 'author1',
     clickDeleteDeck: fn(),
     clickUpdateDeck: fn(),
-    editFunction: fn(),
+    decks: decks,
     playFunction: fn(),
     sortTableOnClick: fn(),
     tableSort: '',
-    trashFunction: fn(),
   },
 }
 
-// const YourWrapper = () => {
-//   return (
-//     <DecksTable
-//       clickDeleteDeck={() => {}}
-//       clickUpdateDeck={() => {}}
-//       decks={decks}
-//       playFunction={() => {}}
-//       userId={false}
-//     />
-//   )
-// }
-
 export const DefaultYourDecksTable: Story = {
-  render: () => <YourWrapper />,
+  args: {
+    authorId: 'false',
+    clickDeleteDeck: fn(),
+    clickUpdateDeck: fn(),
+    decks: decks,
+    playFunction: fn(),
+    sortTableOnClick: fn(),
+    tableSort: '',
+  },
 }
