@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 
 import { Error404 } from '@/pages'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
-import { useSuperSearch } from '@/pages/ui/decks/hooks/useSuperSearch'
-import { useSuperSort } from '@/pages/ui/decks/hooks/useSuperSort'
+import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
+import { useSuperSort } from '@/pages/hooks/useSuperSort'
 import {
   useDeleteCardMutation,
   useGetCardsQuery,

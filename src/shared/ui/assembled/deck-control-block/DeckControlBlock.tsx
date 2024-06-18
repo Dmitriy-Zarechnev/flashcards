@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 
-import { TabsData } from '@/pages/ui/decks/hooks/useSuperTabs'
+import { TabsData } from '@/pages/hooks/useSuperTabs'
 import { GetDeckMinMaxCardsResponse } from '@/services/types/decks.types'
 import { Button, Icon, SearchInput, SliderComponent, Tabs, Typography } from '@/shared'
 

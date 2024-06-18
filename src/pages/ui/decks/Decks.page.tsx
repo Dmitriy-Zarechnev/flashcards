@@ -1,9 +1,9 @@
 import { Error404 } from '@/pages'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
-import { useSuperSearch } from '@/pages/ui/decks/hooks/useSuperSearch'
-import { useSuperSlider } from '@/pages/ui/decks/hooks/useSuperSlider'
-import { useSuperSort } from '@/pages/ui/decks/hooks/useSuperSort'
-import { useSuperTabs } from '@/pages/ui/decks/hooks/useSuperTabs'
+import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
+import { useSuperSlider } from '@/pages/hooks/useSuperSlider'
+import { useSuperSort } from '@/pages/hooks/useSuperSort'
+import { useSuperTabs } from '@/pages/hooks/useSuperTabs'
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
