@@ -12,7 +12,7 @@ export const Error404 = () => {
       <img alt={'404'} src={image} />
       {/* eslint-disable-next-line react/no-unescaped-entities */}
       <Typography.Body1>Sorry! Page isn't found!</Typography.Body1>
-      <Button as={Link} fullWidth={false} to={'/'}>
+      <Button as={Link} fullWidth={false} to={'/decks'}>
         Back to home page
       </Button>
     </div>

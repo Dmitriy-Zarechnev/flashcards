@@ -1,3 +1,4 @@
+import { Error404 } from '@/pages'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/ui/decks/hooks/useSuperSearch'
 import { useSuperSlider } from '@/pages/ui/decks/hooks/useSuperSlider'
@@ -91,7 +92,7 @@ export const DecksPage = () => {
 
   // ----- Показывать страницу с ошибкой -----
   if (error) {
-    return <div>Error: {JSON.stringify(error)}</div>
+    return <Error404 />
   }
 
   return (

@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { Error404 } from '@/pages'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/ui/decks/hooks/useSuperSearch'
 import { useSuperSort } from '@/pages/ui/decks/hooks/useSuperSort'
@@ -95,7 +96,7 @@ export const CardsPage = () => {
 
   // ----- Показывать страницу с ошибкой -----
   if (error) {
-    return <div>Error: {JSON.stringify(error)}</div>
+    return <Error404 />
   }
 
   return (
