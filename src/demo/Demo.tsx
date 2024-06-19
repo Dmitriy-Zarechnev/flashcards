@@ -7,8 +7,6 @@ export const Demo = () => {
 
   const { data } = useGetDeckByIdQuery({ id: 'clxivq8an03cfpb01lijvljnx' })
 
-  console.log(data)
-
   async function onSubmit(data: DeckFormValues) {
     // при создании м
     await createDeck({ ...data })

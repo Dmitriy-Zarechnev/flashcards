@@ -6,7 +6,6 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { Demo } from '@/demo/Demo'
 import {
   CardsPage,
   DecksPage,
@@ -37,10 +36,6 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <Demo />,
-    path: '/demo',
-  },
-  {
     element: <DecksPage />,
     path: '/decks',
   },
@@ -64,6 +59,13 @@ export const routes = createBrowserRouter([
         element: <PrivateRoutes />,
       },
       ...publicRoutes,
+      {
+        /* гарантирует, что перенаправление заменит текущую запись в истории браузера, так что если пользователь нажмет
+        кнопку "назад" в браузере, он не вернется к корневому пути, а перейдет к предыдущему URL в истории. */
+
+        element: <Navigate replace to={'/decks'} />,
+        path: '/',
+      },
     ],
     element: <Layout />,
     errorElement: <Error404 />,
