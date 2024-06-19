@@ -15,7 +15,10 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
+import { useMeQuery } from '@/services'
 import { Layout } from '@/shared'
+
+import InitLoader from './InitLoader'
 
 //========================================================================================
 
@@ -79,7 +82,18 @@ export function Router() {
 //========================================================================================
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  /* проверяем авторизирован пользователь или нет есть отдельная проверка в 'flashcards-base-query'
+  но там переодресация на логинизацию только если повторный запрос с обновленным токеном упал */
+
+  const { data, isLoading, isSuccess, isUninitialized } = useMeQuery()
+
+  // Проверяем, идет ли загрузка или запрос еще не был инициирован
+  if (isLoading || isUninitialized) {
+    // Здесь можно вернуть индикатор загрузки или null, если не хотите ничего показывать
+    return <InitLoader />
+  }
+
+  const isAuthenticated = isSuccess && data
 
   return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
 }
