@@ -5,6 +5,7 @@ import { ModalFooter } from './'
 const meta = {
   argTypes: {},
   component: ModalFooter,
+
   tags: ['autodocs'],
   title: '🟢UI/Assembled/ModalFooter',
 } satisfies Meta<typeof ModalFooter>

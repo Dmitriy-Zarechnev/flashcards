@@ -20,7 +20,7 @@ export type Deck = {
   author: Author
 } & DefaultDeck
 
-type Card = {
+export type Card = {
   answer: string
   answerImg: string
   answerVideo: string
@@ -67,6 +67,9 @@ export type GetDeckMinMaxCardsResponse = {
 // [ ARGS ]
 
 export type DefaultIdArg = { id: string }
+
+export type GetCardsArgs = { question: string } & DefaultIdArg &
+  Omit<GetDecksArgs, 'authorId' | 'maxCardsCount' | 'minCardsCount' | 'name'>
 
 export type GetDecksArgs = {
   authorId?: string

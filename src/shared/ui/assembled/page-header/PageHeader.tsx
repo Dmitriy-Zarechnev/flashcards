@@ -1,36 +1,39 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { Link } from 'react-router-dom'
 
+import { useMeQuery } from '@/services'
 import { Button, DropdownProfile, Typography } from '@/shared'
 
 import s from './PageHeader.module.scss'
 
-import profileImage from '../dropdown-profile/Dropdown.webp'
+//import img from './Dropdown.webp'
 import logo from './Logo.png'
-
-const profile = {
-  email: 'SuperIvan@gmail.com',
-  name: 'Ivan',
-  photo: profileImage,
-  photoDescription: 'Photo of Ivan',
-}
 
 type PageHeaderProps = {
   isSingUp: boolean
 } & ComponentPropsWithoutRef<'header'>
 
 export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ isSingUp }, ref) => {
+  // ----- Запрос для получения данных пользователя -----
+  const { data } = useMeQuery()
+
   return (
     <header ref={ref}>
       <div className={s.wrapper}>
-        <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
+        <Link to={'/decks'}>
+          <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
+        </Link>
+
         {isSingUp ? (
           <div className={s.profileInfo}>
-            <Typography.Subtitle1>{profile.name}</Typography.Subtitle1>
+            <Link to={'/profile'}>
+              <Typography.Subtitle1>{data?.name}</Typography.Subtitle1>
+            </Link>
             <DropdownProfile
-              email={profile.email}
-              name={profile.name}
-              photo={profile.photo}
-              photoDescription={profile.photoDescription}
+              email={data?.email ?? 'user@yandex.com'}
+              name={data?.name ?? 'User'}
+              photo={data?.avatar}
+              photoDescription={`${data?.name} - avatar`}
             />
           </div>
         ) : (

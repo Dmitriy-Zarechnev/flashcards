@@ -1,29 +1,31 @@
+import { Link } from 'react-router-dom'
+
 import { Deck } from '@/services'
 import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './DecksTable.module.scss'
 
-import defImg from './../../../assets/deck-default-cover.webp'
+import defImg from './../../../assets/card-default-cover.webp'
 
 type DecksTableProps = {
+  authorId?: string
   clickDeleteDeck: (id: string) => void
   clickUpdateDeck: (id: string) => void
   decks?: Deck[]
   playFunction: () => void
   sortTableOnClick: (title: string) => void
   tableSort: string
-  userId: boolean
 }
 
 export const DecksTable = ({
+  authorId,
   clickDeleteDeck,
   clickUpdateDeck,
   decks,
   playFunction,
   sortTableOnClick,
   tableSort,
-  userId,
 }: DecksTableProps) => {
   return (
     <Tables.Table>
@@ -46,6 +48,7 @@ export const DecksTable = ({
           />
           <HeadCellWithArrow
             arrowDirection={tableSort !== 'created-asc'}
+            className={s.cellWidth}
             sortTableOnClick={() => sortTableOnClick('created')}
             title={'Created by'}
           />
@@ -59,9 +62,9 @@ export const DecksTable = ({
             <Tables.TableRow key={deck.id}>
               <Tables.TableBodyCell>
                 <ImgBlock
-                  as={'a'}
-                  href={'#'}
+                  as={Link}
                   title={deck.name}
+                  to={`/decks/${deck.id}`}
                   url={deck.cover || defImg}
                   wd={'250px'}
                 />
@@ -83,7 +86,7 @@ export const DecksTable = ({
                 <IconButtons
                   editFunction={() => clickUpdateDeck(deck.id)}
                   playFunction={() => playFunction()}
-                  showEditButtons={userId}
+                  showEditButtons={authorId === deck.author.id}
                   showPlayButton
                   trashFunction={() => clickDeleteDeck(deck.id)}
                 />

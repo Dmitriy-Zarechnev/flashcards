@@ -23,13 +23,7 @@ const Wrapper = () => {
     setValueRight(value[1])
   }
 
-  return (
-    <SliderComponent
-      valueChangeHandler={valueChangeHandler}
-      valueLeft={valueLeft}
-      valueRight={valueRight}
-    />
-  )
+  return <SliderComponent onValueChange={valueChangeHandler} value={[valueLeft, valueRight]} />
 }
 
 export const DefaultSlider: Story = {

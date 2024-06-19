@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { fn } from '@storybook/test'
+
 import { DecksTable } from './'
 
 const meta = {
@@ -10,7 +12,7 @@ const meta = {
 } satisfies Meta<typeof DecksTable>
 
 export default meta
-type Story = StoryObj<typeof DecksTable>
+type Story = StoryObj<typeof meta>
 
 const decks = [
   {
@@ -43,34 +45,26 @@ const decks = [
   },
 ]
 
-const MyWrapper = () => {
-  return (
-    <DecksTable
-      clickDeleteDeck={() => {}}
-      clickUpdateDeck={() => {}}
-      decks={decks}
-      playFunction={() => {}}
-      userId
-    />
-  )
-}
-
 export const DefaultMyDecksTable: Story = {
-  render: () => <MyWrapper />,
-}
-
-const YourWrapper = () => {
-  return (
-    <DecksTable
-      clickDeleteDeck={() => {}}
-      clickUpdateDeck={() => {}}
-      decks={decks}
-      playFunction={() => {}}
-      userId={false}
-    />
-  )
+  args: {
+    authorId: 'author1',
+    clickDeleteDeck: fn(),
+    clickUpdateDeck: fn(),
+    decks: decks,
+    playFunction: fn(),
+    sortTableOnClick: fn(),
+    tableSort: '',
+  },
 }
 
 export const DefaultYourDecksTable: Story = {
-  render: () => <YourWrapper />,
+  args: {
+    authorId: 'false',
+    clickDeleteDeck: fn(),
+    clickUpdateDeck: fn(),
+    decks: decks,
+    playFunction: fn(),
+    sortTableOnClick: fn(),
+    tableSort: '',
+  },
 }

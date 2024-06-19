@@ -37,5 +37,10 @@ header {
   & p {
     text-decoration: underline;
     text-decoration-style: dashed;
+    text-underline-offset: 6px;
+
+    &:hover{
+      color: var(--color-accent-700);
+    }
   }
 }

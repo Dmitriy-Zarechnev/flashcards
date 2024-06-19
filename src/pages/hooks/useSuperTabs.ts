@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-type TabsData = {
+export type TabsData = {
   title: string
   value: string
 }

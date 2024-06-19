@@ -1,13 +1,5 @@
-import { GetCardsResponse } from '@/services'
-import {
-  HeadCellWithArrow,
-  IconButtons,
-  ImgBlock,
-  Rating,
-  SortValue,
-  Tables,
-  Typography,
-} from '@/shared'
+import { Card } from '@/services/types/decks.types'
+import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './CardsTable.module.scss'
@@ -15,52 +7,52 @@ import s from './CardsTable.module.scss'
 import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {
-  cardTableSort: SortValue
-  cards: GetCardsResponse[]
+  authorId?: boolean
+  cards?: Card[]
   editFunction: (id: string) => void
-  sortOnClick: (sortValue: SortValue) => void
+  sortTableOnClick: (title: string) => void
+  tableSort: string
   trashFunction: (id: string) => void
-  userId: boolean
 }
 
 export const CardsTable = ({
-  cardTableSort,
+  authorId,
   cards,
   editFunction,
-  sortOnClick,
+  sortTableOnClick,
+  tableSort,
   trashFunction,
-  userId,
 }: CardsTableProps) => {
   return (
     <Tables.Table>
       <Tables.TableHead>
         <Tables.TableRow>
           <HeadCellWithArrow
-            arrowDirection={cardTableSort !== 'question'}
-            sortTableOnClick={() => sortOnClick('question')}
+            arrowDirection={tableSort !== 'question-asc'}
+            sortTableOnClick={() => sortTableOnClick('question')}
             title={'Question'}
           />
           <HeadCellWithArrow
-            arrowDirection={cardTableSort !== 'answer'}
-            sortTableOnClick={() => sortOnClick('answer')}
+            arrowDirection={tableSort !== 'answer-asc'}
+            sortTableOnClick={() => sortTableOnClick('answer')}
             title={'Answer'}
           />
           <HeadCellWithArrow
-            arrowDirection={cardTableSort !== 'updated'}
-            sortTableOnClick={() => sortOnClick('updated')}
+            arrowDirection={tableSort !== 'updated-asc'}
+            sortTableOnClick={() => sortTableOnClick('updated')}
             title={'Last Updated'}
           />
           <HeadCellWithArrow
-            arrowDirection={cardTableSort !== 'grade'}
-            sortTableOnClick={() => sortOnClick('grade')}
+            arrowDirection={tableSort !== 'grade-asc'}
+            sortTableOnClick={() => sortTableOnClick('grade')}
             title={'Grade'}
           />
-          {userId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
+          {authorId && <Tables.TableHeadCell className={s.noHover}></Tables.TableHeadCell>}
         </Tables.TableRow>
       </Tables.TableHead>
 
       <Tables.TableBody>
-        {cards.map(card => {
+        {cards?.map(card => {
           return (
             <Tables.TableRow key={card.id}>
               <Tables.TableBodyCell>
@@ -79,7 +71,7 @@ export const CardsTable = ({
                 <Rating rating={card.grade} />
               </Tables.TableBodyCell>
 
-              {userId && (
+              {authorId && (
                 <Tables.TableBodyCell>
                   <IconButtons
                     editFunction={() => editFunction(card.id)}

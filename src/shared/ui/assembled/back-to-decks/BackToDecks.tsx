@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Button, Icon } from '@/shared'
 
 type BackToDecksProps = {
@@ -8,7 +10,7 @@ type BackToDecksProps = {
 
 export const BackToDecks = ({ className, iconId, title }: BackToDecksProps) => {
   return (
-    <Button as={'a'} className={className} variant={'link'}>
+    <Button as={Link} className={className} to={`/decks`} variant={'link'}>
       <Icon iconId={iconId} />
       {title}
     </Button>

@@ -1,16 +1,19 @@
 import { ChangeEvent } from 'react'
 
-import { Button, Icon, SearchInput, SliderComponent, Tabs, TabsData, Typography } from '@/shared'
+import { TabsData } from '@/pages/hooks/useSuperTabs'
+import { GetDeckMinMaxCardsResponse } from '@/services/types/decks.types'
+import { Button, Icon, SearchInput, SliderComponent, Tabs, Typography } from '@/shared'
 
 import s from './DeckControlBlock.module.scss'
 
 type DeckControlBlockProps = {
   clearFilterOnClick: () => void
+  minMaxCardsData: GetDeckMinMaxCardsResponse
   searchInputOnChange: (value: string) => void
   searchInputReset: () => void
   searchInputValue: string
-  sliderValue: number[]
   sliderValueChange: (value: number[]) => void
+  sliderValues: number[]
   tabValue: string
   tabValueChange: (value: string) => void
   tabsData: TabsData[]
@@ -18,11 +21,12 @@ type DeckControlBlockProps = {
 
 export const DeckControlBlock = ({
   clearFilterOnClick,
+  minMaxCardsData,
   searchInputOnChange,
   searchInputReset,
   searchInputValue,
-  sliderValue,
   sliderValueChange,
+  sliderValues,
   tabValue,
   tabValueChange,
   tabsData,
@@ -53,9 +57,10 @@ export const DeckControlBlock = ({
       <div className={s.sliderBox}>
         <Typography.Body2>Number of cards</Typography.Body2>
         <SliderComponent
-          valueChange={sliderValueChange}
-          valueLeft={sliderValue[0]}
-          valueRight={sliderValue[1]}
+          max={minMaxCardsData.max}
+          min={minMaxCardsData.min}
+          onValueChange={sliderValueChange}
+          value={[sliderValues[0], sliderValues[1]]}
         />
       </div>
       <Button onClick={clearFilterOnClick} variant={'secondary'}>

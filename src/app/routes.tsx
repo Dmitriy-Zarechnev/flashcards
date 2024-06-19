@@ -16,6 +16,7 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
+import { Layout } from '@/shared'
 
 //========================================================================================
 
@@ -57,11 +58,16 @@ const privateRoutes: RouteObject[] = [
 
 export const routes = createBrowserRouter([
   {
-    children: privateRoutes,
-    element: <PrivateRoutes />,
+    children: [
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      ...publicRoutes,
+    ],
+    element: <Layout />,
     errorElement: <Error404 />,
   },
-  ...publicRoutes,
 ])
 
 export function Router() {
@@ -73,5 +79,5 @@ export function Router() {
 function PrivateRoutes() {
   const isAuthenticated = true
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
 }

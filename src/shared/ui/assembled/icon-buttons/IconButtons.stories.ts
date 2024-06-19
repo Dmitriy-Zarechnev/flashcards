@@ -19,6 +19,7 @@ export const ThreeIconButtonsStory: Story = {
     editFunction: fn(),
     id: '123',
     playFunction: fn(),
+    showEditButtons: true,
     showPlayButton: true,
     trashFunction: fn(),
   },
@@ -27,8 +28,18 @@ export const ThreeIconButtonsStory: Story = {
 export const TwoIconButtonsStory: Story = {
   args: {
     editFunction: fn(),
-    id: '123',
+    id: '678',
+    showEditButtons: true,
     showPlayButton: false,
     trashFunction: fn(),
+  },
+}
+
+export const OneIconButtonsStory: Story = {
+  args: {
+    id: '456',
+    playFunction: fn(),
+    showEditButtons: false,
+    showPlayButton: true,
   },
 }
