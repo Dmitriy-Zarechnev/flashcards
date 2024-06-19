@@ -24,7 +24,7 @@ export const DefaultHeaderAvatar: Story = {
 export const HeaderAvatarWithoutPhoto: Story = {
   args: {
     name: 'Hello',
-    photo: '',
+    photo: undefined,
     photoDescription: 'Phototo',
   },
 }
