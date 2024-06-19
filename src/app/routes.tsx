@@ -16,22 +16,26 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
-import { Layout } from '@/shared'
+import { Layout, PATH } from '@/shared'
 
 //========================================================================================
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
-    path: '/sign-in',
+    path: PATH.SIGNIN,
   },
   {
     element: <SignUpPage />,
-    path: '/sign-up',
+    path: PATH.SIGNUP,
   },
   {
     element: <ForgotPasswordPage />,
-    path: '/recover-password',
+    path: PATH.RECOVERPASSWORD,
+  },
+  {
+    element: <Error404 />,
+    path: PATH.ERRORPAGE,
   },
 ]
 
@@ -42,15 +46,19 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element: <DecksPage />,
-    path: '/decks',
+    path: PATH.DECKSPAGE,
   },
   {
     element: <CardsPage />,
-    path: '/decks/:deckId',
+    path: PATH.CARDSPAGE,
   },
   {
     element: <LearnPage />,
-    path: '/decks/:deckId/learn',
+    path: PATH.LEARNDECK,
+  },
+  {
+    element: <Error404 />,
+    path: PATH.ERRORPAGE,
   },
 ]
 
@@ -66,7 +74,7 @@ export const routes = createBrowserRouter([
       ...publicRoutes,
     ],
     element: <Layout />,
-    errorElement: <Error404 />,
+    errorElement: <Navigate to={PATH.ERRORPAGE} />,
   },
 ])
 
@@ -79,5 +87,5 @@ export function Router() {
 function PrivateRoutes() {
   const isAuthenticated = true
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={PATH.SIGNIN} />
 }

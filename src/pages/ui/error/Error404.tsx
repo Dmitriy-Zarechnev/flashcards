@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Button, Typography } from '@/shared'
+import { Button, PATH, Typography } from '@/shared'
 
 import s from './Error404.module.scss'
 
@@ -12,7 +12,7 @@ export const Error404 = () => {
       <img alt={'404'} src={image} />
       {/* eslint-disable-next-line react/no-unescaped-entities */}
       <Typography.Body1>Sorry! Page isn't found!</Typography.Body1>
-      <Button as={Link} fullWidth={false} to={'/decks'}>
+      <Button as={Link} fullWidth={false} to={PATH.DECKSPAGE}>
         Back to home page
       </Button>
     </div>

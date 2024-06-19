@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Deck } from '@/services'
-import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography } from '@/shared'
+import { HeadCellWithArrow, IconButtons, ImgBlock, PATH, Tables, Typography } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './DecksTable.module.scss'
@@ -64,7 +64,7 @@ export const DecksTable = ({
                 <ImgBlock
                   as={Link}
                   title={deck.name}
-                  to={`/decks/${deck.id}`}
+                  to={`${PATH.DECKSPAGE}/${deck.id}`}
                   url={deck.cover || defImg}
                   wd={'250px'}
                 />

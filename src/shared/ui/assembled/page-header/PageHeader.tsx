@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useMeQuery } from '@/services'
-import { Button, DropdownProfile, Typography } from '@/shared'
+import { Button, DropdownProfile, PATH, Typography } from '@/shared'
 
 import s from './PageHeader.module.scss'
 
@@ -20,13 +20,13 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ i
   return (
     <header ref={ref}>
       <div className={s.wrapper}>
-        <Link to={'/decks'}>
+        <Link to={PATH.DECKSPAGE}>
           <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
         </Link>
 
         {isSingUp ? (
           <div className={s.profileInfo}>
-            <Link to={'/profile'}>
+            <Link to={PATH.PROFILE}>
               <Typography.Subtitle1>{data?.name}</Typography.Subtitle1>
             </Link>
             <DropdownProfile

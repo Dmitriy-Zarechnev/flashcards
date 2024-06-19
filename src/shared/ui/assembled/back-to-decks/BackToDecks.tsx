@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Button, Icon } from '@/shared'
+import { Button, Icon, PATH } from '@/shared'
 
 type BackToDecksProps = {
   className?: string
@@ -10,7 +10,7 @@ type BackToDecksProps = {
 
 export const BackToDecks = ({ className, iconId, title }: BackToDecksProps) => {
   return (
-    <Button as={Link} className={className} to={`/decks`} variant={'link'}>
+    <Button as={Link} className={className} to={PATH.DECKSPAGE} variant={'link'}>
       <Icon iconId={iconId} />
       {title}
     </Button>
