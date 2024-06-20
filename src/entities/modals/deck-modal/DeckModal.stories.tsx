@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { DeckFormValues } from '@/entities'
 
+import img from './../../../shared/assets/deck-default-cover.webp'
 import { DeckModal } from './DeckModal'
 
 const meta = {
@@ -40,6 +41,7 @@ function onRejected(data: DeckFormValues) {
 }
 
 const DeckDataFromServer = {
+  cover: img,
   isPrivate: true,
   name: 'Name from server',
 }

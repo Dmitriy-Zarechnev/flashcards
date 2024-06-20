@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { SignIn, SignInFormValues } from '@/entities'
 import { useLoginMutation } from '@/services'
+import { PATH } from '@/shared/utils/routerVariables'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
@@ -16,9 +17,11 @@ export const SignInPage = () => {
       }).unwrap() // .unwrap() для обработки ошибок
 
       // Проверяем, была ли мутация успешной
-      if (result) {
-        // navigate('/decks') // Перенаправляем пользователя
-        navigate('/')
+      if (result && localStorage.getItem('accessToken')) {
+        /* !!! была проблема, что перенаправление осуществлялось только после второго запроса, походу токены
+         не успевали засетаться при первом запросе */
+
+        navigate(PATH.DECKSPAGE)
       }
     } catch (error) {
       // Обработка ошибок логинизации, например, показ сообщения
