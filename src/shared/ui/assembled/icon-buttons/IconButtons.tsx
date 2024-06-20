@@ -6,6 +6,7 @@ import { clsx } from 'clsx'
 import s from './IconButtons.module.scss'
 
 type IconButtonsProps = {
+  disabled: boolean
   editFunction?: () => void
   playFunction?: () => void
   showEditButtons?: boolean
@@ -15,16 +16,19 @@ type IconButtonsProps = {
 
 export const IconButtons = ({
   className,
+  disabled,
   editFunction,
   playFunction,
-  showEditButtons = true,
-  showPlayButton = false,
+  showEditButtons = false,
+  showPlayButton = true,
   trashFunction,
   ...rest
 }: IconButtonsProps) => {
   return (
     <div className={clsx(s.IconButtonsWrapper, className)} {...rest}>
-      {showPlayButton && <IconButton iconId={'playCircleOutline'} onClick={playFunction} />}
+      {showPlayButton && (
+        <IconButton disabled={disabled} iconId={'playCircleOutline'} onClick={playFunction} />
+      )}
       {showEditButtons && (
         <>
           <IconButton iconId={'editOutline'} onClick={editFunction} />

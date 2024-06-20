@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Deck } from '@/services'
+import { Deck, useDeleteDeckMutation, useUpdateDeckMutation } from '@/services'
 import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
 import { updatedDate } from '@/shared/utils/updateDate'
@@ -11,23 +11,24 @@ import defImg from './../../../assets/card-default-cover.webp'
 
 type DecksTableProps = {
   authorId?: string
-  clickDeleteDeck: (id: string) => void
-  clickUpdateDeck: (id: string) => void
   decks?: Deck[]
-  playFunction: () => void
   sortTableOnClick: (title: string) => void
   tableSort: string
 }
 
-export const DecksTable = ({
-  authorId,
-  clickDeleteDeck,
-  clickUpdateDeck,
-  decks,
-  playFunction,
-  sortTableOnClick,
-  tableSort,
-}: DecksTableProps) => {
+export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: DecksTableProps) => {
+  // ----- Блок работы с удалением и редактированием колод -----
+  const [deleteDeck] = useDeleteDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
+
+  const updateDeckHandler = (id: string) => {
+    updateDeck({ id, isPrivate: false, name: 'hello' })
+  }
+  const deleteDeckHandler = (id: string) => {
+    deleteDeck({ id })
+  }
+  const playDeckHandler = () => {}
+
   return (
     <Tables.Table>
       <Tables.TableHead>
@@ -85,11 +86,12 @@ export const DecksTable = ({
 
               <Tables.TableBodyCell>
                 <IconButtons
-                  editFunction={() => clickUpdateDeck(deck.id)}
-                  playFunction={() => playFunction()}
+                  disabled={deck.cardsCount === 0}
+                  editFunction={() => updateDeckHandler(deck.id)}
+                  playFunction={() => playDeckHandler()}
                   showEditButtons={authorId === deck.author.id}
                   showPlayButton
-                  trashFunction={() => clickDeleteDeck(deck.id)}
+                  trashFunction={() => deleteDeckHandler(deck.id)}
                 />
               </Tables.TableBodyCell>
             </Tables.TableRow>

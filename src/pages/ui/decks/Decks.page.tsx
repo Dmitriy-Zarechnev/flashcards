@@ -1,15 +1,11 @@
+import { DeckFormValues } from '@/entities'
 import { Error404 } from '@/pages'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
 import { useSuperSlider } from '@/pages/hooks/useSuperSlider'
 import { useSuperSort } from '@/pages/hooks/useSuperSort'
 import { useSuperTabs } from '@/pages/hooks/useSuperTabs'
-import {
-  useDeleteDeckMutation,
-  useGetDecksQuery,
-  useMeQuery,
-  useUpdateDeckMutation,
-} from '@/services'
+import { useCreateDeckMutation, useGetDecksQuery, useMeQuery } from '@/services'
 import { DeckControlBlock, DecksTable, ListHeader, Page, Pagination, Typography } from '@/shared'
 
 import s from './Decks.page.module.scss'
@@ -62,17 +58,12 @@ export const DecksPage = () => {
     orderBy: tableSort,
   })
 
-  // ----- Блок работы с удалением и редактированием колод -----
-  const [deleteDeck] = useDeleteDeckMutation()
-  const [updateDeck] = useUpdateDeckMutation()
+  // ----- Блок работы с созданием колоды -----
+  const [createDeck] = useCreateDeckMutation()
 
-  const updateDeckHandler = (id: string) => {
-    updateDeck({ id, isPrivate: false, name: 'hello' })
+  async function onSubmitAddDeckHandler(data: DeckFormValues) {
+    await createDeck({ ...data })
   }
-  const deleteDeckHandler = (id: string) => {
-    deleteDeck({ id })
-  }
-  const playDeckHandler = () => {}
 
   // ----- Очистили filters при нажатии на кнопку -----
   const clearFilterHandler = () => {
@@ -97,7 +88,11 @@ export const DecksPage = () => {
 
   return (
     <Page>
-      <ListHeader buttonTitle={'Add new deck'} title={'Decks List'} />
+      <ListHeader
+        buttonTitle={'Add new deck'}
+        onSubmitAddDeck={onSubmitAddDeckHandler}
+        title={'Decks List'}
+      />
       <DeckControlBlock
         clearFilterOnClick={clearFilterHandler}
         minMaxCardsData={minMaxCardsData}
@@ -114,10 +109,7 @@ export const DecksPage = () => {
         <>
           <DecksTable
             authorId={authorId}
-            clickDeleteDeck={deleteDeckHandler}
-            clickUpdateDeck={updateDeckHandler}
             decks={data?.items}
-            playFunction={playDeckHandler}
             sortTableOnClick={sortTableOnClickHandler}
             tableSort={tableSort}
           />
