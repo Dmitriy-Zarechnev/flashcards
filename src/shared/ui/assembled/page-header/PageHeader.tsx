@@ -2,7 +2,8 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useMeQuery } from '@/services'
-import { Button, DropdownProfile, PATH, Typography } from '@/shared'
+import { Button, DropdownProfile, Typography } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
 
 import s from './PageHeader.module.scss'
 

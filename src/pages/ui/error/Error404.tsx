@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
-import { Button, PATH, Typography } from '@/shared'
+import { Button, Typography } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
 
 import s from './Error404.module.scss'
 

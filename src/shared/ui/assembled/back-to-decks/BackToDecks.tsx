@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
-import { Button, Icon, PATH } from '@/shared'
+import { Button, Icon } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
 
 type BackToDecksProps = {
   className?: string

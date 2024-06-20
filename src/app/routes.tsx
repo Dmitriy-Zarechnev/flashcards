@@ -16,7 +16,8 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
-import { Layout, PATH } from '@/shared'
+import { Layout } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
 
 //========================================================================================
 
