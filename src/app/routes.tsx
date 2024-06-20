@@ -17,6 +17,7 @@ import {
 } from '@/pages'
 import { useMeQuery } from '@/services'
 import { Layout } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
 
 import InitLoader from './InitLoader'
 
@@ -25,30 +26,38 @@ import InitLoader from './InitLoader'
 const publicRoutes: RouteObject[] = [
   {
     element: <SignInPage />,
-    path: '/sign-in',
+    path: PATH.SIGNIN,
   },
   {
     element: <SignUpPage />,
-    path: '/sign-up',
+    path: PATH.SIGNUP,
   },
   {
     element: <ForgotPasswordPage />,
-    path: '/recover-password',
+    path: PATH.RECOVERPASSWORD,
+  },
+  {
+    element: <Error404 />,
+    path: PATH.ERRORPAGE,
   },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
     element: <DecksPage />,
-    path: '/decks',
+    path: PATH.DECKSPAGE,
   },
   {
     element: <CardsPage />,
-    path: '/decks/:deckId',
+    path: PATH.CARDSPAGE,
   },
   {
     element: <LearnPage />,
-    path: '/decks/:deckId/learn',
+    path: PATH.LEARNDECK,
+  },
+  {
+    element: <Error404 />,
+    path: PATH.ERRORPAGE,
   },
 ]
 
@@ -71,7 +80,7 @@ export const routes = createBrowserRouter([
       },
     ],
     element: <Layout />,
-    errorElement: <Error404 />,
+    errorElement: <Navigate to={PATH.ERRORPAGE} />,
   },
 ])
 
@@ -97,5 +106,5 @@ function PrivateRoutes() {
 
   console.log('isAuthenticated', isAuthenticated)
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={PATH.SIGNIN} />
 }
