@@ -1,4 +1,5 @@
 import { routes } from '@/app'
+import { PATH } from '@/shared/utils/routerVariables'
 import {
   BaseQueryFn,
   FetchArgs,
@@ -82,9 +83,13 @@ export const baseQueryWithReauth: BaseQueryFn<
 
           // делаем повтореный запрос уже с новыми токенами
           await baseQuery(args, api, extraOptions)
+
+          // ГПТ уверен что мы должны вернуть результат запроса
+          // result = await baseQuery(args, api, extraOptions)
+          // return result
         } else {
           // если нет рефрешь токена, то и результата не придет, значит перенаправим на логинизацию
-          await routes.navigate('/sign-in')
+          await routes.navigate(PATH.SIGNIN)
         }
       } finally {
         release()

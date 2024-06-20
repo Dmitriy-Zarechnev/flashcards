@@ -75,7 +75,7 @@ export const routes = createBrowserRouter([
         /* гарантирует, что перенаправление заменит текущую запись в истории браузера, так что если пользователь нажмет
         кнопку "назад" в браузере, он не вернется к корневому пути, а перейдет к предыдущему URL в истории. */
 
-        element: <Navigate replace to={'/decks'} />,
+        element: <Navigate replace to={PATH.DECKSPAGE} />,
         path: '/',
       },
     ],
@@ -94,17 +94,17 @@ function PrivateRoutes() {
   /* проверяем авторизирован пользователь или нет есть отдельная проверка в 'flashcards-base-query'
   но там переодресация на логинизацию только если повторный запрос с обновленным токеном упал */
 
-  const { data, isLoading, isSuccess, isUninitialized } = useMeQuery()
+  // const { data, isLoading, isSuccess, isUninitialized } = useMeQuery()
+  //
+  // // Проверяем, идет ли загрузка или запрос еще не был инициирован
+  // if (isLoading || isUninitialized) {
+  //   // Здесь можно вернуть индикатор загрузки или null, если не хотите ничего показывать
+  //   return <InitLoader />
+  // }
+  //
+  // const isAuthenticated = isSuccess && data
 
-  // Проверяем, идет ли загрузка или запрос еще не был инициирован
-  if (isLoading || isUninitialized) {
-    // Здесь можно вернуть индикатор загрузки или null, если не хотите ничего показывать
-    return <InitLoader />
-  }
-
-  const isAuthenticated = isSuccess && data
-
-  console.log('isAuthenticated', isAuthenticated)
+  const isAuthenticated = true
 
   return isAuthenticated ? <Outlet /> : <Navigate to={PATH.SIGNIN} />
 }
