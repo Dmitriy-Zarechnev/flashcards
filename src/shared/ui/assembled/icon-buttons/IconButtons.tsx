@@ -37,7 +37,6 @@ export const IconButtons = ({
       {showEditButtons && (
         <>
           <DeckModal deckData={deckData} onSubmit={editCb} variant={'edit'} />
-          {/*<IconButton iconId={'editOutline'} onClick={editFunction} />*/}
           <CardDeleteModal cardName={cardName} deleteCb={deleteCb} type={'Deck'} />
         </>
       )}
