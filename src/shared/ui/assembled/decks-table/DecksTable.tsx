@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { DeckFormValues } from '@/entities'
 import { Deck, useDeleteDeckMutation, useUpdateDeckMutation } from '@/services'
 import { HeadCellWithArrow, IconButtons, ImgBlock, Tables, Typography } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
@@ -21,8 +22,8 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
 
-  const updateDeckHandler = (id: string) => {
-    updateDeck({ id, isPrivate: false, name: 'hello' })
+  async function updateDeckHandler(id: string, data: DeckFormValues) {
+    await updateDeck({ id, ...data })
   }
 
   async function deleteDeckHandler(id: string) {
@@ -88,12 +89,13 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
               <Tables.TableBodyCell>
                 <IconButtons
                   cardName={deck.name}
+                  deckData={{ cover: deck.cover, isPrivate: deck.isPrivate, name: deck.name }}
+                  deleteCb={() => deleteDeckHandler(deck.id)}
                   disabled={deck.cardsCount === 0}
-                  editFunction={() => updateDeckHandler(deck.id)}
+                  editCb={(data: DeckFormValues) => updateDeckHandler(deck.id, data)}
                   playFunction={() => playDeckHandler()}
                   showEditButtons={authorId === deck.userId}
                   showPlayButton
-                  trashFunction={() => deleteDeckHandler(deck.id)}
                 />
               </Tables.TableBodyCell>
             </Tables.TableRow>
