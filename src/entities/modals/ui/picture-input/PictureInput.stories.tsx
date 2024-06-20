@@ -22,8 +22,9 @@ function deleteImageHandlerCb() {
   console.log('DELETED')
 }
 
-function handleImageChangeCb() {
+function handleImageChangeCb(file: File) {
   console.log('imageChanged')
+  console.log(file)
 }
 
 export const Default: Story = {

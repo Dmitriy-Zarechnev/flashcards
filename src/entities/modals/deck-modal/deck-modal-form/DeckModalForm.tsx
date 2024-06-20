@@ -23,7 +23,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
 
   const { control, handleSubmit, setValue } = useForm<DeckFormValues>({
     defaultValues: {
-      cover: '',
+      cover: deckData?.cover || '',
       isPrivate: deckData?.isPrivate || false,
       name: deckData?.name || '',
     },
@@ -59,7 +59,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
       // если картинки не было, пользователь её добавит, и удалит, то засетается null
       // и получиться что undefined !== null и полетит запрос с cover:null
       // т.е. картинки там и не было, а мы её еще удаляем... поэтому => deckData?.cover !== undefined
-      if (deckData?.cover !== cover && deckData?.cover !== undefined) {
+      if (deckData?.cover !== cover) {
         args.cover = cover
       }
       if (deckData?.isPrivate !== isPrivate) {
@@ -84,7 +84,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
     <form className={s.form} noValidate onSubmit={handleSubmit(submitHandler)}>
       <PictureInput
         btnDisable={isSubmitting}
-        coverFromServer={deckData?.cover}
+        coverFromServer={deckData?.cover || ''}
         deleteImageHandlerCb={deleteImageHandler}
         handleImageChangeCb={handleImageChange}
         pictureDefaultCover={cardDefaultCover}
