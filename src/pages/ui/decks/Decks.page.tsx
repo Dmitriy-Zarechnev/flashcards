@@ -108,7 +108,7 @@ export const DecksPage = () => {
       {data?.items.length !== 0 ? (
         <>
           <DecksTable
-            authorId={authorId}
+            authorId={me?.id}
             decks={data?.items}
             sortTableOnClick={sortTableOnClickHandler}
             tableSort={tableSort}

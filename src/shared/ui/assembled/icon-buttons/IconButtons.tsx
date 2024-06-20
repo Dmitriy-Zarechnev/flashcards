@@ -1,20 +1,23 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { CardDeleteModal } from '@/entities'
 import { IconButton } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './IconButtons.module.scss'
 
 type IconButtonsProps = {
+  cardName: string
   disabled: boolean
   editFunction?: () => void
   playFunction?: () => void
   showEditButtons?: boolean
   showPlayButton?: boolean
-  trashFunction?: () => void
+  trashFunction: () => Promise<any>
 } & ComponentPropsWithoutRef<'div'>
 
 export const IconButtons = ({
+  cardName,
   className,
   disabled,
   editFunction,
@@ -32,7 +35,7 @@ export const IconButtons = ({
       {showEditButtons && (
         <>
           <IconButton iconId={'editOutline'} onClick={editFunction} />
-          <IconButton iconId={'trashOutline'} onClick={trashFunction} />
+          <CardDeleteModal cardName={cardName} deleteCb={trashFunction} type={'Deck'} />
         </>
       )}
     </div>

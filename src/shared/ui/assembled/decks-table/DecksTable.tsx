@@ -24,8 +24,9 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
   const updateDeckHandler = (id: string) => {
     updateDeck({ id, isPrivate: false, name: 'hello' })
   }
-  const deleteDeckHandler = (id: string) => {
-    deleteDeck({ id })
+
+  async function deleteDeckHandler(id: string) {
+    await deleteDeck({ id })
   }
   const playDeckHandler = () => {}
 
@@ -86,10 +87,11 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
 
               <Tables.TableBodyCell>
                 <IconButtons
+                  cardName={deck.name}
                   disabled={deck.cardsCount === 0}
                   editFunction={() => updateDeckHandler(deck.id)}
                   playFunction={() => playDeckHandler()}
-                  showEditButtons={authorId === deck.author.id}
+                  showEditButtons={authorId === deck.userId}
                   showPlayButton
                   trashFunction={() => deleteDeckHandler(deck.id)}
                 />

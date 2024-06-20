@@ -1,16 +1,23 @@
 import { useState } from 'react'
 
+import { ButtonTitle } from '@/entities/modals/card-delete-modal/CardDeleteModal'
 import { Button, Typography } from '@/shared'
 
 import s from './CardDeleteBody.module.scss'
 
 type CardDeleteBodyProps = {
+  buttonTitle: ButtonTitle
   cardName: string
   closeModal?: () => void
   deleteCb: () => Promise<any>
 }
 
-export const CardDeleteBody = ({ cardName, closeModal, deleteCb }: CardDeleteBodyProps) => {
+export const CardDeleteBody = ({
+  buttonTitle,
+  cardName,
+  closeModal,
+  deleteCb,
+}: CardDeleteBodyProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   async function deleteCardHandler() {
@@ -40,7 +47,7 @@ export const CardDeleteBody = ({ cardName, closeModal, deleteCb }: CardDeleteBod
           type={'button'}
           variant={'primary'}
         >
-          Delete Card
+          {`Delete ${buttonTitle}`}
         </Button>
       </div>
     </div>
