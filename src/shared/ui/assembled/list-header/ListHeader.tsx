@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { CardModal, DeckFormValues, DeckModal } from '@/entities'
+import { CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
 import { DropdownMenu, Typography } from '@/shared'
 import { clsx } from 'clsx'
 
@@ -8,7 +8,8 @@ import s from './ListHeader.module.scss'
 
 type ListHeaderProps = {
   buttonTitle: string
-  onSubmitAddDeck: (data: DeckFormValues) => Promise<any>
+  onSubmitAddCard?: (data: CardFormValues) => Promise<any>
+  onSubmitAddDeck?: (data: DeckFormValues) => Promise<any>
   title: string
   userId?: boolean
 } & ComponentPropsWithoutRef<'div'>
@@ -16,6 +17,7 @@ type ListHeaderProps = {
 export const ListHeader = ({
   buttonTitle,
   className,
+  onSubmitAddCard,
   onSubmitAddDeck,
   title,
   userId = false,
@@ -27,8 +29,11 @@ export const ListHeader = ({
         <Typography.H1>{title}</Typography.H1>
         {userId && <DropdownMenu />}
       </div>
-      <CardModal variant={''} />
-      <DeckModal onSubmit={onSubmitAddDeck} variant={'add'} />
+      {userId ? (
+        <CardModal onSubmit={onSubmitAddCard} variant={'add'} />
+      ) : (
+        <DeckModal onSubmit={onSubmitAddDeck} variant={'add'} />
+      )}
     </div>
   )
 }

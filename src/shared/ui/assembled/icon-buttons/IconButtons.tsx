@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { CardDeleteModal, DeckFormValues, DeckModal } from '@/entities'
+import { ButtonTitle } from '@/entities/modals/card-delete-modal/CardDeleteModal'
 import { IconButton } from '@/shared'
 import { clsx } from 'clsx'
 
@@ -8,9 +9,10 @@ import s from './IconButtons.module.scss'
 
 type IconButtonsProps = {
   cardName: string
-  deckData: DeckFormValues
+  deckData?: DeckFormValues
+  deleteBtnType: ButtonTitle
   deleteCb: () => Promise<any>
-  disabled: boolean
+  disabled?: boolean
   editCb: (data: DeckFormValues) => Promise<any>
   playFunction?: () => void
   showEditButtons?: boolean
@@ -21,6 +23,7 @@ export const IconButtons = ({
   cardName,
   className,
   deckData,
+  deleteBtnType,
   deleteCb,
   disabled,
   editCb,
@@ -37,7 +40,7 @@ export const IconButtons = ({
       {showEditButtons && (
         <>
           <DeckModal deckData={deckData} onSubmit={editCb} variant={'edit'} />
-          <CardDeleteModal cardName={cardName} deleteCb={deleteCb} type={'Deck'} />
+          <CardDeleteModal cardName={cardName} deleteCb={deleteCb} type={deleteBtnType} />
         </>
       )}
     </div>

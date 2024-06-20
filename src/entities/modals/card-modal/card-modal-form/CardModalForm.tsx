@@ -19,7 +19,7 @@ type CardModalFormProps = {
     'answerImg' | 'id' | 'questionImg'
   >
   closeModal?: () => void
-  onSubmit: (data: CardFormValues) => Promise<any>
+  onSubmit?: (data: CardFormValues) => Promise<any>
 }
 
 type selectValuesTypes = 'picture' | 'text'
@@ -92,7 +92,7 @@ export const CardModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Card
         }
       }
 
-      await onSubmit(args)
+      await onSubmit?.(args)
 
       closeModal?.()
     } catch (error) {

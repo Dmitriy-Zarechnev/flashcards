@@ -8,7 +8,7 @@ type CardModalProps = {
     CreateCardArgs,
     'answerImg' | 'id' | 'questionImg'
   >
-  onSubmit: (data: CardFormValues) => Promise<any>
+  onSubmit?: (data: CardFormValues) => Promise<any>
   variant: 'add' | 'edit'
 }
 

@@ -1,3 +1,4 @@
+import { useDeleteCardMutation, useUpdateCardMutation } from '@/services'
 import { Card } from '@/services/types/decks.types'
 import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
@@ -9,20 +10,22 @@ import defImg from './../../../assets/card-default-cover.webp'
 type CardsTableProps = {
   authorId?: boolean
   cards?: Card[]
-  editFunction: (id: string) => void
   sortTableOnClick: (title: string) => void
   tableSort: string
-  trashFunction: (id: string) => void
 }
 
-export const CardsTable = ({
-  authorId,
-  cards,
-  editFunction,
-  sortTableOnClick,
-  tableSort,
-  trashFunction,
-}: CardsTableProps) => {
+export const CardsTable = ({ authorId, cards, sortTableOnClick, tableSort }: CardsTableProps) => {
+  // ----- Блок работы с удалением и редактированием карточек в колоде -----
+  const [deleteCard] = useDeleteCardMutation()
+  const [updateCard] = useUpdateCardMutation()
+
+  async function deleteCardHandler(id: string) {
+    await deleteCard({ id })
+  }
+  async function updateCardHandler(id: string) {
+    await updateCard({ id })
+  }
+
   return (
     <Tables.Table>
       <Tables.TableHead>
@@ -74,8 +77,12 @@ export const CardsTable = ({
               {authorId && (
                 <Tables.TableBodyCell>
                   <IconButtons
-                    editFunction={() => editFunction(card.id)}
-                    trashFunction={() => trashFunction(card.id)}
+                    cardName={'this card'}
+                    deleteBtnType={'Card'}
+                    deleteCb={() => deleteCardHandler(card.id)}
+                    editCb={() => updateCardHandler(card.id)}
+                    showEditButtons
+                    showPlayButton={false}
                   />
                 </Tables.TableBodyCell>
               )}

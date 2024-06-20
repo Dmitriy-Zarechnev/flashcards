@@ -5,7 +5,7 @@ import { DeckModalForm } from './deck-modal-form/DeckModalForm'
 
 type DeckModalProps = {
   deckData?: DeckFormValues
-  onSubmit: (data: DeckFormValues) => Promise<any>
+  onSubmit?: (data: DeckFormValues) => Promise<any>
   variant: 'add' | 'edit'
 }
 

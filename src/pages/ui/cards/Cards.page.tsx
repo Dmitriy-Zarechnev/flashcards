@@ -1,16 +1,16 @@
 import { ChangeEvent } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { CardFormValues } from '@/entities'
 import { Error404 } from '@/pages'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
 import { useSuperSort } from '@/pages/hooks/useSuperSort'
 import {
-  useDeleteCardMutation,
+  useCreateCardMutation,
   useGetCardsQuery,
   useGetDeckByIdQuery,
   useMeQuery,
-  useUpdateCardMutation,
 } from '@/services'
 import {
   BackToDecks,
@@ -73,21 +73,15 @@ export const CardsPage = () => {
     question: search,
   })
 
-  // ----- Блок работы с удалением и редактированием карточек в колоде -----
-  const [deleteCard] = useDeleteCardMutation()
-  const [updateCard] = useUpdateCardMutation()
-  // const [createCard] = useCreateCardMutation()
+  // ----- Блок работы с воспроизведением колоды -----
+  async function playDeckHandler() {}
 
-  const deleteCardHandler = (id: string) => {
-    deleteCard({ id })
+  // ----- Блок работы с созданием карт в колоде -----
+  const [createCard] = useCreateCardMutation()
+
+  async function createCardHandler(data: CardFormValues) {
+    await createCard({ id: deckId, ...data })
   }
-  const updateCardHandler = (id: string) => {
-    updateCard({ id })
-  }
-  // const createCardHandler = (id: string) => {
-  //   createCard({ answer: 'why&', id, question: 'because' })
-  //   console.log('createCard')
-  // }
 
   // ----- Показывать Loader -----
   if (isLoading) {
@@ -104,6 +98,7 @@ export const CardsPage = () => {
       <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <ListHeader
         buttonTitle={authorId ? 'Add new card' : 'Learn to Pack'}
+        onSubmitAddCard={authorId ? createCardHandler : playDeckHandler}
         title={deckByIdData?.name ?? 'Super Deck'}
         userId={authorId}
       />
@@ -120,10 +115,8 @@ export const CardsPage = () => {
           <CardsTable
             authorId={authorId}
             cards={cardsData?.items}
-            editFunction={updateCardHandler}
             sortTableOnClick={sortTableOnClickHandler}
             tableSort={tableSort}
-            trashFunction={deleteCardHandler}
           />
           <Pagination
             count={cardsData?.pagination.totalPages || 0}

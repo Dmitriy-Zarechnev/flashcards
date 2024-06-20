@@ -14,7 +14,7 @@ type DeckModalFormProps = {
   btnTitle: string
   closeModal?: () => void
   deckData?: DeckFormValues
-  onSubmit: (data: DeckFormValues) => Promise<any>
+  onSubmit?: (data: DeckFormValues) => Promise<any>
 }
 
 export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: DeckModalFormProps) => {
@@ -69,7 +69,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
         args.name = name
       }
 
-      await onSubmit(args)
+      await onSubmit?.(args)
       if (imageURL) {
         URL.revokeObjectURL(imageURL) // Освобождаем URL после отправки формы
         setImageURL(undefined)
