@@ -15,8 +15,11 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
+import { useMeQuery } from '@/services'
 import { Layout } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
+
+import InitLoader from './InitLoader'
 
 //========================================================================================
 
@@ -44,6 +47,8 @@ const privateRoutes: RouteObject[] = [
     element: <DecksPage />,
     path: PATH.DECKSPAGE,
   },
+  { element: <Navigate replace to={PATH.DECKSPAGE} />, path: '/' },
+
   {
     element: <CardsPage />,
     path: PATH.CARDSPAGE,
@@ -68,13 +73,13 @@ export const routes = createBrowserRouter([
         element: <PrivateRoutes />,
       },
       ...publicRoutes,
-      {
-        /* гарантирует, что перенаправление заменит текущую запись в истории браузера, так что если пользователь нажмет
-        кнопку "назад" в браузере, он не вернется к корневому пути, а перейдет к предыдущему URL в истории. */
-
-        element: <Navigate replace to={PATH.DECKSPAGE} />,
-        path: '/',
-      },
+      // {
+      //   /* гарантирует, что перенаправление заменит текущую запись в истории браузера, так что если пользователь нажмет
+      //   кнопку "назад" в браузере, он не вернется к корневому пути, а перейдет к предыдущему URL в истории. */
+      //
+      //   element: <Navigate replace to={PATH.DECKSPAGE} />,
+      //   path: '/',
+      // },
     ],
     element: <Layout />,
     errorElement: <Navigate to={PATH.ERRORPAGE} />,
@@ -87,21 +92,39 @@ export function Router() {
 
 //========================================================================================
 
+// function PrivateRoutes() {
+//   /* проверяем авторизирован пользователь или нет есть отдельная проверка в 'flashcards-base-query'
+//   но там переодресация на логинизацию только если повторный запрос с обновленным токеном упал */
+//
+//   const { data, isLoading, isSuccess, isUninitialized } = useMeQuery()
+//
+//   // Проверяем, идет ли загрузка или запрос еще не был инициирован
+//   if (isLoading || isUninitialized) {
+//     // Здесь можно вернуть индикатор загрузки или null, если не хотите ничего показывать
+//     return <InitLoader />
+//   }
+//
+//   // const isAuthenticated = isSuccess && data
+//
+//   const isAuthenticated = true
+//
+//   return isAuthenticated ? <Outlet /> : <Navigate to={PATH.SIGNIN} />
+// }
+
 function PrivateRoutes() {
-  /* проверяем авторизирован пользователь или нет есть отдельная проверка в 'flashcards-base-query'
-  но там переодресация на логинизацию только если повторный запрос с обновленным токеном упал */
+  /* при каждой переадрессации на PrivateRoutes будет выполнятся запрос useMeQuery, если он не пройдет, то пользователь
+  будет перенаправлен на SignInPage => логика в 'flashcards-base-query'
+  этого вполне достаточно, нет нужды использовать еще одну проверку с isAuthenticated*/
 
-  // const { data, isLoading, isSuccess, isUninitialized } = useMeQuery()
-  //
-  // // Проверяем, идет ли загрузка или запрос еще не был инициирован
-  // if (isLoading || isUninitialized) {
-  //   // Здесь можно вернуть индикатор загрузки или null, если не хотите ничего показывать
-  //   return <InitLoader />
-  // }
-  //
-  // const isAuthenticated = isSuccess && data
+  // const { isLoading, isUninitialized } = useMeQuery()
 
-  const isAuthenticated = true
+  const { isLoading, isUninitialized } = useMeQuery()
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={PATH.SIGNIN} />
+  // Проверяем, идет ли загрузка или запрос еще не был инициирован
+  if (isLoading || isUninitialized) {
+    // Здесь можно вернуть индикатор загрузки или null, если не хотите ничего показывать
+    return <InitLoader />
+  }
+
+  return <Outlet />
 }

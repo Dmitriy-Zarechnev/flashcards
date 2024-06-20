@@ -70,6 +70,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           extraOptions
         )) as any
 
+        // пришел ответ с refresh-token
         if (
           refreshResult.data &&
           typeof refreshResult.data === 'object' &&
