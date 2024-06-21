@@ -20,8 +20,11 @@ const cardsService = flashcardsApi.injectEndpoints({
           formData.append('answer', answer)
           formData.append('question', question)
 
-          if (answerImg && questionImg) {
+          if (answerImg) {
             formData.append('answerImg', answerImg)
+          }
+
+          if (questionImg) {
             formData.append('questionImg', questionImg)
           }
 

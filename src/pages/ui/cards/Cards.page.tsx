@@ -80,6 +80,7 @@ export const CardsPage = () => {
   const [createCard] = useCreateCardMutation()
 
   async function createCardHandler(data: CardFormValues) {
+    debugger
     await createCard({ id: deckId, ...data })
   }
 
