@@ -1,4 +1,5 @@
 import { Dropdown, HeaderAvatar, Icon, Typography } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
 
 import s from './DropdownProfile.module.scss'
 
@@ -14,23 +15,21 @@ export const DropdownProfile = ({ email, name, photo, photoDescription }: Dropdo
     <Dropdown.Root
       style={{ height: '36px', width: '36px' }}
       trigger={<HeaderAvatar name={name} photo={photo} photoDescription={photoDescription} />}
-      // trigger={<img alt={photoDescription} src={photo} />}
     >
       <div className={s.profileItem}>
-        {/*<img alt={photoDescription} src={photo} />*/}
-        <HeaderAvatar name={name} photo={photo} photoDescription={photoDescription} />
+        <HeaderAvatar name={name} noHover photo={photo} photoDescription={photoDescription} />
         <div>
           <Typography.Subtitle2>{name}</Typography.Subtitle2>
           <Typography.Caption>{email}</Typography.Caption>
         </div>
       </div>
       <Dropdown.Separator />
-      <Dropdown.Item>
+      <Dropdown.Item path={PATH.PROFILE}>
         <Icon iconId={'personOutline'} />
         <Typography.Caption>My profile</Typography.Caption>
       </Dropdown.Item>
       <Dropdown.Separator />
-      <Dropdown.Item>
+      <Dropdown.Item path={PATH.SINGOUT}>
         <Icon iconId={'logOut'} />
         <Typography.Caption>Sign out</Typography.Caption>
       </Dropdown.Item>

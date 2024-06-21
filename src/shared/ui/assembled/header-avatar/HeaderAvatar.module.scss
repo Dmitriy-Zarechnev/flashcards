@@ -31,3 +31,8 @@
     box-shadow: 0 0 10px var(--color-accent-300);
   }
 }
+
+.fallBack.noHover:hover {
+  cursor: default;
+  box-shadow: none;
+}

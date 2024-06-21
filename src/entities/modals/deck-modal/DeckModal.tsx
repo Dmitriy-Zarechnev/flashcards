@@ -1,12 +1,12 @@
 import { DeckFormValues } from '@/entities'
-import { Button, Dialog, IconButton } from '@/shared'
+import { Button, Dialog, IconButton, ModalVariant } from '@/shared'
 
 import { DeckModalForm } from './deck-modal-form/DeckModalForm'
 
 type DeckModalProps = {
   deckData?: DeckFormValues
   onSubmit?: (data: DeckFormValues) => Promise<any>
-  variant: 'add' | 'edit'
+  variant: ModalVariant
 }
 
 export const DeckModal = ({ deckData, onSubmit, variant }: DeckModalProps) => {

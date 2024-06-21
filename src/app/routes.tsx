@@ -15,11 +15,8 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
-import { useMeQuery } from '@/services'
 import { Layout } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
-
-import InitLoader from './InitLoader'
 
 //========================================================================================
 

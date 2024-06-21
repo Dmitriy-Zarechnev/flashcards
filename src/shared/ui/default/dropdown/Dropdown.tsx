@@ -1,4 +1,5 @@
 import { CSSProperties, ComponentPropsWithRef, ReactNode } from 'react'
+import { NavLink } from 'react-router-dom'
 
 import * as D from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
@@ -35,10 +36,15 @@ const Root = ({ children, style, trigger, triggerClassName, ...rest }: DropdownP
 type ItemProps = {
   children: ReactNode
   className?: string
+  path: string
 }
 
-const Item = ({ children, className }: ItemProps) => (
-  <D.Item className={clsx(s.item, className)}>{children}</D.Item>
+const Item = ({ children, className, path }: ItemProps) => (
+  <D.Item className={clsx(s.item, className)}>
+    <NavLink className={s.iconTextLink} to={path}>
+      {children}
+    </NavLink>
+  </D.Item>
 )
 
 const Separator = () => <D.Separator className={s.separator} />

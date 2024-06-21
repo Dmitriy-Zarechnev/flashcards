@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-import { ButtonTitle } from '@/entities/modals/card-delete-modal/CardDeleteModal'
-import { Button, Typography } from '@/shared'
+import { Button, ButtonTitle, Typography } from '@/shared'
 
 import s from './CardDeleteBody.module.scss'
 

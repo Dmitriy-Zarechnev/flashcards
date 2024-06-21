@@ -7,4 +7,5 @@ export const PATH = {
   RECOVERPASSWORD: '/recover-password',
   SIGNIN: '/sign-in',
   SIGNUP: '/sign-up',
+  SINGOUT: '/sign-out',
 } as const

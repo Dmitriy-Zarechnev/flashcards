@@ -2,9 +2,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { CardFormValues } from '@/entities'
-import { CardData } from '@/entities/modals/card-modal/CardModal'
 import { modalSchemes } from '@/entities/validationSchemes'
-import { Button, Select, TextField } from '@/shared'
+import { Button, CardData, Select, TextField } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CardModalForm.module.scss'

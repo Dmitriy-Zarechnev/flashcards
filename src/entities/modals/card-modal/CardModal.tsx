@@ -1,17 +1,11 @@
 import { CardFormValues } from '@/entities'
 import { CardModalForm } from '@/entities/modals/card-modal/card-modal-form/CardModalForm'
-import { CreateCardArgs } from '@/services'
-import { Button, Dialog, IconButton } from '@/shared'
-
-export type CardData = { answerImg?: string; questionImg?: string } & Omit<
-  CreateCardArgs,
-  'answerImg' | 'id' | 'questionImg'
->
+import { Button, CardData, Dialog, IconButton, ModalVariant } from '@/shared'
 
 type CardModalProps = {
   cardData?: CardData
   onSubmit?: (data: CardFormValues) => Promise<any>
-  variant: 'add' | 'edit'
+  variant: ModalVariant
 }
 
 export const CardModal = ({ cardData, onSubmit, variant }: CardModalProps) => {

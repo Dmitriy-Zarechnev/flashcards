@@ -1,9 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { CardDeleteModal, CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
-import { ButtonTitle } from '@/entities/modals/card-delete-modal/CardDeleteModal'
-import { CardData } from '@/entities/modals/card-modal/CardModal'
-import { IconButton } from '@/shared'
+import { ButtonTitle, CardData, IconButton } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './IconButtons.module.scss'

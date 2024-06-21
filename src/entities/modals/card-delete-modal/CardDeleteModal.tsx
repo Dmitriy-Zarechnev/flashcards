@@ -1,8 +1,6 @@
-import { Dialog, IconButton } from '@/shared'
+import { ButtonTitle, Dialog, IconButton } from '@/shared'
 
 import { CardDeleteBody } from './card-delete-body/CardDeleteBody'
-
-export type ButtonTitle = 'Card' | 'Deck'
 
 type CardDeleteModalProps = {
   cardName: string
