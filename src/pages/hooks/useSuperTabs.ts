@@ -6,8 +6,8 @@ export type TabsData = {
 }
 
 const tabsList: TabsData[] = [
-  { title: 'My Cards', value: 'my' },
-  { title: 'All Cards', value: 'all' },
+  { title: 'My', value: 'my' },
+  { title: 'All', value: 'all' },
 ]
 
 export const useSuperTabs = () => {

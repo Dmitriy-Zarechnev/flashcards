@@ -73,6 +73,8 @@ export const CardsPage = () => {
     question: search,
   })
 
+  const paginationDecider = cardsData && cardsData.pagination && cardsData.pagination.totalItems > 5
+
   // ----- Блок работы с воспроизведением колоды -----
   async function playDeckHandler() {}
 
@@ -97,7 +99,6 @@ export const CardsPage = () => {
     <Page mt={'24px'}>
       <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <ListHeader
-        // buttonTitle={authorId ? 'Add new card' : 'Learn to Pack'}
         buttonType={'Card'}
         isCardExist={cardsData?.items.length === 0}
         onSubmitAddCard={createCardHandler}
@@ -121,14 +122,16 @@ export const CardsPage = () => {
             sortTableOnClick={sortTableOnClickHandler}
             tableSort={tableSort}
           />
-          <Pagination
-            count={cardsData?.pagination.totalPages || 0}
-            onChange={handleCurrentPage}
-            onPerPageChange={handlePerPage}
-            page={+currentPage}
-            perPage={+itemsPerPage}
-            perPageOptions={optionsItemsPerPage}
-          />
+          {paginationDecider && (
+            <Pagination
+              count={cardsData?.pagination.totalPages || 0}
+              onChange={handleCurrentPage}
+              onPerPageChange={handlePerPage}
+              page={+currentPage}
+              perPage={+itemsPerPage}
+              perPageOptions={optionsItemsPerPage}
+            />
+          )}
         </>
       ) : (
         <Typography.H2 className={s.filterErrorPage}>
