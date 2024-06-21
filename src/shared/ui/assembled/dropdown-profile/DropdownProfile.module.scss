@@ -12,3 +12,10 @@
     color: var(--color-dark-100);
   }
 }
+
+.iconTextLink {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 6px;
+  align-items: center;
+}

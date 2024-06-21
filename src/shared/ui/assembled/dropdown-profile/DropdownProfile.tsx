@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom'
+
 import { Dropdown, HeaderAvatar, Icon, Typography } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
 
@@ -24,14 +26,18 @@ export const DropdownProfile = ({ email, name, photo, photoDescription }: Dropdo
         </div>
       </div>
       <Dropdown.Separator />
-      <Dropdown.Item path={PATH.PROFILE}>
-        <Icon iconId={'personOutline'} />
-        <Typography.Caption>My profile</Typography.Caption>
+      <Dropdown.Item>
+        <NavLink className={s.iconTextLink} to={PATH.PROFILE}>
+          <Icon iconId={'personOutline'} />
+          <Typography.Caption>My profile</Typography.Caption>
+        </NavLink>
       </Dropdown.Item>
       <Dropdown.Separator />
-      <Dropdown.Item path={PATH.SINGOUT}>
-        <Icon iconId={'logOut'} />
-        <Typography.Caption>Sign out</Typography.Caption>
+      <Dropdown.Item>
+        <NavLink className={s.iconTextLink} to={PATH.SINGOUT}>
+          <Icon iconId={'logOut'} />
+          <Typography.Caption>Sign out</Typography.Caption>
+        </NavLink>
       </Dropdown.Item>
     </Dropdown.Root>
   )
