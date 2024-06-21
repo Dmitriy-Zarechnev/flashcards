@@ -8,6 +8,7 @@ import s from './ListHeader.module.scss'
 
 type ListHeaderProps = {
   buttonType?: ButtonTitle
+  isCardExist?: boolean
   onSubmitAddCard?: (data: CardFormValues) => Promise<any>
   onSubmitAddDeck?: (data: DeckFormValues) => Promise<any>
   startLearnCards?: () => void
@@ -18,6 +19,7 @@ type ListHeaderProps = {
 export const ListHeader = ({
   buttonType,
   className,
+  isCardExist,
   onSubmitAddCard,
   onSubmitAddDeck,
   title,
@@ -25,6 +27,10 @@ export const ListHeader = ({
   ...rest
 }: ListHeaderProps) => {
   const buttonTypeDecider = () => {
+    if (isCardExist && !userId) {
+      return
+    }
+
     if (buttonType === 'Card') {
       if (!userId) {
         return <Button variant={'primary'}>Learn cards</Button>
@@ -43,12 +49,6 @@ export const ListHeader = ({
         {userId && <DropdownMenu />}
       </div>
       {buttonTypeDecider()}
-      {/*{buttonTitle === 'Card' ? (*/}
-      {/*  <CardModal onSubmit={onSubmitAddCard} variant={'add'} />*/}
-      {/*) : (*/}
-      {/*  // <Button variant={'primary'}/>*/}
-      {/*  <DeckModal onSubmit={onSubmitAddDeck} variant={'add'} />*/}
-      {/*)}*/}
     </div>
   )
 }

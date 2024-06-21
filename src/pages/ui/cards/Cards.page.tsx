@@ -99,6 +99,7 @@ export const CardsPage = () => {
       <ListHeader
         // buttonTitle={authorId ? 'Add new card' : 'Learn to Pack'}
         buttonType={'Card'}
+        isCardExist={cardsData?.items.length === 0}
         onSubmitAddCard={createCardHandler}
         startLearnCards={playDeckHandler}
         title={deckByIdData?.name ?? 'Super Deck'}
