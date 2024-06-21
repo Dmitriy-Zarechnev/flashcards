@@ -10,6 +10,7 @@ type ListHeaderProps = {
   buttonTitle: string
   onSubmitAddCard?: (data: CardFormValues) => Promise<any>
   onSubmitAddDeck?: (data: DeckFormValues) => Promise<any>
+  startLearnCards?: () => void
   title: string
   userId?: boolean
 } & ComponentPropsWithoutRef<'div'>

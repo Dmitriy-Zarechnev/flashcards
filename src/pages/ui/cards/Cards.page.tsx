@@ -99,7 +99,8 @@ export const CardsPage = () => {
       <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <ListHeader
         buttonTitle={authorId ? 'Add new card' : 'Learn to Pack'}
-        onSubmitAddCard={authorId ? createCardHandler : playDeckHandler}
+        onSubmitAddCard={createCardHandler}
+        startLearnCards={playDeckHandler}
         title={deckByIdData?.name ?? 'Super Deck'}
         userId={authorId}
       />
