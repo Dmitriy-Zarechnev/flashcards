@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { CardFormValues } from '@/entities'
+import { CardData } from '@/entities/modals/card-modal/CardModal'
 import { modalSchemes } from '@/entities/validationSchemes'
-import { CreateCardArgs } from '@/services'
 import { Button, Select, TextField } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -14,10 +14,7 @@ import pictureDefaultCover from './../../../../shared/assets/deck-default-cover.
 
 type CardModalFormProps = {
   btnTitle: string
-  cardData?: { answerImg?: string; questionImg?: string } & Omit<
-    CreateCardArgs,
-    'answerImg' | 'id' | 'questionImg'
-  >
+  cardData?: CardData
   closeModal?: () => void
   onSubmit?: (data: CardFormValues) => Promise<any>
 }

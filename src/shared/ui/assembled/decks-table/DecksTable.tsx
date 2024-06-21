@@ -93,7 +93,7 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
                   deleteBtnType={'Deck'}
                   deleteCb={() => deleteDeckHandler(deck.id)}
                   disabled={deck.cardsCount === 0}
-                  editCb={(data: DeckFormValues) => updateDeckHandler(deck.id, data)}
+                  editDeckCb={(data: DeckFormValues) => updateDeckHandler(deck.id, data)}
                   playFunction={() => playDeckHandler()}
                   showEditButtons={authorId === deck.userId}
                   showPlayButton

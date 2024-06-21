@@ -1,3 +1,4 @@
+import { CardFormValues } from '@/entities'
 import { useDeleteCardMutation, useUpdateCardMutation } from '@/services'
 import { Card } from '@/services/types/decks.types'
 import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
@@ -22,8 +23,8 @@ export const CardsTable = ({ authorId, cards, sortTableOnClick, tableSort }: Car
   async function deleteCardHandler(id: string) {
     await deleteCard({ id })
   }
-  async function updateCardHandler(id: string) {
-    await updateCard({ id })
+  async function updateCardHandler(id: string, data: CardFormValues) {
+    await updateCard({ id, ...data })
   }
 
   return (
@@ -77,10 +78,16 @@ export const CardsTable = ({ authorId, cards, sortTableOnClick, tableSort }: Car
               {authorId && (
                 <Tables.TableBodyCell>
                   <IconButtons
+                    cardData={{
+                      answer: card.answer,
+                      answerImg: card.answerImg,
+                      question: card.question,
+                      questionImg: card.questionImg,
+                    }}
                     cardName={'this card'}
                     deleteBtnType={'Card'}
                     deleteCb={() => deleteCardHandler(card.id)}
-                    editCb={() => updateCardHandler(card.id)}
+                    editCardCb={(data: CardFormValues) => updateCardHandler(card.id, data)}
                     showEditButtons
                     showPlayButton={false}
                   />
