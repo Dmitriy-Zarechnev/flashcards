@@ -27,17 +27,21 @@ export const ListHeader = ({
   ...rest
 }: ListHeaderProps) => {
   const buttonTypeDecider = () => {
+    // Если колода пустая и создана не мной, то тогда без кнопки
     if (isCardExist && !userId) {
       return
     }
 
     if (buttonType === 'Card') {
       if (!userId) {
+        // Если колода непустая и создана не мной, то кнопка учить
         return <Button variant={'primary'}>Learn cards</Button>
       }
 
+      // Если колода пустая и создана мной, то кнопка добавить карточки
       return <CardModal onSubmit={onSubmitAddCard} variant={'add'} />
     } else {
+      // Если страница колод, то кнопка добавить колоду
       return <DeckModal onSubmit={onSubmitAddDeck} variant={'add'} />
     }
   }
