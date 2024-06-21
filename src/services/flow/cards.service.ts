@@ -34,9 +34,8 @@ const cardsService = flashcardsApi.injectEndpoints({
       }),
       deleteCard: builder.mutation<any, DefaultIdArg>({
         invalidatesTags: ['Cards'],
-        query: id => ({
+        query: ({ id }) => ({
           method: 'DELETE',
-          params: id,
           url: `v1/cards/${id}`,
         }),
       }),

@@ -35,7 +35,7 @@ export const CardDeleteBody = ({
       <Typography.Body1 as={'p'} className={s.text}>
         Do you really want to remove <span>{cardName}</span>?
         <br />
-        All cards will be deleted.
+        {buttonTitle === 'Deck' && 'All cards will be deleted.'}
       </Typography.Body1>
       <div className={s.footerBtnWrapper}>
         <Button onClick={closeModal} type={'button'} variant={'secondary'}>
