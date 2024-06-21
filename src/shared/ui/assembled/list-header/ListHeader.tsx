@@ -1,13 +1,13 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
-import { DropdownMenu, Typography } from '@/shared'
+import { Button, ButtonTitle, DropdownMenu, Typography } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './ListHeader.module.scss'
 
 type ListHeaderProps = {
-  buttonTitle: string
+  buttonType?: ButtonTitle
   onSubmitAddCard?: (data: CardFormValues) => Promise<any>
   onSubmitAddDeck?: (data: DeckFormValues) => Promise<any>
   startLearnCards?: () => void
@@ -16,25 +16,39 @@ type ListHeaderProps = {
 } & ComponentPropsWithoutRef<'div'>
 
 export const ListHeader = ({
-  buttonTitle,
+  buttonType,
   className,
   onSubmitAddCard,
   onSubmitAddDeck,
   title,
-  userId = false,
+  userId,
   ...rest
 }: ListHeaderProps) => {
+  const buttonTypeDecider = () => {
+    if (buttonType === 'Card') {
+      if (!userId) {
+        return <Button variant={'primary'}>Learn cards</Button>
+      }
+
+      return <CardModal onSubmit={onSubmitAddCard} variant={'add'} />
+    } else {
+      return <DeckModal onSubmit={onSubmitAddDeck} variant={'add'} />
+    }
+  }
+
   return (
     <div className={clsx(s.listHeader, className)} {...rest}>
       <div className={s.titleBox}>
         <Typography.H1>{title}</Typography.H1>
         {userId && <DropdownMenu />}
       </div>
-      {userId ? (
-        <CardModal onSubmit={onSubmitAddCard} variant={'add'} />
-      ) : (
-        <DeckModal onSubmit={onSubmitAddDeck} variant={'add'} />
-      )}
+      {buttonTypeDecider()}
+      {/*{buttonTitle === 'Card' ? (*/}
+      {/*  <CardModal onSubmit={onSubmitAddCard} variant={'add'} />*/}
+      {/*) : (*/}
+      {/*  // <Button variant={'primary'}/>*/}
+      {/*  <DeckModal onSubmit={onSubmitAddDeck} variant={'add'} />*/}
+      {/*)}*/}
     </div>
   )
 }

@@ -80,7 +80,6 @@ export const CardsPage = () => {
   const [createCard] = useCreateCardMutation()
 
   async function createCardHandler(data: CardFormValues) {
-    debugger
     await createCard({ id: deckId, ...data })
   }
 
@@ -98,7 +97,8 @@ export const CardsPage = () => {
     <Page mt={'24px'}>
       <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <ListHeader
-        buttonTitle={authorId ? 'Add new card' : 'Learn to Pack'}
+        // buttonTitle={authorId ? 'Add new card' : 'Learn to Pack'}
+        buttonType={'Card'}
         onSubmitAddCard={createCardHandler}
         startLearnCards={playDeckHandler}
         title={deckByIdData?.name ?? 'Super Deck'}

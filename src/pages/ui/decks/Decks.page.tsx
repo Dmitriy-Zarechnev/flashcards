@@ -89,7 +89,8 @@ export const DecksPage = () => {
   return (
     <Page>
       <ListHeader
-        buttonTitle={'Add new deck'}
+        // buttonTitle={'Add new deck'}
+        buttonType={'Deck'}
         onSubmitAddDeck={onSubmitAddDeckHandler}
         title={'Decks List'}
       />
