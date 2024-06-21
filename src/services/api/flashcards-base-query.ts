@@ -43,21 +43,23 @@ export const baseQueryWithReauth: BaseQueryFn<
   /* ожидаем результат запроса*/
   let result = await baseQuery(args, api, extraOptions)
 
+  console.log(result)
+
   // проверяем на ошибку в result, например если нет нужного токена (истек срок жизни токена)
   if (result.error && result.error.status === 401) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire()
 
       try {
-        // пробуем рефрешнуть токен
-        // ! обязатеотнр нужно передать нужные аргуементы для обновления токена
-        // почему метод post? потому что мы отправляем старый токен, он банится на сервере
-        // и нам приходит уже новый токен
+        /* пробуем рефрешнуть токен
+           ! обязатеотнр нужно передать нужные аргуементы для обновления токена
+           почему метод post? потому что мы отправляем старый токен, он банится на сервере
+           и нам приходит уже новый токен */
 
         const refreshToken = localStorage.getItem('refreshToken')
 
-        // нужно поменять headers
-        // так как header ожидает refresh-token а не access-token, чтобы отправиться его на сервер
+        /* нужно поменять headers
+           так как header ожидает refresh-token а не access-token, чтобы отправиться его на сервер */
         const refreshResult = (await baseQuery(
           {
             headers: {
@@ -90,6 +92,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           // return result
         } else {
           // если нет рефрешь токена, то и результата не придет, значит перенаправим на логинизацию
+          // ⛔ обязательно нужно перенаправлять туда, где нет автоматического запроса! а то будет бесконечный цикл запросов
           await routes.navigate(PATH.SIGNIN)
         }
       } finally {

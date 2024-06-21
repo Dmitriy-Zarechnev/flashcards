@@ -15,10 +15,8 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
-import { useMeQuery } from '@/services'
 import { PATH } from '@/shared/utils/routerVariables'
 
-import InitLoader from './InitLoader'
 import { Layout } from './layout/Layout'
 
 //========================================================================================
@@ -90,8 +88,7 @@ export function Router() {
 //========================================================================================
 
 // function PrivateRoutes() {
-//   /* проверяем авторизирован пользователь или нет есть отдельная проверка в 'flashcards-base-query'
-//   но там переодресация на логинизацию только если повторный запрос с обновленным токеном упал */
+
 //
 //   const { data, isLoading, isSuccess, isUninitialized } = useMeQuery()
 //
@@ -109,21 +106,10 @@ export function Router() {
 // }
 
 function PrivateRoutes() {
-  /* при каждой переадрессации на PrivateRoutes будет выполнятся запрос useMeQuery, если он не пройдет, то пользователь
-  будет перенаправлен на SignInPage => логика в 'flashcards-base-query'
-  этого вполне достаточно, нет нужды использовать еще одну проверку с isAuthenticated*/
+  const refreshToken = localStorage.getItem('refreshToken')
+  const accessToken = localStorage.getItem('accessToken')
 
-  // const { isLoading, isUninitialized } = useMeQuery()
-
-  const { data, isLoading, isUninitialized } = useMeQuery()
-
-  // Проверяем, идет ли загрузка или запрос еще не был инициирован
-  if (isLoading || isUninitialized) {
-    // Здесь можно вернуть индикатор загрузки или null, если не хотите ничего показывать
-    return <InitLoader />
-  }
-
-  const isAuthenticated = !!data
+  const isAuthenticated = refreshToken && accessToken
 
   return isAuthenticated ? <Outlet /> : <Navigate to={PATH.SIGNIN} />
 }

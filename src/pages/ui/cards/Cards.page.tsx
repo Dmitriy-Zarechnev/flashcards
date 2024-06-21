@@ -91,7 +91,7 @@ export const CardsPage = () => {
 
   // ----- Показывать Loader -----
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return <h1>🟠🟠🟠 CARDS LOADING 🟠🟠🟠</h1>
   }
 
   // ----- Показывать страницу с ошибкой -----
