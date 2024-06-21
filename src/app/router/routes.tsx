@@ -16,10 +16,10 @@ import {
   SignUpPage,
 } from '@/pages'
 import { useMeQuery } from '@/services'
-import { Layout } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
 
 import InitLoader from './InitLoader'
+import { Layout } from './layout/Layout'
 
 //========================================================================================
 
@@ -36,10 +36,10 @@ const publicRoutes: RouteObject[] = [
     element: <ForgotPasswordPage />,
     path: PATH.RECOVERPASSWORD,
   },
-  {
-    element: <Error404 />,
-    path: PATH.ERRORPAGE,
-  },
+  // {
+  //   element: <Error404 />,
+  //   path: PATH.ERRORPAGE,
+  // },
 ]
 
 const privateRoutes: RouteObject[] = [
@@ -47,8 +47,11 @@ const privateRoutes: RouteObject[] = [
     element: <DecksPage />,
     path: PATH.DECKSPAGE,
   },
-  { element: <Navigate replace to={PATH.DECKSPAGE} />, path: '/' },
-
+  {
+    // replace - убирает путь '/' из истории браузера
+    element: <Navigate replace to={PATH.DECKSPAGE} />,
+    path: '/',
+  },
   {
     element: <CardsPage />,
     path: PATH.CARDSPAGE,
@@ -57,10 +60,10 @@ const privateRoutes: RouteObject[] = [
     element: <LearnPage />,
     path: PATH.LEARNDECK,
   },
-  {
-    element: <Error404 />,
-    path: PATH.ERRORPAGE,
-  },
+  // {
+  //   element: <Error404 />,
+  //   path: PATH.ERRORPAGE,
+  // },
 ]
 
 //========================================================================================
@@ -73,16 +76,10 @@ export const routes = createBrowserRouter([
         element: <PrivateRoutes />,
       },
       ...publicRoutes,
-      // {
-      //   /* гарантирует, что перенаправление заменит текущую запись в истории браузера, так что если пользователь нажмет
-      //   кнопку "назад" в браузере, он не вернется к корневому пути, а перейдет к предыдущему URL в истории. */
-      //
-      //   element: <Navigate replace to={PATH.DECKSPAGE} />,
-      //   path: '/',
-      // },
     ],
     element: <Layout />,
-    errorElement: <Navigate to={PATH.ERRORPAGE} />,
+    // errorElement: <Navigate to={PATH.ERRORPAGE} />,
+    errorElement: <Error404 />,
   },
 ])
 
@@ -118,7 +115,7 @@ function PrivateRoutes() {
 
   // const { isLoading, isUninitialized } = useMeQuery()
 
-  const { isLoading, isUninitialized } = useMeQuery()
+  const { data, isLoading, isUninitialized } = useMeQuery()
 
   // Проверяем, идет ли загрузка или запрос еще не был инициирован
   if (isLoading || isUninitialized) {
@@ -126,5 +123,7 @@ function PrivateRoutes() {
     return <InitLoader />
   }
 
-  return <Outlet />
+  const isAuthenticated = !!data
+
+  return isAuthenticated ? <Outlet /> : <Navigate to={PATH.SIGNIN} />
 }
