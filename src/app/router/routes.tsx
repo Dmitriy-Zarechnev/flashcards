@@ -123,6 +123,10 @@ export function Router() {
    так как у пользователя теперь только один токен, он успешно будет перенаправлен на /sign-in и если у него есть валидный refreshToken, то он
    может востановить accessToken перезагрузив страничку ( хотя если у него уже упал запрос в flashcards-base-query врядли у него это получиться)
 
+   💢 новая задача => если остался только refreshToken и при перезагрузке мы получим accessToken, однако нас не пенаправляет на /decks
+      нужно еще раз перезагрузить страничку
+      решение => при обноновлении accessToken по refreshToken будем проверять url странички, и если окажется что это /sign-in, то будем
+      перенаправлять пользователя на /decks. Реализуем получение url через утилиту getPathname в flashcards-base-query
 */
 
 function PrivateRoutes() {
@@ -134,8 +138,6 @@ function PrivateRoutes() {
 
   const isAuthenticated = refreshToken && accessToken
 
-  console.log('🟢PrivateRoutes')
-
   return isAuthenticated ? <Outlet /> : <Navigate to={PATH.SIGNIN} />
 }
 
@@ -144,8 +146,6 @@ function PublicRoutes() {
   const accessToken = localStorage.getItem('accessToken')
 
   const isAuthenticated = refreshToken && accessToken
-
-  console.log('🔴PublicRoutes')
 
   return isAuthenticated ? <Navigate to={PATH.DECKSPAGE} /> : <Outlet />
 }
