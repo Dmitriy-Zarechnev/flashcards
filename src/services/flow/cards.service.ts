@@ -1,9 +1,11 @@
 import { flashcardsApi } from '@/services/api/flashcards.api'
 import {
+  Card,
   CreateCardArgs,
   DefaultIdArg,
   GetCardsArgs,
   GetCardsResponse,
+  GradeType,
   UpdateCardArgs,
 } from '@/services/types/decks.types'
 
@@ -52,6 +54,21 @@ const cardsService = flashcardsApi.injectEndpoints({
           url: `v1/decks/${id}/cards`,
         }),
       }),
+      getRandomCard: builder.query<Card, DefaultIdArg>({
+        providesTags: ['Cards'],
+        query: ({ id }) => ({
+          method: 'GET',
+          url: `v1/decks/${id}/learn`,
+        }),
+      }),
+      saveGradeCard: builder.mutation<Card, GradeType>({
+        invalidatesTags: ['Cards'],
+        query: ({ cardId, grade, id }) => ({
+          body: { cardId, grade },
+          method: 'POST',
+          url: `v1/decks/${id}/learn`,
+        }),
+      }),
       updateCard: builder.mutation<GetCardsResponse, UpdateCardArgs>({
         invalidatesTags: ['Cards'],
         query: ({ answer, answerImg, id, question, questionImg }) => {
@@ -89,5 +106,7 @@ export const {
   useCreateCardMutation,
   useDeleteCardMutation,
   useGetCardsQuery,
+  useGetRandomCardQuery,
+  useSaveGradeCardMutation,
   useUpdateCardMutation,
 } = cardsService

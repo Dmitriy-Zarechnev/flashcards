@@ -68,6 +68,8 @@ export type GetDeckMinMaxCardsResponse = {
 
 export type DefaultIdArg = { id: string }
 
+export type GradeType = { cardId: string | undefined; grade: number } & DefaultIdArg
+
 export type GetCardsArgs = { question: string } & DefaultIdArg &
   Omit<GetDecksArgs, 'authorId' | 'maxCardsCount' | 'minCardsCount' | 'name'>
 
