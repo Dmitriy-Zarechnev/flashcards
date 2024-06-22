@@ -74,9 +74,6 @@ export const CardsPage = () => {
 
   const paginationDecider = cardsData && cardsData.pagination && cardsData.pagination.totalItems > 5
 
-  // ----- Блок работы с воспроизведением колоды -----
-  async function playDeckHandler() {}
-
   // ----- Блок работы с созданием карт в колоде -----
   const [createCard] = useCreateCardMutation()
 
@@ -101,7 +98,6 @@ export const CardsPage = () => {
         buttonType={'Card'}
         isCardExist={cardsData?.items.length === 0}
         onSubmitAddCard={createCardHandler}
-        startLearnCards={playDeckHandler}
         title={deckByIdData?.name ?? 'Super Deck'}
         userId={authorId}
       />

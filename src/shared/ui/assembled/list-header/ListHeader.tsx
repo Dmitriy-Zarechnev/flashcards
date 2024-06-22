@@ -14,7 +14,6 @@ type ListHeaderProps = {
   isCardExist?: boolean
   onSubmitAddCard?: (data: CardFormValues) => Promise<any>
   onSubmitAddDeck?: (data: DeckFormValues) => Promise<any>
-  startLearnCards?: () => void
   title: string
   userId?: boolean
 } & ComponentPropsWithoutRef<'div'>
