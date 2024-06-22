@@ -1,13 +1,16 @@
-import { useParams } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { CardDeleteModal, DeckFormValues, DeckModal } from '@/entities'
+import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { useDeleteDeckMutation, useGetDeckByIdQuery, useUpdateDeckMutation } from '@/services'
 import { Dropdown, Icon, Typography } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
+
+import s from './DropdownMenu.module.scss'
 
 export const DropdownMenu = () => {
   // ----- Достали deck id из url-а -----
-  const params = useParams()
-  const deckId = params.deckId ?? ''
+  const { deckId } = useIdFromParams()
 
   // ----- Запросили deck по id чтобы получить cover и name -----
   const { data: deckByIdData = { cover: null, isPrivate: false, name: 'name' } } =
@@ -29,8 +32,10 @@ export const DropdownMenu = () => {
   return (
     <Dropdown.Root trigger={<Icon iconId={'group1399'} />}>
       <Dropdown.Item>
-        <Icon iconId={'playCircleOutline'} />
-        <Typography.Caption>Learn</Typography.Caption>
+        <NavLink className={s.learnLink} to={`${PATH.DECKSPAGE}/${deckId}/learn`}>
+          <Icon iconId={'playCircleOutline'} />
+          <Typography.Caption>Learn</Typography.Caption>
+        </NavLink>
       </Dropdown.Item>
       <Dropdown.Separator />
       <Dropdown.Item>

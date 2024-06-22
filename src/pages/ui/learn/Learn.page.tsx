@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
 
+import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
 import { BackToDecks, Button, Card, Page, RadioGroup, Typography } from '@/shared'
 
@@ -43,8 +43,8 @@ export const LearnPage = () => {
   const [isAnswerShown, setIsAnswerShown] = useState(false)
 
   // ----- Достали deck id из url-а -----
-  const params = useParams()
-  const deckId = params.deckId ?? ''
+  const { deckId } = useIdFromParams()
+
   // ----- Запросили deck по id чтобы получить name -----
   const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId || '' })
 

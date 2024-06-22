@@ -1,7 +1,10 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { Link } from 'react-router-dom'
 
 import { CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
+import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { Button, ButtonTitle, DropdownMenu, Typography } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
 import { clsx } from 'clsx'
 
 import s from './ListHeader.module.scss'
@@ -26,6 +29,9 @@ export const ListHeader = ({
   userId,
   ...rest
 }: ListHeaderProps) => {
+  // ----- Достали deck id из url-а -----
+  const { deckId } = useIdFromParams()
+
   const buttonTypeDecider = () => {
     // Если колода пустая и создана не мной, то тогда без кнопки
     if (isCardExist && !userId) {
@@ -35,7 +41,11 @@ export const ListHeader = ({
     if (buttonType === 'Card') {
       if (!userId) {
         // Если колода непустая и создана не мной, то кнопка учить
-        return <Button variant={'primary'}>Learn cards</Button>
+        return (
+          <Button as={Link} to={`${PATH.DECKSPAGE}/${deckId}/learn`} variant={'primary'}>
+            Learn cards
+          </Button>
+        )
       }
 
       // Если колода пустая и создана мной, то кнопка добавить карточки

@@ -1,8 +1,8 @@
 import { ChangeEvent } from 'react'
-import { useParams } from 'react-router-dom'
 
 import { CardFormValues } from '@/entities'
 import { Error404 } from '@/pages'
+import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
 import { useSuperSort } from '@/pages/hooks/useSuperSort'
@@ -27,8 +27,7 @@ import s from './Cards.page.module.scss'
 
 export const CardsPage = () => {
   // ----- Достали deck id из url-а -----
-  const params = useParams()
-  const deckId = params.deckId ?? ''
+  const { deckId } = useIdFromParams()
 
   // ----- Хук для работы пагинации и с url-ом -----
   const {
