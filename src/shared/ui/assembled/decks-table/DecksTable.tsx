@@ -90,6 +90,7 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
                 <IconButtons
                   cardName={deck.name}
                   deckData={{ cover: deck.cover, isPrivate: deck.isPrivate, name: deck.name }}
+                  deckId={deck.id}
                   deleteBtnType={'Deck'}
                   deleteCb={() => deleteDeckHandler(deck.id)}
                   disabled={deck.cardsCount === 0}

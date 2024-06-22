@@ -1,7 +1,9 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { Link } from 'react-router-dom'
 
 import { CardDeleteModal, CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
 import { ButtonTitle, CardData, IconButton } from '@/shared'
+import { PATH } from '@/shared/utils/routerVariables'
 import { clsx } from 'clsx'
 
 import s from './IconButtons.module.scss'
@@ -10,6 +12,7 @@ type IconButtonsProps = {
   cardData?: CardData
   cardName: string
   deckData?: DeckFormValues
+  deckId?: string
   deleteBtnType: ButtonTitle
   deleteCb: () => Promise<any>
   disabled?: boolean
@@ -25,6 +28,7 @@ export const IconButtons = ({
   cardName,
   className,
   deckData,
+  deckId,
   deleteBtnType,
   deleteCb,
   disabled,
@@ -38,7 +42,9 @@ export const IconButtons = ({
   return (
     <div className={clsx(s.iconButtonsWrapper, className)} {...rest}>
       {showPlayButton && (
-        <IconButton disabled={disabled} iconId={'playCircleOutline'} onClick={playFunction} />
+        <Link to={`${PATH.DECKSPAGE}/${deckId}/learn`}>
+          <IconButton disabled={disabled} iconId={'playCircleOutline'} onClick={playFunction} />
+        </Link>
       )}
       {showEditButtons && (
         <>

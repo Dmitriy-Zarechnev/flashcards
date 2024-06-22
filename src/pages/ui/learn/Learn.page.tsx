@@ -14,6 +14,7 @@ export const LearnPage = () => {
       <Typography.H1>
         Learn <span>{deckByIdData?.name}123</span>
       </Typography.H1>
+      <Typography.Body1></Typography.Body1>
     </Card>
   )
 }
