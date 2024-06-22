@@ -17,7 +17,9 @@ export const EditProfile = () => {
   const { data: me, refetch } = useMeQuery()
 
   // Сохраняем URL изображения в состоянии
-  const [imageURL, setImageURL] = useState(me?.avatar)
+  const [imageURL, setImageURL] = useState<string | undefined>(me?.avatar)
+  // Сохраняем File изображения в состоянии
+  const [avatarFile, setAvatarFile] = useState<File | null>(null)
 
   // Добавили картинку в ref
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -26,20 +28,10 @@ export const EditProfile = () => {
   const changeProfilePhoto = (file: File) => {
     const newAvatarURL = URL.createObjectURL(file)
 
+    setAvatarFile(file)
     setImageURL(newAvatarURL) // Обновляем URL в состоянии
   }
 
-  // Получили картинку, которую загрузил пользователь
-  function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
-    if (event.target.files && event.target.files[0]) {
-      changeProfilePhoto(event.target.files[0])
-
-      //** to clean ref to load img with the same name once more  */
-      if (fileInputRef.current) {
-        fileInputRef.current.value = ''
-      }
-    }
-  }
   // Click по кнопке-инпуту аватара
   function handleButtonClick() {
     if (fileInputRef.current !== null) {
@@ -51,10 +43,8 @@ export const EditProfile = () => {
   const [updateUser] = useUpdateUserDataMutation()
 
   const updateProfile = async (data: EditProfileFormValues) => {
-    await updateUser({ ...data, avatar: imageURL })
-
+    await updateUser({ ...data, avatar: avatarFile })
     await refetch()
-
     setIsEditName(!isEditName)
 
     if (imageURL) {
@@ -64,6 +54,19 @@ export const EditProfile = () => {
     }
   }
 
+  // Получили картинку, которую загрузил пользователь
+  function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.files && event.target.files[0]) {
+      changeProfilePhoto(event.target.files[0])
+
+      updateUser({ avatar: event.target.files[0], name: me?.name || 'name' })
+
+      //** to clean ref to load img with the same name once more  */
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''
+      }
+    }
+  }
   // logOut логика
   const logOut = () => {}
 
@@ -74,7 +77,7 @@ export const EditProfile = () => {
         <HeaderAvatar
           name={me?.name}
           noHover
-          photo={imageURL}
+          photo={me?.avatar}
           photoDescription={`${me?.name}-avatar`}
           style={{ height: '100px', width: '100px' }}
           textStyle={{ fontSize: '70px' }}

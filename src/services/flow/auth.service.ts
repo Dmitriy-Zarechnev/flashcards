@@ -71,7 +71,7 @@ const authService = flashcardsApi.injectEndpoints({
             formData.append('avatar', avatar)
           } else if (avatar === null) {
             // если передали null, значит мы хотим удалить avatar
-            formData.append('avatar', '')
+            formData.delete('avatar')
           }
 
           return {
