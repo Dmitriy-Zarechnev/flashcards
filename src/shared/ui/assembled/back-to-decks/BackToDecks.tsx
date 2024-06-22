@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Icon } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
 
 type BackToDecksProps = {
   className?: string
@@ -10,8 +9,10 @@ type BackToDecksProps = {
 }
 
 export const BackToDecks = ({ className, iconId, title }: BackToDecksProps) => {
+  const navigate = useNavigate()
+
   return (
-    <Button as={Link} className={className} to={PATH.DECKSPAGE} variant={'link'}>
+    <Button className={className} onClick={() => navigate(-1)} variant={'link'}>
       <Icon iconId={iconId} />
       {title}
     </Button>
