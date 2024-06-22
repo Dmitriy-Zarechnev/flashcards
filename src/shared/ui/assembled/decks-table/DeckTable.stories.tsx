@@ -48,10 +48,7 @@ const decks = [
 export const DefaultMyDecksTable: Story = {
   args: {
     authorId: 'author1',
-    clickDeleteDeck: fn(),
-    clickUpdateDeck: fn(),
     decks: decks,
-    playFunction: fn(),
     sortTableOnClick: fn(),
     tableSort: '',
   },
@@ -60,10 +57,7 @@ export const DefaultMyDecksTable: Story = {
 export const DefaultYourDecksTable: Story = {
   args: {
     authorId: 'false',
-    clickDeleteDeck: fn(),
-    clickUpdateDeck: fn(),
     decks: decks,
-    playFunction: fn(),
     sortTableOnClick: fn(),
     tableSort: '',
   },

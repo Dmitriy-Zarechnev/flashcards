@@ -16,29 +16,32 @@ type Story = StoryObj<typeof meta>
 
 export const ThreeIconButtonsStory: Story = {
   args: {
-    editFunction: fn(),
+    cardName: 'Name',
+    deleteBtnType: 'Card',
+    deleteCb: fn(),
     id: '123',
-    playFunction: fn(),
     showEditButtons: true,
     showPlayButton: true,
-    trashFunction: fn(),
   },
 }
 
 export const TwoIconButtonsStory: Story = {
   args: {
-    editFunction: fn(),
+    cardName: 'Name',
+    deleteBtnType: 'Card',
+    deleteCb: fn(),
     id: '678',
     showEditButtons: true,
     showPlayButton: false,
-    trashFunction: fn(),
   },
 }
 
 export const OneIconButtonsStory: Story = {
   args: {
+    cardName: 'Name',
+    deleteBtnType: 'Card',
+    deleteCb: fn(),
     id: '456',
-    playFunction: fn(),
     showEditButtons: false,
     showPlayButton: true,
   },

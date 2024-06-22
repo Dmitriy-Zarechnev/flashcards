@@ -29,7 +29,6 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
   async function deleteDeckHandler(id: string) {
     await deleteDeck({ id })
   }
-  const playDeckHandler = () => {}
 
   return (
     <Tables.Table>
@@ -95,7 +94,6 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
                   deleteCb={() => deleteDeckHandler(deck.id)}
                   disabled={deck.cardsCount === 0}
                   editDeckCb={(data: DeckFormValues) => updateDeckHandler(deck.id, data)}
-                  playFunction={() => playDeckHandler()}
                   showEditButtons={authorId === deck.userId}
                   showPlayButton
                 />
