@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form'
 
 import { Button, Card, PasswordInput, Typography } from '@/shared'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -29,7 +28,6 @@ export const CreateNewPassword = ({ onSubmit }: CreateNewPasswordProps) => {
   return (
     <Card className={s.createNewPasswordWrapper}>
       <form className={s.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-        {import.meta.env.DEV && <DevTool control={control} />}
         <div className={s.inputWrapper}>
           <Typography.H1 className={s.createNewPasswordHeader}>Create new password</Typography.H1>
           <PasswordInput

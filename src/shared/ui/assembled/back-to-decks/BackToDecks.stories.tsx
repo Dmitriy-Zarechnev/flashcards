@@ -1,19 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserDecorator } from '@/shared/utils/routerDecorator'
 
 import { BackToDecks } from './'
 
 const meta = {
   argTypes: {},
   component: BackToDecks,
-  decorators: [
-    Story => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    ),
-  ],
+  decorators: [BrowserDecorator],
   tags: ['autodocs'],
   title: '🟢UI/Assembled/BackToDecks',
 } satisfies Meta<typeof BackToDecks>

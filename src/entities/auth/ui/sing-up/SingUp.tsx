@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form'
 
 import { Button, Card, ModalFooter, PasswordInput, TextField, Typography } from '@/shared'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SingUp.module.scss'
@@ -29,7 +28,6 @@ export const SingUp = ({ onSubmit }: SingUpProps) => {
   return (
     <Card className={s.singUpWrapper}>
       <form className={s.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-        {import.meta.env.DEV && <DevTool control={control} />}
         <div className={s.inputsWrapper}>
           <Typography.H1 className={s.singUpHeader}>Sing Up</Typography.H1>
           <TextField

@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form'
 
 import { Button, Card, ModalFooter, TextField, Typography } from '@/shared'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './ForgotPassword.module.scss'
@@ -27,8 +26,6 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
   return (
     <Card className={s.forgotPasswordWrapper}>
       <form className={s.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-        {import.meta.env.DEV && <DevTool control={control} />}
-
         <div className={s.inputWrapper}>
           <Typography.H1 className={s.forgotPasswordHeader}>Forgot your password?</Typography.H1>
           <TextField

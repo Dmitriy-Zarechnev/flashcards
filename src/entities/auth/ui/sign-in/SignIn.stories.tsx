@@ -1,20 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { FieldValues } from 'react-hook-form'
-import { BrowserRouter } from 'react-router-dom'
+
+import { BrowserDecorator } from '@/shared/utils/routerDecorator'
 
 import { SignIn } from './'
 
 const meta = {
   argTypes: {},
   component: SignIn,
-  decorators: [
-    Story => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    ),
-  ],
+  decorators: [BrowserDecorator],
   parameters: {
     layout: 'centered',
   },
