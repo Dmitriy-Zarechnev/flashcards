@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 
 import { useMeQuery } from '@/services'
-import { PageHeader } from '@/shared'
+import { LineLoader, PageHeader } from '@/shared'
 
 import s from './Layout.module.scss'
 
@@ -12,6 +12,7 @@ export const Layout = () => {
 
   return (
     <div className={s.layout}>
+      <LineLoader className={s.lineLoader} />
       <PageHeader data={data} />
       <main>{isLoading || isUninitialized ? <InitLoader /> : <Outlet />}</main>
     </div>

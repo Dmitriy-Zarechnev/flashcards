@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { InitLoader } from './InitLoader'
+import { LineLoader } from '@/shared/ui/default/lineLoader/LineLoader'
 
 const meta = {
-  component: InitLoader,
+  component: LineLoader,
   tags: ['autodocs'],
-  title: '🟤Router/InitLoader',
-} satisfies Meta<typeof InitLoader>
+  title: '🟢UI/Default/LineLoader',
+} satisfies Meta<typeof LineLoader>
 
 export default meta
 type Story = StoryObj<typeof meta>
