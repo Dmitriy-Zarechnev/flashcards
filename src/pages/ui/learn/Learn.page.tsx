@@ -87,7 +87,7 @@ export const LearnPage = () => {
             Question: <Typography.Body2>{randomCard?.question}</Typography.Body2>
           </Typography.Subtitle1>
           {randomCard?.questionImg && (
-            <img alt={'question picture'} src={randomCard?.questionImg} />
+            <img alt={'question picture'} className={s.learnImg} src={randomCard?.questionImg} />
           )}
           <Typography.Body2>Counts of attempts: {randomCard?.shots}</Typography.Body2>
 
@@ -101,7 +101,9 @@ export const LearnPage = () => {
               <Typography.Subtitle1>
                 Answer: <Typography.Body2>{randomCard?.answer}</Typography.Body2>
               </Typography.Subtitle1>
-              {randomCard?.answerImg && <img alt={'answer picture'} src={randomCard?.answerImg} />}
+              {randomCard?.answerImg && (
+                <img alt={'answer picture'} className={s.learnImg} src={randomCard?.answerImg} />
+              )}
               <RadioGroup
                 onValueChange={setCardGrade}
                 options={RadioGroupOptions}
