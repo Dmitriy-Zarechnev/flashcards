@@ -2,9 +2,36 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
-import { BackToDecks, Button, Card, Page, Typography } from '@/shared'
+import { BackToDecks, Button, Card, Page, RadioGroup, Typography } from '@/shared'
 
 import s from './Learn.module.scss'
+const RadioGroupOptions = [
+  {
+    id: '1 - Did not know',
+    label: 'Did not know',
+    value: '1',
+  },
+  {
+    id: '2 - Forgot',
+    label: 'Forgot',
+    value: '2',
+  },
+  {
+    id: '3 - A lot of thought',
+    label: 'A lot of thought',
+    value: '3',
+  },
+  {
+    id: '4 - Confused',
+    label: 'Confused',
+    value: '4',
+  },
+  {
+    id: '5 - Knew the answer',
+    label: 'Knew the answer',
+    value: '5',
+  },
+]
 
 export const LearnPage = () => {
   const [isAnswerShown, setIsAnswerShown] = useState(false)
@@ -21,8 +48,18 @@ export const LearnPage = () => {
 
   const [saveCardGrade] = useSaveGradeCardMutation()
 
-  const saveCardGradeHandler = (grade: number) => {
-    saveCardGrade({ id: deckId, ...{ cardId: randomCard?.id, grade } })
+  const [cardGrade, setCardGrade] = useState(randomCard?.grade.toString() || '1')
+
+  console.log(cardGrade)
+  console.log(randomCard?.grade)
+
+  const saveCardGradeHandler = () => {
+    saveCardGrade({ id: deckId, ...{ cardId: randomCard?.id, grade: +cardGrade } })
+    setIsAnswerShown(false)
+  }
+
+  const changeGradeHandler = (value: string) => {
+    setCardGrade(value)
   }
 
   return (
@@ -52,7 +89,12 @@ export const LearnPage = () => {
                 Answer: <Typography.Body2>{randomCard?.answer}</Typography.Body2>
               </Typography.Subtitle1>
               {randomCard?.answerImg && <img alt={'answer picture'} src={randomCard?.answerImg} />}
-              <Button fullWidth onClick={() => saveCardGradeHandler(5)}>
+              <RadioGroup
+                onChange={(value: string) => changeGradeHandler(value)}
+                options={RadioGroupOptions}
+                value={cardGrade}
+              />
+              <Button fullWidth onClick={saveCardGradeHandler}>
                 Next Question
               </Button>
             </>
