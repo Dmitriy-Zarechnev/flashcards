@@ -96,8 +96,16 @@ export const baseQueryWithReauth: BaseQueryFn<
           localStorage.removeItem('accessToken')
 
           /* если нет рефрешь токена, то и результата не придет, значит перенаправим на логинизацию
-            ⛔ обязательно нужно перенаправлять туда, где нет автоматического запроса! а то будет бесконечный цикл запросов */
-          await routes.navigate(PATH.SIGNIN)
+            ⛔ обязательно нужно перенаправлять туда, где нет автоматического запроса! а то будет бесконечный цикл запросов
+
+            для возможности пользователю переходить на разные странички PublicRoutes и не быть при этом всегда пененаправленным
+            на /sign-in будет проверять куда направить пользователя по услвоию */
+
+          if (getPathname() === PATH.SIGNUP) {
+            await routes.navigate(PATH.SIGNUP)
+          } else {
+            await routes.navigate(PATH.SIGNIN)
+          }
         }
       } finally {
         release()
