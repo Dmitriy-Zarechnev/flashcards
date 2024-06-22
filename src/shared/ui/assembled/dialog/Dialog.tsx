@@ -18,7 +18,7 @@ type DialogProps = {
 
 export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
   const [isShown, setShown] = useState(false)
-  // ждя избежания закрытия окна, если пользователь кликнул внутри модальки, а отжал кнопку вне модалки
+  // для избежания закрытия окна, если пользователь кликнул внутри модалки, а отжал кнопку вне модалки
   // для реализации функции => handleMouseDown | handleMouseUp
   const [isMouseDownInside, setMouseDownInside] = useState(false)
 
@@ -27,10 +27,10 @@ export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
   }
 
   function handleMouseDown(event: MouseEvent) {
-    // если клинкули по клику внутри модальки, т.е. у тега, которого есть `.${s.card}`
+    // если кликнули по клику внутри модалки, т.е. у тега, которого есть `.${s.card}`
     const card = (event.target as HTMLElement).closest(`.${s.card}`)
 
-    // если клинкули по модалке
+    // если кликнули по модалке
     if (card) {
       setMouseDownInside(true)
     } else {
@@ -39,16 +39,16 @@ export const Dialog = ({ children, title, trigger, ...rest }: DialogProps) => {
   }
 
   function handleMouseUp(event: MouseEvent) {
-    // если клинкули по клику внутри модальки, т.е. у тега, которого есть `.${s.card}`
+    // если кликнули по клику внутри модалки, т.е. у тега, которого есть `.${s.card}`
     const card = (event.target as HTMLElement).closest(`.${s.card}`)
 
-    // елси данный клик не по модалке и НАЧАЛЬНОЕ НАЖАТИЕ было не внутри модалки
+    // если данный клик не по модалке и НАЧАЛЬНОЕ НАЖАТИЕ было не внутри модалки
     if (!card && !isMouseDownInside) {
       // то закрываем окно
       setShown(false)
     }
 
-    // клик начался внутри и закончился внутри => вернуть стейт в начальное состояние
+    // клик начался внутри и закончился внутри => вернуть state в начальное состояние
     setMouseDownInside(false)
   }
 

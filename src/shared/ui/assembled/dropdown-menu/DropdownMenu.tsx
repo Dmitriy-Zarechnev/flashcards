@@ -27,7 +27,6 @@ export const DropdownMenu = () => {
   async function deleteDeckHandler() {
     await deleteDeck({ id: deckId })
   }
-  // const playDeckHandler = () => {}
 
   return (
     <Dropdown.Root trigger={<Icon iconId={'group1399'} />}>

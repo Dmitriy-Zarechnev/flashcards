@@ -18,7 +18,6 @@ type IconButtonsProps = {
   disabled?: boolean
   editCardCb?: (data: CardFormValues) => Promise<any>
   editDeckCb?: (data: DeckFormValues) => Promise<any>
-  playFunction?: () => void
   showEditButtons?: boolean
   showPlayButton?: boolean
 } & ComponentPropsWithoutRef<'div'>
@@ -34,7 +33,6 @@ export const IconButtons = ({
   disabled,
   editCardCb,
   editDeckCb,
-  playFunction,
   showEditButtons = false,
   showPlayButton = true,
   ...rest
@@ -43,7 +41,7 @@ export const IconButtons = ({
     <div className={clsx(s.iconButtonsWrapper, className)} {...rest}>
       {showPlayButton && (
         <NavLink className={s.playLink} to={`${PATH.DECKSPAGE}/${deckId}/learn`}>
-          <IconButton disabled={disabled} iconId={'playCircleOutline'} onClick={playFunction} />
+          <IconButton disabled={disabled} iconId={'playCircleOutline'} />
         </NavLink>
       )}
       {showEditButtons && (
