@@ -1,37 +1,32 @@
 import { useForm } from 'react-hook-form'
 
-import { authSchemes } from '@/entities/validationSchemes'
+import { EditProfileFormValues, authSchemes } from '@/entities/validationSchemes'
 import { Button, TextField } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './FormPanel.module.scss'
 
 type FormPanelProps = {
-  name: string
-  onSubmit: (data: FormValues) => void
+  name?: string
+  onSubmit: (data: EditProfileFormValues) => void
 }
-
-const validationSchema = authSchemes.editProfileFormPanel
-
-type FormValues = z.infer<typeof validationSchema>
 
 export const FormPanel = ({ name, onSubmit }: FormPanelProps) => {
   const {
     control,
     formState: { isSubmitting },
     handleSubmit,
-  } = useForm<FormValues>({
+  } = useForm<EditProfileFormValues>({
     defaultValues: { name },
     mode: 'onBlur',
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(authSchemes.editProfile),
   })
 
   return (
     <form className={s.formPanel} noValidate onSubmit={handleSubmit(onSubmit)}>
       <TextField control={control} label={'NickName'} name={'name'} />
       <Button disabled={isSubmitting} fullWidth type={'submit'} variant={'primary'}>
-        Sing Up
+        Save Changes
       </Button>
     </form>
   )

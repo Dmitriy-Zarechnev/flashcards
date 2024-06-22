@@ -68,7 +68,7 @@ const decksService = flashcardsApi.injectEndpoints({
         query: ({ cover, id, isPrivate, name }) => {
           const formData = new FormData()
 
-          // !!! так как тут метод patch, ужно отправлять только те свойства, которые нужно поменять
+          // !!! так как тут метод patch, нужно отправлять только те свойства, которые нужно поменять
           if (name) {
             formData.append('name', name)
           }
@@ -78,7 +78,7 @@ const decksService = flashcardsApi.injectEndpoints({
           if (cover) {
             formData.append('cover', cover)
           } else if (cover === null) {
-            // если передали null, значи мы хотим удалить cover
+            // если передали null, значит мы хотим удалить cover
             formData.append('cover', '')
           }
 

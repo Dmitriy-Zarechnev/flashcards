@@ -15,6 +15,7 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
+import { ProfilePage } from '@/pages/ui/profile/Profile.page'
 import { PATH } from '@/shared/utils/routerVariables'
 
 import { Layout } from './layout/Layout'
@@ -49,6 +50,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <LearnPage />,
     path: PATH.LEARNDECK,
+  },
+  {
+    element: <ProfilePage />,
+    path: PATH.PROFILE,
   },
 ]
 

@@ -24,7 +24,7 @@ const signUp = z
     path: ['confirmPassword'],
   })
 
-const editProfileFormPanel = z.object({
+const editProfile = z.object({
   name,
 })
 
@@ -48,7 +48,7 @@ const card = z.object({
 
 export const authSchemes = {
   createNewPassword,
-  editProfileFormPanel,
+  editProfile,
   forgotPassword,
   signIn,
   signUp,
@@ -62,7 +62,7 @@ export const modalSchemes = {
 //========================================================================================
 
 export type CreateNewPasswordFormValues = z.infer<typeof authSchemes.createNewPassword>
-export type EditProfileFormPanelFormValues = z.infer<typeof authSchemes.editProfileFormPanel>
+export type EditProfileFormValues = z.infer<typeof authSchemes.editProfile>
 export type ForgotPasswordFormValues = z.infer<typeof authSchemes.forgotPassword>
 export type SignInFormValues = z.infer<typeof authSchemes.signIn>
 export type SignUpFormValues = z.infer<typeof authSchemes.signUp>

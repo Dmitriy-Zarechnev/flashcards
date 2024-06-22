@@ -1,15 +1,17 @@
+import { CSSProperties, ComponentPropsWithoutRef } from 'react'
+
 import * as Avatar from '@radix-ui/react-avatar'
 import { clsx } from 'clsx'
 
 import s from './HeaderAvatar.module.scss'
 
 type HeaderAvatarProps = {
-  className?: string
-  name: string
+  name?: string
   noHover?: boolean
   photo?: string
   photoDescription: string
-}
+  textStyle: CSSProperties
+} & ComponentPropsWithoutRef<typeof Avatar.Root>
 
 export const HeaderAvatar = ({
   className,
@@ -17,12 +19,14 @@ export const HeaderAvatar = ({
   noHover,
   photo,
   photoDescription,
+  style,
+  textStyle,
 }: HeaderAvatarProps) => {
   return (
-    <Avatar.Root className={clsx(s.rootAvatar, className)}>
+    <Avatar.Root className={clsx(s.rootAvatar, className)} style={style}>
       <Avatar.Image alt={photoDescription} src={photo} />
-      <Avatar.Fallback className={clsx(s.fallBack, noHover && s.noHover)}>
-        {name[0]}
+      <Avatar.Fallback className={clsx(s.fallBack, noHover && s.noHover)} style={textStyle}>
+        {name?.[0]}
       </Avatar.Fallback>
     </Avatar.Root>
   )

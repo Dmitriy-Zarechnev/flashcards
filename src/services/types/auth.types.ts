@@ -9,7 +9,7 @@ export type AuthResponse = {
 }
 
 export type UpdateUserDataArgs = {
-  avatar: string
+  avatar?: string
   name: string
 }
 

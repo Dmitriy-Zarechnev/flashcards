@@ -11,15 +11,17 @@
   }
 }
 
-.imageContainer {
+.avatarContainer {
   position: relative;
+  width: 100px;
+  height: 100px;
 
-  img {
-    aspect-ratio: 1;
-    width: 96px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
+  //img {
+  //  aspect-ratio: 1;
+  //  width: 96px;
+  //  object-fit: cover;
+  //  border-radius: 50%;
+  //}
 
   button {
     position: absolute;
@@ -37,4 +39,8 @@
       color: var(--color-accent-500);
     }
   }
+}
+
+.avatarText{
+  font-size: 50px;
 }

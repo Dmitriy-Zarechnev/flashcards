@@ -58,11 +58,28 @@ const authService = flashcardsApi.injectEndpoints({
         }),
       }),
       updateUserData: builder.mutation<AuthResponse, UpdateUserDataArgs>({
-        query: args => ({
-          body: args,
-          method: 'PATCH',
-          url: `/v1/auth/me`,
-        }),
+        invalidatesTags: ['Auth'],
+        query: ({ avatar, name }) => {
+          const formData = new FormData()
+
+          // !!! так как тут метод patch, нужно отправлять только те свойства, которые нужно поменять
+          if (name) {
+            formData.append('name', name)
+          }
+
+          if (avatar) {
+            formData.append('avatar', avatar)
+          } else if (avatar === null) {
+            // если передали null, значит мы хотим удалить avatar
+            formData.append('avatar', '')
+          }
+
+          return {
+            body: formData,
+            method: 'PATCH',
+            url: `/v1/auth/me`,
+          }
+        },
       }),
     }
   },

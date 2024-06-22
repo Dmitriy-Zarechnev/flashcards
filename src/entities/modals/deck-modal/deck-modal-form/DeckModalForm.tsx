@@ -39,7 +39,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
 
   function deleteImageHandler() {
     if (imageURL) {
-      // удаляем изображение, чтобы оно не оставлось в памяти браузера
+      // удаляем изображение, чтобы оно не оставалось в памяти браузера
       URL.revokeObjectURL(imageURL)
       setImageURL(undefined)
     }

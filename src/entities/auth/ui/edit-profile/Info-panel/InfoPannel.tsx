@@ -4,9 +4,9 @@ import s from './InfoPanel.module.scss'
 
 type InfoPanelProps = {
   editName: () => void
-  email: string
+  email?: string
   logout: () => void
-  name: string
+  name?: string
 }
 
 export const InfoPanel = ({ editName, email, logout, name }: InfoPanelProps) => {
