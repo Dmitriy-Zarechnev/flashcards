@@ -17,10 +17,7 @@ export const SignInPage = () => {
       }).unwrap() // .unwrap() для обработки ошибок
 
       // Проверяем, была ли мутация успешной
-      if (result && localStorage.getItem('accessToken')) {
-        /* !!! была проблема, что перенаправление осуществлялось только после второго запроса, походу токены
-         не успевали засетаться при первом запросе */
-
+      if (result) {
         navigate(PATH.DECKSPAGE)
       }
     } catch (error) {

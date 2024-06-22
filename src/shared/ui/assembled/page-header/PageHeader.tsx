@@ -10,11 +10,9 @@ import s from './PageHeader.module.scss'
 //import img from './Dropdown.webp'
 import logo from './Logo.png'
 
-type PageHeaderProps = {
-  isSingUp: boolean
-} & ComponentPropsWithoutRef<'header'>
+type PageHeaderProps = {} & ComponentPropsWithoutRef<'header'>
 
-export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ isSingUp }, ref) => {
+export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>((_, ref) => {
   // ----- Запрос для получения данных пользователя -----
   const { data } = useMeQuery()
 
@@ -25,7 +23,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ i
           <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
         </Link>
 
-        {isSingUp ? (
+        {data ? (
           <div className={s.profileInfo}>
             <Link to={PATH.PROFILE}>
               <Typography.Subtitle1>{data?.name}</Typography.Subtitle1>
@@ -38,7 +36,9 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ i
             />
           </div>
         ) : (
-          <Button variant={'secondary'}>Sing In</Button>
+          <Button as={Link} to={PATH.SIGNIN} variant={'primary'}>
+            Sing In
+          </Button>
         )}
       </div>
     </header>
