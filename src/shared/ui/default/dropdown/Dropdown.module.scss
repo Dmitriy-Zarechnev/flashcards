@@ -52,6 +52,12 @@
 .item {
   cursor: pointer;
   user-select: none;
+
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 6px;
+  align-items: center;
+
   outline: none;
 
   &[data-highlighted] * {

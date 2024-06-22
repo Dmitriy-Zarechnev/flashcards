@@ -4,12 +4,13 @@ import { Button, Dialog, IconButton, ModalVariant } from '@/shared'
 import { DeckModalForm } from './deck-modal-form/DeckModalForm'
 
 type DeckModalProps = {
+  closeModal?: () => void
   deckData?: DeckFormValues
   onSubmit?: (data: DeckFormValues) => Promise<any>
   variant: ModalVariant
 }
 
-export const DeckModal = ({ deckData, onSubmit, variant }: DeckModalProps) => {
+export const DeckModal = ({ closeModal, deckData, onSubmit, variant }: DeckModalProps) => {
   const title = variant === 'add' ? 'Add New Deck' : 'Edit Deck'
 
   return (
@@ -23,7 +24,12 @@ export const DeckModal = ({ deckData, onSubmit, variant }: DeckModalProps) => {
         )
       }
     >
-      <DeckModalForm btnTitle={title} deckData={deckData} onSubmit={onSubmit} />
+      <DeckModalForm
+        btnTitle={title}
+        closeModal={closeModal}
+        deckData={deckData}
+        onSubmit={onSubmit}
+      />
     </Dialog>
   )
 }

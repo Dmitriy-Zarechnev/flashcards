@@ -35,7 +35,7 @@ const Root = ({ children, style, trigger, triggerClassName, ...rest }: DropdownP
 type ItemProps = {
   children: ReactNode
   className?: string
-}
+} & ComponentPropsWithRef<typeof D.Item>
 
 const Item = ({ children, className }: ItemProps) => (
   <D.Item className={clsx(s.item, className)}>{children}</D.Item>
