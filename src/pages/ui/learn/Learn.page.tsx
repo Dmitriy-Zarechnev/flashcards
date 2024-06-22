@@ -1,65 +1,78 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
 import { BackToDecks, Button, Card, Page, RadioGroup, Typography } from '@/shared'
 
 import s from './Learn.module.scss'
-const RadioGroupOptions = [
-  {
-    id: '1 - Did not know',
-    label: 'Did not know',
-    value: '1',
-  },
-  {
-    id: '2 - Forgot',
-    label: 'Forgot',
-    value: '2',
-  },
-  {
-    id: '3 - A lot of thought',
-    label: 'A lot of thought',
-    value: '3',
-  },
-  {
-    id: '4 - Confused',
-    label: 'Confused',
-    value: '4',
-  },
-  {
-    id: '5 - Knew the answer',
-    label: 'Knew the answer',
-    value: '5',
-  },
-]
 
 export const LearnPage = () => {
+  // Options для Radio Grade
+  const RadioGroupOptions = useMemo(
+    () => [
+      {
+        id: '1 - Did not know',
+        label: 'Did not know',
+        value: '1',
+      },
+      {
+        id: '2 - Forgot',
+        label: 'Forgot',
+        value: '2',
+      },
+      {
+        id: '3 - A lot of thought',
+        label: 'A lot of thought',
+        value: '3',
+      },
+      {
+        id: '4 - Confused',
+        label: 'Confused',
+        value: '4',
+      },
+      {
+        id: '5 - Knew the answer',
+        label: 'Knew the answer',
+        value: '5',
+      },
+    ],
+    []
+  )
+
+  // State для отображения и скрытия блока с ответом
   const [isAnswerShown, setIsAnswerShown] = useState(false)
 
-  const showAnswerHandler = () => {
-    setIsAnswerShown(true)
-  }
-
+  // ----- Достали deck id из url-а -----
   const params = useParams()
   const deckId = params.deckId ?? ''
+  // ----- Запросили deck по id чтобы получить name -----
   const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId || '' })
 
-  const { data: randomCard } = useGetRandomCardQuery({ id: deckId || '' })
+  // ----- Запросили случайную карточку -----
+  const { data: randomCard, refetch } = useGetRandomCardQuery({ id: deckId || '' })
 
+  // ----- Запрос на изменение grade карточки -----
   const [saveCardGrade] = useSaveGradeCardMutation()
 
-  const [cardGrade, setCardGrade] = useState(randomCard?.grade.toString() || '1')
+  // State для изменения grade карточки
+  const [cardGrade, setCardGrade] = useState(randomCard?.grade.toString() || '')
 
-  console.log(cardGrade)
-  console.log(randomCard?.grade)
+  // функция для отправки grade и запроса новой карточки
+  async function saveCardGradeHandler() {
+    // Отправили новый grade карточки
+    await saveCardGrade({
+      id: deckId,
+      ...{ cardId: randomCard?.id, grade: +cardGrade },
+    })
 
-  const saveCardGradeHandler = () => {
-    saveCardGrade({ id: deckId, ...{ cardId: randomCard?.id, grade: +cardGrade } })
+    // Запросили новую случайную карточку
+    await refetch()
+
+    // Удалили локальный grade
+    setCardGrade('')
+
+    // Убрали блок с ответом
     setIsAnswerShown(false)
-  }
-
-  const changeGradeHandler = (value: string) => {
-    setCardGrade(value)
   }
 
   return (
@@ -79,7 +92,7 @@ export const LearnPage = () => {
           <Typography.Body2>Counts of attempts: {randomCard?.shots}</Typography.Body2>
 
           {!isAnswerShown && (
-            <Button fullWidth onClick={showAnswerHandler}>
+            <Button fullWidth onClick={() => setIsAnswerShown(true)}>
               Show Answer
             </Button>
           )}
@@ -90,9 +103,9 @@ export const LearnPage = () => {
               </Typography.Subtitle1>
               {randomCard?.answerImg && <img alt={'answer picture'} src={randomCard?.answerImg} />}
               <RadioGroup
-                onChange={(value: string) => changeGradeHandler(value)}
+                onValueChange={setCardGrade}
                 options={RadioGroupOptions}
-                value={cardGrade}
+                value={cardGrade || randomCard?.grade.toString()}
               />
               <Button fullWidth onClick={saveCardGradeHandler}>
                 Next Question

@@ -55,14 +55,12 @@ const cardsService = flashcardsApi.injectEndpoints({
         }),
       }),
       getRandomCard: builder.query<Card, DefaultIdArg>({
-        providesTags: ['Cards'],
         query: ({ id }) => ({
           method: 'GET',
           url: `v1/decks/${id}/learn`,
         }),
       }),
       saveGradeCard: builder.mutation<Card, GradeType>({
-        invalidatesTags: ['Cards'],
         query: ({ cardId, grade, id }) => ({
           body: { cardId, grade },
           method: 'POST',
