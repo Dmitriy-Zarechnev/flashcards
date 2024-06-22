@@ -19,6 +19,8 @@ export type LoginArgs = {
   rememberMe: boolean
 }
 
+export type SignUpArgs = Omit<LoginArgs, 'rememberMe'>
+
 export type LoginResponse = {
   accessToken: string
   refreshToken: string

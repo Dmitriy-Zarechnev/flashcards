@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useMeQuery } from '@/services'
+import { AuthResponse } from '@/services'
 import { Button, DropdownProfile, Typography } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
 
@@ -10,12 +10,11 @@ import s from './PageHeader.module.scss'
 //import img from './Dropdown.webp'
 import logo from './Logo.png'
 
-type PageHeaderProps = {} & ComponentPropsWithoutRef<'header'>
+type PageHeaderProps = {
+  data?: AuthResponse
+} & ComponentPropsWithoutRef<'header'>
 
-export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>((_, ref) => {
-  // ----- Запрос для получения данных пользователя -----
-  const { data } = useMeQuery()
-
+export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ data }, ref) => {
   return (
     <header ref={ref}>
       <div className={s.wrapper}>
