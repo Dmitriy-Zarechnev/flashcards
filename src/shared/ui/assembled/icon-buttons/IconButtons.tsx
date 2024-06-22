@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { CardDeleteModal, CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
 import { ButtonTitle, CardData, IconButton } from '@/shared'
@@ -42,9 +42,9 @@ export const IconButtons = ({
   return (
     <div className={clsx(s.iconButtonsWrapper, className)} {...rest}>
       {showPlayButton && (
-        <Link to={`${PATH.DECKSPAGE}/${deckId}/learn`}>
+        <NavLink className={s.playLink} to={`${PATH.DECKSPAGE}/${deckId}/learn`}>
           <IconButton disabled={disabled} iconId={'playCircleOutline'} onClick={playFunction} />
-        </Link>
+        </NavLink>
       )}
       {showEditButtons && (
         <>
