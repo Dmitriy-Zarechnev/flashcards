@@ -1,29 +1,26 @@
 import { useNavigate } from 'react-router-dom'
 
 import { SignIn, SignInFormValues } from '@/entities'
-import { useLoginMutation } from '@/services'
-import { PATH } from '@/shared/utils/routerVariables'
+import { useLineLoading, useLoginMutation } from '@/services'
+import { PATH } from '@/shared'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
+  const { setLineLoading } = useLineLoading()
   const [login] = useLoginMutation()
 
-  async function onSubmitHandler(data: SignInFormValues) {
+  async function onSubmitHandler({ email, password, rememberMe }: SignInFormValues) {
+    setLineLoading(true)
     try {
-      const result = await login({
-        email: data.email,
-        password: data.password,
-        rememberMe: data.rememberMe,
-      }).unwrap() // .unwrap() для обработки ошибок
+      const result = await login({ email, password, rememberMe }).unwrap()
 
-      // Проверяем, была ли мутация успешной
       if (result) {
         navigate(PATH.DECKSPAGE)
       }
     } catch (error) {
-      // Обработка ошибок логинизации, например, показ сообщения
       console.error('Ошибка логинизации:', error)
     }
+    setLineLoading(false)
   }
 
   return (

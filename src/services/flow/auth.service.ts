@@ -1,12 +1,17 @@
 import { flashcardsApi } from '@/services/api/flashcards.api'
 
-import { AuthResponse, LoginArgs, LoginResponse, UpdateUserDataArgs } from '../types/auth.types'
+import {
+  AuthResponse,
+  LoginArgs,
+  LoginResponse,
+  SignUpArgs,
+  UpdateUserDataArgs,
+} from '../types/auth.types'
 
 const authService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<LoginResponse, LoginArgs>({
-        // invalidatesTags: ['Auth'],
         async onQueryStarted(_, { queryFulfilled }) {
           const { data } = await queryFulfilled
 
@@ -24,6 +29,16 @@ const authService = flashcardsApi.injectEndpoints({
         }),
       }),
       logout: builder.mutation<void, void>({
+        /* так как при logout никакого ответа не приходит, мы просто удалим токены, нужно сразу
+           сделать запрос useMeQuery чтобы перенаправить пользователя*/
+        invalidatesTags: ['Auth'],
+        async onQueryStarted() {
+          /* ну нужно ждать ответа от сервера просто разлогиниваемся, так как response не предусмотрен API */
+          localStorage.removeItem('accessToken')
+          localStorage.removeItem('refreshToken')
+
+          //TODO после logout не происходит обновление PageHeader мы разлогинились, а данные остались профиля
+        },
         query: () => ({
           method: 'POST',
           url: `/v2/auth/logout`,
@@ -33,8 +48,16 @@ const authService = flashcardsApi.injectEndpoints({
         providesTags: ['Auth'],
         query: () => `/v1/auth/me`,
       }),
+      signUp: builder.mutation<AuthResponse, SignUpArgs>({
+        /* несмотря на то что при успешной рестирации получаем данные пользователя, будем перенаправлять его на
+           /sing-in => пусть там входит и получает токены. Перенаправление реализовано в SignUpPage */
+        query: args => ({
+          body: args,
+          method: 'POST',
+          url: `/v1/auth/sign-up`,
+        }),
+      }),
       updateUserData: builder.mutation<AuthResponse, UpdateUserDataArgs>({
-        // invalidatesTags: ['Auth'],
         query: args => ({
           body: args,
           method: 'PATCH',
@@ -45,5 +68,10 @@ const authService = flashcardsApi.injectEndpoints({
   },
 })
 
-export const { useLoginMutation, useLogoutMutation, useMeQuery, useUpdateUserDataMutation } =
-  authService
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useSignUpMutation,
+  useUpdateUserDataMutation,
+} = authService

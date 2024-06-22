@@ -1,12 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { FieldValues } from 'react-hook-form'
+import { BrowserRouter } from 'react-router-dom'
+
+import { SignUpFormValues } from '@/entities'
 
 import { SingUp } from './SingUp'
 
 const meta = {
   argTypes: {},
   component: SingUp,
+  decorators: [
+    Story => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
   parameters: {
     layout: 'centered',
   },
@@ -19,6 +28,6 @@ type Story = StoryObj<typeof SingUp>
 
 export const SingUpStory: Story = {
   args: {
-    onSubmit: (data: FieldValues) => console.log(data),
+    onSubmit: (data: SignUpFormValues) => console.log(data),
   },
 }
