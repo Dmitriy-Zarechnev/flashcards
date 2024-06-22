@@ -43,8 +43,6 @@ export const baseQueryWithReauth: BaseQueryFn<
   /* ожидаем результат запроса*/
   let result = await baseQuery(args, api, extraOptions)
 
-  console.log(result)
-
   // проверяем на ошибку в result, например если нет нужного токена (истек срок жизни токена)
   if (result.error && result.error.status === 401) {
     if (!mutex.isLocked()) {
