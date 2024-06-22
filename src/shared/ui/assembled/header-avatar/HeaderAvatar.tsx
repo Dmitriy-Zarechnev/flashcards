@@ -24,7 +24,7 @@ export const HeaderAvatar = ({
 }: HeaderAvatarProps) => {
   return (
     <Avatar.Root className={clsx(s.rootAvatar, className)} style={style}>
-      <Avatar.Image alt={photoDescription} src={photo} />
+      <Avatar.Image alt={photoDescription} className={clsx(s.fallBack, s.noHover)} src={photo} />
       <Avatar.Fallback className={clsx(s.fallBack, noHover && s.noHover)} style={textStyle}>
         {name?.[0]}
       </Avatar.Fallback>

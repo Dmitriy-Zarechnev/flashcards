@@ -14,32 +14,22 @@ export const EditProfile = () => {
   const [isEditName, setIsEditName] = useState(false)
 
   // ----- Запрос для получения id пользователя -----
-  const { data: me } = useMeQuery()
+  const { data: me, refetch } = useMeQuery()
 
-  // ----- Update данных пользователя -----
-  const [updateUser] = useUpdateUserDataMutation()
+  // Сохраняем URL изображения в состоянии
+  const [imageURL, setImageURL] = useState(me?.avatar)
 
-  const updateProfile = (data: EditProfileFormValues) => {
-    updateUser(data)
-    setIsEditName(!isEditName)
-  }
-
-  const changeProfilePhoto = (file: File) => {
-    console.log(file)
-  }
-  // logOut логика
-  const logOut = () => {}
-
-  //
+  // Добавили картинку в ref
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  //
-  function handleButtonClick() {
-    if (fileInputRef.current !== null) {
-      fileInputRef.current.click()
-    }
+  // Функция для обработки полученной из ref картинки
+  const changeProfilePhoto = (file: File) => {
+    const newAvatarURL = URL.createObjectURL(file)
+
+    setImageURL(newAvatarURL) // Обновляем URL в состоянии
   }
-  //
+
+  // Получили картинку, которую загрузил пользователь
   function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
       changeProfilePhoto(event.target.files[0])
@@ -50,6 +40,32 @@ export const EditProfile = () => {
       }
     }
   }
+  // Click по кнопке-инпуту аватара
+  function handleButtonClick() {
+    if (fileInputRef.current !== null) {
+      fileInputRef.current.click()
+    }
+  }
+
+  // ----- Update данных пользователя -----
+  const [updateUser] = useUpdateUserDataMutation()
+
+  const updateProfile = async (data: EditProfileFormValues) => {
+    await updateUser({ ...data, avatar: imageURL })
+
+    await refetch()
+
+    setIsEditName(!isEditName)
+
+    if (imageURL) {
+      // удаляем изображение, чтобы оно не оставалось в памяти браузера
+      URL.revokeObjectURL(imageURL)
+      setImageURL(undefined)
+    }
+  }
+
+  // logOut логика
+  const logOut = () => {}
 
   return (
     <Card className={s.editProfile}>
@@ -58,7 +74,7 @@ export const EditProfile = () => {
         <HeaderAvatar
           name={me?.name}
           noHover
-          photo={me?.avatar}
+          photo={imageURL}
           photoDescription={`${me?.name}-avatar`}
           style={{ height: '100px', width: '100px' }}
           textStyle={{ fontSize: '70px' }}
