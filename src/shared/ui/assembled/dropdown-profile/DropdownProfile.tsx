@@ -33,7 +33,7 @@ export const DropdownProfile = ({ email, name, photo, photoDescription }: Dropdo
         </NavLink>
       </Dropdown.Item>
       <Dropdown.Separator />
-      <Dropdown.Item>
+      <Dropdown.Item onClick={() => {}}>
         <NavLink className={s.iconTextLink} to={PATH.SINGOUT}>
           <Icon iconId={'logOut'} />
           <Typography.Caption>Sign out</Typography.Caption>

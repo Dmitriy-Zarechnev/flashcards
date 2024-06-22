@@ -37,8 +37,10 @@ type ItemProps = {
   className?: string
 } & ComponentPropsWithRef<typeof D.Item>
 
-const Item = ({ children, className }: ItemProps) => (
-  <D.Item className={clsx(s.item, className)}>{children}</D.Item>
+const Item = ({ children, className, ...rest }: ItemProps) => (
+  <D.Item {...rest} className={clsx(s.item, className)}>
+    {children}
+  </D.Item>
 )
 
 const Separator = () => <D.Separator className={s.separator} />
