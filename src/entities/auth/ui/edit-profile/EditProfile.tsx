@@ -1,8 +1,9 @@
 import { ChangeEvent, useRef, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { EditProfileFormValues } from '@/entities'
 import { useMeQuery, useUpdateUserDataMutation } from '@/services'
-import { Card, HeaderAvatar, IconButton, Typography } from '@/shared'
+import { Card, HeaderAvatar, IconButton, LineLoader, Typography } from '@/shared'
 
 import s from './EditProfile.module.scss'
 
@@ -14,7 +15,7 @@ export const EditProfile = () => {
   const [isEditName, setIsEditName] = useState(false)
 
   // ----- Запрос для получения id пользователя -----
-  const { data: me, refetch } = useMeQuery()
+  const { data: me, error: isMeError, isLoading: isMeLoading, refetch } = useMeQuery()
 
   // Сохраняем File изображения в состоянии
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
@@ -30,20 +31,24 @@ export const EditProfile = () => {
   }
 
   // ----- Update данных пользователя -----
-  const [updateUser] = useUpdateUserDataMutation()
+  const [updateUser, { error: isUpdateUserDataError, isLoading: isUpdateUserDataLoading }] =
+    useUpdateUserDataMutation()
 
   const updateProfile = async (data: EditProfileFormValues) => {
     await updateUser({ ...data, avatar: avatarFile })
     await refetch()
+    toast.success("You've successfully changed your profile name")
     setIsEditName(!isEditName)
   }
 
   // Получили картинку, которую загрузил пользователь
-  function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
+  async function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
       setAvatarFile(event.target.files[0])
 
-      updateUser({ avatar: event.target.files[0], name: me?.name || 'name' })
+      await updateUser({ avatar: event.target.files[0], name: me?.name || 'name' })
+      await refetch()
+      toast.success("You've successfully changed your avatar. Looking good!")
 
       //** to clean ref to load img with the same name once more  */
       if (fileInputRef.current) {
@@ -54,38 +59,49 @@ export const EditProfile = () => {
   // logOut логика
   const logOut = () => {}
 
-  return (
-    <Card className={s.editProfile}>
-      <Typography.H1>Personal Information</Typography.H1>
-      <div className={s.avatarContainer}>
-        <HeaderAvatar
-          name={me?.name}
-          noHover
-          photo={me?.avatar}
-          photoDescription={`${me?.name}-avatar`}
-          style={{ height: '100px', width: '100px' }}
-          textStyle={{ fontSize: '70px' }}
-        />
-        {!isEditName && <IconButton iconId={'editOutline'} onClick={handleButtonClick} />}
-        <input
-          accept={'image/*'}
-          onChange={imageChangeHandler}
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          type={'file'}
-        />
-      </div>
+  // ----- Показывать Loader -----
+  const isShowLineLoader = isMeLoading || isUpdateUserDataLoading
 
-      {!isEditName ? (
-        <InfoPanel
-          editName={() => setIsEditName(!isEditName)}
-          email={me?.email}
-          logout={logOut}
-          name={me?.name}
-        />
-      ) : (
-        <FormPanel name={me?.name} onSubmit={updateProfile} />
-      )}
-    </Card>
+  // ----- Показывать страницу с ошибкой -----
+  if (isMeError || isUpdateUserDataError) {
+    return toast.error('Oops! Something went wrong. Please try again later.')
+  }
+
+  return (
+    <>
+      {isShowLineLoader && <LineLoader />}
+      <Card className={s.editProfile}>
+        <Typography.H1>Personal Information</Typography.H1>
+        <div className={s.avatarContainer}>
+          <HeaderAvatar
+            name={me?.name}
+            noHover
+            photo={me?.avatar}
+            photoDescription={`${me?.name}-avatar`}
+            style={{ height: '100px', width: '100px' }}
+            textStyle={{ fontSize: '70px' }}
+          />
+          {!isEditName && <IconButton iconId={'editOutline'} onClick={handleButtonClick} />}
+          <input
+            accept={'image/*'}
+            onChange={imageChangeHandler}
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            type={'file'}
+          />
+        </div>
+
+        {!isEditName ? (
+          <InfoPanel
+            editName={() => setIsEditName(!isEditName)}
+            email={me?.email}
+            logout={logOut}
+            name={me?.name}
+          />
+        ) : (
+          <FormPanel name={me?.name} onSubmit={updateProfile} />
+        )}
+      </Card>
+    </>
   )
 }

@@ -52,7 +52,11 @@ export const CardsPage = () => {
   const { sortTableOnClickHandler, tableSort } = useSuperSort()
 
   // ----- Запросили deck по id чтобы получить cover и name -----
-  const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId })
+  const {
+    data: deckByIdData,
+    error: isGetDeckByIdError,
+    isLoading: isGetDeckByIdLoading,
+  } = useGetDeckByIdQuery({ id: deckId })
   // ----- Запрос для получения id пользователя -----
   const { data: me } = useMeQuery()
   // ----- Проверка id и изменение отображения компоненты -----
@@ -75,19 +79,22 @@ export const CardsPage = () => {
   const paginationDecider = cardsData && cardsData.pagination && cardsData.pagination.totalItems > 5
 
   // ----- Блок работы с созданием карт в колоде -----
-  const [createCard, { isLoading: isCreateCardLoading }] = useCreateCardMutation()
+  const [createCard, { error: isCreateCardError, isLoading: isCreateCardLoading }] =
+    useCreateCardMutation()
 
   async function createCardHandler(data: CardFormValues) {
     await createCard({ id: deckId, ...data })
     toast.success('Card created! Ready to add another?')
   }
 
+  // ----- Показывать Loader -----
+  const isShowLineLoader =
+    isCreateCardLoading || isGetCardsLoading || isGetCardsFetching || isGetDeckByIdLoading
+
   // ----- Показывать страницу с ошибкой -----
-  if (isGetCardsError) {
+  if (isGetCardsError || isCreateCardError || isGetDeckByIdError) {
     return toast.error('Oops! Something went wrong. Please try again later.')
   }
-
-  const isShowLineLoader = isCreateCardLoading || isGetCardsLoading || isGetCardsFetching
 
   return (
     <>
