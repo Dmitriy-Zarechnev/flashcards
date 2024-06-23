@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { SignIn, SignInFormValues } from '@/entities'
 import { useLoginMutation } from '@/services'
@@ -13,10 +14,11 @@ export const SignInPage = () => {
       const result = await login({ email, password, rememberMe }).unwrap()
 
       if (result) {
+        toast.success("You're successfully signed in. Welcome!")
         navigate(PATH.DECKSPAGE)
       }
     } catch (error) {
-      console.error('Ошибка логинизации:', error)
+      toast.error("We couldn't recognize that login or password. Care to try again?")
     }
   }
 
