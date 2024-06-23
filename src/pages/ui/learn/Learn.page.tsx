@@ -100,9 +100,7 @@ export const LearnPage = () => {
             Learn <span>{deckByIdData?.name}123</span>
           </Typography.H1>
           <div className={s.questionWrapper}>
-            <Typography.Subtitle1>
-              Question: <Typography.Body2>{randomCard?.question}</Typography.Body2>
-            </Typography.Subtitle1>
+            <Typography.Subtitle1>Question: {randomCard?.question}</Typography.Subtitle1>
             {randomCard?.questionImg && (
               <img alt={'question picture'} className={s.learnImg} src={randomCard?.questionImg} />
             )}
@@ -115,9 +113,7 @@ export const LearnPage = () => {
             )}
             {isAnswerShown && (
               <>
-                <Typography.Subtitle1>
-                  Answer: <Typography.Body2>{randomCard?.answer}</Typography.Body2>
-                </Typography.Subtitle1>
+                <Typography.Subtitle1>Answer: {randomCard?.answer}</Typography.Subtitle1>
                 {randomCard?.answerImg && (
                   <img alt={'answer picture'} className={s.learnImg} src={randomCard?.answerImg} />
                 )}
