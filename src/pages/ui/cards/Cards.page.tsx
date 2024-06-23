@@ -90,48 +90,50 @@ export const CardsPage = () => {
   const isShowLineLoader = isCreateCardLoading || isGetCardsLoading
 
   return (
-    <Page mt={'24px'}>
+    <>
       {isShowLineLoader && <LineLoader />}
-      <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
-      <ListHeader
-        buttonType={'Card'}
-        isCardExist={cardsData?.items.length === 0}
-        onSubmitAddCard={createCardHandler}
-        title={deckByIdData?.name ?? 'Super Deck'}
-        userId={authorId}
-      />
-      <img alt={`Deck picture`} className={s.deckImg} src={deckByIdData?.cover ?? defDeckImg} />
-      <SearchInput
-        className={s.searchInput}
-        onChange={searchQuestionHandler}
-        placeholder={'Look for the question that you need'}
-        searchTextResetHandler={searchInputResetHandler}
-        value={search}
-      />
-      {cardsData?.items.length !== 0 ? (
-        <>
-          <CardsTable
-            authorId={authorId}
-            cards={cardsData?.items}
-            sortTableOnClick={sortTableOnClickHandler}
-            tableSort={tableSort}
-          />
-          {paginationDecider && (
-            <Pagination
-              count={cardsData?.pagination.totalPages || 0}
-              onChange={handleCurrentPage}
-              onPerPageChange={handlePerPage}
-              page={+currentPage}
-              perPage={+itemsPerPage}
-              perPageOptions={optionsItemsPerPage}
+      <Page mt={'24px'}>
+        <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
+        <ListHeader
+          buttonType={'Card'}
+          isCardExist={cardsData?.items.length === 0}
+          onSubmitAddCard={createCardHandler}
+          title={deckByIdData?.name ?? 'Super Deck'}
+          userId={authorId}
+        />
+        <img alt={`Deck picture`} className={s.deckImg} src={deckByIdData?.cover ?? defDeckImg} />
+        <SearchInput
+          className={s.searchInput}
+          onChange={searchQuestionHandler}
+          placeholder={'Look for the question that you need'}
+          searchTextResetHandler={searchInputResetHandler}
+          value={search}
+        />
+        {cardsData?.items.length !== 0 ? (
+          <>
+            <CardsTable
+              authorId={authorId}
+              cards={cardsData?.items}
+              sortTableOnClick={sortTableOnClickHandler}
+              tableSort={tableSort}
             />
-          )}
-        </>
-      ) : (
-        <Typography.H2 className={s.filterErrorPage}>
-          No content with these terms...🤬
-        </Typography.H2>
-      )}
-    </Page>
+            {paginationDecider && (
+              <Pagination
+                count={cardsData?.pagination.totalPages || 0}
+                onChange={handleCurrentPage}
+                onPerPageChange={handlePerPage}
+                page={+currentPage}
+                perPage={+itemsPerPage}
+                perPageOptions={optionsItemsPerPage}
+              />
+            )}
+          </>
+        ) : (
+          <Typography.H2 className={s.filterErrorPage}>
+            No content with these terms...🤬
+          </Typography.H2>
+        )}
+      </Page>
+    </>
   )
 }

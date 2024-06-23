@@ -97,47 +97,49 @@ export const DecksPage = () => {
   }
 
   return (
-    <Page>
+    <>
       {isShowLineLoader && <LineLoader />}
-      <ListHeader
-        buttonType={'Deck'}
-        onSubmitAddDeck={onSubmitAddDeckHandler}
-        title={'Decks List'}
-      />
-      <DeckControlBlock
-        clearFilterOnClick={clearFilterHandler}
-        minMaxCardsData={minMaxCardsData}
-        searchInputOnChange={searchInputOnChangeHandler}
-        searchInputReset={searchInputResetHandler}
-        searchInputValue={search}
-        sliderValueChange={sliderValueChangeHandler}
-        sliderValues={sliderValues}
-        tabValue={tabValue}
-        tabValueChange={tabValueChangeHandler}
-        tabsData={tabsList}
-      />
-      {data?.items.length !== 0 ? (
-        <>
-          <DecksTable
-            authorId={me?.id}
-            decks={data?.items}
-            sortTableOnClick={sortTableOnClickHandler}
-            tableSort={tableSort}
-          />
-          <Pagination
-            count={data?.pagination.totalPages || 0}
-            onChange={handleCurrentPage}
-            onPerPageChange={handlePerPage}
-            page={+currentPage}
-            perPage={+itemsPerPage}
-            perPageOptions={optionsItemsPerPage}
-          />
-        </>
-      ) : (
-        <Typography.H2 className={s.filterErrorPage}>
-          No content with these terms...🤬
-        </Typography.H2>
-      )}
-    </Page>
+      <Page>
+        <ListHeader
+          buttonType={'Deck'}
+          onSubmitAddDeck={onSubmitAddDeckHandler}
+          title={'Decks List'}
+        />
+        <DeckControlBlock
+          clearFilterOnClick={clearFilterHandler}
+          minMaxCardsData={minMaxCardsData}
+          searchInputOnChange={searchInputOnChangeHandler}
+          searchInputReset={searchInputResetHandler}
+          searchInputValue={search}
+          sliderValueChange={sliderValueChangeHandler}
+          sliderValues={sliderValues}
+          tabValue={tabValue}
+          tabValueChange={tabValueChangeHandler}
+          tabsData={tabsList}
+        />
+        {data?.items.length !== 0 ? (
+          <>
+            <DecksTable
+              authorId={me?.id}
+              decks={data?.items}
+              sortTableOnClick={sortTableOnClickHandler}
+              tableSort={tableSort}
+            />
+            <Pagination
+              count={data?.pagination.totalPages || 0}
+              onChange={handleCurrentPage}
+              onPerPageChange={handlePerPage}
+              page={+currentPage}
+              perPage={+itemsPerPage}
+              perPageOptions={optionsItemsPerPage}
+            />
+          </>
+        ) : (
+          <Typography.H2 className={s.filterErrorPage}>
+            No content with these terms...🤬
+          </Typography.H2>
+        )}
+      </Page>
+    </>
   )
 }
