@@ -15,6 +15,7 @@ import {
 import {
   BackToDecks,
   CardsTable,
+  LineLoader,
   ListHeader,
   Page,
   Pagination,
@@ -63,7 +64,7 @@ export const CardsPage = () => {
   const {
     data: cardsData,
     error,
-    isLoading,
+    isLoading: isGetCardsLoading,
   } = useGetCardsQuery({
     currentPage: +currentPage,
     id: deckId,
@@ -75,15 +76,10 @@ export const CardsPage = () => {
   const paginationDecider = cardsData && cardsData.pagination && cardsData.pagination.totalItems > 5
 
   // ----- Блок работы с созданием карт в колоде -----
-  const [createCard] = useCreateCardMutation()
+  const [createCard, { isLoading: isCreateCardLoading }] = useCreateCardMutation()
 
   async function createCardHandler(data: CardFormValues) {
     await createCard({ id: deckId, ...data })
-  }
-
-  // ----- Показывать Loader -----
-  if (isLoading) {
-    return <h1>🟠🟠🟠 CARDS LOADING 🟠🟠🟠</h1>
   }
 
   // ----- Показывать страницу с ошибкой -----
@@ -91,8 +87,11 @@ export const CardsPage = () => {
     return <Error404 />
   }
 
+  const isShowLineLoader = isCreateCardLoading || isGetCardsLoading
+
   return (
     <Page mt={'24px'}>
+      {isShowLineLoader && <LineLoader />}
       <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <ListHeader
         buttonType={'Card'}

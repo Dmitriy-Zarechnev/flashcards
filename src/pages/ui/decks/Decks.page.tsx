@@ -6,7 +6,15 @@ import { useSuperSlider } from '@/pages/hooks/useSuperSlider'
 import { useSuperSort } from '@/pages/hooks/useSuperSort'
 import { useSuperTabs } from '@/pages/hooks/useSuperTabs'
 import { useCreateDeckMutation, useGetDecksQuery, useMeQuery } from '@/services'
-import { DeckControlBlock, DecksTable, ListHeader, Page, Pagination, Typography } from '@/shared'
+import {
+  DeckControlBlock,
+  DecksTable,
+  LineLoader,
+  ListHeader,
+  Page,
+  Pagination,
+  Typography,
+} from '@/shared'
 
 import s from './Decks.page.module.scss'
 
@@ -44,11 +52,15 @@ export const DecksPage = () => {
   const { setTableSort, sortTableOnClickHandler, tableSort } = useSuperSort()
 
   // ----- Запрос для получения id пользователя -----
-  const { data: me } = useMeQuery()
+  const { data: me } = useMeQuery() // loader для me запроса в layout
   const authorId = tabValue === tabsList[0].value ? me?.id : undefined
 
   // ----- Блок работы с запросом на сервер и получения данных -----
-  const { data, error, isLoading } = useGetDecksQuery({
+  const {
+    data,
+    error,
+    isLoading: isGetDecksLoading,
+  } = useGetDecksQuery({
     authorId,
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
@@ -59,7 +71,7 @@ export const DecksPage = () => {
   })
 
   // ----- Блок работы с созданием колоды -----
-  const [createDeck] = useCreateDeckMutation()
+  const [createDeck, { isLoading: isCreateDeckLoading }] = useCreateDeckMutation()
 
   async function onSubmitAddDeckHandler(data: DeckFormValues) {
     await createDeck({ ...data })
@@ -77,9 +89,7 @@ export const DecksPage = () => {
   }
 
   // ----- Показывать Loader -----
-  if (isLoading) {
-    return <h1>🟣🟣🟣 DECKS LOADING 🟣🟣🟣</h1>
-  }
+  const isShowLineLoader = isGetDecksLoading || isCreateDeckLoading
 
   // ----- Показывать страницу с ошибкой -----
   if (error) {
@@ -88,6 +98,7 @@ export const DecksPage = () => {
 
   return (
     <Page>
+      {isShowLineLoader && <LineLoader />}
       <ListHeader
         buttonType={'Deck'}
         onSubmitAddDeck={onSubmitAddDeckHandler}
