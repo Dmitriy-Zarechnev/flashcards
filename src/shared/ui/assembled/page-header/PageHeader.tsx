@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useLogoutMutation, useMeQuery } from '@/services'
@@ -15,13 +15,22 @@ type PageHeaderProps = {
 } & ComponentPropsWithoutRef<'header'>
 
 export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({}, ref) => {
-  const [isUserDataShow, setIsUserDataShow] = useState(true)
-  const { data } = useMeQuery()
+  const [isUserDataShow, setIsUserDataShow] = useState(false)
+  const { data, isError } = useMeQuery()
 
   const [logout] = useLogoutMutation()
 
+  useEffect(() => {
+    /* ⛔ костыль против кеширования! При вылогинивании в стейте была и дата от удачного запроса и ошибка при запросе без токенов
+          => если есть дата и нет ошибки, то будет отображать данные */
+    if (!!data && !isError) {
+      setIsUserDataShow(true)
+    }
+  }, [data, isError])
+
   function logoutHandler() {
     logout()
+    setIsUserDataShow(false)
   }
 
   return (
@@ -31,7 +40,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({},
           <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
         </Link>
 
-        {data ? (
+        {isUserDataShow ? (
           <div className={s.profileInfo}>
             <Link to={PATH.PROFILE}>
               <Typography.Subtitle1>{data?.name}</Typography.Subtitle1>
