@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
+import { toast } from 'react-toastify'
 
 import { CardFormValues } from '@/entities'
-import { Error404 } from '@/pages'
 import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
@@ -61,7 +61,8 @@ export const CardsPage = () => {
   // ----- Запросили cards используя deck.id  -----
   const {
     data: cardsData,
-    error,
+    error: isGetCardsError,
+    isFetching: isGetCardsFetching,
     isLoading: isGetCardsLoading,
   } = useGetCardsQuery({
     currentPage: +currentPage,
@@ -78,21 +79,22 @@ export const CardsPage = () => {
 
   async function createCardHandler(data: CardFormValues) {
     await createCard({ id: deckId, ...data })
+    toast.success('Card created! Ready to add another?')
   }
 
   // ----- Показывать страницу с ошибкой -----
-  if (error) {
-    return <Error404 />
+  if (isGetCardsError) {
+    return toast.error('Oops! Something went wrong. Please try again later.')
   }
 
-  const isShowLineLoader = isCreateCardLoading || isGetCardsLoading
+  const isShowLineLoader = isCreateCardLoading || isGetCardsLoading || isGetCardsFetching
 
   return (
     <>
       {isShowLineLoader && <LineLoader />}
 
       <Page mt={'24px'}>
-        <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
+        <BackToDecks title={'Back to Decks List'} />
         <ListHeader
           buttonType={'Card'}
           isCardExist={cardsData?.items.length === 0}

@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
-import { BackToDecks, Button, Card, Page, RadioGroup, Typography } from '@/shared'
+import { BackToDecks, Button, Card, LineLoader, Page, RadioGroup, Typography } from '@/shared'
 
 import s from './Learn.module.scss'
 
@@ -49,10 +50,16 @@ export const LearnPage = () => {
   const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId || '' })
 
   // ----- Запросили случайную карточку -----
-  const { data: randomCard, refetch } = useGetRandomCardQuery({ id: deckId || '' })
+  const {
+    data: randomCard,
+    error: isGetRandomCardError,
+    isLoading: isGetRandomCardLoading,
+    refetch,
+  } = useGetRandomCardQuery({ id: deckId || '' })
 
   // ----- Запрос на изменение grade карточки -----
-  const [saveCardGrade] = useSaveGradeCardMutation()
+  const [saveCardGrade, { error: isSaveCardGradeError, isLoading: isSaveCardGradeLoading }] =
+    useSaveGradeCardMutation()
 
   // State для изменения grade карточки
   const [cardGrade, setCardGrade] = useState(randomCard?.grade.toString() || '')
@@ -75,48 +82,59 @@ export const LearnPage = () => {
     setIsAnswerShown(false)
   }
 
-  return (
-    <Page>
-      <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
-      <Card className={s.learn}>
-        <Typography.H1>
-          Learn <span>{deckByIdData?.name}123</span>
-        </Typography.H1>
-        <div className={s.questionWrapper}>
-          <Typography.Subtitle1>
-            Question: <Typography.Body2>{randomCard?.question}</Typography.Body2>
-          </Typography.Subtitle1>
-          {randomCard?.questionImg && (
-            <img alt={'question picture'} className={s.learnImg} src={randomCard?.questionImg} />
-          )}
-          <Typography.Body2>Counts of attempts: {randomCard?.shots}</Typography.Body2>
+  // ----- Показывать Loader -----
+  const isShowLineLoader = isGetRandomCardLoading || isSaveCardGradeLoading
 
-          {!isAnswerShown && (
-            <Button fullWidth onClick={() => setIsAnswerShown(true)}>
-              Show Answer
-            </Button>
-          )}
-          {isAnswerShown && (
-            <>
-              <Typography.Subtitle1>
-                Answer: <Typography.Body2>{randomCard?.answer}</Typography.Body2>
-              </Typography.Subtitle1>
-              {randomCard?.answerImg && (
-                <img alt={'answer picture'} className={s.learnImg} src={randomCard?.answerImg} />
-              )}
-              <Typography.Subtitle1>Rate yourself:</Typography.Subtitle1>
-              <RadioGroup
-                onValueChange={setCardGrade}
-                options={RadioGroupOptions}
-                value={cardGrade || randomCard?.grade.toString()}
-              />
-              <Button fullWidth onClick={saveCardGradeHandler}>
-                Next Question
+  // ----- Показывать snackBar с ошибкой -----
+  if (isGetRandomCardError || isSaveCardGradeError) {
+    return toast.error('Oops! Something went wrong. Please try again later.')
+  }
+
+  return (
+    <>
+      {isShowLineLoader && <LineLoader />}
+      <Page>
+        <BackToDecks title={'Back to Decks List'} />
+        <Card className={s.learn}>
+          <Typography.H1>
+            Learn <span>{deckByIdData?.name}123</span>
+          </Typography.H1>
+          <div className={s.questionWrapper}>
+            <Typography.Subtitle1>
+              Question: <Typography.Body2>{randomCard?.question}</Typography.Body2>
+            </Typography.Subtitle1>
+            {randomCard?.questionImg && (
+              <img alt={'question picture'} className={s.learnImg} src={randomCard?.questionImg} />
+            )}
+            <Typography.Body2>Counts of attempts: {randomCard?.shots}</Typography.Body2>
+
+            {!isAnswerShown && (
+              <Button fullWidth onClick={() => setIsAnswerShown(true)}>
+                Show Answer
               </Button>
-            </>
-          )}
-        </div>
-      </Card>
-    </Page>
+            )}
+            {isAnswerShown && (
+              <>
+                <Typography.Subtitle1>
+                  Answer: <Typography.Body2>{randomCard?.answer}</Typography.Body2>
+                </Typography.Subtitle1>
+                {randomCard?.answerImg && (
+                  <img alt={'answer picture'} className={s.learnImg} src={randomCard?.answerImg} />
+                )}
+                <Typography.Subtitle1>Rate yourself:</Typography.Subtitle1>
+                <RadioGroup
+                  onValueChange={setCardGrade}
+                  options={RadioGroupOptions}
+                  value={cardGrade || randomCard?.grade.toString()}
+                />
+                <Button fullWidth onClick={saveCardGradeHandler}>
+                  Next Question
+                </Button>
+              </>
+            )}
+          </div>
+        </Card>
+      </Page>
+    </>
   )
 }

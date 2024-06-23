@@ -1,4 +1,6 @@
+import { MouseEvent } from 'react'
 import { NavLink } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { CardDeleteModal, DeckFormValues, DeckModal } from '@/entities'
 import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
@@ -13,8 +15,16 @@ export const DropdownMenu = () => {
   const { deckId } = useIdFromParams()
 
   // ----- Запросили deck по id чтобы получить cover и name -----
-  const { data: deckByIdData = { cover: null, isPrivate: false, name: 'name' } } =
-    useGetDeckByIdQuery({ id: deckId })
+  const { data: deckByIdData } = useGetDeckByIdQuery({ id: deckId })
+
+  // ----- Заблокировали переход на страницу learn при пустой колоде -----
+  const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (deckByIdData?.cardsCount === 0) {
+      // Останавливаем переход по ссылке
+      e.preventDefault()
+      toast.warning('This deck is not ready for learning yet.')
+    }
+  }
 
   // ----- Блок работы с удалением и редактированием колод -----
   const [deleteDeck] = useDeleteDeckMutation()
@@ -31,7 +41,11 @@ export const DropdownMenu = () => {
   return (
     <Dropdown.Root trigger={<Icon iconId={'group1399'} />}>
       <Dropdown.Item>
-        <NavLink className={s.learnLink} to={`${PATH.DECKSPAGE}/${deckId}/learn`}>
+        <NavLink
+          className={s.learnLink}
+          onClick={handleLinkClick}
+          to={`${PATH.DECKSPAGE}/${deckId}/learn`}
+        >
           <Icon iconId={'playCircleOutline'} />
           <Typography.Caption>Learn</Typography.Caption>
         </NavLink>
@@ -40,9 +54,9 @@ export const DropdownMenu = () => {
       <Dropdown.Item>
         <DeckModal
           deckData={{
-            cover: deckByIdData.cover,
-            isPrivate: deckByIdData.isPrivate,
-            name: deckByIdData.name,
+            cover: deckByIdData?.cover,
+            isPrivate: deckByIdData?.isPrivate,
+            name: deckByIdData?.name,
           }}
           onSubmit={updateDeckHandler}
           variant={'edit'}
@@ -52,7 +66,7 @@ export const DropdownMenu = () => {
       </Dropdown.Item>
       <Dropdown.Separator />
       <Dropdown.Item>
-        <CardDeleteModal cardName={deckByIdData.name} deleteCb={deleteDeckHandler} type={'Deck'} />
+        <CardDeleteModal cardName={deckByIdData?.name} deleteCb={deleteDeckHandler} type={'Deck'} />
         {/*<Icon iconId={'trashOutline'} />*/}
         <Typography.Caption>Delete</Typography.Caption>
       </Dropdown.Item>

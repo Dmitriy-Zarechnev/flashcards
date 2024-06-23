@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { SignUpFormValues, SingUp } from '@/entities'
 import { useSignUpMutation } from '@/services'
@@ -16,10 +17,11 @@ export const SignUpPage = () => {
       const result = await signUp({ email, password }).unwrap()
 
       if (result) {
+        toast.info("Welcome aboard! You've successfully signed up!")
         navigate(PATH.SIGNIN)
       }
     } catch (error) {
-      console.error('Ошибка регистрации:', error)
+      toast.error('Oops! Something went wrong. Please check your information and try again.')
     }
   }
 

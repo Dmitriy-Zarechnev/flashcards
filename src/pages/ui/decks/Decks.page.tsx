@@ -1,5 +1,6 @@
+import { toast } from 'react-toastify'
+
 import { DeckFormValues } from '@/entities'
-import { Error404 } from '@/pages'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
 import { useSuperSlider } from '@/pages/hooks/useSuperSlider'
@@ -59,7 +60,8 @@ export const DecksPage = () => {
   // ----- Блок работы с запросом на сервер и получения данных -----
   const {
     data,
-    error,
+    error: isGetDecksError,
+    isFetching: isGetDecksFetching,
     isLoading: isGetDecksLoading,
   } = useGetDecksQuery({
     authorId,
@@ -72,10 +74,12 @@ export const DecksPage = () => {
   })
 
   // ----- Блок работы с созданием колоды -----
-  const [createDeck, { isLoading: isCreateDeckLoading }] = useCreateDeckMutation()
+  const [createDeck, { error: isCreateDeckError, isLoading: isCreateDeckLoading }] =
+    useCreateDeckMutation()
 
   async function onSubmitAddDeckHandler(data: DeckFormValues) {
     await createDeck({ ...data })
+    toast.success('Deck added! Ready to fill it with some cards?')
   }
 
   // ----- Очистили filters при нажатии на кнопку -----
@@ -91,11 +95,11 @@ export const DecksPage = () => {
   }
 
   // ----- Показывать Loader -----
-  const isShowLineLoader = isGetDecksLoading || isCreateDeckLoading
+  const isShowLineLoader = isGetDecksLoading || isCreateDeckLoading || isGetDecksFetching
 
-  // ----- Показывать страницу с ошибкой -----
-  if (error) {
-    return <Error404 />
+  // ----- Показывать snackBar с ошибкой -----
+  if (isCreateDeckError || isGetDecksError) {
+    return toast.error('Oops! Something went wrong. Please try again later.')
   }
 
   return (

@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { useLogoutMutation, useMeQuery } from '@/services'
 import { flashcardsApi } from '@/services/api/flashcards.api'
@@ -19,6 +20,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({},
 
   async function logoutHandler() {
     await logout()
+    toast.info('Logout successful. See you next time!')
     /* ⛔ только так смог побороть кеширвоание при me запросе ⛔ */
     dispatch(flashcardsApi.util.resetApiState())
   }
