@@ -1,7 +1,9 @@
 import { ChangeEvent, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { EditProfileFormValues } from '@/entities'
-import { useMeQuery, useUpdateUserDataMutation } from '@/services'
+import { useLogoutMutation, useMeQuery, useUpdateUserDataMutation } from '@/services'
+import { flashcardsApi } from '@/services/api/flashcards.api'
 import { Card, HeaderAvatar, IconButton, Typography } from '@/shared'
 
 import s from './EditProfile.module.scss'
@@ -10,6 +12,9 @@ import { InfoPanel } from './Info-panel/InfoPannel'
 import { FormPanel } from './form-panel/FormPanel'
 
 export const EditProfile = () => {
+  const dispatch = useDispatch()
+  const [logout] = useLogoutMutation()
+
   // ----- Показывать или нет поле редактирования имени -----
   const [isEditName, setIsEditName] = useState(false)
 
@@ -51,8 +56,12 @@ export const EditProfile = () => {
       }
     }
   }
+
   // logOut логика
-  const logOut = () => {}
+  function logoutHandler() {
+    logout()
+    dispatch(flashcardsApi.util.resetApiState())
+  }
 
   return (
     <Card className={s.editProfile}>
@@ -80,7 +89,7 @@ export const EditProfile = () => {
         <InfoPanel
           editName={() => setIsEditName(!isEditName)}
           email={me?.email}
-          logout={logOut}
+          logout={logoutHandler}
           name={me?.name}
         />
       ) : (

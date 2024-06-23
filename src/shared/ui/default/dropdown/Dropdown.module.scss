@@ -60,6 +60,10 @@
 
   outline: none;
 
+  a {
+    width: 100%;
+  }
+
   &[data-highlighted] * {
     color: var(--color-accent-500);
   }
