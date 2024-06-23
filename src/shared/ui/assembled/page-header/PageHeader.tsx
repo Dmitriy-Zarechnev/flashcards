@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 
-import { AuthResponse } from '@/services'
+import { AuthResponse, useLogoutMutation } from '@/services'
 import { Button, DropdownProfile, Typography } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
 
@@ -11,10 +11,16 @@ import s from './PageHeader.module.scss'
 import logo from './Logo.png'
 
 type PageHeaderProps = {
-  data?: AuthResponse
+  data?: AuthResponse | null
 } & ComponentPropsWithoutRef<'header'>
 
 export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ data }, ref) => {
+  const [logout] = useLogoutMutation()
+
+  function logoutHandler() {
+    logout()
+  }
+
   return (
     <header ref={ref}>
       <div className={s.wrapper}>
@@ -40,6 +46,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ d
           </Button>
         )}
       </div>
+      <button onClick={logoutHandler}>LOGOUT</button>
     </header>
   )
 })
