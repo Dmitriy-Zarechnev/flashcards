@@ -10,8 +10,14 @@ export const useSuperSlider = () => {
   const defaultMax = Math.ceil(minMaxCardsData.max / 2)
   const defaultSliderValues = [0, defaultMax]
 
-  // State для вызова перерисовки при изменении slider values
+  // State для отображения на UI при изменении slider values
   const [sliderValues, setSliderValues] = useState<number[]>([
+    defaultSliderValues[0],
+    defaultSliderValues[1],
+  ])
+
+  // State для вызова перерисовки при изменении окончании изменения slider values на UI
+  const [sliderFinalValues, setSliderFinalValues] = useState<number[]>([
     defaultSliderValues[0],
     defaultSliderValues[1],
   ])
@@ -21,11 +27,19 @@ export const useSuperSlider = () => {
     setSliderValues(value)
   }
 
+  // Callback для отправки значений slider values на сервер прокидываем из Slider.Root
+  const sliderValueCommitHandler = (value: number[]) => {
+    setSliderFinalValues(value)
+  }
+
   return {
     defaultSliderValues,
     minMaxCardsData,
+    setSliderFinalValues,
     setSliderValues,
+    sliderFinalValues,
     sliderValueChangeHandler,
+    sliderValueCommitHandler,
     sliderValues,
   }
 }

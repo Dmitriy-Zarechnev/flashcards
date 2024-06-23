@@ -13,6 +13,7 @@ type DeckControlBlockProps = {
   searchInputReset: () => void
   searchInputValue: string
   sliderValueChange: (value: number[]) => void
+  sliderValueCommit: (value: number[]) => void
   sliderValues: number[]
   tabValue: string
   tabValueChange: (value: string) => void
@@ -26,6 +27,7 @@ export const DeckControlBlock = ({
   searchInputReset,
   searchInputValue,
   sliderValueChange,
+  sliderValueCommit,
   sliderValues,
   tabValue,
   tabValueChange,
@@ -60,6 +62,7 @@ export const DeckControlBlock = ({
           max={minMaxCardsData.max}
           min={minMaxCardsData.min}
           onValueChange={sliderValueChange}
+          onValueCommit={sliderValueCommit}
           value={[sliderValues[0], sliderValues[1]]}
         />
       </div>

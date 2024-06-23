@@ -32,8 +32,11 @@ export const DecksPage = () => {
   const {
     defaultSliderValues,
     minMaxCardsData,
+    setSliderFinalValues,
     setSliderValues,
+    sliderFinalValues,
     sliderValueChangeHandler,
+    sliderValueCommitHandler,
     sliderValues,
   } = useSuperSlider()
 
@@ -52,8 +55,8 @@ export const DecksPage = () => {
     authorId,
     currentPage: +currentPage,
     itemsPerPage: +itemsPerPage,
-    maxCardsCount: sliderValues[1],
-    minCardsCount: sliderValues[0],
+    maxCardsCount: sliderFinalValues[1],
+    minCardsCount: sliderFinalValues[0],
     name: search,
     orderBy: tableSort,
   })
@@ -67,6 +70,7 @@ export const DecksPage = () => {
 
   // ----- Очистили filters при нажатии на кнопку -----
   const clearFilterHandler = () => {
+    setSliderFinalValues(defaultSliderValues)
     setSliderValues(defaultSliderValues)
     searchInputResetHandler()
     setTabValue(tabsList[1].value)
@@ -100,6 +104,7 @@ export const DecksPage = () => {
         searchInputReset={searchInputResetHandler}
         searchInputValue={search}
         sliderValueChange={sliderValueChangeHandler}
+        sliderValueCommit={sliderValueCommitHandler}
         sliderValues={sliderValues}
         tabValue={tabValue}
         tabValueChange={tabValueChangeHandler}
