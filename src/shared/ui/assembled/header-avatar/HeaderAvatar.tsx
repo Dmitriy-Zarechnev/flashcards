@@ -10,7 +10,7 @@ type HeaderAvatarProps = {
   noHover?: boolean
   photo?: string
   photoDescription: string
-  textStyle: CSSProperties
+  textStyle?: CSSProperties
 } & ComponentPropsWithoutRef<typeof Avatar.Root>
 
 export const HeaderAvatar = ({

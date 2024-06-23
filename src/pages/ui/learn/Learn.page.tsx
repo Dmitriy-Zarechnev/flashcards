@@ -77,7 +77,7 @@ export const LearnPage = () => {
 
   return (
     <Page>
-      <BackToDecks iconId={'arrowBackOutline'} title={'Back to previous list'} />
+      <BackToDecks iconId={'arrowBackOutline'} title={'Back to Decks List'} />
       <Card className={s.learn}>
         <Typography.H1>
           Learn <span>{deckByIdData?.name}123</span>
@@ -104,6 +104,7 @@ export const LearnPage = () => {
               {randomCard?.answerImg && (
                 <img alt={'answer picture'} className={s.learnImg} src={randomCard?.answerImg} />
               )}
+              <Typography.Subtitle1>Rate yourself:</Typography.Subtitle1>
               <RadioGroup
                 onValueChange={setCardGrade}
                 options={RadioGroupOptions}

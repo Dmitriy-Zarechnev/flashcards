@@ -7,7 +7,6 @@ import { PATH } from '@/shared/utils/routerVariables'
 
 import s from './PageHeader.module.scss'
 
-//import img from './Dropdown.webp'
 import logo from './Logo.png'
 
 type PageHeaderProps = {
@@ -36,7 +35,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ d
           </div>
         ) : (
           <Button as={Link} to={PATH.SIGNIN} variant={'primary'}>
-            Sing In
+            Sign In
           </Button>
         )}
       </div>
