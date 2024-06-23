@@ -26,10 +26,13 @@ export const HeaderAvatar = ({
     <Avatar.Root className={clsx(s.rootAvatar, className)} style={style}>
       <Avatar.Image
         alt={photoDescription}
-        className={clsx(s.fallBack, noHover && s.noHover)}
+        className={clsx(s.avatarImg, noHover && s.noHover)}
         src={photo}
       />
-      <Avatar.Fallback className={clsx(s.fallBack, noHover && s.noHover)} style={textStyle}>
+      <Avatar.Fallback
+        className={clsx(s.avatarImg, s.fallBack, noHover && s.noHover)}
+        style={textStyle}
+      >
         {name?.[0]}
       </Avatar.Fallback>
     </Avatar.Root>

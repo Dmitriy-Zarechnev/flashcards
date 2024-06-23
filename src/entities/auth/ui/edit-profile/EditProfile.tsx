@@ -16,21 +16,11 @@ export const EditProfile = () => {
   // ----- Запрос для получения id пользователя -----
   const { data: me, refetch } = useMeQuery()
 
-  // Сохраняем URL изображения в состоянии
-  const [imageURL, setImageURL] = useState<string | undefined>(me?.avatar)
   // Сохраняем File изображения в состоянии
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
 
   // Добавили картинку в ref
   const fileInputRef = useRef<HTMLInputElement>(null)
-
-  // Функция для обработки полученной из ref картинки
-  const changeProfilePhoto = (file: File) => {
-    const newAvatarURL = URL.createObjectURL(file)
-
-    setAvatarFile(file)
-    setImageURL(newAvatarURL) // Обновляем URL в состоянии
-  }
 
   // Click по кнопке-инпуту аватара
   function handleButtonClick() {
@@ -46,18 +36,12 @@ export const EditProfile = () => {
     await updateUser({ ...data, avatar: avatarFile })
     await refetch()
     setIsEditName(!isEditName)
-
-    if (imageURL) {
-      // удаляем изображение, чтобы оно не оставалось в памяти браузера
-      URL.revokeObjectURL(imageURL)
-      setImageURL(undefined)
-    }
   }
 
   // Получили картинку, которую загрузил пользователь
   function imageChangeHandler(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
-      changeProfilePhoto(event.target.files[0])
+      setAvatarFile(event.target.files[0])
 
       updateUser({ avatar: event.target.files[0], name: me?.name || 'name' })
 
