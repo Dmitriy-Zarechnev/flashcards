@@ -1,19 +1,28 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { AuthResponse } from '@/services'
-import { Button, DropdownProfile, Typography } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
+import { useLogoutMutation, useMeQuery } from '@/services'
+import { flashcardsApi } from '@/services/api/flashcards.api'
+import { Button, DropdownProfile, PATH, Typography } from '@/shared'
 
 import s from './PageHeader.module.scss'
 
 import logo from './Logo.png'
 
-type PageHeaderProps = {
-  data?: AuthResponse
-} & ComponentPropsWithoutRef<'header'>
+type PageHeaderProps = {} & ComponentPropsWithoutRef<'header'>
 
-export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ data }, ref) => {
+export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({}, ref) => {
+  const dispatch = useDispatch()
+  const { data } = useMeQuery()
+  const [logout] = useLogoutMutation()
+
+  async function logoutHandler() {
+    await logout()
+    /* ⛔ только так смог побороть кеширвоание при me запросе ⛔ */
+    dispatch(flashcardsApi.util.resetApiState())
+  }
+
   return (
     <header ref={ref}>
       <div className={s.wrapper}>
@@ -28,6 +37,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ d
             </Link>
             <DropdownProfile
               email={data?.email ?? 'user@yandex.com'}
+              logout={logoutHandler}
               name={data?.name ?? 'User'}
               photo={data?.avatar}
               photoDescription={`${data?.name} - avatar`}

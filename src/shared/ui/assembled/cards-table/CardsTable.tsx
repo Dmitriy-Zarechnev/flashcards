@@ -1,7 +1,15 @@
 import { CardFormValues } from '@/entities'
 import { useDeleteCardMutation, useUpdateCardMutation } from '@/services'
 import { Card } from '@/services/types/decks.types'
-import { HeadCellWithArrow, IconButtons, ImgBlock, Rating, Tables, Typography } from '@/shared'
+import {
+  HeadCellWithArrow,
+  IconButtons,
+  ImgBlock,
+  LineLoader,
+  Rating,
+  Tables,
+  Typography,
+} from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './CardsTable.module.scss'
@@ -17,8 +25,8 @@ type CardsTableProps = {
 
 export const CardsTable = ({ authorId, cards, sortTableOnClick, tableSort }: CardsTableProps) => {
   // ----- Блок работы с удалением и редактированием карточек в колоде -----
-  const [deleteCard] = useDeleteCardMutation()
-  const [updateCard] = useUpdateCardMutation()
+  const [deleteCard, { isLoading: isDeleteCardLoading }] = useDeleteCardMutation()
+  const [updateCard, { isLoading: isUpdateCardLoading }] = useUpdateCardMutation()
 
   async function deleteCardHandler(id: string) {
     await deleteCard({ id })
@@ -27,8 +35,11 @@ export const CardsTable = ({ authorId, cards, sortTableOnClick, tableSort }: Car
     await updateCard({ id, ...data })
   }
 
+  const isShowLineLoader = isDeleteCardLoading || isUpdateCardLoading
+
   return (
     <Tables.Table>
+      {isShowLineLoader && <LineLoader />}
       <Tables.TableHead>
         <Tables.TableRow>
           <HeadCellWithArrow

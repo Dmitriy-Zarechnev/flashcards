@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { Dropdown, HeaderAvatar, Icon, Typography } from '@/shared'
@@ -8,14 +7,19 @@ import s from './DropdownProfile.module.scss'
 
 type DropdownProfileProps = {
   email: string
+  logout: () => void
   name: string
   photo?: string
   photoDescription: string
 }
 
-export const DropdownProfile = ({ email, name, photo, photoDescription }: DropdownProfileProps) => {
-  const [isOpen, setIsOpen] = useState(false)
-
+export const DropdownProfile = ({
+  email,
+  logout,
+  name,
+  photo,
+  photoDescription,
+}: DropdownProfileProps) => {
   return (
     <Dropdown.Root
       onOpenChange={() => setIsOpen(!isOpen)}
@@ -38,8 +42,8 @@ export const DropdownProfile = ({ email, name, photo, photoDescription }: Dropdo
         </NavLink>
       </Dropdown.Item>
       <Dropdown.Separator />
-      <Dropdown.Item>
-        <NavLink className={s.iconTextLink} to={PATH.SINGOUT}>
+      <Dropdown.Item onClick={logout}>
+        <NavLink className={s.iconTextLink} to={PATH.SIGNIN}>
           <Icon iconId={'logOut'} />
           <Typography.Caption>Sign out</Typography.Caption>
         </NavLink>
