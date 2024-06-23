@@ -1,18 +1,24 @@
 import { NavLink } from 'react-router-dom'
 
-import { Dropdown, HeaderAvatar, Icon, Typography } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
+import { Dropdown, HeaderAvatar, Icon, PATH, Typography } from '@/shared'
 
 import s from './DropdownProfile.module.scss'
 
 type DropdownProfileProps = {
   email: string
+  logout: () => void
   name: string
   photo?: string
   photoDescription: string
 }
 
-export const DropdownProfile = ({ email, name, photo, photoDescription }: DropdownProfileProps) => {
+export const DropdownProfile = ({
+  email,
+  logout,
+  name,
+  photo,
+  photoDescription,
+}: DropdownProfileProps) => {
   return (
     <Dropdown.Root
       style={{ height: '36px', width: '36px' }}
@@ -33,11 +39,12 @@ export const DropdownProfile = ({ email, name, photo, photoDescription }: Dropdo
         </NavLink>
       </Dropdown.Item>
       <Dropdown.Separator />
-      <Dropdown.Item onClick={() => {}}>
-        <NavLink className={s.iconTextLink} to={PATH.SINGOUT}>
+      <Dropdown.Item onClick={logout}>
+        {/* убрал тут NavLink => перенаправление уже есть в функции onClick={logout} */}
+        <div className={s.iconTextLink}>
           <Icon iconId={'logOut'} />
           <Typography.Caption>Sign out</Typography.Caption>
-        </NavLink>
+        </div>
       </Dropdown.Item>
     </Dropdown.Root>
   )

@@ -28,7 +28,6 @@ const authService = flashcardsApi.injectEndpoints({
           url: '/v1/auth/login',
         }),
       }),
-      /* перенсес в LayOut. тут оставил как пример псевдо-мутации */
       logout: builder.mutation<void, void>({
         /* так как при logout никакого ответа не приходит, мы просто удалим токены, нужно сразу
            сделать запрос useMeQuery чтобы перенаправить пользователя на страницуу ллогинизации.
@@ -38,9 +37,8 @@ const authService = flashcardsApi.injectEndpoints({
         onQueryStarted() {
           localStorage.removeItem('accessToken')
           localStorage.removeItem('refreshToken')
-
-          //TODO после logout не происходит обновление PageHeader мы разлогинились, а данные остались профиля
         },
+        /* затычка вместо запроса */
         queryFn: () => ({ data: undefined }),
       }),
       me: builder.query<AuthResponse, void>({

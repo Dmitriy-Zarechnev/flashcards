@@ -1,7 +1,7 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { AuthResponse, useLogoutMutation } from '@/services'
+import { useLogoutMutation, useMeQuery } from '@/services'
 import { Button, DropdownProfile, Typography } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
 
@@ -11,10 +11,13 @@ import s from './PageHeader.module.scss'
 import logo from './Logo.png'
 
 type PageHeaderProps = {
-  data?: AuthResponse | null
+  // data?: AuthResponse | null
 } & ComponentPropsWithoutRef<'header'>
 
-export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ data }, ref) => {
+export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({}, ref) => {
+  const [isUserDataShow, setIsUserDataShow] = useState(true)
+  const { data } = useMeQuery()
+
   const [logout] = useLogoutMutation()
 
   function logoutHandler() {
@@ -35,6 +38,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ d
             </Link>
             <DropdownProfile
               email={data?.email ?? 'user@yandex.com'}
+              logout={logoutHandler}
               name={data?.name ?? 'User'}
               photo={data?.avatar}
               photoDescription={`${data?.name} - avatar`}
@@ -46,7 +50,6 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({ d
           </Button>
         )}
       </div>
-      <button onClick={logoutHandler}>LOGOUT</button>
     </header>
   )
 })
