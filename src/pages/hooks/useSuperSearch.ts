@@ -29,7 +29,7 @@ export const useSuperSearch = (
         searchParams.delete('search')
       }
       setSearchParams(searchParams)
-    }, 2000)
+    }, 500)
 
     return () => {
       clearTimeout(timerId)

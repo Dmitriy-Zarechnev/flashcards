@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { Dropdown, HeaderAvatar, Icon, Typography } from '@/shared'
@@ -20,6 +21,8 @@ export const DropdownProfile = ({
   photo,
   photoDescription,
 }: DropdownProfileProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <Dropdown.Root
       onOpenChange={() => setIsOpen(!isOpen)}

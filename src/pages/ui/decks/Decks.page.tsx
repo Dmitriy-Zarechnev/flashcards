@@ -99,48 +99,6 @@ export const DecksPage = () => {
   }
 
   return (
-    <Page>
-      <ListHeader
-        buttonType={'Deck'}
-        onSubmitAddDeck={onSubmitAddDeckHandler}
-        title={'Decks List'}
-      />
-      <DeckControlBlock
-        clearFilterOnClick={clearFilterHandler}
-        minMaxCardsData={minMaxCardsData}
-        searchInputOnChange={searchInputOnChangeHandler}
-        searchInputReset={searchInputResetHandler}
-        searchInputValue={inputValue}
-        sliderValueChange={sliderValueChangeHandler}
-        sliderValueCommit={sliderValueCommitHandler}
-        sliderValues={sliderValues}
-        tabValue={tabValue}
-        tabValueChange={tabValueChangeHandler}
-        tabsData={tabsList}
-      />
-      {data?.items.length !== 0 ? (
-        <>
-          <DecksTable
-            authorId={me?.id}
-            decks={data?.items}
-            sortTableOnClick={sortTableOnClickHandler}
-            tableSort={tableSort}
-          />
-          <Pagination
-            count={data?.pagination.totalPages || 0}
-            onChange={handleCurrentPage}
-            onPerPageChange={handlePerPage}
-            page={+currentPage}
-            perPage={+itemsPerPage}
-            perPageOptions={optionsItemsPerPage}
-          />
-        </>
-      ) : (
-        <Typography.H2 className={s.filterErrorPage}>
-          No content with these terms...🤬
-        </Typography.H2>
-      )}
-    </Page>
     <>
       {isShowLineLoader && <LineLoader />}
       <Page>
@@ -154,8 +112,9 @@ export const DecksPage = () => {
           minMaxCardsData={minMaxCardsData}
           searchInputOnChange={searchInputOnChangeHandler}
           searchInputReset={searchInputResetHandler}
-          searchInputValue={search}
+          searchInputValue={inputValue}
           sliderValueChange={sliderValueChangeHandler}
+          sliderValueCommit={sliderValueCommitHandler}
           sliderValues={sliderValues}
           tabValue={tabValue}
           tabValueChange={tabValueChangeHandler}
