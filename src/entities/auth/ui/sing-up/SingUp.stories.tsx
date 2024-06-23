@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { SignUpFormValues } from '@/entities'
-import { BrowserDecorator } from '@/shared/utils/routerDecorator'
+import { BrowserDecorator } from '@/services'
 
 import { SingUp } from './SingUp'
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { FieldValues } from 'react-hook-form'
 
-import { BrowserDecorator } from '@/shared/utils/routerDecorator'
+import { BrowserDecorator } from '@/services'
 
 import { SignIn } from './'
 
