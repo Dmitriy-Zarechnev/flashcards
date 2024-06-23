@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { CardDeleteModal, DeckFormValues, DeckModal } from '@/entities'
 import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { useDeleteDeckMutation, useGetDeckByIdQuery, useUpdateDeckMutation } from '@/services'
-import { Dropdown, Icon, Typography } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
+import { Dropdown, Icon, PATH, Typography } from '@/shared'
 
 import s from './DropdownMenu.module.scss'
 
