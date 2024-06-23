@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { Dropdown, HeaderAvatar, Icon, Typography } from '@/shared'
@@ -13,8 +14,12 @@ type DropdownProfileProps = {
 }
 
 export const DropdownProfile = ({ email, name, photo, photoDescription }: DropdownProfileProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <Dropdown.Root
+      onOpenChange={() => setIsOpen(!isOpen)}
+      open={isOpen}
       style={{ height: '36px', width: '36px' }}
       trigger={<HeaderAvatar name={name} photo={photo} photoDescription={photoDescription} />}
     >
@@ -27,7 +32,7 @@ export const DropdownProfile = ({ email, name, photo, photoDescription }: Dropdo
       </div>
       <Dropdown.Separator />
       <Dropdown.Item>
-        <NavLink className={s.iconTextLink} to={PATH.PROFILE}>
+        <NavLink className={s.iconTextLink} onClick={() => setIsOpen(false)} to={PATH.PROFILE}>
           <Icon iconId={'personOutline'} />
           <Typography.Caption>My profile</Typography.Caption>
         </NavLink>

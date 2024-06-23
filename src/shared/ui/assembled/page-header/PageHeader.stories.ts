@@ -13,13 +13,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const SingUpPageHeaderStory: Story = {
-  args: {
-    isSingUp: true,
-  },
+  args: {},
 }
 
 export const NotSingUpPageHeaderStory: Story = {
-  args: {
-    isSingUp: false,
-  },
+  args: {},
 }

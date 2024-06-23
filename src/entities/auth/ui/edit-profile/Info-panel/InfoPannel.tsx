@@ -16,7 +16,7 @@ export const InfoPanel = ({ editName, email, logout, name }: InfoPanelProps) => 
         <Typography.H2>{name}</Typography.H2>
         <IconButton className={s.editBtn} iconId={'editOutline'} onClick={editName} />
       </div>
-      <Typography.Body2 className={s.email}>{email}</Typography.Body2>
+      <Typography.Body2 style={{ color: 'var(--color-dark-100)' }}>{email}</Typography.Body2>
       <Button onClick={logout} variant={'secondary'}>
         <Icon iconId={'logOut'} />
         Logout
