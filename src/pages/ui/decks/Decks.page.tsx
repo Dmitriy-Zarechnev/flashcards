@@ -23,10 +23,8 @@ export const DecksPage = () => {
   } = useSuperPagination([5, 10, 15, 20])
 
   // ----- Хук для работы с поиском по названию колоды -----
-  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperSearch(
-    searchParams,
-    setSearchParams
-  )
+  const { inputFinalValue, inputValue, searchInputOnChangeHandler, searchInputResetHandler } =
+    useSuperSearch(searchParams, setSearchParams)
 
   // ----- Хук для работы со слайдером -----
   const {
@@ -57,7 +55,7 @@ export const DecksPage = () => {
     itemsPerPage: +itemsPerPage,
     maxCardsCount: sliderFinalValues[1],
     minCardsCount: sliderFinalValues[0],
-    name: search,
+    name: inputFinalValue,
     orderBy: tableSort,
   })
 
@@ -102,7 +100,7 @@ export const DecksPage = () => {
         minMaxCardsData={minMaxCardsData}
         searchInputOnChange={searchInputOnChangeHandler}
         searchInputReset={searchInputResetHandler}
-        searchInputValue={search}
+        searchInputValue={inputValue}
         sliderValueChange={sliderValueChangeHandler}
         sliderValueCommit={sliderValueCommitHandler}
         sliderValues={sliderValues}

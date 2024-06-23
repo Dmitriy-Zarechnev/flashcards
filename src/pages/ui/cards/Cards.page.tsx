@@ -41,10 +41,8 @@ export const CardsPage = () => {
   } = useSuperPagination([5, 10, 15])
 
   // ----- Хук и функция для работы с поиском по вопросу -----
-  const { search, searchInputOnChangeHandler, searchInputResetHandler } = useSuperSearch(
-    searchParams,
-    setSearchParams
-  )
+  const { inputFinalValue, inputValue, searchInputOnChangeHandler, searchInputResetHandler } =
+    useSuperSearch(searchParams, setSearchParams)
   const searchQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
     searchInputOnChangeHandler(e.currentTarget.value)
   }
@@ -69,7 +67,7 @@ export const CardsPage = () => {
     id: deckId,
     itemsPerPage: +itemsPerPage,
     orderBy: tableSort,
-    question: search,
+    question: inputFinalValue,
   })
 
   const paginationDecider = cardsData && cardsData.pagination && cardsData.pagination.totalItems > 5
@@ -107,7 +105,7 @@ export const CardsPage = () => {
         onChange={searchQuestionHandler}
         placeholder={'Look for the question that you need'}
         searchTextResetHandler={searchInputResetHandler}
-        value={search}
+        value={inputValue}
       />
       {cardsData?.items.length !== 0 ? (
         <>
