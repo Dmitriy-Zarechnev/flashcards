@@ -12,6 +12,7 @@ const authService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<LoginResponse, LoginArgs>({
+        /* нет смысла вызывать invalidatesTags: ['Auth'] после login, так как me запрос будет вызыван в Layout */
         async onQueryStarted(_, { queryFulfilled }) {
           const { data } = await queryFulfilled
 
@@ -30,19 +31,16 @@ const authService = flashcardsApi.injectEndpoints({
       }),
       logout: builder.mutation<void, void>({
         /* так как при logout никакого ответа не приходит, мы просто удалим токены, нужно сразу
-           сделать запрос useMeQuery чтобы перенаправить пользователя на страницуу ллогинизации.
-
-           Можно логику удаления токенов описать в LayOut, а можно сдесь - в псевдо-запросе */
-        invalidatesTags: ['Auth'],
+           повторный запрос me будет в layout => нет смысла вызывать повторный запрос invalidatesTags: ['Auth'] */
+        // invalidatesTags: ['Auth'],
         onQueryStarted() {
           localStorage.removeItem('accessToken')
           localStorage.removeItem('refreshToken')
         },
-        /* затычка вместо запроса */
         queryFn: () => ({ data: undefined }),
       }),
       me: builder.query<AuthResponse, void>({
-        providesTags: ['Auth'],
+        // providesTags: ['Auth'],
         query: () => `/v1/auth/me`,
       }),
       signUp: builder.mutation<AuthResponse, SignUpArgs>({

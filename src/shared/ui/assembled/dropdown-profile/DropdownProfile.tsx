@@ -40,11 +40,10 @@ export const DropdownProfile = ({
       </Dropdown.Item>
       <Dropdown.Separator />
       <Dropdown.Item onClick={logout}>
-        {/* убрал тут NavLink => перенаправление уже есть в функции onClick={logout} */}
-        <div className={s.iconTextLink}>
+        <NavLink className={s.iconTextLink} to={PATH.SIGNIN}>
           <Icon iconId={'logOut'} />
           <Typography.Caption>Sign out</Typography.Caption>
-        </div>
+        </NavLink>
       </Dropdown.Item>
     </Dropdown.Root>
   )

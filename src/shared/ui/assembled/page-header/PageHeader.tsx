@@ -1,36 +1,26 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, useEffect, useState } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { useLogoutMutation, useMeQuery } from '@/services'
-import { Button, DropdownProfile, Typography } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
+import { flashcardsApi } from '@/services/api/flashcards.api'
+import { Button, DropdownProfile, PATH, Typography } from '@/shared'
 
 import s from './PageHeader.module.scss'
 
-//import img from './Dropdown.webp'
 import logo from './Logo.png'
 
-type PageHeaderProps = {
-  // data?: AuthResponse | null
-} & ComponentPropsWithoutRef<'header'>
+type PageHeaderProps = {} & ComponentPropsWithoutRef<'header'>
 
 export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({}, ref) => {
-  const [isUserDataShow, setIsUserDataShow] = useState(false)
-  const { data, isError } = useMeQuery()
-
+  const dispatch = useDispatch()
+  const { data } = useMeQuery()
   const [logout] = useLogoutMutation()
 
-  useEffect(() => {
-    /* ⛔ костыль против кеширования! При вылогинивании в стейте была и дата от удачного запроса и ошибка при запросе без токенов
-          => если есть дата и нет ошибки, то будет отображать данные */
-    if (!!data && !isError) {
-      setIsUserDataShow(true)
-    }
-  }, [data, isError])
-
-  function logoutHandler() {
-    logout()
-    setIsUserDataShow(false)
+  async function logoutHandler() {
+    await logout()
+    /* ⛔ только так смог побороть кеширвоание при me запросе ⛔ */
+    dispatch(flashcardsApi.util.resetApiState())
   }
 
   return (
@@ -40,7 +30,7 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({},
           <img alt={'Project Picture'} className={s.projectPicture} src={logo} />
         </Link>
 
-        {isUserDataShow ? (
+        {data ? (
           <div className={s.profileInfo}>
             <Link to={PATH.PROFILE}>
               <Typography.Subtitle1>{data?.name}</Typography.Subtitle1>
