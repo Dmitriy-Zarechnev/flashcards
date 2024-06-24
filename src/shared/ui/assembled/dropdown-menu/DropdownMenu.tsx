@@ -1,4 +1,3 @@
-import { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -18,25 +17,13 @@ export const DropdownMenu = () => {
     id: deckId,
   })
 
-  // ----- Заблокировали переход на страницу learn при пустой колоде -----
-  // const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
-  //   if (deckByIdData?.cardsCount === 0) {
-  //     // Останавливаем переход по ссылке
-  //     e.preventDefault()
-  //     toast.warning('This deck is not ready for learning yet.')
-  //   }
-  // }
-
   // ----- Блок работы с удалением и редактированием колод -----
   const [deleteDeck, { isLoading: isDeleteLoadig }] = useDeleteDeckMutation()
   const [updateDeck, { isLoading: isUpdateLoading }] = useUpdateDeckMutation()
 
-  // TODO так как роутинг теперь через navigate => можно удалить NavLink и стили для неё
-
-  function learnHandler(e: MouseEvent<HTMLDivElement>) {
+  function learnHandler() {
     if (deckByIdData?.cardsCount === 0) {
       // Останавливаем переход по ссылке
-      e.preventDefault()
       toast.warning('This deck is not ready for learning yet.')
     } else {
       navigate(`${PATH.DECKSPAGE}/${deckId}/learn`)
@@ -59,10 +46,6 @@ export const DropdownMenu = () => {
     navigate(PATH.DECKSPAGE)
   }
 
-  function deleteHandler() {
-    deleteDeckHandler()
-  }
-
   const isShowLineLoader = isDeleteLoadig || isUpdateLoading || isGetDeckByIdLoading
 
   return (
@@ -74,27 +57,30 @@ export const DropdownMenu = () => {
           <Typography.Caption>Learn</Typography.Caption>
         </Dropdown.Item>
         <Dropdown.Separator />
-        <Dropdown.Item onClick={updateHandler}>
+        <Dropdown.Item
+          onClick={() => {
+            console.log('click')
+            updateHandler()
+          }}
+        >
           <DeckModal
             deckData={{
-              cover: deckByIdData.cover,
-              isPrivate: deckByIdData.isPrivate,
-              name: deckByIdData.name,
+              cover: deckByIdData?.cover,
+              isPrivate: deckByIdData?.isPrivate,
+              name: deckByIdData?.name,
             }}
             onSubmit={updateDeckHandler}
             variant={'edit'}
           />
-          {/*<Icon iconId={'editOutline'} />*/}
           <Typography.Caption>Edit</Typography.Caption>
         </Dropdown.Item>
         <Dropdown.Separator />
-        <Dropdown.Item onClick={deleteHandler}>
+        <Dropdown.Item onClick={deleteDeckHandler}>
           <CardDeleteModal
             cardName={deckByIdData?.name}
             deleteCb={deleteDeckHandler}
             type={'Deck'}
           />
-          {/*<Icon iconId={'trashOutline'} />*/}
           <Typography.Caption>Delete</Typography.Caption>
         </Dropdown.Item>
       </Dropdown.Root>
