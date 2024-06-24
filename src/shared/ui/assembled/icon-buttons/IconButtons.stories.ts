@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { BrowserDecorator } from '@/services'
 import { fn } from '@storybook/test'
 
 import { IconButtons } from './index'
@@ -7,6 +8,7 @@ import { IconButtons } from './index'
 const meta = {
   argTypes: {},
   component: IconButtons,
+  decorators: [BrowserDecorator],
   tags: ['autodocs'],
   title: '🟢UI/Assembled/IconButtons',
 } satisfies Meta<typeof IconButtons>

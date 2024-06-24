@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { ProviderBrowserDecorator } from '@/services'
 import { fn } from '@storybook/test'
 
 import { CardsTable } from './'
@@ -7,6 +8,7 @@ import { CardsTable } from './'
 const meta = {
   argTypes: {},
   component: CardsTable,
+  decorators: [ProviderBrowserDecorator],
   tags: ['autodocs'],
   title: '🟢UI/Assembled/CardsTable',
 } satisfies Meta<typeof CardsTable>
@@ -66,10 +68,8 @@ export const DefaultMyCardsTable: Story = {
   args: {
     authorId: true,
     cards: mockCardsData,
-    editFunction: fn(),
     sortTableOnClick: fn(),
     tableSort: '',
-    trashFunction: fn(),
   },
 }
 
@@ -77,9 +77,7 @@ export const DefaultYourCardsTable: Story = {
   args: {
     authorId: false,
     cards: mockCardsData,
-    editFunction: fn(),
     sortTableOnClick: fn(),
     tableSort: '',
-    trashFunction: fn(),
   },
 }

@@ -2,8 +2,7 @@ import { ComponentPropsWithoutRef } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { CardDeleteModal, CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
-import { ButtonTitle, CardData, IconButton } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
+import { ButtonTitle, CardData, IconButton, PATH } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './IconButtons.module.scss'

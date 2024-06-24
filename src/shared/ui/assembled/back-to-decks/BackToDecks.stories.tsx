@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { BrowserDecorator } from '@/shared/utils/routerDecorator'
+import { BrowserDecorator } from '@/services'
 
 import { BackToDecks } from './'
 

@@ -1,7 +1,11 @@
 import { ChangeEvent, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
 
 import { EditProfileFormValues } from '@/entities'
+import { useLogoutMutation, useMeQuery, useUpdateUserDataMutation } from '@/services'
+import { flashcardsApi } from '@/services/api/flashcards.api'
+import { Card, HeaderAvatar, IconButton, Typography } from '@/shared'
 import { useMeQuery, useUpdateUserDataMutation } from '@/services'
 import { Card, HeaderAvatar, IconButton, LineLoader, Typography } from '@/shared'
 
@@ -11,6 +15,9 @@ import { InfoPanel } from './Info-panel/InfoPannel'
 import { FormPanel } from './form-panel/FormPanel'
 
 export const EditProfile = () => {
+  const dispatch = useDispatch()
+  const [logout] = useLogoutMutation()
+
   // ----- Показывать или нет поле редактирования имени -----
   const [isEditName, setIsEditName] = useState(false)
 
@@ -56,8 +63,12 @@ export const EditProfile = () => {
       }
     }
   }
+
   // logOut логика
-  const logOut = () => {}
+  function logoutHandler() {
+    logout()
+    dispatch(flashcardsApi.util.resetApiState())
+  }
 
   // ----- Показывать Loader -----
   const isShowLineLoader = isMeLoading || isUpdateUserDataLoading
@@ -91,17 +102,16 @@ export const EditProfile = () => {
           />
         </div>
 
-        {!isEditName ? (
-          <InfoPanel
-            editName={() => setIsEditName(!isEditName)}
-            email={me?.email}
-            logout={logOut}
-            name={me?.name}
-          />
-        ) : (
-          <FormPanel name={me?.name} onSubmit={updateProfile} />
-        )}
-      </Card>
-    </>
+      {!isEditName ? (
+        <InfoPanel
+          editName={() => setIsEditName(!isEditName)}
+          email={me?.email}
+          logout={logoutHandler}
+          name={me?.name}
+        />
+      ) : (
+        <FormPanel name={me?.name} onSubmit={updateProfile} />
+      )}
+    </Card>
   )
 }

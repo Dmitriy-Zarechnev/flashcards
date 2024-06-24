@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
 import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
-import { Button, ButtonTitle, DropdownMenu, Typography } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
+import { Button, ButtonTitle, DropdownMenu, PATH, Typography } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './ListHeader.module.scss'
