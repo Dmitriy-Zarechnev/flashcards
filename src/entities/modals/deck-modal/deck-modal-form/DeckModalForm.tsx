@@ -68,7 +68,6 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
       if (deckData?.name !== name) {
         args.name = name
       }
-
       await onSubmit?.(args)
       if (imageURL) {
         URL.revokeObjectURL(imageURL) // Освобождаем URL после отправки формы
