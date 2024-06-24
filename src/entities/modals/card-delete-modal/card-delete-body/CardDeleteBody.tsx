@@ -6,7 +6,7 @@ import s from './CardDeleteBody.module.scss'
 
 type CardDeleteBodyProps = {
   buttonTitle: ButtonTitle
-  cardName: string
+  cardName?: string
   closeModal?: () => void
   deleteCb: () => Promise<any>
 }

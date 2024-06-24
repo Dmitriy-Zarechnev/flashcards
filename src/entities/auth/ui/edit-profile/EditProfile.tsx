@@ -1,12 +1,10 @@
 import { ChangeEvent, useRef, useState } from 'react'
-import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import { EditProfileFormValues } from '@/entities'
 import { useLogoutMutation, useMeQuery, useUpdateUserDataMutation } from '@/services'
 import { flashcardsApi } from '@/services/api/flashcards.api'
-import { Card, HeaderAvatar, IconButton, Typography } from '@/shared'
-import { useMeQuery, useUpdateUserDataMutation } from '@/services'
 import { Card, HeaderAvatar, IconButton, LineLoader, Typography } from '@/shared'
 
 import s from './EditProfile.module.scss'
@@ -102,16 +100,17 @@ export const EditProfile = () => {
           />
         </div>
 
-      {!isEditName ? (
-        <InfoPanel
-          editName={() => setIsEditName(!isEditName)}
-          email={me?.email}
-          logout={logoutHandler}
-          name={me?.name}
-        />
-      ) : (
-        <FormPanel name={me?.name} onSubmit={updateProfile} />
-      )}
-    </Card>
+        {!isEditName ? (
+          <InfoPanel
+            editName={() => setIsEditName(!isEditName)}
+            email={me?.email}
+            logout={logoutHandler}
+            name={me?.name}
+          />
+        ) : (
+          <FormPanel name={me?.name} onSubmit={updateProfile} />
+        )}
+      </Card>
+    </>
   )
 }

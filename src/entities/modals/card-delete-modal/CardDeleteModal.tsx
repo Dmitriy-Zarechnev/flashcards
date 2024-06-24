@@ -3,7 +3,7 @@ import { ButtonTitle, Dialog, IconButton } from '@/shared'
 import { CardDeleteBody } from './card-delete-body/CardDeleteBody'
 
 type CardDeleteModalProps = {
-  cardName: string
+  cardName?: string
   deleteCb: () => Promise<any>
   type: ButtonTitle
 }
