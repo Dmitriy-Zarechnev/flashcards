@@ -94,6 +94,42 @@ const decksService = flashcardsApi.injectEndpoints({
       }),
       updateDeck: builder.mutation<DefaultDeck, UpdateDeckArgs>({
         invalidatesTags: ['Decks'],
+
+        /* 🚧 пример optimisticUpdate.
+              Но смысла в нем тут мало, так как пока идет запрос мы не закрываем форму, и блочим кнопку...
+              Поэтому пользователь увидит изменение, только если закроет модалку сам. */
+        async onQueryStarted({ id, ...args }, { dispatch, getState, queryFulfilled }) {
+          const updateDeckOptimistic = decksService.util.selectInvalidatedBy(getState(), [
+            { type: 'Decks' },
+          ])
+
+          const optimisticResults: any[] = []
+
+          updateDeckOptimistic.forEach(({ originalArgs }) => {
+            optimisticResults.push(
+              dispatch(
+                decksService.util.updateQueryData('getDecks', originalArgs, draft => {
+                  const itemToUpdateIndex = draft.items.findIndex(deck => deck.id === id)
+
+                  if (itemToUpdateIndex === -1) {
+                    return
+                  }
+
+                  Object.assign(draft.items[itemToUpdateIndex], args)
+                })
+              )
+            )
+          })
+
+          try {
+            await queryFulfilled
+          } catch (error) {
+            optimisticResults.forEach(result => {
+              result.undo()
+            })
+          }
+        },
+
         query: ({ cover, id, isPrivate, name }) => {
           const formData = new FormData()
 
