@@ -104,7 +104,7 @@ export const CardsPage = () => {
           buttonType={'Card'}
           isCardExist={cardsData?.items.length === 0}
           onSubmitAddCard={createCardHandler}
-          title={deckByIdData?.name ?? 'Super Deck'}
+          title={deckByIdData?.name ?? 'Unknown'}
           userId={authorId}
         />
         <img alt={`Deck picture`} className={s.deckImg} src={deckByIdData?.cover ?? defDeckImg} />

@@ -100,8 +100,8 @@ export const DropdownMenu = () => {
       <DeckModal
         deckData={{
           cover: deckByIdData?.cover,
-          isPrivate: deckByIdData?.isPrivate,
-          name: deckByIdData?.name,
+          isPrivate: deckByIdData?.isPrivate ?? false,
+          name: deckByIdData?.name ?? '',
         }}
         onSubmit={updateDeckHandler}
         ref={editDeckRef}

@@ -44,7 +44,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
       setImageURL(undefined)
     }
     // setValue('cover', '')
-    // если отправим на бек null, значит хотим именно удалить существующую каритнку
+    // если отправим на бек null, значит хотим именно удалить существующую картинку
     setValue('cover', null)
   }
 
