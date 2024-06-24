@@ -35,6 +35,35 @@ const decksService = flashcardsApi.injectEndpoints({
       }),
       deleteDeck: builder.mutation<DefaultDeck, DefaultIdArg>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+          const deleteDeckOptimistic = decksService.util.selectInvalidatedBy(getState(), [
+            { type: 'Decks' },
+          ])
+          const optimisticResults: any[] = []
+
+          deleteDeckOptimistic.forEach(({ originalArgs }) => {
+            optimisticResults.push(
+              dispatch(
+                decksService.util.updateQueryData('getDecks', originalArgs, draft => {
+                  /* измененния в стейте МУТАБЕЛЬНО */
+                  const itemDeleteIndex = draft.items.findIndex(deck => deck.id === id)
+
+                  if (itemDeleteIndex !== -1) {
+                    draft.items.splice(itemDeleteIndex, 1)
+                  }
+                })
+              )
+            )
+          })
+
+          try {
+            await queryFulfilled
+          } catch (error) {
+            optimisticResults.forEach(result => {
+              result.undo()
+            })
+          }
+        },
         query: ({ id }) => ({
           method: 'DELETE',
           url: `v1/decks/${id}`,
