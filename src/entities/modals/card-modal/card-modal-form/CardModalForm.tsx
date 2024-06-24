@@ -16,11 +16,18 @@ type CardModalFormProps = {
   cardData?: CardData
   closeModal?: () => void
   onSubmit?: (data: CardFormValues) => Promise<any>
+  setBlocked?: (blocked: boolean) => void
 }
 
 type selectValuesTypes = 'picture' | 'text'
 
-export const CardModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: CardModalFormProps) => {
+export const CardModalForm = ({
+  btnTitle,
+  cardData,
+  closeModal,
+  onSubmit,
+  setBlocked,
+}: CardModalFormProps) => {
   const { control, handleSubmit, setValue } = useForm<CardFormValues>({
     defaultValues: {
       answer: cardData?.answer || '',
@@ -115,6 +122,7 @@ export const CardModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Card
           deleteImageHandlerCb={deleteQuestionImageHandler}
           handleImageChangeCb={handleQuestionImageChange}
           pictureDefaultCover={pictureDefaultCover}
+          setBlocked={setBlocked}
         />
       )}
 
@@ -127,6 +135,7 @@ export const CardModalForm = ({ btnTitle, cardData, closeModal, onSubmit }: Card
           deleteImageHandlerCb={deleteAnswerImageHandler}
           handleImageChangeCb={handleAnswerImageChange}
           pictureDefaultCover={pictureDefaultCover}
+          setBlocked={setBlocked}
         />
       )}
 

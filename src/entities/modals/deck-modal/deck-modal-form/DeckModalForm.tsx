@@ -15,9 +15,16 @@ type DeckModalFormProps = {
   closeModal?: () => void
   deckData?: DeckFormValues
   onSubmit?: (data: DeckFormValues) => Promise<any>
+  setBlocked?: (blocked: boolean) => void /* 🔹 Добавляем пропс для блокировки */
 }
 
-export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: DeckModalFormProps) => {
+export const DeckModalForm = ({
+  btnTitle,
+  closeModal,
+  deckData,
+  onSubmit,
+  setBlocked,
+}: DeckModalFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [imageURL, setImageURL] = useState<string | undefined>(deckData?.cover) // Сохраняем URL изображения в состоянии
 
@@ -87,6 +94,7 @@ export const DeckModalForm = ({ btnTitle, closeModal, deckData, onSubmit }: Deck
         deleteImageHandlerCb={deleteImageHandler}
         handleImageChangeCb={handleImageChange}
         pictureDefaultCover={cardDefaultCover}
+        setBlocked={setBlocked}
       />
 
       <TextField control={control} label={'Name Pack'} name={'name'} type={'text'} />

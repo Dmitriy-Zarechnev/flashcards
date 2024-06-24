@@ -24,6 +24,13 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     // для реализации функции => handleMouseDown | handleMouseUp
     const [isMouseDownInside, setMouseDownInside] = useState(false)
 
+    /* 🔹стейт для блокировки модалки при закрытия окна выбора картинки
+         1. этим стейтом блокируем клики
+         2. передаем функцию менять стейт в компоненту картинок, где есть кнопка
+         3. в компоненте картинок блокируем клики по модалке, и разрешаем через 0.5с => избегаем мискликов
+            при выборе картинки */
+    const [isBlocked, setBlocked] = useState(false)
+
     function show() {
       setShown(true)
     }
@@ -41,6 +48,11 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     }
 
     function handleMouseUp(event: MouseEvent) {
+      /* 🔹 блокируем клик по модалке - достаточно заблокировать только отжатие клика */
+      if (isBlocked) {
+        return
+      }
+
       // если кликнули по клику внутри модалки, т.е. у тега, которого есть `.${s.card}`
       const card = (event.target as HTMLElement).closest(`.${s.card}`)
 
@@ -65,6 +77,8 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       closeModal: () => {
         setShown(false)
       },
+      /* 🔹 Передаем функцию блокировки в дочерний компонент */
+      setBlocked: setBlocked,
     })
 
     return (

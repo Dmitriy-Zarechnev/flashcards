@@ -10,6 +10,7 @@ type PictureInputProps = {
   deleteImageHandlerCb: () => void
   handleImageChangeCb: (file: File) => void
   pictureDefaultCover: string
+  setBlocked?: (blocked: boolean) => void /* 🔹 Добавляем пропс для блокировки */
 } & ComponentPropsWithoutRef<'div'>
 
 export const PictureInput = ({
@@ -18,16 +19,18 @@ export const PictureInput = ({
   deleteImageHandlerCb,
   handleImageChangeCb,
   pictureDefaultCover,
+  setBlocked,
 }: PictureInputProps) => {
   /* Локальное состояние нужно для реактивного отслеживания и отображения URL изображения.
      Ref нужен для управления поведением скрытого <input type="file"> */
 
   const [selectedImage, setSelectedImage] = useState<string | undefined>(coverFromServer)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
   /* почему ref а не локлаьное состояние? при работе с input, если мы будем работать через локальное состояние
      то при замене blob-картинки приедтся перерисовывать компоненту, использование ref помогает избежать перерисовки */
 
-  function handleButtonClick() {
+  function imageChangeClick() {
     if (fileInputRef.current !== null) {
       fileInputRef.current.click()
     }
@@ -56,6 +59,19 @@ export const PictureInput = ({
   }
 
   function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
+    /* 🔹 Блокируем взаимодействие => имеет смысл блокировать именно после этой функции, а не после клика по кнопке,
+    так как именно эта функция выполняется после подтверждения выбора картинки */
+    if (setBlocked) {
+      setBlocked(true)
+    }
+
+    /* 🔹 разблокируем через короткое время, чтобы пользователь не сделал мисклик, когда выбирал картинку */
+    setTimeout(() => {
+      if (setBlocked) {
+        setBlocked(false)
+      }
+    }, 500)
+
     if (event.target.files && event.target.files[0]) {
       deleteBlob()
 
@@ -90,7 +106,7 @@ export const PictureInput = ({
         <Button
           disabled={btnDisable}
           fullWidth
-          onClick={handleButtonClick}
+          onClick={imageChangeClick}
           type={'button'}
           variant={'secondary'}
         >
