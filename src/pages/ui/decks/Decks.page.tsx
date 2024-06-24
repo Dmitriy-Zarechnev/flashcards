@@ -60,7 +60,6 @@ export const DecksPage = () => {
   // ----- Блок работы с запросом на сервер и получения данных -----
   const {
     data,
-    error: isGetDecksError,
     isFetching: isGetDecksFetching,
     isLoading: isGetDecksLoading,
   } = useGetDecksQuery({
@@ -98,7 +97,7 @@ export const DecksPage = () => {
   const isShowLineLoader = isGetDecksLoading || isCreateDeckLoading || isGetDecksFetching
 
   // ----- Показывать snackBar с ошибкой -----
-  if (isCreateDeckError || isGetDecksError) {
+  if (isCreateDeckError) {
     return toast.error('Oops! Something went wrong. Please try again later.')
   }
 

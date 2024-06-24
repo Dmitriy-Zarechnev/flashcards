@@ -52,7 +52,6 @@ export const LearnPage = () => {
   // ----- Запросили случайную карточку -----
   const {
     data: randomCard,
-    error: isGetRandomCardError,
     isLoading: isGetRandomCardLoading,
     refetch,
   } = useGetRandomCardQuery({ id: deckId || '' })
@@ -86,7 +85,7 @@ export const LearnPage = () => {
   const isShowLineLoader = isGetRandomCardLoading || isSaveCardGradeLoading
 
   // ----- Показывать snackBar с ошибкой -----
-  if (isGetRandomCardError || isSaveCardGradeError) {
+  if (isSaveCardGradeError) {
     return toast.error('Oops! Something went wrong. Please try again later.')
   }
 

@@ -52,11 +52,9 @@ export const CardsPage = () => {
   const { sortTableOnClickHandler, tableSort } = useSuperSort()
 
   // ----- Запросили deck по id чтобы получить cover и name -----
-  const {
-    data: deckByIdData,
-    error: isGetDeckByIdError,
-    isLoading: isGetDeckByIdLoading,
-  } = useGetDeckByIdQuery({ id: deckId })
+  const { data: deckByIdData, isLoading: isGetDeckByIdLoading } = useGetDeckByIdQuery({
+    id: deckId,
+  })
   // ----- Запрос для получения id пользователя -----
   const { data: me } = useMeQuery()
   // ----- Проверка id и изменение отображения компоненты -----
@@ -65,7 +63,6 @@ export const CardsPage = () => {
   // ----- Запросили cards используя deck.id  -----
   const {
     data: cardsData,
-    error: isGetCardsError,
     isFetching: isGetCardsFetching,
     isLoading: isGetCardsLoading,
   } = useGetCardsQuery({
@@ -92,7 +89,7 @@ export const CardsPage = () => {
     isCreateCardLoading || isGetCardsLoading || isGetCardsFetching || isGetDeckByIdLoading
 
   // ----- Показывать страницу с ошибкой -----
-  if (isGetCardsError || isCreateCardError || isGetDeckByIdError) {
+  if (isCreateCardError) {
     return toast.error('Oops! Something went wrong. Please try again later.')
   }
 

@@ -15,7 +15,7 @@ export const EditProfile = () => {
   const [isEditName, setIsEditName] = useState(false)
 
   // ----- Запрос для получения id пользователя -----
-  const { data: me, error: isMeError, isLoading: isMeLoading, refetch } = useMeQuery()
+  const { data: me, isLoading: isMeLoading, refetch } = useMeQuery()
 
   // Сохраняем File изображения в состоянии
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
@@ -63,7 +63,7 @@ export const EditProfile = () => {
   const isShowLineLoader = isMeLoading || isUpdateUserDataLoading
 
   // ----- Показывать страницу с ошибкой -----
-  if (isMeError || isUpdateUserDataError) {
+  if (isUpdateUserDataError) {
     return toast.error('Oops! Something went wrong. Please try again later.')
   }
 
