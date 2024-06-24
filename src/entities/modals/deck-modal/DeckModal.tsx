@@ -1,3 +1,5 @@
+import { CSSProperties, forwardRef } from 'react'
+
 import { DeckFormValues } from '@/entities'
 import { Button, Dialog, IconButton, ModalVariant } from '@/shared'
 
@@ -7,29 +9,33 @@ type DeckModalProps = {
   closeModal?: () => void
   deckData?: DeckFormValues
   onSubmit?: (data: DeckFormValues) => Promise<any>
+  style?: CSSProperties
   variant: ModalVariant
 }
 
-export const DeckModal = ({ closeModal, deckData, onSubmit, variant }: DeckModalProps) => {
-  const title = variant === 'add' ? 'Add New Deck' : 'Edit Deck'
+export const DeckModal = forwardRef<HTMLDivElement, DeckModalProps>(
+  ({ closeModal, deckData, onSubmit, style, variant }, ref) => {
+    const title = variant === 'add' ? 'Add New Deck' : 'Edit Deck'
 
-  return (
-    <Dialog
-      title={title}
-      trigger={
-        variant === 'add' ? (
-          <Button variant={'primary'}>{title}</Button>
-        ) : (
-          <IconButton iconId={'editOutline'} />
-        )
-      }
-    >
-      <DeckModalForm
-        btnTitle={title}
-        closeModal={closeModal}
-        deckData={deckData}
-        onSubmit={onSubmit}
-      />
-    </Dialog>
-  )
-}
+    return (
+      <Dialog
+        ref={ref}
+        title={title}
+        trigger={
+          variant === 'add' ? (
+            <Button variant={'primary'}>{title}</Button>
+          ) : (
+            <IconButton iconId={'editOutline'} style={style} />
+          )
+        }
+      >
+        <DeckModalForm
+          btnTitle={title}
+          closeModal={closeModal}
+          deckData={deckData}
+          onSubmit={onSubmit}
+        />
+      </Dialog>
+    )
+  }
+)

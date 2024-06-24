@@ -73,6 +73,7 @@ export const CardsPage = () => {
     question: inputFinalValue,
   })
 
+  // ----- Условие по которому показываем или нет Pagination -----
   const paginationDecider = cardsData && cardsData.pagination && cardsData.pagination.totalItems > 5
 
   // ----- Блок работы с созданием карт в колоде -----

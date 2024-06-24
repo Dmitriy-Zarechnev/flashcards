@@ -1,3 +1,5 @@
+import { CSSProperties, forwardRef } from 'react'
+
 import { ButtonTitle, Dialog, IconButton } from '@/shared'
 
 import { CardDeleteBody } from './card-delete-body/CardDeleteBody'
@@ -5,13 +7,20 @@ import { CardDeleteBody } from './card-delete-body/CardDeleteBody'
 type CardDeleteModalProps = {
   cardName?: string
   deleteCb: () => Promise<any>
+  style?: CSSProperties
   type: ButtonTitle
 }
 
-export const CardDeleteModal = ({ cardName, deleteCb, type }: CardDeleteModalProps) => {
-  return (
-    <Dialog title={`Delete ${type}`} trigger={<IconButton iconId={'trashOutline'} />}>
-      <CardDeleteBody buttonTitle={type} cardName={cardName} deleteCb={deleteCb} />
-    </Dialog>
-  )
-}
+export const CardDeleteModal = forwardRef<HTMLDivElement, CardDeleteModalProps>(
+  ({ cardName, deleteCb, style, type }, ref) => {
+    return (
+      <Dialog
+        ref={ref}
+        title={`Delete ${type}`}
+        trigger={<IconButton iconId={'trashOutline'} style={style} />}
+      >
+        <CardDeleteBody buttonTitle={type} cardName={cardName} deleteCb={deleteCb} />
+      </Dialog>
+    )
+  }
+)
