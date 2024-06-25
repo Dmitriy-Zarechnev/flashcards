@@ -8,6 +8,7 @@ export const PATH = {
   LEARNDECK: '/decks/:deckId/learn',
   PROFILE: '/profile',
   RECOVERPASSWORD: '/recover-password',
+  RESETPASSWORD: '/reset-password/:token',
   SIGNIN: '/sign-in',
   SIGNUP: '/sign-up',
   SINGOUT: '/sign-out',
