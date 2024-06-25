@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Dropdown, HeaderAvatar, Icon, Typography } from '@/shared'
 import { PATH } from '@/shared/utils/routerVariables'
@@ -39,17 +39,17 @@ export const DropdownProfile = ({
       </div>
       <Dropdown.Separator />
       <Dropdown.Item>
-        <NavLink className={s.iconTextLink} onClick={() => setIsOpen(false)} to={PATH.PROFILE}>
+        <Link className={s.iconTextLink} onClick={() => setIsOpen(false)} to={PATH.PROFILE}>
           <Icon iconId={'personOutline'} />
           <Typography.Caption>My profile</Typography.Caption>
-        </NavLink>
+        </Link>
       </Dropdown.Item>
       <Dropdown.Separator />
       <Dropdown.Item onClick={logout}>
-        <NavLink className={s.iconTextLink} to={PATH.SIGNIN}>
+        <Link className={s.iconTextLink} to={PATH.SIGNIN}>
           <Icon iconId={'logOut'} />
           <Typography.Caption>Sign out</Typography.Caption>
-        </NavLink>
+        </Link>
       </Dropdown.Item>
     </Dropdown.Root>
   )
