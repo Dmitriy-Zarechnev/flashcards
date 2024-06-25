@@ -18,8 +18,8 @@ export const PageHeader = forwardRef<ElementRef<'header'>, PageHeaderProps>(({},
   const { data } = useMeQuery()
   const [logout] = useLogoutMutation()
 
-  async function logoutHandler() {
-    await logout()
+  function logoutHandler() {
+    logout()
     toast.info('Logout successful. See you next time!')
     /* ⛔ только так смог побороть кеширвоание при me запросе ⛔ */
     dispatch(flashcardsApi.util.resetApiState())
