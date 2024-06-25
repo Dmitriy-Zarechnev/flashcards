@@ -1,5 +1,7 @@
 export const PATH = {
   CARDSPAGE: '/decks/:deckId',
+  CHECKEMAIL: '/check-email',
+  CHECKEMAILPAGE: '/check-email/:email',
   DECKSPAGE: '/decks',
   ERRORPAGE: '/error404',
   INIT: '/',

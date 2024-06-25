@@ -25,3 +25,5 @@ export type LoginResponse = {
   accessToken: string
   refreshToken: string
 }
+
+export type SendRecoveryToEmail = { html: string } & Pick<LoginArgs, 'email'>

@@ -15,6 +15,7 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
+import { CheckEmailPage } from '@/pages/ui/check-email/CheckEmail.page'
 import { ProfilePage } from '@/pages/ui/profile/Profile.page'
 import { PATH } from '@/shared/utils/routerVariables'
 
@@ -34,6 +35,10 @@ const publicRoutes: RouteObject[] = [
   {
     element: <ForgotPasswordPage />,
     path: PATH.RECOVERPASSWORD,
+  },
+  {
+    element: <CheckEmailPage />,
+    path: PATH.CHECKEMAILPAGE,
   },
 ]
 
