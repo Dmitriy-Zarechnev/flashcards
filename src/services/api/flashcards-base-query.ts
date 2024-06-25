@@ -101,12 +101,21 @@ export const baseQueryWithReauth: BaseQueryFn<
             для возможности пользователю переходить на разные странички PublicRoutes и не быть при этом всегда пененаправленным
             на /sign-in будет проверять куда направить пользователя по услвоию */
 
-          if (getPathname() === PATH.SIGNUP) {
-            await routes.navigate(PATH.SIGNUP)
-          } else if (getPathname() === PATH.RESETPASSWORD) {
-            await routes.navigate(PATH.RESETPASSWORD)
-          } else {
-            await routes.navigate(PATH.SIGNIN)
+          const urlPath = getPathname() as string
+
+          if (!urlPath.includes('reset-password')) {
+            switch (urlPath) {
+              case PATH.SIGNUP:
+                await routes.navigate(PATH.SIGNUP)
+                break
+
+              case PATH.RECOVERPASSWORD:
+                await routes.navigate(PATH.RECOVERPASSWORD)
+                break
+
+              default:
+                await routes.navigate(PATH.SIGNIN)
+            }
           }
         }
       } finally {
