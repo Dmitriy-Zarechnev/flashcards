@@ -36,8 +36,7 @@ export const EditProfile = () => {
   }
 
   // ----- Update данных пользователя -----
-  const [updateUser, { error: isUpdateUserDataError, isLoading: isUpdateUserDataLoading }] =
-    useUpdateUserDataMutation()
+  const [updateUser, { isLoading: isUpdateUserDataLoading }] = useUpdateUserDataMutation()
 
   const updateProfile = async (data: EditProfileFormValues) => {
     await updateUser({ ...data, avatar: avatarFile })
@@ -70,11 +69,6 @@ export const EditProfile = () => {
 
   // ----- Показывать Loader -----
   const isShowLineLoader = isMeLoading || isUpdateUserDataLoading
-
-  // ----- Показывать страницу с ошибкой -----
-  if (isUpdateUserDataError) {
-    return toast.error('Oops! Something went wrong. Please try again later.')
-  }
 
   return (
     <>

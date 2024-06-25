@@ -77,8 +77,7 @@ export const CardsPage = () => {
   const paginationDecider = cardsData && cardsData.pagination && cardsData.pagination.totalItems > 5
 
   // ----- Блок работы с созданием карт в колоде -----
-  const [createCard, { error: isCreateCardError, isLoading: isCreateCardLoading }] =
-    useCreateCardMutation()
+  const [createCard, { isLoading: isCreateCardLoading }] = useCreateCardMutation()
 
   async function createCardHandler(data: CardFormValues) {
     await createCard({ id: deckId, ...data })
@@ -88,11 +87,6 @@ export const CardsPage = () => {
   // ----- Показывать Loader -----
   const isShowLineLoader =
     isCreateCardLoading || isGetCardsLoading || isGetCardsFetching || isGetDeckByIdLoading
-
-  // ----- Показывать страницу с ошибкой -----
-  if (isCreateCardError) {
-    return toast.error('Oops! Something went wrong. Please try again later.')
-  }
 
   return (
     <>
