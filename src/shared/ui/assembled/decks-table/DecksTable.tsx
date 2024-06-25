@@ -20,10 +20,8 @@ type DecksTableProps = {
 
 export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: DecksTableProps) => {
   // ----- Блок работы с удалением и редактированием колод -----
-  const [deleteDeck, { error: isDeleteDeckError, isLoading: isDeleteDeckLoading }] =
-    useDeleteDeckMutation()
-  const [updateDeck, { error: isUpdateDeckError, isLoading: isUpdateDeckLoading }] =
-    useUpdateDeckMutation()
+  const [deleteDeck, { isLoading: isDeleteDeckLoading }] = useDeleteDeckMutation()
+  const [updateDeck, { isLoading: isUpdateDeckLoading }] = useUpdateDeckMutation()
 
   async function updateDeckHandler(id: string, data: DeckFormValues) {
     await updateDeck({ id, ...data })
@@ -37,11 +35,6 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
 
   // ----- Показывать Loader -----
   const isShowLineLoader = isDeleteDeckLoading || isUpdateDeckLoading
-
-  // ----- Показывать snackBar с ошибкой -----
-  if (isDeleteDeckError || isUpdateDeckError) {
-    return toast.error('Oops! Something went wrong. Please try again later.')
-  }
 
   return (
     <>

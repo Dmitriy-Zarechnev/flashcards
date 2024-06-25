@@ -27,10 +27,8 @@ type CardsTableProps = {
 
 export const CardsTable = ({ authorId, cards, sortTableOnClick, tableSort }: CardsTableProps) => {
   // ----- Блок работы с удалением и редактированием карточек в колоде -----
-  const [deleteCard, { error: isDeleteCardError, isLoading: isDeleteCardLoading }] =
-    useDeleteCardMutation()
-  const [updateCard, { error: isUpdateCardError, isLoading: isUpdateCardLoading }] =
-    useUpdateCardMutation()
+  const [deleteCard, { isLoading: isDeleteCardLoading }] = useDeleteCardMutation()
+  const [updateCard, { isLoading: isUpdateCardLoading }] = useUpdateCardMutation()
 
   async function deleteCardHandler(id: string) {
     await deleteCard({ id })
@@ -44,11 +42,6 @@ export const CardsTable = ({ authorId, cards, sortTableOnClick, tableSort }: Car
 
   // ----- Показывать Loader -----
   const isShowLineLoader = isDeleteCardLoading || isUpdateCardLoading
-
-  // ----- Показывать snackBar с ошибкой -----
-  if (isDeleteCardError || isUpdateCardError) {
-    return toast.error('Oops! Something went wrong. Please try again later.')
-  }
 
   return (
     <>

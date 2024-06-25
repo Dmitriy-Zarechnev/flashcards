@@ -73,8 +73,7 @@ export const DecksPage = () => {
   })
 
   // ----- Блок работы с созданием колоды -----
-  const [createDeck, { error: isCreateDeckError, isLoading: isCreateDeckLoading }] =
-    useCreateDeckMutation()
+  const [createDeck, { isLoading: isCreateDeckLoading }] = useCreateDeckMutation()
 
   async function onSubmitAddDeckHandler(data: DeckFormValues) {
     await createDeck({ ...data })
@@ -95,11 +94,6 @@ export const DecksPage = () => {
 
   // ----- Показывать Loader -----
   const isShowLineLoader = isGetDecksLoading || isCreateDeckLoading || isGetDecksFetching
-
-  // ----- Показывать snackBar с ошибкой -----
-  if (isCreateDeckError) {
-    return toast.error('Oops! Something went wrong. Please try again later.')
-  }
 
   return (
     <>
