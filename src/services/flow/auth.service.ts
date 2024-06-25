@@ -4,7 +4,8 @@ import {
   AuthResponse,
   LoginArgs,
   LoginResponse,
-  SendRecoveryToEmail,
+  ResetPasswordArgs,
+  SendRecoveryToEmailArgs,
   SignUpArgs,
   UpdateUserDataArgs,
 } from '../types/auth.types'
@@ -44,7 +45,7 @@ const authService = flashcardsApi.injectEndpoints({
         // providesTags: ['Auth'],
         query: () => `/v1/auth/me`,
       }),
-      sendRecoveryToEmail: builder.mutation<void, SendRecoveryToEmail>({
+      sendRecoveryToEmail: builder.mutation<void, SendRecoveryToEmailArgs>({
         query: ({ email, html }) => ({
           body: {
             email,
@@ -52,6 +53,15 @@ const authService = flashcardsApi.injectEndpoints({
           },
           method: 'POST',
           url: '/v1/auth/recover-password',
+        }),
+      }),
+      sendResetPassword: builder.mutation<void, ResetPasswordArgs>({
+        query: ({ password, token }) => ({
+          body: {
+            password,
+          },
+          method: 'POST',
+          url: `/v1/auth/reset-password/${token}`,
         }),
       }),
       signUp: builder.mutation<AuthResponse, SignUpArgs>({
