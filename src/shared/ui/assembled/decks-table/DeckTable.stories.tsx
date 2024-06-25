@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ProviderBrowserDecorator } from '@/services'
+import { StorybookDecorator } from '@/services/StorybookDecorator'
 import { fn } from '@storybook/test'
 
 import { DecksTable } from './'
@@ -8,7 +8,7 @@ import { DecksTable } from './'
 const meta = {
   argTypes: {},
   component: DecksTable,
-  decorators: [ProviderBrowserDecorator],
+  decorators: [StorybookDecorator],
   tags: ['autodocs'],
   title: '🟢UI/Assembled/DecksTable',
 } satisfies Meta<typeof DecksTable>

@@ -28,6 +28,7 @@ export const DefaultDeckControlBlock: Story = {
     searchInputReset: fn(),
     searchInputValue: '',
     sliderValueChange: fn(),
+    sliderValueCommit: fn(),
     sliderValues: [0, 15],
     tabValue: 'all',
     tabValueChange: fn(),

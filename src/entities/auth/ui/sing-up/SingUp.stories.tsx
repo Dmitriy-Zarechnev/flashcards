@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { SignUpFormValues } from '@/entities'
-import { BrowserDecorator } from '@/services'
+import { StorybookDecorator } from '@/services/StorybookDecorator'
 
 import { SingUp } from './SingUp'
 
 const meta = {
   argTypes: {},
   component: SingUp,
-  decorators: [BrowserDecorator],
+  decorators: [StorybookDecorator],
   parameters: {
     layout: 'centered',
   },

@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { FieldValues } from 'react-hook-form'
 
-import { BrowserDecorator } from '@/services/decorators/BrowserDecorator'
+import { StorybookDecorator } from '@/services/StorybookDecorator'
 
 import { ForgotPassword } from './'
 
 const meta = {
   argTypes: {},
   component: ForgotPassword,
-  decorators: [BrowserDecorator],
+  decorators: [StorybookDecorator],
   parameters: {
     layout: 'centered',
   },

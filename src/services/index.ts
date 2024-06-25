@@ -1,5 +1,3 @@
-export { BrowserDecorator } from './decorators/BrowserDecorator'
-export { ProviderBrowserDecorator } from './decorators/ProviderBrowserDecorator'
 export * from './flow/auth.service'
 
 export * from './flow/cards.service'

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ProviderBrowserDecorator } from '@/services'
+import { StorybookDecorator } from '@/services/StorybookDecorator'
 
 import { ListHeader } from './'
 
 const meta = {
   argTypes: {},
   component: ListHeader,
-  decorators: [ProviderBrowserDecorator],
+  decorators: [StorybookDecorator],
   tags: ['autodocs'],
   title: '🟢UI/Assembled/ListHeader',
 } satisfies Meta<typeof ListHeader>

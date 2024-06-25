@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ProviderBrowserDecorator } from '@/services/decorators'
+import { StorybookDecorator } from '@/services/StorybookDecorator'
 
 import { DropdownMenu } from './index'
 
 const meta = {
   component: DropdownMenu,
-  decorators: [ProviderBrowserDecorator],
+  decorators: [StorybookDecorator],
   tags: ['autodocs'],
   title: '🟢UI/Assembled/DropdownMenu',
 } satisfies Meta<typeof DropdownMenu>
