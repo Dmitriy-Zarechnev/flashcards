@@ -80,6 +80,7 @@ export const routes = createBrowserRouter([
         children: publicRoutes,
         element: <PublicRoutes />,
       },
+
       {
         // replace - убирает путь '/' из истории браузера
         element: <Navigate replace to={PATH.DECKSPAGE} />,

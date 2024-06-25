@@ -103,6 +103,8 @@ export const baseQueryWithReauth: BaseQueryFn<
 
           if (getPathname() === PATH.SIGNUP) {
             await routes.navigate(PATH.SIGNUP)
+          } else if (getPathname() === PATH.RESETPASSWORD) {
+            await routes.navigate(PATH.RESETPASSWORD)
           } else {
             await routes.navigate(PATH.SIGNIN)
           }
