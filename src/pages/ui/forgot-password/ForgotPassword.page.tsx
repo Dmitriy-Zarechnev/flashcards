@@ -27,7 +27,7 @@ export const ForgotPasswordPage = () => {
       }).unwrap()
 
       navigate(`${PATH.CHECKEMAIL}/${data.email}`)
-      toast.success('Send!')
+      toast.success('An email has been sent to your address with further instructions!')
     } catch (error) {
       const apiError = error as ApiError
 
