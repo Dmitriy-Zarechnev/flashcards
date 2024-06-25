@@ -15,7 +15,9 @@ import {
   SignInPage,
   SignUpPage,
 } from '@/pages'
+import { CheckEmailPage } from '@/pages/ui/check-email/CheckEmail.page'
 import { ProfilePage } from '@/pages/ui/profile/Profile.page'
+import { ResetPasswordPage } from '@/pages/ui/reset-password/ResetPassword.page'
 import { PATH } from '@/shared/utils/routerVariables'
 
 import { Layout } from './layout/Layout'
@@ -34,6 +36,14 @@ const publicRoutes: RouteObject[] = [
   {
     element: <ForgotPasswordPage />,
     path: PATH.RECOVERPASSWORD,
+  },
+  {
+    element: <CheckEmailPage />,
+    path: PATH.CHECKEMAILPAGE,
+  },
+  {
+    element: <ResetPasswordPage />,
+    path: PATH.RESETPASSWORD,
   },
 ]
 
@@ -70,6 +80,7 @@ export const routes = createBrowserRouter([
         children: publicRoutes,
         element: <PublicRoutes />,
       },
+
       {
         // replace - убирает путь '/' из истории браузера
         element: <Navigate replace to={PATH.DECKSPAGE} />,

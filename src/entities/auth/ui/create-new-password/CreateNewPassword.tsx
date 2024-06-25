@@ -2,27 +2,22 @@ import { useForm } from 'react-hook-form'
 
 import { Button, Card, PasswordInput, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './CreateNewPassword.module.scss'
 
-import { authSchemes } from '../../../validationSchemes'
+import { CreateNewPasswordFormValues, authSchemes } from '../../../validationSchemes'
 
 type CreateNewPasswordProps = {
-  onSubmit: (data: FormValues) => void
+  onSubmit: (data: CreateNewPasswordFormValues) => void
 }
-
-const validationSchema = authSchemes.createNewPassword
-
-type FormValues = z.infer<typeof validationSchema>
 
 export const CreateNewPassword = ({ onSubmit }: CreateNewPasswordProps) => {
   const {
     control,
     formState: { isSubmitting },
     handleSubmit,
-  } = useForm<FormValues>({
-    resolver: zodResolver(validationSchema),
+  } = useForm<CreateNewPasswordFormValues>({
+    resolver: zodResolver(authSchemes.createNewPassword),
   })
 
   return (

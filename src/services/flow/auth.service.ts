@@ -4,6 +4,8 @@ import {
   AuthResponse,
   LoginArgs,
   LoginResponse,
+  ResetPasswordArgs,
+  SendRecoveryToEmailArgs,
   SignUpArgs,
   UpdateUserDataArgs,
 } from '../types/auth.types'
@@ -42,6 +44,25 @@ const authService = flashcardsApi.injectEndpoints({
       me: builder.query<AuthResponse, void>({
         // providesTags: ['Auth'],
         query: () => `/v1/auth/me`,
+      }),
+      sendRecoveryToEmail: builder.mutation<void, SendRecoveryToEmailArgs>({
+        query: ({ email, html }) => ({
+          body: {
+            email,
+            html,
+          },
+          method: 'POST',
+          url: '/v1/auth/recover-password',
+        }),
+      }),
+      sendResetPassword: builder.mutation<void, ResetPasswordArgs>({
+        query: ({ password, token }) => ({
+          body: {
+            password,
+          },
+          method: 'POST',
+          url: `/v1/auth/reset-password/${token}`,
+        }),
       }),
       signUp: builder.mutation<AuthResponse, SignUpArgs>({
         /* несмотря на то что при успешной рестирации получаем данные пользователя, будем перенаправлять его на
@@ -84,6 +105,7 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
+  useSendRecoveryToEmailMutation,
   useSignUpMutation,
   useUpdateUserDataMutation,
 } = authService
