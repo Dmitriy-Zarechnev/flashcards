@@ -106,6 +106,7 @@ export const {
   useLogoutMutation,
   useMeQuery,
   useSendRecoveryToEmailMutation,
+  useSendResetPasswordMutation,
   useSignUpMutation,
   useUpdateUserDataMutation,
 } = authService

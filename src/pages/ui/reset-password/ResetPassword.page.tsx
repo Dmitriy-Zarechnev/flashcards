@@ -1,22 +1,30 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { CreateNewPassword, CreateNewPasswordFormValues } from '@/entities'
-import { Page } from '@/shared'
+import { useSendResetPasswordMutation } from '@/services'
+import { LineLoader, PATH, Page } from '@/shared'
 
 export const ResetPasswordPage = () => {
-  // ----- Достали email из url-а -----
+  const navigate = useNavigate()
+
+  // ----- Достали token из url-а -----
   const params = useParams()
   const token = params.token ?? ''
 
-  console.log(token)
-
-  const onSubmitHandler = (data: CreateNewPasswordFormValues) => {
-    console.log(data)
+  const [resetPassword, { isLoading: isResetPasswordLoading }] = useSendResetPasswordMutation()
+  const onSubmitHandler = async (data: CreateNewPasswordFormValues) => {
+    await resetPassword({ ...data, token })
+    toast.success('Your password has been successfully changed!')
+    navigate(`${PATH.SIGNIN}`)
   }
 
   return (
-    <Page mt={'100px'}>
-      <CreateNewPassword onSubmit={onSubmitHandler} />
-    </Page>
+    <>
+      {isResetPasswordLoading && <LineLoader />}
+      <Page mt={'100px'}>
+        <CreateNewPassword onSubmit={onSubmitHandler} />
+      </Page>
+    </>
   )
 }
