@@ -20,7 +20,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof SignIn>
 
-export const SingInStory: Story = {
+export const SignInStory: Story = {
   args: {
     onSubmit: (data: FieldValues) => console.log(data),
   },
