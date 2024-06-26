@@ -7,31 +7,21 @@ import { LineLoader, PATH, Page } from '@/shared'
 
 import s from './ForgotPassword.module.scss'
 
-type ApiError = {
-  data?: {
-    message: string
-  }
-}
-
 export const ForgotPasswordPage = () => {
   const navigate = useNavigate()
 
-  const [recoveryPassword, { isLoading: isSendRecoveryToEmailLoading }] =
+  const [recoveryPassword, { isError, isLoading: isSendRecoveryToEmailLoading }] =
     useSendRecoveryToEmailMutation()
 
   async function onSubmitHandler(data: ForgotPasswordFormValues) {
-    try {
-      await recoveryPassword({
-        ...data,
-        html: '<h1>Hi, ##name##</h1><p>Click <a href=`http://localhost:5173/reset-password/##token##`>here</a> to recover your password</p>',
-      }).unwrap()
+    await recoveryPassword({
+      ...data,
+      html: '<h1>Hi, ##name##</h1><p>Click <a href=`http://localhost:5173/reset-password/##token##`>here</a> to recover your password</p>',
+    }).unwrap()
 
+    if (!isError) {
       navigate(`${PATH.CHECKEMAIL}/${data.email}`)
       toast.success('An email has been sent to your address with further instructions!')
-    } catch (error) {
-      const apiError = error as ApiError
-
-      toast.error(apiError.data?.message)
     }
   }
 

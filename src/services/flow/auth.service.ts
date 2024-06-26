@@ -14,7 +14,7 @@ const authService = flashcardsApi.injectEndpoints({
   endpoints: builder => {
     return {
       login: builder.mutation<LoginResponse, LoginArgs>({
-        /* нет смысла вызывать invalidatesTags: ['Auth'] после login, так как me запрос будет вызыван в Layout */
+        /* нет смысла вызывать invalidatesTags: ['Auth'] после login, так как me запрос будет вызван в Layout */
         async onQueryStarted(_, { queryFulfilled }) {
           const { data } = await queryFulfilled
 
