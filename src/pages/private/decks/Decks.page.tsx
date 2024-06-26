@@ -1,23 +1,15 @@
 import { toast } from 'react-toastify'
 
 import { DeckFormValues } from '@/entities'
-import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
-import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
-import { useSuperSlider } from '@/pages/hooks/useSuperSlider'
-import { useSuperSort } from '@/pages/hooks/useSuperSort'
-import { useSuperTabs } from '@/pages/hooks/useSuperTabs'
 import { useCreateDeckMutation, useGetDecksQuery, useMeQuery } from '@/services'
-import {
-  DeckControlBlock,
-  DecksTable,
-  LineLoader,
-  ListHeader,
-  Page,
-  Pagination,
-  Typography,
-} from '@/shared'
+import { LineLoader, Page, Typography } from '@/shared'
 
 import s from './Decks.page.module.scss'
+
+import { ListHeader, Pagination } from './../_components'
+import { useSuperPagination, useSuperSearch, useSuperSort } from './../_hooks'
+import { DeckControlBlock, DecksTable } from './components'
+import { useSuperSlider, useSuperTabs } from './hooks'
 
 export const DecksPage = () => {
   // ----- Хук для работы пагинации и с url-ом -----

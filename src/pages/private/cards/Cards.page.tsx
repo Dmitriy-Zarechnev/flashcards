@@ -2,29 +2,19 @@ import { ChangeEvent } from 'react'
 import { toast } from 'react-toastify'
 
 import { CardFormValues } from '@/entities'
-import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
-import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
-import { useSuperSort } from '@/pages/hooks/useSuperSort'
-import { useIdFromParams } from '@/pages/private/_hooks/useIdFromParams'
 import {
   useCreateCardMutation,
   useGetCardsQuery,
   useGetDeckByIdQuery,
   useMeQuery,
 } from '@/services'
-import {
-  BackToDecks,
-  CardsTable,
-  LineLoader,
-  ListHeader,
-  Page,
-  Pagination,
-  SearchInput,
-  Typography,
-  deckDefaultCover,
-} from '@/shared'
+import { LineLoader, Page, Typography, deckDefaultCover } from '@/shared'
 
 import s from './Cards.page.module.scss'
+
+import { BackToDecks, ListHeader, Pagination, SearchInput } from './../_components'
+import { useIdFromParams, useSuperPagination, useSuperSearch, useSuperSort } from './../_hooks'
+import { CardsTable } from './components/cards-table/CardsTable'
 
 export const CardsPage = () => {
   // ----- Достали deck id из url-а -----

@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
 
+import { BackToDecks } from '@/pages/private/_components/back-to-decks/BackToDecks'
 import { useIdFromParams } from '@/pages/private/_hooks/useIdFromParams'
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
-import { BackToDecks, Button, Card, LineLoader, Page, RadioGroup, Typography } from '@/shared'
+import { Button, Card, LineLoader, Page, RadioGroup, Typography } from '@/shared'
 
 import s from './Learn.module.scss'
 

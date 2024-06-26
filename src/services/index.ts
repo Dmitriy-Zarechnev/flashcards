@@ -5,4 +5,4 @@ export * from './flow/cards.service'
 export * from './flow/decks.service'
 
 export type { AuthResponse } from './types/auth.types'
-export type { CreateCardArgs, Deck } from './types/decks.types'
+export type { Card, CreateCardArgs, Deck, GetDeckMinMaxCardsResponse } from './types/decks.types'

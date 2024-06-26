@@ -1,1 +1,0 @@
-export { ImgBlock } from './ImgBlock'

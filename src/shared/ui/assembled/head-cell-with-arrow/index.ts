@@ -1,1 +1,0 @@
-export { HeadCellWithArrow } from './HeadCellWithArrow'

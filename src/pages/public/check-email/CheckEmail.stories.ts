@@ -1,15 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CheckEmailPage } from "@/pages"
+import { StorybookDecorator } from "@/services/StorybookDecorator";
+
+import { CheckEmailPage } from "./CheckEmail.page"
 
 const meta = {
   argTypes: {},
   component: CheckEmailPage,
+  decorators: [StorybookDecorator],
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🟡Auth/CheckEmail',
+  title: '🟣Pages/public/CheckEmail',
 } satisfies Meta<typeof CheckEmailPage>
 
 export default meta

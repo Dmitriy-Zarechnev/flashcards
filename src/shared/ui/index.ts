@@ -1,23 +1,8 @@
 // ============================== [ Assembled ] ===========================================
-export { BackToDecks } from './assembled/back-to-decks'
-export { CardsTable } from './assembled/cards-table'
-export { DeckControlBlock } from './assembled/deck-control-block'
-export { DecksTable } from './assembled/decks-table'
 export { Dialog } from './assembled/dialog'
-export { DropdownMenu } from './assembled/dropdown-menu'
 export { DropdownProfile } from './assembled/dropdown-profile'
-export { FormModal } from './assembled/form-modal'
-export { HeadCellWithArrow } from './assembled/head-cell-with-arrow'
 export { HeaderAvatar } from './assembled/header-avatar'
-export { IconButtons } from './assembled/icon-buttons'
-export { ImgBlock } from './assembled/image-block'
-export { ListHeader } from './assembled/list-header'
-export { Modal } from './assembled/modal'
-export { ModalFooter } from './assembled/modal-footer'
-export { ModalList } from './assembled/modal-list'
 export { PageHeader } from './assembled/page-header'
-export { Pagination } from './assembled/pagination'
-export { SearchInput } from './assembled/search-input'
 
 // ============================== [ Controlled ] ===========================================
 export { ControlledCheckbox } from './controlled/controlled-checkbox'

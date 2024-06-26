@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, Card, ModalFooter, TextField, Typography } from '@/shared'
+import { Button, Card, TextField, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './ForgotPassword.module.scss'
 
 import { ForgotPasswordFormValues, authSchemes } from '../../../validationSchemes'
+import { ModalFooter } from './../../_components'
 
 type ForgotPasswordProps = {
   onSubmit: (data: ForgotPasswordFormValues) => void
