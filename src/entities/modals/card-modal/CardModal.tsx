@@ -1,6 +1,7 @@
 import { CardFormValues } from '@/entities'
-import { CardModalForm } from '@/entities/modals/card-modal/card-modal-form/CardModalForm'
 import { Button, CardData, Dialog, IconButton, ModalVariant } from '@/shared'
+
+import { CardModalForm } from './card-modal-form/CardModalForm'
 
 type CardModalProps = {
   cardData?: CardData

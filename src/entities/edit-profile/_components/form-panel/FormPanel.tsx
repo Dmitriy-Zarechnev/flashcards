@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form'
 
-import { EditProfileFormValues, authSchemes } from '@/entities/validationSchemes'
 import { Button, TextField } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './FormPanel.module.scss'
+
+import { EditProfileFormValues, authSchemes } from '../../../validationSchemes'
 
 type FormPanelProps = {
   name?: string

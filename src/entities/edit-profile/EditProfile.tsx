@@ -2,13 +2,13 @@ import { ChangeEvent, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 
-import { EditProfileFormValues } from '@/entities'
 import { useLogoutMutation, useMeQuery, useUpdateUserDataMutation } from '@/services'
 import { flashcardsApi } from '@/services/api/flashcards.api'
 import { Card, HeaderAvatar, IconButton, LineLoader, Typography } from '@/shared'
 
 import s from './EditProfile.module.scss'
 
+import { EditProfileFormValues } from '../validationSchemes'
 import { FormPanel, InfoPanel } from './_components'
 
 export const EditProfile = () => {
