@@ -21,8 +21,8 @@ import {
   Pagination,
   SearchInput,
   Typography,
+  deckDefaultCover,
 } from '@/shared'
-import defDeckImg from '@/shared/assets/card-default-cover.webp'
 
 import s from './Cards.page.module.scss'
 
@@ -101,7 +101,11 @@ export const CardsPage = () => {
           title={deckByIdData?.name ?? 'Unknown'}
           userId={authorId}
         />
-        <img alt={`Deck picture`} className={s.deckImg} src={deckByIdData?.cover ?? defDeckImg} />
+        <img
+          alt={`Deck picture`}
+          className={s.deckImg}
+          src={deckByIdData?.cover ?? deckDefaultCover}
+        />
         <SearchInput
           className={s.searchInput}
           onChange={searchQuestionHandler}

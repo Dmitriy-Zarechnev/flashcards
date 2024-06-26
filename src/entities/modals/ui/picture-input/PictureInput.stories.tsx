@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import pictureDefaultCover from './../../../../shared/assets/card-default-cover.webp'
+import { deckDefaultCover } from '@/shared'
+
 import { PictureInput } from './PictureInput'
 
 const meta = {
@@ -33,7 +34,7 @@ export const Default: Story = {
     coverFromServer: undefined,
     deleteImageHandlerCb,
     handleImageChangeCb,
-    pictureDefaultCover,
+    pictureDefaultCover: deckDefaultCover,
   },
 }
 
@@ -43,6 +44,6 @@ export const ButtonsDisabled: Story = {
     coverFromServer: undefined,
     deleteImageHandlerCb,
     handleImageChangeCb,
-    pictureDefaultCover,
+    pictureDefaultCover: deckDefaultCover,
   },
 }

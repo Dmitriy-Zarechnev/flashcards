@@ -2,14 +2,12 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { CardFormValues } from '@/entities'
+import { PictureInput } from '@/entities/modals/ui/picture-input'
 import { modalSchemes } from '@/entities/validationSchemes'
-import { Button, CardData, Select, TextField } from '@/shared'
+import { Button, CardData, Select, TextField, cardDefaultCover } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CardModalForm.module.scss'
-
-import { PictureInput } from '../../ui/picture-input'
-import pictureDefaultCover from './../../../../shared/assets/deck-default-cover.webp'
 
 type CardModalFormProps = {
   btnTitle: string
@@ -121,7 +119,7 @@ export const CardModalForm = ({
           coverFromServer={cardData?.questionImg || ''}
           deleteImageHandlerCb={deleteQuestionImageHandler}
           handleImageChangeCb={handleQuestionImageChange}
-          pictureDefaultCover={pictureDefaultCover}
+          pictureDefaultCover={cardDefaultCover}
           setBlocked={setBlocked}
         />
       )}
@@ -134,7 +132,7 @@ export const CardModalForm = ({
           coverFromServer={cardData?.answerImg || ''}
           deleteImageHandlerCb={deleteAnswerImageHandler}
           handleImageChangeCb={handleAnswerImageChange}
-          pictureDefaultCover={pictureDefaultCover}
+          pictureDefaultCover={cardDefaultCover}
           setBlocked={setBlocked}
         />
       )}

@@ -11,12 +11,11 @@ import {
   Rating,
   Tables,
   Typography,
+  cardDefaultCover,
 } from '@/shared'
 import { updatedDate } from '@/shared/utils/updateDate'
 
 import s from './CardsTable.module.scss'
-
-import defImg from './../../../assets/card-default-cover.webp'
 
 type CardsTableProps = {
   authorId?: boolean
@@ -78,11 +77,11 @@ export const CardsTable = ({ authorId, cards, sortTableOnClick, tableSort }: Car
             return (
               <Tables.TableRow key={card.id}>
                 <Tables.TableBodyCell>
-                  <ImgBlock title={card.question} url={card.questionImg || defImg} />
+                  <ImgBlock title={card.question} url={card.questionImg || cardDefaultCover} />
                 </Tables.TableBodyCell>
 
                 <Tables.TableBodyCell>
-                  <ImgBlock title={card.answer} url={card.answerImg || defImg} />
+                  <ImgBlock title={card.answer} url={card.answerImg || cardDefaultCover} />
                 </Tables.TableBodyCell>
 
                 <Tables.TableBodyCell>

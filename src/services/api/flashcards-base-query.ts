@@ -1,5 +1,5 @@
 import { routes } from '@/app'
-import { PATH } from '@/shared/utils/routerVariables'
+import { PATH } from '@/shared'
 import {
   BaseQueryFn,
   FetchArgs,

@@ -1,4 +1,4 @@
-import iconsSprite from '@/shared/assets/sprite.svg'
+import { svgSprite } from '@/shared'
 
 type IconProps = {
   className?: string
@@ -16,7 +16,8 @@ export const Icon = ({ className, height, iconId, viewBox, width }: IconProps) =
       viewBox={viewBox || '0 0 24 24'}
       width={width || '16'}
     >
-      <use xlinkHref={`${iconsSprite}#${iconId}`} />
+      {/*<use xlinkHref={`${iconsSprite}#${iconId}`} />*/}
+      <use xlinkHref={`${svgSprite}#${iconId}`} />
     </svg>
   )
 }

@@ -3,13 +3,19 @@ import { toast } from 'react-toastify'
 
 import { DeckFormValues } from '@/entities'
 import { Deck, useDeleteDeckMutation, useUpdateDeckMutation } from '@/services'
-import { HeadCellWithArrow, IconButtons, ImgBlock, LineLoader, Tables, Typography } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
-import { updatedDate } from '@/shared/utils/updateDate'
+import {
+  HeadCellWithArrow,
+  IconButtons,
+  ImgBlock,
+  LineLoader,
+  PATH,
+  Tables,
+  Typography,
+  deckDefaultCover,
+  updatedDate,
+} from '@/shared'
 
 import s from './DecksTable.module.scss'
-
-import defImg from './../../../assets/card-default-cover.webp'
 
 type DecksTableProps = {
   authorId?: string
@@ -76,7 +82,7 @@ export const DecksTable = ({ authorId, decks, sortTableOnClick, tableSort }: Dec
                     as={Link}
                     title={deck.name}
                     to={`${PATH.DECKSPAGE}/${deck.id}`}
-                    url={deck.cover || defImg}
+                    url={deck.cover || deckDefaultCover}
                     wd={'250px'}
                   />
                 </Tables.TableBodyCell>

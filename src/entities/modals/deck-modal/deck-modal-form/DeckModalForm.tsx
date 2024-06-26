@@ -2,12 +2,11 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { DeckFormValues, modalSchemes } from '@/entities/validationSchemes'
-import { Button, ControlledCheckbox, TextField } from '@/shared'
+import { Button, ControlledCheckbox, TextField, deckDefaultCover } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './DeckModalForm.module.scss'
 
-import cardDefaultCover from '../../../../shared/assets/card-default-cover.webp'
 import { PictureInput } from '../../ui/picture-input'
 
 type DeckModalFormProps = {
@@ -93,7 +92,7 @@ export const DeckModalForm = ({
         coverFromServer={deckData?.cover || ''}
         deleteImageHandlerCb={deleteImageHandler}
         handleImageChangeCb={handleImageChange}
-        pictureDefaultCover={cardDefaultCover}
+        pictureDefaultCover={deckDefaultCover}
         setBlocked={setBlocked}
       />
 

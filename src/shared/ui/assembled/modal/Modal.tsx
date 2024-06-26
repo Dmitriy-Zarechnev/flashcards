@@ -1,11 +1,9 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Button, Icon, Input, Typography } from '@/shared'
+import { Button, Icon, Input, Typography, cardDefaultCover } from '@/shared'
 import { clsx } from 'clsx'
 
 import s from './Modal.module.scss'
-
-import reactImg from '../../../assets/deck-default-cover.webp'
 
 type ModalProps = {
   buttonTitle: string
@@ -13,7 +11,7 @@ type ModalProps = {
   title: string
 } & ComponentPropsWithoutRef<'div'>
 
-export const Modal = ({ buttonTitle, className, imgUrl = reactImg, title }: ModalProps) => {
+export const Modal = ({ buttonTitle, className, imgUrl = cardDefaultCover, title }: ModalProps) => {
   return (
     <div className={clsx(s.Wrapper, className)}>
       <Typography.Subtitle2>{title}:</Typography.Subtitle2>

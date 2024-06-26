@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { cardDefaultCover } from '@/shared'
+
 import { ImgBlock } from './'
-import defImg from './../../../assets/deck-default-cover.webp'
 
 const meta = {
   argTypes: {},
@@ -16,6 +17,6 @@ type Story = StoryObj<typeof meta>
 export const ImgBlockStory: Story = {
   args: {
     title: 'Name',
-    url: defImg,
+    url: cardDefaultCover,
   },
 }

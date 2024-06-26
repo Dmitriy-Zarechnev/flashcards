@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Dropdown, HeaderAvatar, Icon, Typography } from '@/shared'
-import { PATH } from '@/shared/utils/routerVariables'
+import { Dropdown, HeaderAvatar, Icon, PATH, Typography } from '@/shared'
 
 import s from './DropdownProfile.module.scss'
 
