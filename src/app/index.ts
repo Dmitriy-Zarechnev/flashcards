@@ -1,1 +1,1 @@
-export { routes } from '@/app/router/routes'
+export { routes } from '@/processes/routes'

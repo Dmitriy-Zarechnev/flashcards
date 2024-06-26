@@ -1,1 +1,0 @@
-export { DropdownProfile } from './DropdownProfile'

@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { StorybookDecorator } from '@/services/StorybookDecorator'
 
-import { PageHeader } from './'
+import { PageHeader } from './PageHeader'
 
 const meta = {
   argTypes: {},
   component: PageHeader,
   decorators: [StorybookDecorator],
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/PageHeader',
+  title: '🟤Processes/layout/components/PageHeader',
 } satisfies Meta<typeof PageHeader>
 
 export default meta

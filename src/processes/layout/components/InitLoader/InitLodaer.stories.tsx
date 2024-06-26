@@ -5,7 +5,7 @@ import { InitLoader } from './InitLoader'
 const meta = {
   component: InitLoader,
   tags: ['autodocs'],
-  title: '🟤Router/InitLoader',
+  title: '🟤Processes/layout/components/InitLoader',
 } satisfies Meta<typeof InitLoader>
 
 export default meta

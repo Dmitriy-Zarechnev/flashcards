@@ -5,11 +5,12 @@ import { toast } from 'react-toastify'
 
 import { useLogoutMutation, useMeQuery } from '@/services'
 import { flashcardsApi } from '@/services/api/flashcards.api'
-import { Button, DropdownProfile, PATH, Typography } from '@/shared'
+import { Button, PATH, Typography } from '@/shared'
 
 import s from './PageHeader.module.scss'
 
 import logo from './Logo.png'
+import { DropdownProfile } from './dropdown-profile/DropdownProfile'
 
 type PageHeaderProps = {} & ComponentPropsWithoutRef<'header'>
 

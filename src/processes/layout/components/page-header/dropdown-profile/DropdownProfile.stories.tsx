@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { StorybookDecorator } from '@/services/StorybookDecorator'
 import { fn } from '@storybook/test'
 
-import { DropdownProfile } from './index'
+import { DropdownProfile } from './DropdownProfile'
 
 const profile = {
   email: 'SuperIvan@gmail.com',
@@ -16,7 +16,7 @@ const meta = {
   component: DropdownProfile,
   decorators: [StorybookDecorator],
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/DropdownProfile',
+  title: '🟤Processes/layout/components/PageHeader/DropdownProfile',
 } satisfies Meta<typeof DropdownProfile>
 
 export default meta

@@ -1,19 +1,15 @@
-// ============================== [ Assembled ] ===========================================
 export { Dialog } from './assembled/dialog'
-export { DropdownProfile } from './assembled/dropdown-profile'
-export { HeaderAvatar } from './assembled/header-avatar'
-export { PageHeader } from './assembled/page-header'
-
 // ============================== [ Controlled ] ===========================================
 export { ControlledCheckbox } from './controlled/controlled-checkbox'
+
 export { ControlledRadioGroup } from './controlled/controlled-radiogroup'
 export { ControlledSelect } from './controlled/controlled-select'
 export { PasswordInput } from './controlled/password-input'
 export type { PasswordInputProps } from './controlled/password-input'
 export { TextField } from './controlled/text-field'
-
 // ============================== [ Default ] ===========================================
 export { Button } from './default/button'
+
 export { Card } from './default/card'
 export { Checkbox } from './default/checkbox'
 export type { CheckboxProps } from './default/checkbox'
@@ -33,3 +29,4 @@ export { SliderComponent } from './default/slider'
 export { Tables } from './default/tables'
 export { Tabs } from './default/tabs'
 export { Typography } from './default/typography'
+export { HeaderAvatar } from './header-avatar/HeaderAvatar'

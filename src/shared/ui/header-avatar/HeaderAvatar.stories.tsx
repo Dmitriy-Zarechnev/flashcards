@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { HeaderAvatar } from './'
 import profileImage from './Dropdown.webp'
+import { HeaderAvatar } from './HeaderAvatar'
 
 const meta = {
   argTypes: {},
   component: HeaderAvatar,
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/HeaderAvatar',
+  title: '🟢UI/HeaderAvatar',
 } satisfies Meta<typeof HeaderAvatar>
 
 export default meta

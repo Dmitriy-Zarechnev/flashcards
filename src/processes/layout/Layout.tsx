@@ -2,13 +2,12 @@ import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
 import { useMeQuery } from '@/services'
-import { PageHeader } from '@/shared'
 
 import 'react-toastify/dist/ReactToastify.css'
 
 import s from './Layout.module.scss'
 
-import { InitLoader } from './InitLoader/InitLoader'
+import { InitLoader, PageHeader } from './components'
 
 export const Layout = () => {
   const { isLoading, isUninitialized } = useMeQuery()
