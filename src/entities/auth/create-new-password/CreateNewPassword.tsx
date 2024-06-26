@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, Card, PasswordInput, Typography } from '@/shared'
+import { Button, Card, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CreateNewPassword.module.scss'
 
+import { PasswordInput } from '../../_components'
 import { CreateNewPasswordFormValues, authSchemes } from '../../validationSchemes'
 
 type CreateNewPasswordProps = {

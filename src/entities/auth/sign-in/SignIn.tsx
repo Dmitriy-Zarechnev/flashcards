@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { Button, Card, ControlledCheckbox, PasswordInput, TextField, Typography } from '@/shared'
+import { Button, Card, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SignIn.module.scss'
 
+import { ControlledCheckbox, PasswordInput, TextField } from '../../_components'
 import { SignInFormValues, authSchemes } from '../../validationSchemes'
 import { ModalFooter } from '../_components'
 

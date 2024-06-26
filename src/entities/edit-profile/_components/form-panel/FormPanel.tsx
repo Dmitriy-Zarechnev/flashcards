@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, TextField } from '@/shared'
+import { Button } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './FormPanel.module.scss'
 
+import { TextField } from '../../../_components'
 import { EditProfileFormValues, authSchemes } from '../../../validationSchemes'
 
 type FormPanelProps = {

@@ -3,11 +3,12 @@ import { useForm } from 'react-hook-form'
 
 import { CardFormValues } from '@/entities'
 import { modalSchemes } from '@/entities/validationSchemes'
-import { Button, CardData, Select, TextField, cardDefaultCover } from '@/shared'
+import { Button, CardData, Select, cardDefaultCover } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CardModalForm.module.scss'
 
+import { TextField } from '../../../_components'
 import { PictureInput } from '../../_components'
 
 type CardModalFormProps = {

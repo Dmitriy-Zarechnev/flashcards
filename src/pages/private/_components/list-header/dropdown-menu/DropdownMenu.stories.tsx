@@ -8,7 +8,7 @@ const meta = {
   component: DropdownMenu,
   decorators: [StorybookDecorator],
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/DropdownMenu',
+  title: '🟣Pages/private/components/list-header/DropdownMenu',
 } satisfies Meta<typeof DropdownMenu>
 
 export default meta

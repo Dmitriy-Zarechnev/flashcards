@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, Card, PasswordInput, TextField, Typography } from '@/shared'
+import { Button, Card, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SignUp.module.scss'
 
+import { PasswordInput, TextField } from '../../_components'
 import { SignUpFormValues, authSchemes } from '../../validationSchemes'
 import { ModalFooter } from '../_components'
 

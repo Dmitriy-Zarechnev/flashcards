@@ -10,7 +10,7 @@ const meta = {
 
   decorators: [StorybookDecorator],
   tags: ['autodocs'],
-  title: '🟢UI/Assembled/ModalFooter',
+  title: '🟡Entities/auth/components/ModalFooter',
 } satisfies Meta<typeof ModalFooter>
 
 export default meta

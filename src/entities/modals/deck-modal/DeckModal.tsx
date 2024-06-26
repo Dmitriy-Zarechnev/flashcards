@@ -1,8 +1,9 @@
 import { CSSProperties, forwardRef } from 'react'
 
 import { DeckFormValues } from '@/entities'
-import { Button, Dialog, IconButton, ModalVariant } from '@/shared'
+import { Button, IconButton, ModalVariant } from '@/shared'
 
+import { Dialog } from '../_components'
 import { DeckModalForm } from './deck-modal-form/DeckModalForm'
 
 type DeckModalProps = {

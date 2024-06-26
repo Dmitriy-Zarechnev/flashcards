@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { DeckFormValues, modalSchemes } from '@/entities/validationSchemes'
-import { Button, ControlledCheckbox, TextField, deckDefaultCover } from '@/shared'
+import { Button, deckDefaultCover } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './DeckModalForm.module.scss'
 
+import { ControlledCheckbox, TextField } from '../../../_components'
 import { PictureInput } from '../../_components'
 
 type DeckModalFormProps = {

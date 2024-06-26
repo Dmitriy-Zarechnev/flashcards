@@ -1,7 +1,8 @@
 import { CSSProperties, forwardRef } from 'react'
 
-import { ButtonTitle, Dialog, IconButton } from '@/shared'
+import { ButtonTitle, IconButton } from '@/shared'
 
+import { Dialog } from '../_components'
 import { CardDeleteBody } from './card-delete-body/CardDeleteBody'
 
 type CardDeleteModalProps = {
