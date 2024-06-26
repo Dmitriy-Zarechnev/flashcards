@@ -1,15 +1,17 @@
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { ForgotPassword, ForgotPasswordFormValues } from '@/entities'
 import { useSendRecoveryToEmailMutation } from '@/services'
+import { flashcardsApi } from '@/services/api/flashcards.api'
 import { LineLoader, PATH, Page } from '@/shared'
 
 import s from './ForgotPassword.module.scss'
 
 export const ForgotPasswordPage = () => {
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
   const [recoveryPassword, { isError, isLoading: isSendRecoveryToEmailLoading }] =
     useSendRecoveryToEmailMutation()
 
@@ -22,7 +24,10 @@ export const ForgotPasswordPage = () => {
     if (!isError) {
       navigate(`${PATH.CHECKEMAIL}/${data.email}`)
       toast.success('An email has been sent to your address with further instructions!')
+
+      return
     }
+    dispatch(flashcardsApi.util.resetApiState())
   }
 
   return (
