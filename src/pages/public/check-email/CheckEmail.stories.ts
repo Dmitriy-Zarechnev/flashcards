@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CheckEmailPage } from './CheckEmail.page'
+import { CheckEmailPage } from "@/pages"
 
 const meta = {
   argTypes: {},
