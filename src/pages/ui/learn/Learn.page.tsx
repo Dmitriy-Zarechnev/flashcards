@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { toast } from 'react-toastify'
 
 import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
@@ -57,8 +56,7 @@ export const LearnPage = () => {
   } = useGetRandomCardQuery({ id: deckId || '' })
 
   // ----- Запрос на изменение grade карточки -----
-  const [saveCardGrade, { error: isSaveCardGradeError, isLoading: isSaveCardGradeLoading }] =
-    useSaveGradeCardMutation()
+  const [saveCardGrade, { isLoading: isSaveCardGradeLoading }] = useSaveGradeCardMutation()
 
   // State для изменения grade карточки
   const [cardGrade, setCardGrade] = useState(randomCard?.grade.toString() || '')
@@ -83,11 +81,6 @@ export const LearnPage = () => {
 
   // ----- Показывать Loader -----
   const isShowLineLoader = isGetRandomCardLoading || isSaveCardGradeLoading
-
-  // ----- Показывать snackBar с ошибкой -----
-  if (isSaveCardGradeError) {
-    return toast.error('Oops! Something went wrong. Please try again later.')
-  }
 
   return (
     <>
