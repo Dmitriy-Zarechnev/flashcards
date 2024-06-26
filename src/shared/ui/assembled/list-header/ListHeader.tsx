@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { CardFormValues, CardModal, DeckFormValues, DeckModal } from '@/entities'
-import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
+import { useIdFromParams } from '@/pages/private/_hooks/useIdFromParams'
 import { Button, ButtonTitle, DropdownMenu, PATH, Typography } from '@/shared'
 import { clsx } from 'clsx'
 

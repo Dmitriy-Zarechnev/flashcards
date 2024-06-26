@@ -2,10 +2,10 @@ import { ChangeEvent } from 'react'
 import { toast } from 'react-toastify'
 
 import { CardFormValues } from '@/entities'
-import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
 import { useSuperPagination } from '@/pages/hooks/useSuperPagination'
 import { useSuperSearch } from '@/pages/hooks/useSuperSearch'
 import { useSuperSort } from '@/pages/hooks/useSuperSort'
+import { useIdFromParams } from '@/pages/private/_hooks/useIdFromParams'
 import {
   useCreateCardMutation,
   useGetCardsQuery,

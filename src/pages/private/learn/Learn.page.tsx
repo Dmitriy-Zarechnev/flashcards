@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 
-import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
+import { useIdFromParams } from '@/pages/private/_hooks/useIdFromParams'
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
 import { BackToDecks, Button, Card, LineLoader, Page, RadioGroup, Typography } from '@/shared'
 

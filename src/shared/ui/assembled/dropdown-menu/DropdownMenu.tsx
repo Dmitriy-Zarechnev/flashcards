@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { CardDeleteModal, DeckFormValues, DeckModal } from '@/entities'
-import { useIdFromParams } from '@/pages/hooks/useIdFromParams'
+import { useIdFromParams } from '@/pages/private/_hooks/useIdFromParams'
 import { useDeleteDeckMutation, useGetDeckByIdQuery, useUpdateDeckMutation } from '@/services'
 import { Dropdown, Icon, IconButton, LineLoader, PATH, Typography } from '@/shared'
 
