@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './DeckModalForm.module.scss'
 
-import { PictureInput } from '../../ui/picture-input'
+import { PictureInput } from '../../_components'
 
 type DeckModalFormProps = {
   btnTitle: string

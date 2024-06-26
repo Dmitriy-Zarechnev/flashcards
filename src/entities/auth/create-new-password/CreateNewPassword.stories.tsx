@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { FieldValues } from 'react-hook-form'
 
-import { CreateNewPassword } from './'
+import { CreateNewPassword } from './CreateNewPassword'
 
 const meta = {
   argTypes: {},
@@ -11,7 +11,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🟡Auth/CreateNewPassword',
+  title: '🟡Entities/auth/CreateNewPassword',
 } satisfies Meta<typeof CreateNewPassword>
 
 export default meta

@@ -4,7 +4,7 @@ import { FieldValues } from 'react-hook-form'
 
 import { StorybookDecorator } from '@/services/StorybookDecorator'
 
-import { ForgotPassword } from './'
+import { ForgotPassword } from './ForgotPassword'
 
 const meta = {
   argTypes: {},
@@ -14,7 +14,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🟡Auth/ForgotPassword',
+  title: '🟡Entities/auth/ForgotPassword',
 } satisfies Meta<typeof ForgotPassword>
 
 export default meta

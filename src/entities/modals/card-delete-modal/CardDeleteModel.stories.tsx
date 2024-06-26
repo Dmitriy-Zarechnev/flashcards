@@ -9,7 +9,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🔴Modal/CardDeleteModal',
+  title: '🟡Entities/modal/CardDeleteModal',
 } satisfies Meta<typeof CardDeleteModal>
 
 export default meta

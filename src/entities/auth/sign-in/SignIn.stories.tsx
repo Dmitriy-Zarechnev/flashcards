@@ -4,7 +4,7 @@ import { FieldValues } from 'react-hook-form'
 
 import { StorybookDecorator } from '@/services/StorybookDecorator'
 
-import { SignIn } from './'
+import { SignIn } from './SignIn'
 
 const meta = {
   argTypes: {},
@@ -14,7 +14,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🟡Auth/SignIn',
+  title: '🟡Entities/auth/SignIn',
 } satisfies Meta<typeof SignIn>
 
 export default meta

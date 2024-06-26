@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DeckFormValues, DeckModal } from '@/entities'
+import { DeckFormValues } from '@/entities'
 import { deckDefaultCover } from '@/shared'
+
+import { DeckModal } from './DeckModal'
 
 const meta = {
   argTypes: {},
@@ -10,7 +12,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🔴Modal/DeckModal',
+  title: '🟡Entities/modal/DeckModal',
 } satisfies Meta<typeof DeckModal>
 
 export default meta

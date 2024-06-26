@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './ForgotPassword.module.scss'
 
-import { ForgotPasswordFormValues, authSchemes } from '../../../validationSchemes'
-import { ModalFooter } from './../../_components'
+import { ForgotPasswordFormValues, authSchemes } from '../../validationSchemes'
+import { ModalFooter } from '../_components'
 
 type ForgotPasswordProps = {
   onSubmit: (data: ForgotPasswordFormValues) => void

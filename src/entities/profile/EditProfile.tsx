@@ -9,8 +9,7 @@ import { Card, HeaderAvatar, IconButton, LineLoader, Typography } from '@/shared
 
 import s from './EditProfile.module.scss'
 
-import { InfoPanel } from './Info-panel/InfoPannel'
-import { FormPanel } from './form-panel/FormPanel'
+import { FormPanel, InfoPanel } from './_components'
 
 export const EditProfile = () => {
   const dispatch = useDispatch()

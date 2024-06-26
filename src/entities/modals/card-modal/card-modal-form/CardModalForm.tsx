@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { CardFormValues } from '@/entities'
-import { PictureInput } from '@/entities/modals/ui/picture-input'
 import { modalSchemes } from '@/entities/validationSchemes'
 import { Button, CardData, Select, TextField, cardDefaultCover } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CardModalForm.module.scss'
+
+import { PictureInput } from '../../_components'
 
 type CardModalFormProps = {
   btnTitle: string

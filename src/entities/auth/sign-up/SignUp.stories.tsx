@@ -3,21 +3,21 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { SignUpFormValues } from '@/entities'
 import { StorybookDecorator } from '@/services/StorybookDecorator'
 
-import { SingUp } from './SingUp'
+import { SignUp } from './SignUp'
 
 const meta = {
   argTypes: {},
-  component: SingUp,
+  component: SignUp,
   decorators: [StorybookDecorator],
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🟡Auth/SingUp',
-} satisfies Meta<typeof SingUp>
+  title: '🟡Entities/auth/SignUp',
+} satisfies Meta<typeof SignUp>
 
 export default meta
-type Story = StoryObj<typeof SingUp>
+type Story = StoryObj<typeof SignUp>
 
 export const SingUpStory: Story = {
   args: {

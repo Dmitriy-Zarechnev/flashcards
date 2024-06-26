@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { SignUpFormValues, SingUp } from '@/entities'
+import { SignUp, SignUpFormValues } from '@/entities'
 import { useSignUpMutation } from '@/services'
 import { LineLoader, PATH } from '@/shared'
 
@@ -29,7 +29,7 @@ export const SignUpPage = () => {
     <>
       {isLoading && <LineLoader />}
       <div style={{ paddingTop: '100px' }}>
-        <SingUp onSubmit={onSubmitHandler} />
+        <SignUp onSubmit={onSubmitHandler} />
       </div>
     </>
   )

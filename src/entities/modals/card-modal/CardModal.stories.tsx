@@ -9,7 +9,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🔴Modal/CardModal',
+  title: '🟡Entities/modal/CardModal',
 } satisfies Meta<typeof CardModal>
 
 export default meta

@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CreateNewPassword.module.scss'
 
-import { CreateNewPasswordFormValues, authSchemes } from '../../../validationSchemes'
+import { CreateNewPasswordFormValues, authSchemes } from '../../validationSchemes'
 
 type CreateNewPasswordProps = {
   onSubmit: (data: CreateNewPasswordFormValues) => void

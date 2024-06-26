@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { SignInFormValues, authSchemes } from '@/entities/validationSchemes'
 import { Button, Card, ControlledCheckbox, PasswordInput, TextField, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SignIn.module.scss'
 
-import { ModalFooter } from './../../_components'
+import { SignInFormValues, authSchemes } from '../../validationSchemes'
+import { ModalFooter } from '../_components'
 
 type SingInProps = {
   onSubmit: (data: SignInFormValues) => void

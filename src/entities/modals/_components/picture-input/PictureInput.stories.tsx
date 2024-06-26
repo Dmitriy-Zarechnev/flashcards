@@ -11,7 +11,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: '🔴Modal/UI/picture-input',
+  title: '🟡Entities/modal/components/picture-input',
 } satisfies Meta<typeof PictureInput>
 
 export default meta

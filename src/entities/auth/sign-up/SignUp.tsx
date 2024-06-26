@@ -3,16 +3,16 @@ import { useForm } from 'react-hook-form'
 import { Button, Card, PasswordInput, TextField, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import s from './SingUp.module.scss'
+import s from './SignUp.module.scss'
 
-import { SignUpFormValues, authSchemes } from '../../../validationSchemes'
-import { ModalFooter } from './../../_components'
+import { SignUpFormValues, authSchemes } from '../../validationSchemes'
+import { ModalFooter } from '../_components'
 
 type SingUpProps = {
   onSubmit: (data: SignUpFormValues) => void
 }
 
-export const SingUp = ({ onSubmit }: SingUpProps) => {
+export const SignUp = ({ onSubmit }: SingUpProps) => {
   const {
     control,
     formState: { isSubmitting },
