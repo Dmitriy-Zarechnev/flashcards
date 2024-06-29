@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { StorybookDecorator } from '@/services/StorybookDecorator'
+import { fn } from '@storybook/test'
 
 import { BackToDecks } from './BackToDecks'
 
@@ -17,6 +18,7 @@ type Story = StoryObj<typeof meta>
 
 export const DefaultBackToDecks: Story = {
   args: {
+    navigationCb: fn(),
     title: 'Back to Decks List',
   },
 }

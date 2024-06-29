@@ -38,6 +38,7 @@ const authService = flashcardsApi.injectEndpoints({
         onQueryStarted() {
           localStorage.removeItem('accessToken')
           localStorage.removeItem('refreshToken')
+          sessionStorage.clear()
         },
         queryFn: () => ({ data: undefined }),
       }),

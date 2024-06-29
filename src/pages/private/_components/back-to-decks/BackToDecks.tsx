@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { memo } from 'react'
 
 import { Button, Icon } from '@/shared'
 
@@ -8,13 +8,11 @@ type BackToDecksProps = {
   title: string
 }
 
-export const BackToDecks = ({ className, title }: BackToDecksProps) => {
-  const navigate = useNavigate()
-
+export const BackToDecks = memo(({ className, navigationCb, title }: BackToDecksProps) => {
   return (
-    <Button className={className} onClick={() => navigate(-1)} variant={'link'}>
+    <Button className={className} onClick={navigationCb} variant={'link'}>
       <Icon iconId={'arrowBackOutline'} />
       {title}
     </Button>
   )
-}
+})

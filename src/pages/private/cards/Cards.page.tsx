@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { CardFormValues } from '@/entities'
@@ -12,11 +13,14 @@ import { LineLoader, Page, Typography, deckDefaultCover } from '@/shared'
 
 import s from './Cards.page.module.scss'
 
+import { getBackToDeckRoutingParams } from '../_tools/backRoutingWithParams'
 import { BackToDecks, ListHeader, Pagination, SearchInput } from './../_components'
 import { useIdFromParams, useSuperPagination, useSuperSearch, useSuperSort } from './../_hooks'
 import { CardsTable } from './components/cards-table/CardsTable'
 
 export const CardsPage = () => {
+  const navigate = useNavigate()
+
   // ----- Достали deck id из url-а -----
   const { deckId } = useIdFromParams()
 
@@ -78,12 +82,16 @@ export const CardsPage = () => {
   const isShowLineLoader =
     isCreateCardLoading || isGetCardsLoading || isGetCardsFetching || isGetDeckByIdLoading
 
+  function routeBackToDecks() {
+    navigate(getBackToDeckRoutingParams())
+  }
+
   return (
     <>
       {isShowLineLoader && <LineLoader />}
 
       <Page mt={'24px'}>
-        <BackToDecks title={'Back to Decks List'} />
+        <BackToDecks navigationCb={routeBackToDecks} title={'Back to Decks List'} />
         <ListHeader
           buttonType={'Card'}
           isCardExist={cardsData?.items.length === 0}

@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { BackToDecks } from '@/pages/private/_components/back-to-decks/BackToDecks'
 import { useIdFromParams } from '@/pages/private/_hooks/useIdFromParams'
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
-import { Button, Card, LineLoader, Page, RadioGroup, Typography } from '@/shared'
+import { Button, Card, LineLoader, PATH, Page, RadioGroup, Typography } from '@/shared'
 
 import s from './Learn.module.scss'
 
 export const LearnPage = () => {
+  const navigate = useNavigate()
+
   // Options для Radio Grade
   const RadioGroupOptions = useMemo(
     () => [
@@ -83,11 +86,15 @@ export const LearnPage = () => {
   // ----- Показывать Loader -----
   const isShowLineLoader = isGetRandomCardLoading || isSaveCardGradeLoading
 
+  function routeBackToDecks() {
+    navigate(PATH.CARDSPAGE)
+  }
+
   return (
     <>
       {isShowLineLoader && <LineLoader />}
       <Page>
-        <BackToDecks title={'Back to Decks List'} />
+        <BackToDecks navigationCb={routeBackToDecks} title={'Back to Decks List'} />
         <Card className={s.learn}>
           <Typography.H1>
             Learn <span>{deckByIdData?.name}123</span>
