@@ -11,9 +11,10 @@ export { LearnPage } from './private/learn/Learn.page'
 export { ProfilePage } from './private/profile/Profile.page'
 
 //========================================================================================
-// [ public ]
-export { CheckEmailPage } from './public/check-email/CheckEmail.page'
-export { ForgotPasswordPage } from './public/forgot-password/ForgotPassword.page'
-export { ResetPasswordPage } from './public/reset-password/ResetPassword.page'
-export { SignInPage } from './public/sign-in/SignIn.page'
-export { SignUpPage } from './public/sign-up/SignUp.page'
+// [ public ] ⛔ если назвать папку public, то не будет работать prettier
+
+export { CheckEmailPage } from './publc/check-email/CheckEmail.page'
+export { ForgotPasswordPage } from './publc/forgot-password/ForgotPassword.page'
+export { ResetPasswordPage } from './publc/reset-password/ResetPassword.page'
+export { SignInPage } from './publc/sign-in/SignIn.page'
+export { SignUpPage } from '@/pages/publc/sign-up/SignUp.page'

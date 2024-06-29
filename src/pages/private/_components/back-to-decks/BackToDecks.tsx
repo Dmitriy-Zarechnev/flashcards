@@ -4,6 +4,7 @@ import { Button, Icon } from '@/shared'
 
 type BackToDecksProps = {
   className?: string
+  navigationCb: () => void
   title: string
 }
 
