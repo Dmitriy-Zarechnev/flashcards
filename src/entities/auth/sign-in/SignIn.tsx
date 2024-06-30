@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { Button, Card, Typography } from '@/shared'
+import { Button, Card, PATH, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SignIn.module.scss'
@@ -50,7 +50,7 @@ export const SignIn = ({ onSubmit }: SingInProps) => {
             Remember me
           </ControlledCheckbox>
 
-          <Typography.Body2 as={Link} className={s.forgotPasswordBox} to={'/recover-password'}>
+          <Typography.Body2 as={Link} className={s.forgotPasswordBox} to={PATH.RECOVERPASSWORD}>
             Forgot Password?
           </Typography.Body2>
         </div>
@@ -61,7 +61,7 @@ export const SignIn = ({ onSubmit }: SingInProps) => {
       <ModalFooter
         buttonChildren={'Sing Up'}
         footerText={"Don't have an account?"}
-        linkPath={'/sign-up'}
+        linkPath={PATH.SIGNUP}
       />
     </Card>
   )

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import { SignUp, SignUpFormValues } from '@/entities'
 import { useSignUpMutation } from '@/services'
-import { LineLoader, PATH } from '@/shared'
+import { LineLoader, PATH, Page } from '@/shared'
 
 export const SignUpPage = () => {
   /* несмотря на то что при успешной рестирации получаем данные пользователя, будем перенаправлять его на
@@ -28,9 +28,9 @@ export const SignUpPage = () => {
   return (
     <>
       {isLoading && <LineLoader />}
-      <div style={{ paddingTop: '100px' }}>
+      <Page mt={'100px'}>
         <SignUp onSubmit={onSubmitHandler} />
-      </div>
+      </Page>
     </>
   )
 }

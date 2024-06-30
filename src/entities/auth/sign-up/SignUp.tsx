@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, Card, Typography } from '@/shared'
+import { Button, Card, PATH, Typography } from '@/shared'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SignUp.module.scss'
@@ -60,7 +60,7 @@ export const SignUp = ({ onSubmit }: SingUpProps) => {
       <ModalFooter
         buttonChildren={'Sing In'}
         footerText={'Already have an account?'}
-        linkPath={'/sign-in'}
+        linkPath={PATH.SIGNIN}
       />
     </Card>
   )
