@@ -2,9 +2,12 @@ import {
   ComponentPropsWithRef,
   MouseEvent,
   ReactElement,
+  KeyboardEvent as ReactKeyboardEvent,
   ReactNode,
   cloneElement,
   forwardRef,
+  useEffect,
+  useRef,
   useState,
 } from 'react'
 
@@ -30,6 +33,9 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
          3. в компоненте картинок блокируем клики по модалке, и разрешаем через 0.5с => избегаем мискликов
             при выборе картинки */
     const [isBlocked, setBlocked] = useState(false)
+
+    /* 🍏 Для замыкания фокуса на модальном окне */
+    const dialogRef = useRef<HTMLDivElement>(null)
 
     function show() {
       setShown(true)
@@ -81,6 +87,36 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       setBlocked: setBlocked,
     })
 
+    /* 🍏 Обработчик для замыкания фокуса на модальном окне */
+    function handleKeyDown(event: ReactKeyboardEvent) {
+      if (event.key === 'Tab') {
+        const focusableElements = dialogRef.current?.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        const firstElement = focusableElements?.[0]
+        const lastElement = focusableElements?.[focusableElements.length - 1]
+
+        if (event.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement?.focus()
+            event.preventDefault()
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement?.focus()
+            event.preventDefault()
+          }
+        }
+      }
+    }
+
+    /* 🍏 Для замыкания фокуса на модальном окне */
+    useEffect(() => {
+      if (isShown) {
+        dialogRef.current?.focus()
+      }
+    }, [isShown])
+
     return (
       <div onClick={show} ref={ref} {...rest} id={id}>
         {trigger}
@@ -88,8 +124,11 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           <div
             className={s.overlay}
             onClick={handleMouseUp}
+            onKeyDown={handleKeyDown} /* 🍏 Для замыкания фокуса на модальном окне */
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
+            ref={dialogRef} /* 🍏 Для замыкания фокуса на модальном окне */
+            tabIndex={-1} /* 🍏 Для замыкания фокуса на модальном окне */
           >
             <Card
               className={s.card}
