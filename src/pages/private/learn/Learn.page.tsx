@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { BackToDecks } from '@/pages/private/_components/back-to-decks/BackToDecks'
 import { useIdFromParams } from '@/pages/private/_hooks/useIdFromParams'
 import { useGetDeckByIdQuery, useGetRandomCardQuery, useSaveGradeCardMutation } from '@/services'
-import { Button, Card, LineLoader, PATH, Page, RadioGroup, Typography } from '@/shared'
+import { Button, Card, LineLoader, Page, RadioGroup, Typography } from '@/shared'
 
 import s from './Learn.module.scss'
 
@@ -87,7 +87,7 @@ export const LearnPage = () => {
   const isShowLineLoader = isGetRandomCardLoading || isSaveCardGradeLoading
 
   function routeBackToDecks() {
-    navigate(PATH.CARDSPAGE)
+    navigate(-1)
   }
 
   return (
