@@ -17,6 +17,8 @@
 .content {
   will-change: transform, opacity;
 
+  z-index: 50;
+
   padding: 12px;
 
   background-color: var(--color-dark-700);
