@@ -94,7 +94,7 @@ export const LearnPage = () => {
     <>
       {isShowLineLoader && <LineLoader />}
       <Page>
-        <BackToDecks navigationCb={routeBackToDecks} title={'Back to Decks List'} />
+        <BackToDecks navigationCb={routeBackToDecks} title={'Back to Deck List'} />
         <Card className={s.learn}>
           <Typography.H1>
             Learn <span>{deckByIdData?.name}123</span>
